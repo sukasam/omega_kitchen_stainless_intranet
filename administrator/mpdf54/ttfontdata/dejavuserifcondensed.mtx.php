@@ -1,4 +1,4 @@
-<?php
+<?php 
 $name='DejaVuSerifCondensed';
 $type='TTF';
 $desc=array (

@@ -4,11 +4,11 @@
 	include ("../../include/function.php");
 	include ("config.php");
 
-	if ($_POST[mode] <> "") {  
+	if ($_POST["mode"] <> "") {  
 		$param = "";
 		if ($_POST[$FR_field] <> "") { $param .=  "&" . $FR_field . "=" . $_POST[$FR_field]; } 
 		if ($_POST[page] <> "") { $param .=  "&" . page . "=" . $_POST[page]; } 
-		if ($_POST[mode] <> "") { $param .=  "&" . mode . "=" . $_POST[mode]; } 
+		if ($_POST["mode"] <> "") { $param .=  "&" . mode . "=" . $_POST["mode"]; } 
 		if ($_POST[user_id] <> "") { $param .=  "&" . user_id . "=" . $_POST[user_id]; } 
 		$param = substr ($param,1);
 
@@ -22,20 +22,20 @@
 		}
 	}
 	
-	if($_GET[action] == "delete"){
-		$sql = "delete from $tbl_name where $PK_field = '$_GET[$PK_field]'";
-		@mysql_query($sql);
+	if($_GET["action"] == "delete"){
+		$sql = "delete from $tbl_name where $PK_field = '".$_GET[$PK_field]."'";
+		@mysqli_query($conn,$sql);
 	}
 	
-	if ($_GET[mode] == "add") { 
-		 Check_Permission ($check_module,$_SESSION[login_id],"add");
+	if ($_GET["mode"] == "add") { 
+		 Check_Permission($conn,$check_module,$_SESSION["login_id"],"add");
 	}
-	if ($_GET[mode] == "update") { 
-		// Check_Permission ($check_module,$_SESSION[login_id],"update");
+	if ($_GET["mode"] == "update") { 
+		// Check_Permission($conn,$check_module,$_SESSION["login_id"],"update");
 		 $_SESSION[s_user_id] = $_GET[user_id];
 		/*$sql = "select * from $tbl_name where $PK_field = '" . $_GET[$PK_field] ."'";
-		$query = @mysql_query ($sql);
-		while ($rec = @mysql_fetch_array ($query)) { 
+		$query = @mysqli_query($conn,$sql);
+		while ($rec = @mysqli_fetch_array ($query)) { 
 			$$PK_field = $rec[$PK_field];
 			foreach ($fieldlist as $key => $value) { 
 				$$value = $rec[$value];
@@ -100,7 +100,7 @@ function confirmDelete(delUrl,text) {
                     User &gt;
                     <? 
 							$sql = "select * from s_user where user_id = '$_GET[user_id]' ";
-							$rec = @mysql_fetch_array(@mysql_query($sql));
+							$rec = @mysqli_fetch_array(@mysqli_query($conn,$sql));
 							echo $rec[username];
 						?>
                         
@@ -119,8 +119,8 @@ function confirmDelete(delUrl,text) {
               <?
 	$counter = 0;
 	$sql = "select * from s_user_p,s_module where user_id = '$_SESSION[s_user_id]' and s_module.module_id = s_user_p.module_id  order by $PK_field desc ";
-		$query = @mysql_query($sql);
-		while($rec = @mysql_fetch_array($query)){
+		$query = @mysqli_query($conn,$sql);
+		while($rec = @mysqli_fetch_array($query)){
 ?>
               <tr <? if ($counter++%2) { ?>class="oddrowbg" <? } else { ?> class="evenrowbg"<? } ?>>
                 <td height="26" ><? echo $rec[module_name]; ?></td>
@@ -136,18 +136,18 @@ function confirmDelete(delUrl,text) {
                 <td><div align="center">
                     <input type="checkbox" name="checkbox4" value="checkbox" <? if($rec[delete_p] == 1) echo "checked"; ?>>
                 </div></td>
-                <td><div align="center"><a href="?action=Edit&user_id=<? echo $_GET[user_id];?>&mode=<? echo $_GET[mode]?>&<? echo "$PK_field=".$rec[$PK_field];?>">Edit</a></div></td>
-                <td><div align="center"><a href="javascript:confirmDelete('update.php?action=delete&user_id=<? echo $_GET[user_id];?>&mode=<? echo $_GET[mode]?>&<? echo "$PK_field=".$rec[$PK_field];?>','Module <? echo $rec[module_name];?>')">Delete</a></div></td>
+                <td><div align="center"><a href="?action=Edit&user_id=<? echo $_GET[user_id];?>&mode=<? echo $_GET["mode"]?>&<? echo "$PK_field=".$rec[$PK_field];?>">Edit</a></div></td>
+                <td><div align="center"><a href="javascript:confirmDelete('update.php?action=delete&user_id=<? echo $_GET[user_id];?>&mode=<? echo $_GET["mode"]?>&<? echo "$PK_field=".$rec[$PK_field];?>','Module <? echo $rec[module_name];?>')">Delete</a></div></td>
               </tr>
               <?
 			} // end while
 ?>
               <tr >
                 <td height="26" class="name"><?
-					  	if($_GET[action] == "Edit"){
-							$sql = "select * from s_user_p  where $PK_field = '$_GET[$PK_field]' ";
-							$query = @mysql_query($sql);
-							$rec = @mysql_fetch_array($query);
+					  	if($_GET["action"] == "Edit"){
+							$sql = "select * from s_user_p  where $PK_field = '".$_GET[$PK_field]."' ";
+							$query = @mysqli_query($conn,$sql);
+							$rec = @mysqli_fetch_array($query);
 							$module_id = $rec[module_id];
 							$read_p = $rec[read_p];
 							$add_p = $rec[add_p];
@@ -159,8 +159,8 @@ function confirmDelete(delUrl,text) {
                       <option>Select One</option>
                       <?
 								$sql = "select * from s_module order by module_id desc";
-								$query = @mysql_query($sql);
-								while($rec = @mysql_fetch_array($query)){
+								$query = @mysqli_query($conn,$sql);
+								while($rec = @mysqli_fetch_array($query)){
 							?>
                       <option value="<? echo $rec[module_id];?>" <? if($module_id == $rec[module_id]) echo "selected";?>><? echo $rec[module_name];?></option>
                       <? } ?>
@@ -179,7 +179,7 @@ function confirmDelete(delUrl,text) {
                     <input name="delete_p" type="checkbox" id="delete_p" value="1" <? if($delete_p == "1") echo "checked"; ?>>
                 </div></td>
                 <td colspan="2"><?
-							if($_GET[action] <> "Edit") $option_value = "Add";
+							if($_GET["action"] <> "Edit") $option_value = "Add";
 							else $option_value = "Edit";
 						?>
                     <div align="left">

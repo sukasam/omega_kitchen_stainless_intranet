@@ -1,4 +1,4 @@
-<?php
+<?php 
 $name='Norasi-Bold';
 $type='TTF';
 $desc=array (

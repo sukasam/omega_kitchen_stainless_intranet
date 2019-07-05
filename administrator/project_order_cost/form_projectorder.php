@@ -20,7 +20,7 @@ $prspro7 = get_sprice($_POST["cprice7"],$_POST["camount7"]);
 
 
 
-/*$sumprice  = eregi_replace(",","",$prspro1) + eregi_replace(",","",$prspro2) + eregi_replace(",","",$prspro3) + eregi_replace(",","",$prspro4) + eregi_replace(",","",$prspro5) + eregi_replace(",","",$prspro6) + eregi_replace(",","",$prspro7);
+/*$sumprice  = preg_replace("/,/","",$prspro1) + preg_replace("/,/","",$prspro2) + preg_replace("/,/","",$prspro3) + preg_replace("/,/","",$prspro4) + preg_replace("/,/","",$prspro5) + preg_replace("/,/","",$prspro6) + preg_replace("/,/","",$prspro7);
 $sumpricevat = ($sumprice * 7) / 100;
 $sumtotal = $sumprice + $sumpricevat;
 
@@ -45,9 +45,9 @@ $sumprice = 0;
 for($i=0;$i<=count($_POST['cproH']);$i++){
 	if($_POST['cproH'][$i] != ""){
 		
-		$_POST['cpriceH'][$i] = eregi_replace(",","",$_POST['cpriceH'][$i]);
-		$_POST['ccost'][$i] = eregi_replace(",","",$_POST['ccost'][$i]);
-		$_POST['costpros'][$i] = eregi_replace(",","",$_POST['costpros'][$i]);
+		$_POST['cpriceH'][$i] = preg_replace("/,/","",$_POST['cpriceH'][$i]);
+		$_POST['ccost'][$i] = preg_replace("/,/","",$_POST['ccost'][$i]);
+		$_POST['costpros'][$i] = preg_replace("/,/","",$_POST['costpros'][$i]);
 		
 		$sumprice += $_POST['camountH'][$i]*$_POST['cpriceH'][$i];
 		$sumTotalCost += $_POST['ccost'][$i];
@@ -56,7 +56,7 @@ for($i=0;$i<=count($_POST['cproH']);$i++){
 		$projectPro .= '<tr>
 		<td style="border:1px solid #000000;padding:5;">'.($i+1).'</td>
 		<td style="border:1px solid #000000;padding:5;">'.$_POST['ccodeH'][$i].'</td>
-		<td style="border:1px solid #000000;text-align:left;padding:5;">'.get_projectname($_POST['cproH'][$i]).'</td>
+		<td style="border:1px solid #000000;text-align:left;padding:5;">'.get_projectname($conn,$_POST['cproH'][$i]).'</td>
 		  <td style="border:1px solid #000000;padding:5;width:100px;">'.$_POST["cpodH"][$i].'</td>
 		  <td style="border:1px solid #000000;padding:5;">'.$_POST['csnH'][$i].'</td>
 		  <td style="border:1px solid #000000;padding:5;">'.$_POST['camountH'][$i].'</td>
@@ -90,9 +90,9 @@ $form = '
             <br />
             <strong>โทรศัพท์ :</strong> '.$_POST["cd_tel"].'<strong>&nbsp;&nbsp;&nbsp;แฟกซ์ :</strong> '.$_POST["cd_fax"].'<br /><br />
             <strong>ชื่อผู้ติดต่อ : </strong>'.$_POST["c_contact"].'<strong>&nbsp;&nbsp;&nbsp;เบอร์โทร :</strong> '.$_POST["c_tel"].' </td>
-            <td width="43%" valign="top" style="font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>กลุ่มลูกค้า : </strong> '.get_groupcusname($_POST['cg_type']).'&nbsp;&nbsp;&nbsp;&nbsp;<strong>ประเภทลูกค้า : </strong>'.custype_name($_POST["ctype"]).'<strong><br />
+            <td width="43%" valign="top" style="font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>กลุ่มลูกค้า : </strong> '.get_groupcusname($conn,$_POST['cg_type']).'&nbsp;&nbsp;&nbsp;&nbsp;<strong>ประเภทลูกค้า : </strong>'.custype_name($conn,$_POST["ctype"]).'<strong><br />
               <br />
-            ประเภทสินค้า :</strong> '.protype_name($_POST["pro_type"]).'<br />
+            ประเภทสินค้า :</strong> '.protype_name($conn,$_POST["pro_type"]).'<br />
             <br />
             <strong>เลขที่ใบเสนอราคา / PO.NO. : </strong>'.$_POST["po_id"].'<br />
             <br />            

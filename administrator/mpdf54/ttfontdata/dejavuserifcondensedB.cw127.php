@@ -1,4 +1,4 @@
-<?php
+<?php 
 $rangeid=114;
 $prevcid=126;
 $prevwidth=754;

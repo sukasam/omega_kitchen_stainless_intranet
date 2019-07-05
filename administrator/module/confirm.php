@@ -4,7 +4,7 @@ include ("../../include/connect.php");
 include ("../../include/function.php"); 
 include ("config.php");
 
-	Check_Permission ($check_module,$_SESSION["login_id"],"delete");
+	Check_Permission($conn,$check_module,$_SESSION["login_id"],"delete");
 	$param = get_param($a_param,$a_not_exists);
 	if (!isset ($del)) header ("location:index.php?$param"); 
 	if ($Action == "OK") { 
@@ -13,7 +13,7 @@ include ("config.php");
 			foreach ($msg as $key=>$value) { 
 				
 				$sql_su = "delete from $tbl_name where " . $PK_field . " = '$value'";
-				@mysql_query ($sql_su);
+				@mysqli_query($conn,$sql_su);
 				
 			} 
 			header ("location:index.php?$param"); 	

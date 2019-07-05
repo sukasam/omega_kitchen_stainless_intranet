@@ -5,7 +5,7 @@ include ("../../include/function.php");
 include ("config.php");
 	
 	$del = $_POST['del'];
-	Check_Permission ($check_module,$_SESSION["login_id"],"delete");
+	Check_Permission($conn,$check_module,$_SESSION["login_id"],"delete");
 	$param = get_param($a_param,$a_not_exists);
 	if (!isset ($del)) header ("location:index.php?$param"); 
 	if ($_POST[Action] == "OK") { 
@@ -13,15 +13,15 @@ include ("config.php");
 			$msg = explode(" ", $_POST[msg]);
 			foreach ($msg as $key=>$value) { 
 				$sql = "select * from $tbl_name where " . $PK_field . " = '$value'";
-				$query = @mysql_query ($sql);
-				$rec = @mysql_fetch_array ($query);
+				$query = @mysqli_query($conn,$sql);
+				$rec = @mysqli_fetch_array ($query);
 				$file_name=$rec["file_name"];
 				
 				if(file_exists("../../upload/news/".$file_name))
 				@unlink("../../upload/news/".$file_name);	
 				
 				$sql_su = "delete from $tbl_name where " . $PK_field . " = '$value'";
-				@mysql_query ($sql_su);
+				@mysqli_query($conn,$sql_su);
 				
 			} 
 			header ("location:index.php?$param"); 	

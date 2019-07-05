@@ -9,7 +9,7 @@
 
 	//$del = $_POST['del'];
 
-	Check_Permission ($check_module,$_SESSION["login_id"],"delete");
+	Check_Permission($conn,$check_module,$_SESSION["login_id"],"delete");
 
 	$param = get_param($a_param,$a_not_exists);
 
@@ -25,7 +25,7 @@
 
 				$sql_su = "delete from $tbl_name where " . $PK_field . " = '$value'";
 
-				@mysql_query ($sql_su);				
+				@mysqli_query($conn,$sql_su);				
 
 			} 
 

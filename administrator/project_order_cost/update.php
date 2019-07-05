@@ -4,7 +4,7 @@
 	include ("../../include/function.php");
 	include ("config.php");
 
-	if ($_POST[mode] <> "") { 
+	if ($_POST["mode"] <> "") { 
 		
 		$param = "";
 		$a_not_exists = array();
@@ -31,96 +31,96 @@
 		
 		$_POST['separate'] = 0;
 		
-		/*$_POST["cprice1"] = eregi_replace(",","",$_POST["cprice1"]);
-		$_POST["cprice2"] = eregi_replace(",","",$_POST["cprice2"]);
-		$_POST["cprice3"] = eregi_replace(",","",$_POST["cprice3"]);
-		$_POST["cprice4"] = eregi_replace(",","",$_POST["cprice4"]);
-		$_POST["cprice5"] = eregi_replace(",","",$_POST["cprice5"]);
-		$_POST["cprice6"] = eregi_replace(",","",$_POST["cprice6"]);
-		$_POST["cprice7"] = eregi_replace(",","",$_POST["cprice7"]);*/
+		/*$_POST["cprice1"] = preg_replace("/,/","",$_POST["cprice1"]);
+		$_POST["cprice2"] = preg_replace("/,/","",$_POST["cprice2"]);
+		$_POST["cprice3"] = preg_replace("/,/","",$_POST["cprice3"]);
+		$_POST["cprice4"] = preg_replace("/,/","",$_POST["cprice4"]);
+		$_POST["cprice5"] = preg_replace("/,/","",$_POST["cprice5"]);
+		$_POST["cprice6"] = preg_replace("/,/","",$_POST["cprice6"]);
+		$_POST["cprice7"] = preg_replace("/,/","",$_POST["cprice7"]);*/
 
 		
-		if ($_POST[mode] == "add") { 
+		if ($_POST["mode"] == "add") { 
 		
-				/*$_POST['fs_id'] = get_snprojectorders($_POST['fs_id']);
+				/*$_POST['fs_id'] = get_snprojectorders($conn,$_POST['fs_id']);
 				$_POST['status_use'] = 1;
 				
 				include "../include/m_add.php";
-				$id = mysql_insert_id();
+				$id = mysqli_insert_id($conn);
 			
 				for($i=0;$i<=count($_POST['cpro']);$i++){
 					if($_POST['cpro'][$i] != ""){
 						
-						$_POST['cprice'][$i] = eregi_replace(",","",$_POST['cprice'][$i]);
+						$_POST['cprice'][$i] = preg_replace("/,/","",$_POST['cprice'][$i]);
 						
-						@mysql_query("INSERT INTO `s_project_product` (`id`, `fo_id`, `cpro`, `cpod`, `csn`, `camount`, `cprice`) VALUES ('NULL','".$id."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."');");
+						@mysqli_query($conn,"INSERT INTO `s_project_product` (`id`, `fo_id`, `cpro`, `cpod`, `csn`, `camount`, `cprice`) VALUES ('NULL','".$id."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."');");
 					}
 				}
 			
-				$_POST['discount'] = eregi_replace(",","",$_POST['discount']);*/
+				$_POST['discount'] = preg_replace("/,/","",$_POST['discount']);*/
 				
 				/*include_once("../mpdf54/mpdf.php");
 				include_once("form_projectorder.php");
 				$mpdf=new mPDF('UTF-8'); 
 				$mpdf->SetAutoFont();
 				$mpdf->WriteHTML($form);
-				$chaf = eregi_replace("/","-",$_POST['fs_id']); 
+				$chaf = preg_replace("/\//","-",$_POST['fs_id']); 
 				$mpdf->Output('../../upload/project_order/'.$chaf.'.pdf','F');*/
 				
 			header ("location:update.php?mode=update&fo_id=".$_POST['fo_id']."&page=".$_POST['page']); 
 		}
-		if ($_POST[mode] == "update" ) { 
+		if ($_POST["mode"] == "update" ) { 
 			
 				$fo_id = $_POST['fo_id'];
 			
-				$shipL1 = eregi_replace(',', '', $_POST['shipL1']);
-				$shipL2 = eregi_replace(',', '', $_POST['shipL2']);
-				$shipL3 = eregi_replace(',', '', $_POST['shipL3']);
-				$shipL4 = eregi_replace(',', '', $_POST['shipL4']);
-				$shipL5 = eregi_replace(',', '', $_POST['shipL5']);
-				$shipL6 = eregi_replace(',', '', $_POST['shipL6']);
-				$shipL7 = eregi_replace(',', '', $_POST['shipL7']);
+				$shipL1 = preg_replace("/,/", '', $_POST['shipL1']);
+				$shipL2 = preg_replace("/,/", '', $_POST['shipL2']);
+				$shipL3 = preg_replace("/,/", '', $_POST['shipL3']);
+				$shipL4 = preg_replace("/,/", '', $_POST['shipL4']);
+				$shipL5 = preg_replace("/,/", '', $_POST['shipL5']);
+				$shipL6 = preg_replace("/,/", '', $_POST['shipL6']);
+				$shipL7 = preg_replace("/,/", '', $_POST['shipL7']);
 			
 				$shipL8 = $shipL1+$shipL2+$shipL3+$shipL4+$shipL5+$shipL6+$shipL7;
 			
-				$shipM1 = eregi_replace(',', '', $_POST['shipM1']);
-				$shipM2 = eregi_replace(',', '', $_POST['shipM2']);
-				$shipM3 = eregi_replace(',', '', $_POST['shipM3']);
-				$shipM4 = eregi_replace(',', '', $_POST['shipM4']);
-				$shipM5 = eregi_replace(',', '', $_POST['shipM5']);
-				$shipM6 = eregi_replace(',', '', $_POST['shipM6']);
-				$shipM7 = eregi_replace(',', '', $_POST['shipM7']);
-				$shipM8 = eregi_replace(',', '', $_POST['shipM8']);
+				$shipM1 = preg_replace("/,/", '', $_POST['shipM1']);
+				$shipM2 = preg_replace("/,/", '', $_POST['shipM2']);
+				$shipM3 = preg_replace("/,/", '', $_POST['shipM3']);
+				$shipM4 = preg_replace("/,/", '', $_POST['shipM4']);
+				$shipM5 = preg_replace("/,/", '', $_POST['shipM5']);
+				$shipM6 = preg_replace("/,/", '', $_POST['shipM6']);
+				$shipM7 = preg_replace("/,/", '', $_POST['shipM7']);
+				$shipM8 = preg_replace("/,/", '', $_POST['shipM8']);
 			
 				$shipM9 = $shipM1+$shipM2+$shipM13+$shipM4+$shipM5+$shipM6+$shipM7+$shipM8;
 			
-				$shipC1 = eregi_replace(',', '', $_POST['shipC1']);
-				$shipC2 = eregi_replace(',', '', $_POST['shipC2']);
-				$shipC3 = eregi_replace(',', '', $_POST['shipC3']);
-				$shipC4 = eregi_replace(',', '', $_POST['shipC4']);
-				$shipC5 = eregi_replace(',', '', $_POST['shipC5']);
-				$shipC6 = eregi_replace(',', '', $_POST['shipC6']);
-				$shipC7 = eregi_replace(',', '', $_POST['shipC7']);
+				$shipC1 = preg_replace("/,/", '', $_POST['shipC1']);
+				$shipC2 = preg_replace("/,/", '', $_POST['shipC2']);
+				$shipC3 = preg_replace("/,/", '', $_POST['shipC3']);
+				$shipC4 = preg_replace("/,/", '', $_POST['shipC4']);
+				$shipC5 = preg_replace("/,/", '', $_POST['shipC5']);
+				$shipC6 = preg_replace("/,/", '', $_POST['shipC6']);
+				$shipC7 = preg_replace("/,/", '', $_POST['shipC7']);
 			
 				$shipC8 = $shipC1+$shipC2+$shipC3+$shipC4+$shipC5+$shipC6+$shipC7;
 			
 				
-				$numCost = mysql_num_rows(mysql_query("SELECT * FROM s_project_order_cost WHERE fo_id = '".$fo_id."'"));
+				$numCost = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM s_project_order_cost WHERE fo_id = '".$fo_id."'"));
 				
 				if($numCost == 0){
-					mysql_query("INSERT INTO `s_project_order_cost` (`id`, `fo_id`, `shipC1`, `shipC2`, `shipC3`, `shipC4`, `shipC5`, `shipC6`, `shipC7`, `shipC8`, `shipM1`, `shipM2`, `shipM3`, `shipM4`, `shipM5`, `shipM6`, `shipM7`, `shipM8`, `shipM9`, `shipL1`, `shipL2`, `shipL3`, `shipL4`, `shipL5`, `shipL6`, `shipL7`, `shipL8`) VALUES (NULL, '".$fo_id."', '".$shipC1."', '".$shipC2."', '".$shipC3."', '".$shipC4."', '".$shipC5."', '".$shipC6."', '".$shipC7."', '".$shipC8."', '".$shipM1."', '".$shipM2."', '".$shipM3."', '".$shipM4."', '".$shipM5."', '".$shipM6."', '".$shipM7."', '".$shipM8."', '".$shipM9."', '".$shipL1."', '".$shipL2."', '".$shipL3."', '".$shipL4."', '".$shipL5."', '".$shipL6."', '".$shipL7."', '".$shipL8."');");
+					mysqli_query($conn,"INSERT INTO `s_project_order_cost` (`id`, `fo_id`, `shipC1`, `shipC2`, `shipC3`, `shipC4`, `shipC5`, `shipC6`, `shipC7`, `shipC8`, `shipM1`, `shipM2`, `shipM3`, `shipM4`, `shipM5`, `shipM6`, `shipM7`, `shipM8`, `shipM9`, `shipL1`, `shipL2`, `shipL3`, `shipL4`, `shipL5`, `shipL6`, `shipL7`, `shipL8`) VALUES (NULL, '".$fo_id."', '".$shipC1."', '".$shipC2."', '".$shipC3."', '".$shipC4."', '".$shipC5."', '".$shipC6."', '".$shipC7."', '".$shipC8."', '".$shipM1."', '".$shipM2."', '".$shipM3."', '".$shipM4."', '".$shipM5."', '".$shipM6."', '".$shipM7."', '".$shipM8."', '".$shipM9."', '".$shipL1."', '".$shipL2."', '".$shipL3."', '".$shipL4."', '".$shipL5."', '".$shipL6."', '".$shipL7."', '".$shipL8."');");
 				}else{
-					@mysql_query("UPDATE `s_project_order_cost` SET `shipC1` = '".$shipC1."', `shipC2` = '".$shipC2."', `shipC3` = '".$shipC3."', `shipC4` = '".$shipC4."', `shipC5` = '".$shipC5."', `shipC6` = '".$shipC6."', `shipC7` = '".$shipC7."', `shipC8` = '".$shipC8."',`shipM1` = '".$shipM1."', `shipM2` = '".$shipM2."', `shipM3` = '".$shipM3."', `shipM4` = '".$shipM4."', `shipM5` = '".$shipM5."', `shipM6` = '".$shipM6."', `shipM7` = '".$shipM7."', `shipM8` = '".$shipM8."', `shipM9` = '".$shipM9."', `shipL1` = '".$shipL1."', `shipL2` = '".$shipL2."', `shipL3` = '".$shipL3."', `shipL4` = '".$shipL4."', `shipL5` = '".$shipL5."', `shipL6` = '".$shipL6."', `shipL7` = '".$shipL7."', `shipL8` = '".$shipL8."' WHERE `fo_id` = ".$fo_id.";");
+					@mysqli_query($conn,"UPDATE `s_project_order_cost` SET `shipC1` = '".$shipC1."', `shipC2` = '".$shipC2."', `shipC3` = '".$shipC3."', `shipC4` = '".$shipC4."', `shipC5` = '".$shipC5."', `shipC6` = '".$shipC6."', `shipC7` = '".$shipC7."', `shipC8` = '".$shipC8."',`shipM1` = '".$shipM1."', `shipM2` = '".$shipM2."', `shipM3` = '".$shipM3."', `shipM4` = '".$shipM4."', `shipM5` = '".$shipM5."', `shipM6` = '".$shipM6."', `shipM7` = '".$shipM7."', `shipM8` = '".$shipM8."', `shipM9` = '".$shipM9."', `shipL1` = '".$shipL1."', `shipL2` = '".$shipL2."', `shipL3` = '".$shipL3."', `shipL4` = '".$shipL4."', `shipL5` = '".$shipL5."', `shipL6` = '".$shipL6."', `shipL7` = '".$shipL7."', `shipL8` = '".$shipL8."' WHERE `fo_id` = ".$fo_id.";");
 				}
 			
-				@mysql_query("DELETE FROM `s_project_product_cost` WHERE `fo_id` = '".$fo_id."'");
+				@mysqli_query($conn,"DELETE FROM `s_project_product_cost` WHERE `fo_id` = '".$fo_id."'");
 			
 				for($i=0;$i<=count($_POST['cproH']);$i++){
 					if($_POST['cproH'][$i] != ""){
 						
-						$_POST['cpriceH'][$i] = eregi_replace(",","",$_POST['cpriceH'][$i]);
-						$_POST['ccost'][$i] = eregi_replace(",","",$_POST['ccost'][$i]);
-						$_POST['costpros'][$i] = eregi_replace(",","",$_POST['costpros'][$i]);
+						$_POST['cpriceH'][$i] = preg_replace("/,/","",$_POST['cpriceH'][$i]);
+						$_POST['ccost'][$i] = preg_replace("/,/","",$_POST['ccost'][$i]);
+						$_POST['costpros'][$i] = preg_replace("/,/","",$_POST['costpros'][$i]);
 						
 						if($_POST['ccostH'][$i] != $_POST['ccost'][$i]){
 							$_POST['ccost'][$i] = $_POST['camountH'][$i]*$_POST['ccost'][$i];
@@ -131,36 +131,36 @@
 						}
 						
 						
-						@mysql_query("INSERT INTO `s_project_product_cost` (`fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`, `costpros`) VALUES ('".$fo_id."', '".$_POST['ccodeH'][$i]."', '".$_POST['cproH'][$i]."', '".$_POST['cpodH'][$i]."', '".$_POST['csnH'][$i]."', '".$_POST['camountH'][$i]."', '".$_POST['cpriceH'][$i]."', '".$_POST['ccost'][$i]."', '".$_POST['costpros'][$i]."');");
+						@mysqli_query($conn,"INSERT INTO `s_project_product_cost` (`fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`, `costpros`) VALUES ('".$fo_id."', '".$_POST['ccodeH'][$i]."', '".$_POST['cproH'][$i]."', '".$_POST['cpodH'][$i]."', '".$_POST['csnH'][$i]."', '".$_POST['camountH'][$i]."', '".$_POST['cpriceH'][$i]."', '".$_POST['ccost'][$i]."', '".$_POST['costpros'][$i]."');");
 					}
 				}
 			
 			
-				//$numCost = mysql_num_rows(mysql_query("SELECT * FROM s_service_cost WHERE job_id = '".$jobID."'"));
+				//$numCost = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM s_service_cost WHERE job_id = '".$jobID."'"));
 			
 				//include ("../include/m_update.php");
 				/*$id = $_REQUEST[$PK_field];	
 			
-				@mysql_query("DELETE FROM `s_project_product` WHERE `fo_id` = '".$id."'");
+				@mysqli_query($conn,"DELETE FROM `s_project_product` WHERE `fo_id` = '".$id."'");
 			
 				for($i=0;$i<=count($_POST['cpro']);$i++){
 					if($_POST['cpro'][$i] != ""){
 						
-						$_POST['cprice'][$i] = eregi_replace(",","",$_POST['cprice'][$i]);
+						$_POST['cprice'][$i] = preg_replace("/,/","",$_POST['cprice'][$i]);
 						
-						@mysql_query("INSERT INTO `s_project_product` (`fo_id`, `cpro`, `cpod`, `csn`, `camount`, `cprice`) VALUES ('".$id."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."');");
+						@mysqli_query($conn,"INSERT INTO `s_project_product` (`fo_id`, `cpro`, `cpod`, `csn`, `camount`, `cprice`) VALUES ('".$id."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."');");
 					}
 				}
 			
-				$_POST['discount'] = eregi_replace(",","",$_POST['discount']);*/
+				$_POST['discount'] = preg_replace("/,/","",$_POST['discount']);*/
 				
 				include_once("../mpdf54/mpdf.php");
 				include_once("form_projectorder.php");
 				$mpdf=new mPDF('UTF-8'); 
 				$mpdf->SetAutoFont();
 				$mpdf->WriteHTML($form);
-				//$chaf = eregi_replace("/","-",$fo_id); 
-			    //$chaf = eregi_replace("PJ","PJC",$_POST['fs_id']);
+				//$chaf = preg_replace("/\//","-",$fo_id); 
+			    //$chaf = preg_replace("/PJ/","PJC",$_POST['fs_id']);
 			    $chaf = "PJC ".$fo_id;
 				$mpdf->Output('../../upload/project_order_cost/'.$chaf.'.pdf','F');
 			
@@ -168,14 +168,14 @@
 			
 		}
 	}
-	if ($_GET[mode] == "add") { 
-		 Check_Permission ($check_module,$_SESSION[login_id],"add");
+	if ($_GET["mode"] == "add") { 
+		 Check_Permission($conn,$check_module,$_SESSION["login_id"],"add");
 	}
-	if ($_GET[mode] == "update") { 
-		Check_Permission ($check_module,$_SESSION[login_id],"update");
+	if ($_GET["mode"] == "update") { 
+		Check_Permission($conn,$check_module,$_SESSION["login_id"],"update");
 		$sql = "select * from $tbl_name where $PK_field = '" . $_GET[$PK_field] ."'";
-		$query = @mysql_query ($sql);
-		while ($rec = @mysql_fetch_array ($query)) { 
+		$query = @mysqli_query($conn,$sql);
+		while ($rec = @mysqli_fetch_array ($query)) { 
 			$$PK_field = $rec[$PK_field];
 			foreach ($fieldlist as $key => $value) { 
 				$$value = $rec[$value];
@@ -199,8 +199,8 @@
 		
 		
 		$sql2 = "select * from s_project_order_cost where fo_id = '" . $_GET[$PK_field] ."'";
-		$query2 = @mysql_query ($sql2);
-		while ($rec2 = @mysql_fetch_array ($query2)) { 
+		$query2 = @mysqli_query($conn,$sql2);
+		while ($rec2 = @mysqli_fetch_array ($query2)) { 
 			$$PK_field = $rec2[$PK_field2];
 			foreach ($fieldlist2 as $key => $value) { 
 				$$value = $rec2[$value];
@@ -325,8 +325,8 @@ function chksign(vals){
             <input type="hidden" name="cg_type" value="<?php   echo $cg_type;?>"> 
             <select name="cg_type1" id="cg_type" class="inputselect" disabled>
                 <?php  
-                	$qucgtype = @mysql_query("SELECT * FROM s_group_type ORDER BY group_name ASC");
-					while($row_cgtype = @mysql_fetch_array($qucgtype)){
+                	$qucgtype = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
+					while($row_cgtype = @mysqli_fetch_array($qucgtype)){
 					  ?>
 					  	<option value="<?php   echo $row_cgtype['group_id'];?>" <?php   if($cg_type == $row_cgtype['group_id']){echo 'selected';}?>><?php   echo $row_cgtype['group_name'];?></option>
 					  <?php  	
@@ -337,8 +337,8 @@ function chksign(vals){
              <input type="hidden" name="ctype" value="<?php   echo $ctype;?>"> 
              <select name="ctype1" id="ctype" class="inputselect" onChange="chksign(this.value);" disabled>
                 <?php  
-                	$quccustommer = @mysql_query("SELECT * FROM s_group_custommer ORDER BY group_name ASC");
-					while($row_cgcus = @mysql_fetch_array($quccustommer)){
+                	$quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
+					while($row_cgcus = @mysqli_fetch_array($quccustommer)){
 						if(substr($row_cgcus['group_name'],0,2) != "SR"){
 					  ?>
 					  	<option value="<?php   echo $row_cgcus['group_id'];?>" <?php   if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php   echo $row_cgcus['group_name'];?></option>
@@ -354,8 +354,8 @@ function chksign(vals){
             <input type="hidden" name="pro_type" value="<?php   echo $pro_type;?>"> 	
             <select name="pro_type2" id="pro_type" class="inputselect" disabled>
                 <?php  
-                	$quprotype = @mysql_query("SELECT * FROM s_group_product ORDER BY group_name ASC");
-					while($row_protype = @mysql_fetch_array($quprotype)){
+                	$quprotype = @mysqli_query($conn,"SELECT * FROM s_group_product ORDER BY group_name ASC");
+					while($row_protype = @mysqli_fetch_array($quprotype)){
 					  ?>
 					  	<option value="<?php   echo $row_protype['group_id'];?>" <?php   if($pro_type == $row_protype['group_id']){echo 'selected';}?>><?php   echo $row_protype['group_name'];?></option>
 					  <?php  	
@@ -368,8 +368,8 @@ function chksign(vals){
             <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>จังหวัด :</strong> 
             <select name="cd_province" id="cd_province" class="inputselect" disabled>
                 <?php  
-                	$quprovince = @mysql_query("SELECT * FROM s_province ORDER BY province_id ASC");
-					while($row_province = @mysql_fetch_array($quprovince)){
+                	$quprovince = @mysqli_query($conn,"SELECT * FROM s_province ORDER BY province_id ASC");
+					while($row_province = @mysqli_fetch_array($quprovince)){
 					  ?>
 					  	<option value="<?php   echo $row_province['province_id'];?>" <?php   if($cd_province == $row_province['province_id']){echo 'selected';}?>><?php   echo $row_province['province_name'];?></option>
 					  <?php  	
@@ -383,7 +383,7 @@ function chksign(vals){
             <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>โทรศัพท์ :</strong> <input type="text" name="cd_tel" value="<?php   echo $cd_tel;?>" id="cd_tel" class="inpfoder" readonly>
               <strong>แฟกซ์ :</strong>
               <input type="text" name="cd_fax" value="<?php   echo $cd_fax;?>" id="cd_fax" class="inpfoder" readonly></td>
-            <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>เลขที่ Project order :</strong> <!--<input type="text" name="fs_id" value="<?php   echo $fs_id;?>">--><input type="text" name="fs_id" value="<?php   if($fs_id == ""){echo check_projectorder("PJ".date("Y/m/"));}else{echo $fs_id;};?>" id="fs_id" class="inpfoder" readonly> <strong> วันที่ :</strong> <input type="text" name="date_forder" readonly value="<?php   if($date_forder==""){echo date("d/m/Y");}else{ echo $date_forder;}?>" class="inpfoder"/><!--<script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_forder'});</script>--></td>
+            <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>เลขที่ Project order :</strong> <!--<input type="text" name="fs_id" value="<?php   echo $fs_id;?>">--><input type="text" name="fs_id" value="<?php   if($fs_id == ""){echo check_projectorder($conn);}else{echo $fs_id;};?>" id="fs_id" class="inpfoder" readonly> <strong> วันที่ :</strong> <input type="text" name="date_forder" readonly value="<?php   if($date_forder==""){echo date("d/m/Y");}else{ echo $date_forder;}?>" class="inpfoder"/><!--<script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_forder'});</script>--></td>
           </tr>
           <tr>
             <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>ชื่อผู้ติดต่อ :</strong>
@@ -659,12 +659,12 @@ function chksign(vals){
     <tbody id="exp" name="exp">
     <?php  
 		$fo_id = $_GET['fo_id'];
-		$quQry2 = mysql_query("SELECT * FROM `s_project_product_cost` WHERE fo_id = '".$fo_id."' ORDER BY id ASC");
-		$numRowPro2 = mysql_num_rows($quQry2);
-		$quQry = mysql_query("SELECT * FROM `s_project_product` WHERE fo_id = '".$fo_id."' ORDER BY id ASC");
-		$numRowPro = mysql_num_rows($quQry);
+		$quQry2 = mysqli_query($conn,"SELECT * FROM `s_project_product_cost` WHERE fo_id = '".$fo_id."' ORDER BY id ASC");
+		$numRowPro2 = mysqli_num_rows($quQry2);
+		$quQry = mysqli_query($conn,"SELECT * FROM `s_project_product` WHERE fo_id = '".$fo_id."' ORDER BY id ASC");
+		$numRowPro = mysqli_num_rows($quQry);
 
-		$quQryss = mysql_query("SELECT * FROM `s_project_product` WHERE fo_id = '".$fo_id."' ORDER BY id ASC");
+		$quQryss = mysqli_query($conn,"SELECT * FROM `s_project_product` WHERE fo_id = '".$fo_id."' ORDER BY id ASC");
 
 		$rowCal = 1;
 		
@@ -675,7 +675,7 @@ function chksign(vals){
 		}
 		
 		//$arrPJ = [];
-		while($rowPJ = mysql_fetch_array($quQryss)){
+		while($rowPJ = mysqli_fetch_array($quQryss)){
 			$arrPJ[] = $rowPJ['ccost'];
 		}
 
@@ -685,7 +685,7 @@ function chksign(vals){
 		$sumTotalCost2 = 0;
 		$sumPrice = 0;
 		$runPJ = 0;
-		while($rowPro = mysql_fetch_array($rowRun)){
+		while($rowPro = mysqli_fetch_array($rowRun)){
 			?>
 			<tr>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;"><?php   echo $rowCal;?></td>
@@ -697,8 +697,8 @@ function chksign(vals){
 			  <select name="cpro[]" id="cpro<?php   echo $rowCal;?>" class="inputselect" style="width:100%;" disabled>
 					<option value="">กรุณาเลือกรายการ</option>
 					<?php  
-						$qupro1 = @mysql_query("SELECT * FROM s_group_project ORDER BY group_name ASC");
-						while($row_qupro1 = @mysql_fetch_array($qupro1)){
+						$qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_project ORDER BY group_name ASC");
+						while($row_qupro1 = @mysqli_fetch_array($qupro1)){
 						  ?>
 							<option value="<?php   echo $row_qupro1['group_id'];?>" <?php   if($rowPro['cpro'] == $row_qupro1['group_id']){echo 'selected';}?>><?php   echo $row_qupro1['group_name'];?></option>
 						  <?php  	
@@ -880,7 +880,7 @@ function chksign(vals){
               </tr>
             </table></td>
             <td style="border:0;padding:0;width:40%;vertical-align:top;padding-left:5px;font-size:12px;border:1px solid #000000;padding-top:10px;"><p><strong>
-              เลขที่สัญญาซื้อขาย : <input type="text" name="r_id" value="<?php   echo $r_id;?>" id="r_id" class="inpfoder" readonly><!--<input type="text" name="r_id" value="<?php   if($r_id == ""){echo check_contactfo("R".date("Y/m/"));}else{echo $r_id;};?>" id="r_id" class="inpfoder" >--><br><br>
+              เลขที่สัญญาซื้อขาย : <input type="text" name="r_id" value="<?php   echo $r_id;?>" id="r_id" class="inpfoder" readonly><!--<input type="text" name="r_id" value="<?php   if($r_id == ""){echo check_contactfo($conn);}else{echo $r_id;};?>" id="r_id" class="inpfoder" >--><br><br>
               วันเริ่มสัญญา : </strong>
               <input type="text" name="date_quf" readonly value="<?php   if($date_quf==""){echo date("d/m/Y");}else{ echo $date_quf;}?>" class="inpfoder" readonly/>
               <!--<script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_quf'});</script> -->
@@ -914,8 +914,8 @@ function chksign(vals){
         <select name="service_type" id="service_type" class="inputselect" style="width:50%;" disabled>
          	<option value="">กรุณาเลือกการบริการ</option>
           <?php  
-                	$quservicetype = @mysql_query("SELECT * FROM s_group_service ORDER BY group_name ASC");
-					while($row_servicetype = @mysql_fetch_array($quservicetype)){
+                	$quservicetype = @mysqli_query($conn,"SELECT * FROM s_group_service ORDER BY group_name ASC");
+					while($row_servicetype = @mysqli_fetch_array($quservicetype)){
 					  ?>
           <option value="<?php   echo $row_servicetype['group_id'];?>" <?php   if($service_type == $row_servicetype['group_id']){echo 'selected';}?>><?php   echo $row_servicetype['group_name'];?></option>
           <?php  	
@@ -936,8 +936,8 @@ function chksign(vals){
                   <!--<select name="cs_company" id="cs_company" class="inputselect" style="width:50%;display: none;">
                     <option value="">กรุณาเลือกช่างบริการ</option>
                     <?php  
-						/*$qutechtype = @mysql_query("SELECT * FROM s_group_technician ORDER BY group_name ASC");
-						while($row_techtype = @mysql_fetch_array($qutechtype)){
+						/*$qutechtype = @mysqli_query($conn,"SELECT * FROM s_group_technician ORDER BY group_name ASC");
+						while($row_techtype = @mysqli_fetch_array($qutechtype)){
 						  ?>
 						<option value="<?php   echo $row_techtype['group_id'];?>" <?php   if($cs_company == $row_techtype['group_id']){echo 'selected';}?>><?php   echo $row_techtype['group_name'];?></option>
 						<?php  	
@@ -963,8 +963,8 @@ function chksign(vals){
                 <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong><!--<input type="text" name="cs_sell" value="<?php   echo $cs_sell;?>" id="cs_sell" class="inpfoder" style="width:50%;text-align:center;">-->
                 <select name="cs_sell" id="cs_sell" class="inputselect" style="width:50%;" disabled>
                 <?php  
-                	$qusaletype = @mysql_query("SELECT * FROM s_group_sale ORDER BY group_name ASC");
-					while($row_saletype = @mysql_fetch_array($qusaletype)){
+                	$qusaletype = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
+					while($row_saletype = @mysqli_fetch_array($qusaletype)){
 					  ?>
 					  	<option value="<?php   echo $row_saletype['group_id'];?>" <?php   if($cs_sell == $row_saletype['group_id']){echo 'selected';}?>><?php   echo $row_saletype['group_name'];?></option>
 					  <?php  	
@@ -1024,9 +1024,9 @@ function chksign(vals){
 			$a_not_exists = array();
 			post_param($a_param,$a_not_exists); 
 			?>
-      <input name="mode" type="hidden" id="mode" value="<?php   echo $_GET[mode];?>">
+      <input name="mode" type="hidden" id="mode" value="<?php   echo $_GET["mode"];?>">
       <input name="fo_id" type="hidden" id="fo_id" value="<?php   echo $_GET[fo_id];?>">
-      <input name="page" type="hidden" id="page" value="<?php   echo $_GET[page];?>">
+      <input name="page" type="hidden" id="page" value="<?php   echo $_GET["page"];?>">
       <input name="status_use" type="hidden" id="status_use" value="<?php   echo $status_use;?>">
       <input name="st_setting" type="hidden" id="st_setting" value="<?php   echo $st_setting;?>">
       <input name="<?php   echo $PK_field;?>" type="hidden" id="<?php   echo $PK_field;?>" value="<?php   echo $_GET[$PK_field];?>">

@@ -3,15 +3,15 @@
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
 	include ("config.php");
-	Check_Permission ($check_module,$_SESSION[login_id],"read");
-	if ($_GET[page] == ""){$_REQUEST[page] = 1;	}
+	Check_Permission($conn,$check_module,$_SESSION["login_id"],"read");
+	if ($_GET["page"] == ""){$_REQUEST["page"] = 1;	}
 	$param = get_param($a_param,$a_not_exists);
 	
-	if($_GET[action] == "delete"){
-		$code = Check_Permission ($check_module,$_SESSION["login_id"],"delete");		
+	if($_GET["action"] == "delete"){
+		$code = Check_Permission($conn,$check_module,$_SESSION["login_id"],"delete");		
 		if ($code == "1") {
-			$sql = "delete from $tbl_name  where $PK_field = '$_GET[$PK_field]'";
-			@mysql_query($sql);			
+			$sql = "delete from $tbl_name  where $PK_field = '".$_GET[$PK_field]."'";
+			@mysqli_query($conn,$sql);			
 			header ("location:index.php");
 		} 
 	}
@@ -263,8 +263,8 @@ function check9(frm){
                             <td width="90%">
                             <select name="cd_province" id="cd_province" class="inputselect">
 							<?php  
-                                $quprovince = @mysql_query("SELECT * FROM s_province ORDER BY province_id ASC");
-                                while($row_province = @@mysql_fetch_array($quprovince)){
+                                $quprovince = @mysqli_query($conn,"SELECT * FROM s_province ORDER BY province_id ASC");
+                                while($row_province = @@mysqli_fetch_array($quprovince)){
                                   ?>
                                     <option value="<?php   echo $row_province['province_id'];?>" <?php   if($cd_province == $row_province['province_id']){echo 'selected';}?>><?php   echo $row_province['province_name'];?></option>
                                   <?php  	
@@ -355,8 +355,8 @@ function check9(frm){
                             <td width="90%">
                             <select name="cg_type" id="cg_type" class="inputselect">
 								<?php  
-                                    $qucgtype = @mysql_query("SELECT * FROM s_group_type ORDER BY group_name ASC");
-                                    while($row_cgtype = @@mysql_fetch_array($qucgtype)){
+                                    $qucgtype = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
+                                    while($row_cgtype = @@mysqli_fetch_array($qucgtype)){
                                       ?>
                                         <option value="<?php   echo $row_cgtype['group_id'];?>" <?php   if($cg_type == $row_cgtype['group_id']){echo 'selected';}?>><?php   echo $row_cgtype['group_name'];?></option>
                                       <?php  	
@@ -370,8 +370,8 @@ function check9(frm){
                             <td><select name="ctype" id="ctype" class="inputselect">
                             	<option value="">เลือกประเภทลูกค้า</option>
                               <?php  
-                                    $quccustommer = @mysql_query("SELECT * FROM s_group_custommer ORDER BY group_name ASC");
-                                    while($row_cgcus = @@mysql_fetch_array($quccustommer)){
+                                    $quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
+                                    while($row_cgcus = @@mysqli_fetch_array($quccustommer)){
                                      if(substr($row_cgcus['group_name'],0,2) != "SR"){
 										?>
                               <option value="<?php   echo $row_cgcus['group_id'];?>" <?php   if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php   echo $row_cgcus['group_name'];?></option>
@@ -386,8 +386,8 @@ function check9(frm){
                             <td><select name="pro_pod" id="pro_pod" class="inputselect" style="width:250px;">
                               <option value="">กรุณาเลือกรายการ</option>
                               <?php  
-                                          $qupros1 = @mysql_query("SELECT * FROM s_group_pod ORDER BY group_name ASC");
-                                          while($row_qupros1 = @@mysql_fetch_array($qupros1)){
+                                          $qupros1 = @mysqli_query($conn,"SELECT * FROM s_group_pod ORDER BY group_name ASC");
+                                          while($row_qupros1 = @@mysqli_fetch_array($qupros1)){
                                             ?>
                               <option value="<?php   echo $row_qupros1['group_name'];?>"><?php   echo $row_qupros1['group_name'];?></option>
                               <?php  	
@@ -475,8 +475,8 @@ function check9(frm){
                             <td width="90%">
                             <select name="cpro" id="cpro" class="inputselect" style="width:450px;">
                                   <?php  
-                                      $qupro1 = @mysql_query("SELECT * FROM s_group_typeproduct ORDER BY group_name ASC");
-                                      while($row_qupro1 = @@mysql_fetch_array($qupro1)){
+                                      $qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_typeproduct ORDER BY group_name ASC");
+                                      while($row_qupro1 = @@mysqli_fetch_array($qupro1)){
                                         ?>
                                           <option value="<?php   echo $row_qupro1['group_id'];?>" <?php   if($cpro1 == $row_qupro1['group_id']){echo 'selected';}?>><?php   echo $row_qupro1['group_name'];?></option>
                                         <?php  	
@@ -567,8 +567,8 @@ function check9(frm){
                             <td width="90%"><select name="pro_pod" id="pro_pod" class="inputselect" style="width:250px;">
                                         <option value="">กรุณาเลือกรายการ</option>
                                       <?php  
-                                          $qupros1 = @mysql_query("SELECT * FROM s_group_pod ORDER BY group_name ASC");
-                                          while($row_qupros1 = @@mysql_fetch_array($qupros1)){
+                                          $qupros1 = @mysqli_query($conn,"SELECT * FROM s_group_pod ORDER BY group_name ASC");
+                                          while($row_qupros1 = @@mysqli_fetch_array($qupros1)){
                                             ?>
                                               <option value="<?php   echo $row_qupros1['group_name'];?>"><?php   echo $row_qupros1['group_name'];?></option>
                                             <?php  	
@@ -656,8 +656,8 @@ function check9(frm){
                             <td width="90%">
                             <select name="ctype" id="ctype" class="inputselect">
 								<?php  
-                                    $quccustommer = @mysql_query("SELECT * FROM s_group_custommer ORDER BY group_name ASC");
-                                    while($row_cgcus = @@mysql_fetch_array($quccustommer)){
+                                    $quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
+                                    while($row_cgcus = @@mysqli_fetch_array($quccustommer)){
                                      if(substr($row_cgcus['group_name'],0,2) != "SR"){
 										?>
                                         <option value="<?php   echo $row_cgcus['group_id'];?>" <?php   if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php   echo $row_cgcus['group_name'];?></option>
@@ -819,8 +819,8 @@ function check9(frm){
                             <td width="90%">
                             <select name="cs_sell" id="cs_sell" class="inputselect" style="width:250px;">
 							<?php  
-                                $qusaletype = @mysql_query("SELECT * FROM s_group_sale ORDER BY group_name ASC");
-                                while($row_saletype = @@mysql_fetch_array($qusaletype)){
+                                $qusaletype = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
+                                while($row_saletype = @@mysqli_fetch_array($qusaletype)){
                                   ?>
                                     <option value="<?php   echo $row_saletype['group_id'];?>"><?php   echo $row_saletype['group_name'];?></option>
                                   <?php  	
@@ -963,8 +963,8 @@ function check9(frm){
                             <select name="cg_type" id="cg_type" class="inputselect">
                             <option value="">เลือกกลุ่มลูกค้า</option>
 								<?php  
-                                    $qucgtype = @mysql_query("SELECT * FROM s_group_type ORDER BY group_name ASC");
-                                    while($row_cgtype = @@mysql_fetch_array($qucgtype)){
+                                    $qucgtype = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
+                                    while($row_cgtype = @@mysqli_fetch_array($qucgtype)){
                                       ?>
                                         <option value="<?php   echo $row_cgtype['group_id'];?>" <?php   if($cg_type == $row_cgtype['group_id']){echo 'selected';}?>><?php   echo $row_cgtype['group_name'];?></option>
                                       <?php  	
@@ -978,8 +978,8 @@ function check9(frm){
                             <td><select name="ctype" id="ctype" class="inputselect">
                             	<option value="">เลือกประเภทลูกค้า</option>
                               <?php  
-                                    $quccustommer = @mysql_query("SELECT * FROM s_group_custommer ORDER BY group_name ASC");
-                                    while($row_cgcus = @@mysql_fetch_array($quccustommer)){
+                                    $quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
+                                    while($row_cgcus = @@mysqli_fetch_array($quccustommer)){
                                      if(substr($row_cgcus['group_name'],0,2) != "SR"){
 										?>
                               <option value="<?php   echo $row_cgcus['group_id'];?>" <?php   if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php   echo $row_cgcus['group_name'];?></option>
@@ -1136,35 +1136,35 @@ function check9(frm){
 										$dateft = $s_day."/".$s_month."/".$s_year;
 									}
 									$sql1 = "SELECT * FROM s_first_order AS fr WHERE 1 ".$daterriod4." ORDER BY fr.cd_name ASC";
-	  						$qu_fr1 = @mysql_num_rows(@mysql_query($sql1));
+	  						$qu_fr1 = @mysqli_num_rows(@mysqli_query($conn,$sql1));
 								?>
 			              <a href="report1.php?date_fm=<?php   echo $datefm;?>&date_to=<?php   echo $dateft;?>&priod=<?php   echo $_GET['poi'];?>" target="_blank"><?php   echo number_format($qu_fr1);?></a></td>
 			            <td><strong>รายการ</strong></td>
 		              </tr>
 			          <?php   
-					  	$typecus = @mysql_query("SELECT * FROM s_group_type ORDER BY group_name ASC");
-						while($roecus = @mysql_fetch_array($typecus)){
+					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
+						while($roecus = @mysqli_fetch_array($typecus)){
 							?>
 			          <?php  	
 						}
 					  ?>
 			          <?php   
-					  	$typepro = @mysql_query("SELECT * FROM s_group_product ORDER BY group_name ASC");
-						while($roepro = @mysql_fetch_array($typepro)){
+					  	$typepro = @mysqli_query($conn,"SELECT * FROM s_group_product ORDER BY group_name ASC");
+						while($roepro = @mysqli_fetch_array($typepro)){
 							?>
 			          <?php  	
 						}
 					  ?>
 			          <?php   
-					  	$typepod = @mysql_query("SELECT * FROM s_group_pod ORDER BY group_name ASC");
-						while($roepod = @mysql_fetch_array($typepod)){
+					  	$typepod = @mysqli_query($conn,"SELECT * FROM s_group_pod ORDER BY group_name ASC");
+						while($roepod = @mysqli_fetch_array($typepod)){
 							?>
 			          <?php  	
 						}
 					  ?>
 			          <?php   
-					  	$typecus = @mysql_query("SELECT * FROM s_group_custommer ORDER BY group_name ASC");
-						while($roetypecus = @mysql_fetch_array($typecus)){
+					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
+						while($roetypecus = @mysqli_fetch_array($typecus)){
 							if(substr($roetypecus['group_name'],0,2) != "SR"){
 								?>
 			          <?php  	
@@ -1172,8 +1172,8 @@ function check9(frm){
 						}
 					  ?>
 			          <?php   
-					  	$typesale = @mysql_query("SELECT * FROM s_group_sale ORDER BY group_name ASC");
-						while($roesale = @mysql_fetch_array($typesale)){
+					  	$typesale = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
+						while($roesale = @mysqli_fetch_array($typesale)){
 							?>
 			          <?php  	
 						}
@@ -1193,8 +1193,8 @@ function check9(frm){
 			            <td><strong>รายการ</strong></td>
 		              </tr>
 			          <?php   
-					  	$typecus = @mysql_query("SELECT * FROM s_group_type ORDER BY group_name ASC");
-						while($roecus = @mysql_fetch_array($typecus)){
+					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
+						while($roecus = @mysqli_fetch_array($typecus)){
 							?>
 			          <tr>
 			            <td>&nbsp;&nbsp;&nbsp;- <?php   echo $roecus['group_name'];?></td>
@@ -1207,7 +1207,7 @@ function check9(frm){
 										$dateft = $s_day."/".$s_month."/".$s_year;
 									}
 									$sql1 = "SELECT * FROM s_first_order AS fr WHERE fr.cg_type = '".$roecus['group_id']."' ".$daterriod4." ORDER BY fr.cd_name ASC";
-	  						$qu_fr1 = @mysql_num_rows(@mysql_query($sql1));
+	  						$qu_fr1 = @mysqli_num_rows(@mysqli_query($conn,$sql1));
 								?>
 			              <a href="report3.php?date_fm=<?php   echo $datefm;?>&date_to=<?php   echo $dateft;?>&priod=<?php   echo $_GET['poi'];?>&cg_type=<?php   echo $roecus['group_id'];?>" target="_blank"><?php   echo number_format($qu_fr1);?></a></td>
 			            <td>รายการ</td>
@@ -1216,22 +1216,22 @@ function check9(frm){
 						}
 					  ?>
 			          <?php   
-					  	$typepro = @mysql_query("SELECT * FROM s_group_product ORDER BY group_name ASC");
-						while($roepro = @mysql_fetch_array($typepro)){
+					  	$typepro = @mysqli_query($conn,"SELECT * FROM s_group_product ORDER BY group_name ASC");
+						while($roepro = @mysqli_fetch_array($typepro)){
 							?>
 			          <?php  	
 						}
 					  ?>
 			          <?php   
-					  	$typepod = @mysql_query("SELECT * FROM s_group_pod ORDER BY group_name ASC");
-						while($roepod = @mysql_fetch_array($typepod)){
+					  	$typepod = @mysqli_query($conn,"SELECT * FROM s_group_pod ORDER BY group_name ASC");
+						while($roepod = @mysqli_fetch_array($typepod)){
 							?>
 			          <?php  	
 						}
 					  ?>
 			          <?php   
-					  	$typecus = @mysql_query("SELECT * FROM s_group_custommer ORDER BY group_name ASC");
-						while($roetypecus = @mysql_fetch_array($typecus)){
+					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
+						while($roetypecus = @mysqli_fetch_array($typecus)){
 							if(substr($roetypecus['group_name'],0,2) != "SR"){
 								?>
 			          <?php  	
@@ -1239,8 +1239,8 @@ function check9(frm){
 						}
 					  ?>
 			          <?php   
-					  	$typesale = @mysql_query("SELECT * FROM s_group_sale ORDER BY group_name ASC");
-						while($roesale = @mysql_fetch_array($typesale)){
+					  	$typesale = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
+						while($roesale = @mysqli_fetch_array($typesale)){
 							?>
 			          <?php  	
 						}
@@ -1255,15 +1255,15 @@ function check9(frm){
                         <th width="7%">&nbsp;</th>
                       </tr>
                       <?php   
-					  	$typecus = @mysql_query("SELECT * FROM s_group_type ORDER BY group_name ASC");
-						while($roecus = @mysql_fetch_array($typecus)){
+					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
+						while($roecus = @mysqli_fetch_array($typecus)){
 							?>
                       <?php  	
 						}
 					  ?>
                       <?php   
-					  	$typepro = @mysql_query("SELECT * FROM s_group_product ORDER BY group_name ASC");
-						while($roepro = @mysql_fetch_array($typepro)){
+					  	$typepro = @mysqli_query($conn,"SELECT * FROM s_group_product ORDER BY group_name ASC");
+						while($roepro = @mysqli_fetch_array($typepro)){
 							?>
                       <?php  	
 						}
@@ -1274,8 +1274,8 @@ function check9(frm){
                         <td><strong>รายการ</strong></td>
                       </tr>
                       <?php   
-					  	$typepod = @mysql_query("SELECT * FROM s_group_pod ORDER BY group_name ASC");
-						while($roepod = @mysql_fetch_array($typepod)){
+					  	$typepod = @mysqli_query($conn,"SELECT * FROM s_group_pod ORDER BY group_name ASC");
+						while($roepod = @mysqli_fetch_array($typepod)){
 							?>
                       <tr>
                         <td>&nbsp;&nbsp;&nbsp;- <?php   echo $roepod['group_name'];?></td>
@@ -1288,7 +1288,7 @@ function check9(frm){
 										$dateft = $s_day."/".$s_month."/".$s_year;
 									}
 									$sql1 = "SELECT * FROM s_first_order AS fr WHERE (fr.pro_pod1 LIKE '%".$roepod['group_name']."%' OR fr.pro_pod2 LIKE '%".$roepod['group_name']."%' OR fr.pro_pod3 LIKE '%".$roepod['group_name']."%' OR fr.pro_pod4 LIKE '%".$roepod['group_name']."%' OR fr.pro_pod5 LIKE '%".$roepod['group_name']."%' OR fr.pro_pod6 LIKE '%".$roepod['group_name']."%' OR fr.pro_pod7 LIKE '%".$roepod['group_name']."%')  ".$daterriod4." ORDER BY fr.cd_name ASC";
-	  						$qu_fr1 = @mysql_num_rows(@mysql_query($sql1));
+	  						$qu_fr1 = @mysqli_num_rows(@mysqli_query($conn,$sql1));
 								?>
                           <a href="report5.php?date_fm=<?php   echo $datefm;?>&date_to=<?php   echo $dateft;?>&priod=<?php   echo $_GET['poi'];?>&pro_pod=<?php   echo $roepod['group_name'];?>" target="_blank"><?php   echo number_format($qu_fr1);?></a></td>
                         <td>รายการ</td>
@@ -1297,8 +1297,8 @@ function check9(frm){
 						}
 					  ?>
                       <?php   
-					  	$typecus = @mysql_query("SELECT * FROM s_group_custommer ORDER BY group_name ASC");
-						while($roetypecus = @mysql_fetch_array($typecus)){
+					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
+						while($roetypecus = @mysqli_fetch_array($typecus)){
 							if(substr($roetypecus['group_name'],0,2) != "SR"){
 								?>
                       <?php  	
@@ -1306,8 +1306,8 @@ function check9(frm){
 						}
 					  ?>
                       <?php   
-					  	$typesale = @mysql_query("SELECT * FROM s_group_sale ORDER BY group_name ASC");
-						while($roesale = @mysql_fetch_array($typesale)){
+					  	$typesale = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
+						while($roesale = @mysqli_fetch_array($typesale)){
 							?>
                       <?php  	
 						}
@@ -1322,22 +1322,22 @@ function check9(frm){
                         <th width="7%">&nbsp;</th>
                       </tr>
                       <?php   
-					  	$typecus = @mysql_query("SELECT * FROM s_group_type ORDER BY group_name ASC");
-						while($roecus = @mysql_fetch_array($typecus)){
+					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
+						while($roecus = @mysqli_fetch_array($typecus)){
 							?>
                       <?php  	
 						}
 					  ?>
                       <?php   
-					  	$typepro = @mysql_query("SELECT * FROM s_group_product ORDER BY group_name ASC");
-						while($roepro = @mysql_fetch_array($typepro)){
+					  	$typepro = @mysqli_query($conn,"SELECT * FROM s_group_product ORDER BY group_name ASC");
+						while($roepro = @mysqli_fetch_array($typepro)){
 							?>
                       <?php  	
 						}
 					  ?>
                       <?php   
-					  	$typepod = @mysql_query("SELECT * FROM s_group_pod ORDER BY group_name ASC");
-						while($roepod = @mysql_fetch_array($typepod)){
+					  	$typepod = @mysqli_query($conn,"SELECT * FROM s_group_pod ORDER BY group_name ASC");
+						while($roepod = @mysqli_fetch_array($typepod)){
 							?>
                       <?php  	
 						}
@@ -1348,8 +1348,8 @@ function check9(frm){
                         <td><strong>รายการ</strong></td>
                       </tr>
                       <?php   
-					  	$typecus = @mysql_query("SELECT * FROM s_group_custommer ORDER BY group_name ASC");
-						while($roetypecus = @mysql_fetch_array($typecus)){
+					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
+						while($roetypecus = @mysqli_fetch_array($typecus)){
 							if(substr($roetypecus['group_name'],0,2) != "SR"){
 								?>
                       <tr>
@@ -1363,7 +1363,7 @@ function check9(frm){
 										$dateft = $s_day."/".$s_month."/".$s_year;
 									}
 									$sql1 = "SELECT * FROM s_first_order AS fr WHERE fr.ctype = '".$roetypecus['group_id']."' ".$daterriod4." ORDER BY fr.cd_name ASC";
-	  						$qu_fr1 = @mysql_num_rows(@mysql_query($sql1));
+	  						$qu_fr1 = @mysqli_num_rows(@mysqli_query($conn,$sql1));
 								?>
                           <a href="report6.php?date_fm=<?php   echo $datefm;?>&date_to=<?php   echo $dateft;?>&priod=<?php   echo $_GET['poi'];?>&ctype=<?php   echo $roetypecus['group_id'];?>" target="_blank"><?php   echo number_format($qu_fr1);?></a></td>
                         <td>รายการ</td>
@@ -1373,8 +1373,8 @@ function check9(frm){
 						}
 					  ?>
                       <?php   
-					  	$typesale = @mysql_query("SELECT * FROM s_group_sale ORDER BY group_name ASC");
-						while($roesale = @mysql_fetch_array($typesale)){
+					  	$typesale = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
+						while($roesale = @mysqli_fetch_array($typesale)){
 							?>
                       <?php  	
 						}
@@ -1389,29 +1389,29 @@ function check9(frm){
                         <th width="7%">&nbsp;</th>
                       </tr>
                       <?php   
-					  	$typecus = @mysql_query("SELECT * FROM s_group_type ORDER BY group_name ASC");
-						while($roecus = @mysql_fetch_array($typecus)){
+					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
+						while($roecus = @mysqli_fetch_array($typecus)){
 							?>
                       <?php  	
 						}
 					  ?>
                       <?php   
-					  	$typepro = @mysql_query("SELECT * FROM s_group_product ORDER BY group_name ASC");
-						while($roepro = @mysql_fetch_array($typepro)){
+					  	$typepro = @mysqli_query($conn,"SELECT * FROM s_group_product ORDER BY group_name ASC");
+						while($roepro = @mysqli_fetch_array($typepro)){
 							?>
                       <?php  	
 						}
 					  ?>
                       <?php   
-					  	$typepod = @mysql_query("SELECT * FROM s_group_pod ORDER BY group_name ASC");
-						while($roepod = @mysql_fetch_array($typepod)){
+					  	$typepod = @mysqli_query($conn,"SELECT * FROM s_group_pod ORDER BY group_name ASC");
+						while($roepod = @mysqli_fetch_array($typepod)){
 							?>
                       <?php  	
 						}
 					  ?>
                       <?php   
-					  	$typecus = @mysql_query("SELECT * FROM s_group_custommer ORDER BY group_name ASC");
-						while($roetypecus = @mysql_fetch_array($typecus)){
+					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
+						while($roetypecus = @mysqli_fetch_array($typecus)){
 							if(substr($roetypecus['group_name'],0,2) != "SR"){
 								?>
                       <?php  	
@@ -1424,8 +1424,8 @@ function check9(frm){
                         <td><strong>รายการ</strong></td>
                       </tr>
                       <?php   
-					  	$typesale = @mysql_query("SELECT * FROM s_group_sale ORDER BY group_name ASC");
-						while($roesale = @mysql_fetch_array($typesale)){
+					  	$typesale = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
+						while($roesale = @mysqli_fetch_array($typesale)){
 							?>
                       <tr>
                         <td>&nbsp;&nbsp;&nbsp;- <?php   echo $roesale['group_name'];?></td>
@@ -1438,7 +1438,7 @@ function check9(frm){
 										$dateft = $s_day."/".$s_month."/".$s_year;
 									}
 									$sql1 = "SELECT * FROM s_first_order AS fr WHERE fr.cs_sell = '".$roesale['group_id']."' ".$daterriod4." ORDER BY fr.cd_name ASC";
-	  						$qu_fr1 = @mysql_num_rows(@mysql_query($sql1));
+	  						$qu_fr1 = @mysqli_num_rows(@mysqli_query($conn,$sql1));
 								?>
                           <a href="report9.php?date_fm=<?php   echo $datefm;?>&date_to=<?php   echo $dateft;?>&priod=<?php   echo $_GET['poi'];?>&cs_sell=<?php   echo $roesale['group_id'];?>" target="_blank"><?php   echo number_format($qu_fr1);?></a></td>
                         <td>รายการ</td>

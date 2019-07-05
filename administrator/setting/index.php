@@ -2,7 +2,7 @@
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
-	//Check_Permission ($check_module,$_SESSION[login_id],"read");
+	//Check_Permission($conn,$check_module,$_SESSION["login_id"],"read");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">

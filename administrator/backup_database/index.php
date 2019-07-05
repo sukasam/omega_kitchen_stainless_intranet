@@ -3,16 +3,16 @@
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
 	include ("config.php");
-	Check_Permission ($check_module,$_SESSION[login_id],"read");
-	if ($_GET[page] == ""){$_REQUEST[page] = 1;	}
+	Check_Permission($conn,$check_module,$_SESSION["login_id"],"read");
+	if ($_GET["page"] == ""){$_REQUEST["page"] = 1;	}
 	$param = get_param($a_param,$a_not_exists);
 	
-	if($_GET[action] == "delete"){
-		$code = Check_Permission ($check_module,$_SESSION["login_id"],"delete");		
+	if($_GET["action"] == "delete"){
+		$code = Check_Permission($conn,$check_module,$_SESSION["login_id"],"delete");		
 		if ($code == "1") {
-			$sql = "delete from $tbl_name  where $PK_field = '$_GET[$PK_field]'";
+			$sql = "delete from $tbl_name  where $PK_field = '".$_GET[$PK_field]."'";
 			unlink("../../upload/database/".$_GET['fn']);
-			@mysql_query($sql);			
+			@mysqli_query($conn,$sql);			
 			header ("location:index.php");
 		} 
 	}
@@ -135,11 +135,11 @@ function check_select(frm){
 					if ($sortby <> "") $sql .= " " . $sortby;
 					include ("../include/page_init.php");
 					//echo $sql;
-					$query = @mysql_query ($sql);
-					if($_GET[page] == "") $_GET[page] = 1;
-					$counter = ($_GET[page]-1)*$pagesize;
+					$query = @mysqli_query($conn,$sql);
+					if($_GET["page"] == "") $_GET["page"] = 1;
+					$counter = ($_GET["page"]-1)*$pagesize;
 					
-					while ($rec = @mysql_fetch_array ($query)) { 
+					while ($rec = @mysqli_fetch_array ($query)) { 
 					$counter++;
 				   ?>
         <TR>

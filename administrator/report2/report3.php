@@ -3,8 +3,8 @@
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
 	include ("config.php");
-	Check_Permission ($check_module,$_SESSION[login_id],"read");
-	if ($_GET[page] == ""){$_REQUEST[page] = 1;	}
+	Check_Permission($conn,$check_module,$_SESSION["login_id"],"read");
+	if ($_GET["page"] == ""){$_REQUEST["page"] = 1;	}
 	$param = get_param($a_param,$a_not_exists);
 	
 	$cg_type = $_REQUEST['cg_type'];
@@ -62,10 +62,10 @@
 	    <th colspan="4" style="text-align:left;font-size:12px;">	      บริษัท โอเมก้า แมชชีนเนอรี่ (1999) จำกัด<br />
 รายงานการให้บริการตามกลุ่มลูกค้า<br />
 ประเภทลูกค้า  :
-<?php   if($_POST['ctype'] != ""){echo getcustom_type($_POST['ctype']);}else{echo "ทั้งหมด";}?>
+<?php   if($_POST['ctype'] != ""){echo getcustom_type($conn,$_POST['ctype']);}else{echo "ทั้งหมด";}?>
 <br />
 ประเภทบริการ  :
-<?php   if($_POST['sr_ctype']){echo get_servicename($_POST['sr_ctype']);}else{echo "ทั้งหมด";}?></th>
+<?php   if($_POST['sr_ctype']){echo get_servicename($conn,$_POST['sr_ctype']);}else{echo "ทั้งหมด";}?></th>
 	    <th colspan="5" style="text-align:right;font-size:11px;vertical-align:bottom;"><?php   echo $dateshow;?><br />
 	      <br />
         <br /></th>
@@ -87,9 +87,9 @@
       </tr>
       <?php   
 		$sql = "SELECT * FROM s_first_order as fr, s_service_report as sv WHERE sv.cus_id = fr.fo_id ".$condition." ".$daterriod." ORDER BY fr.cd_name ASC";
-	  	$qu_fr = @mysql_query($sql);
+	  	$qu_fr = @mysqli_query($conn,$sql);
 		$sum = 0;
-		while($row_fr = @mysql_fetch_array($qu_fr)){
+		while($row_fr = @mysqli_fetch_array($qu_fr)){
 			
 			?>
 			<tr>
@@ -172,7 +172,7 @@
 				?>
               </table></td>    <?php   }?>
               <?php   if($_REQUEST['sh8'] == 1){?><td><?php   echo $row_fr['detail_recom2'];?></td><?php   }?>
-              <?php   if($_REQUEST['sh9'] == 1){?><td><?php   echo get_technician_id($row_fr['loc_contact']);?></td><?php   }?>         
+              <?php   if($_REQUEST['sh9'] == 1){?><td><?php   echo get_technician_id($conn,$row_fr['loc_contact']);?></td><?php   }?>         
             </tr>
 			<?php  
 			$sum += 1;

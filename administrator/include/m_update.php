@@ -14,6 +14,6 @@
 		/*echo $sql;
 		break;
 		*/
-		@mysql_query ($sql);
+		@mysqli_query($conn,$sql);
 		$id = $$PK_field;
 		?>

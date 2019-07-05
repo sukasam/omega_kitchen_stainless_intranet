@@ -4,7 +4,7 @@
 	include ("../../include/function.php");
 	include ("config.php");
 
-	if ($_POST[mode] <> "") { 
+	if ($_POST["mode"] <> "") { 
 		
 		$param = "";
 		$a_not_exists = array();
@@ -31,62 +31,62 @@
 		
 		$_POST['separate'] = 0;
 		
-		/*$_POST["cprice1"] = eregi_replace(",","",$_POST["cprice1"]);
-		$_POST["cprice2"] = eregi_replace(",","",$_POST["cprice2"]);
-		$_POST["cprice3"] = eregi_replace(",","",$_POST["cprice3"]);
-		$_POST["cprice4"] = eregi_replace(",","",$_POST["cprice4"]);
-		$_POST["cprice5"] = eregi_replace(",","",$_POST["cprice5"]);
-		$_POST["cprice6"] = eregi_replace(",","",$_POST["cprice6"]);
-		$_POST["cprice7"] = eregi_replace(",","",$_POST["cprice7"]);*/
+		/*$_POST["cprice1"] = preg_replace("/,/","",$_POST["cprice1"]);
+		$_POST["cprice2"] = preg_replace("/,/","",$_POST["cprice2"]);
+		$_POST["cprice3"] = preg_replace("/,/","",$_POST["cprice3"]);
+		$_POST["cprice4"] = preg_replace("/,/","",$_POST["cprice4"]);
+		$_POST["cprice5"] = preg_replace("/,/","",$_POST["cprice5"]);
+		$_POST["cprice6"] = preg_replace("/,/","",$_POST["cprice6"]);
+		$_POST["cprice7"] = preg_replace("/,/","",$_POST["cprice7"]);*/
 
 		
-		if ($_POST[mode] == "add") { 
+		if ($_POST["mode"] == "add") { 
 			
 		
-				$_POST['fs_id'] = get_snprojectorders($_POST['fs_id']);
+				$_POST['fs_id'] = get_snprojectorders($conn,$_POST['fs_id']);
 				$_POST['status_use'] = 1;
 				
 				include "../include/m_add.php";
-				$id = mysql_insert_id();
+				$id = mysqli_insert_id($conn);
 			
 				for($i=0;$i<=count($_POST['cpro']);$i++){
 					if($_POST['cpro'][$i] != ""){
 						
 						
-						$_POST['cprice'][$i] = eregi_replace(",","",$_POST['cprice'][$i]);
-						$_POST['ccost'][$i] = eregi_replace(",","",$_POST['ccost'][$i]);
+						$_POST['cprice'][$i] = preg_replace("/,/","",$_POST['cprice'][$i]);
+						$_POST['ccost'][$i] = preg_replace("/,/","",$_POST['ccost'][$i]);
 						
 						$_POST['ccost'][$i] = $_POST['camount'][$i] * $_POST['ccost'][$i];
 						
-						@mysql_query("INSERT INTO `s_project_product` (`id`, `fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`) VALUES ('NULL','".$id."', '".$_POST['ccode'][$i]."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."', '".$_POST['ccost'][$i]."');");
+						@mysqli_query($conn,"INSERT INTO `s_project_product` (`id`, `fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`) VALUES ('NULL','".$id."', '".$_POST['ccode'][$i]."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."', '".$_POST['ccost'][$i]."');");
 					}
 				}
 			
-				$_POST['discount'] = eregi_replace(",","",$_POST['discount']);
+				$_POST['discount'] = preg_replace("/,/","",$_POST['discount']);
 				
 				include_once("../mpdf54/mpdf.php");
 				include_once("form_projectorder.php");
 				$mpdf=new mPDF('UTF-8'); 
 				$mpdf->SetAutoFont();
 				$mpdf->WriteHTML($form);
-				$chaf = eregi_replace("/","-",$_POST['fs_id']); 
+				$chaf = preg_replace("/\//","-",$_POST['fs_id']); 
 				$mpdf->Output('../../upload/project_order/'.$chaf.'.pdf','F');
 				
 			header ("location:index.php?" . $param); 
 		}
-		if ($_POST[mode] == "update" ) { 
+		if ($_POST["mode"] == "update" ) { 
 				include ("../include/m_update.php");
 				$id = $_REQUEST[$PK_field];	
 			
-				@mysql_query("DELETE FROM `s_project_product` WHERE `fo_id` = '".$id."'");
+				@mysqli_query($conn,"DELETE FROM `s_project_product` WHERE `fo_id` = '".$id."'");
 			
 			
 				for($i=0;$i<=count($_POST['cpro']);$i++){
 					
 					if($_POST['cpro'][$i] != ""){
 						
-						$_POST['cprice'][$i] = eregi_replace(",","",$_POST['cprice'][$i]);
-						$_POST['ccost'][$i] = eregi_replace(",","",$_POST['ccost'][$i]);
+						$_POST['cprice'][$i] = preg_replace("/,/","",$_POST['cprice'][$i]);
+						$_POST['ccost'][$i] = preg_replace("/,/","",$_POST['ccost'][$i]);
 						
 						if($_POST['ccostH'][$i] != $_POST['ccost'][$i]){
 							$_POST['ccost'][$i] = $_POST['camount'][$i] * $_POST['ccost'][$i];
@@ -97,31 +97,31 @@
 						}					
 						
 						
-						@mysql_query("INSERT INTO `s_project_product` (`fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`) VALUES ('".$id."', '".$_POST['ccode'][$i]."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."', '".$_POST['ccost'][$i]."');");
+						@mysqli_query($conn,"INSERT INTO `s_project_product` (`fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`) VALUES ('".$id."', '".$_POST['ccode'][$i]."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."', '".$_POST['ccost'][$i]."');");
 					}
 				}
 			
-				$_POST['discount'] = eregi_replace(",","",$_POST['discount']);
+				$_POST['discount'] = preg_replace("/,/","",$_POST['discount']);
 				
 				include_once("../mpdf54/mpdf.php");
 				include_once("form_projectorder.php");
 				$mpdf=new mPDF('UTF-8'); 
 				$mpdf->SetAutoFont();
 				$mpdf->WriteHTML($form);
-				$chaf = eregi_replace("/","-",$_POST['fs_id']); 
+				$chaf = preg_replace("/\//","-",$_POST['fs_id']); 
 				$mpdf->Output('../../upload/project_order/'.$chaf.'.pdf','F');
 			
 			header ("location:index.php?" . $param); 
 		}
 	}
-	if ($_GET[mode] == "add") { 
-		 Check_Permission ($check_module,$_SESSION[login_id],"add");
+	if ($_GET["mode"] == "add") { 
+		 Check_Permission($conn,$check_module,$_SESSION["login_id"],"add");
 	}
-	if ($_GET[mode] == "update") { 
-		 Check_Permission ($check_module,$_SESSION[login_id],"update");
+	if ($_GET["mode"] == "update") { 
+		 Check_Permission($conn,$check_module,$_SESSION["login_id"],"update");
 		$sql = "select * from $tbl_name where $PK_field = '" . $_GET[$PK_field] ."'";
-		$query = @mysql_query ($sql);
-		while ($rec = @mysql_fetch_array ($query)) { 
+		$query = @mysqli_query($conn,$sql);
+		while ($rec = @mysqli_fetch_array ($query)) { 
 			$$PK_field = $rec[$PK_field];
 			foreach ($fieldlist as $key => $value) { 
 				$$value = $rec[$value];
@@ -246,8 +246,8 @@ function chksign(vals){
             <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>กลุ่มลูกค้า :</strong> 
             <select name="cg_type" id="cg_type" class="inputselect">
                 <?php  
-                	$qucgtype = @mysql_query("SELECT * FROM s_group_type ORDER BY group_name ASC");
-					while($row_cgtype = @mysql_fetch_array($qucgtype)){
+                	$qucgtype = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
+					while($row_cgtype = @mysqli_fetch_array($qucgtype)){
 					  ?>
 					  	<option value="<?php   echo $row_cgtype['group_id'];?>" <?php   if($cg_type == $row_cgtype['group_id']){echo 'selected';}?>><?php   echo $row_cgtype['group_name'];?></option>
 					  <?php  	
@@ -257,8 +257,8 @@ function chksign(vals){
              <strong>ประเภทลูกค้า :</strong> 
              <select name="ctype" id="ctype" class="inputselect" onChange="chksign(this.value);">
                 <?php  
-                	$quccustommer = @mysql_query("SELECT * FROM s_group_custommer ORDER BY group_name ASC");
-					while($row_cgcus = @mysql_fetch_array($quccustommer)){
+                	$quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
+					while($row_cgcus = @mysqli_fetch_array($quccustommer)){
 						if(substr($row_cgcus['group_name'],0,2) != "SR"){
 					  ?>
 					  	<option value="<?php   echo $row_cgcus['group_id'];?>" <?php   if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php   echo $row_cgcus['group_name'];?></option>
@@ -273,8 +273,8 @@ function chksign(vals){
             <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>ประเภทสินค้า :</strong> 	
             <select name="pro_type" id="pro_type" class="inputselect">
                 <?php  
-                	$quprotype = @mysql_query("SELECT * FROM s_group_product ORDER BY group_name ASC");
-					while($row_protype = @mysql_fetch_array($quprotype)){
+                	$quprotype = @mysqli_query($conn,"SELECT * FROM s_group_product ORDER BY group_name ASC");
+					while($row_protype = @mysqli_fetch_array($quprotype)){
 					  ?>
 					  	<option value="<?php   echo $row_protype['group_id'];?>" <?php   if($pro_type == $row_protype['group_id']){echo 'selected';}?>><?php   echo $row_protype['group_name'];?></option>
 					  <?php  	
@@ -287,8 +287,8 @@ function chksign(vals){
             <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>จังหวัด :</strong> 
             <select name="cd_province" id="cd_province" class="inputselect">
                 <?php  
-                	$quprovince = @mysql_query("SELECT * FROM s_province ORDER BY province_id ASC");
-					while($row_province = @mysql_fetch_array($quprovince)){
+                	$quprovince = @mysqli_query($conn,"SELECT * FROM s_province ORDER BY province_id ASC");
+					while($row_province = @mysqli_fetch_array($quprovince)){
 					  ?>
 					  	<option value="<?php   echo $row_province['province_id'];?>" <?php   if($cd_province == $row_province['province_id']){echo 'selected';}?>><?php   echo $row_province['province_name'];?></option>
 					  <?php  	
@@ -302,7 +302,7 @@ function chksign(vals){
             <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>โทรศัพท์ :</strong> <input type="text" name="cd_tel" value="<?php   echo $cd_tel;?>" id="cd_tel" class="inpfoder">
               <strong>แฟกซ์ :</strong>
               <input type="text" name="cd_fax" value="<?php   echo $cd_fax;?>" id="cd_fax" class="inpfoder"></td>
-            <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>เลขที่ Project order :</strong> <!--<input type="text" name="fs_id" value="<?php   echo $fs_id;?>">--><input type="text" name="fs_id" value="<?php   if($fs_id == ""){echo check_projectorder("PJ".date("Y/m/"));}else{echo $fs_id;};?>" id="fs_id" class="inpfoder" > <strong> วันที่ :</strong> <input type="text" name="date_forder" readonly value="<?php   if($date_forder==""){echo date("d/m/Y");}else{ echo $date_forder;}?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_forder'});</script></td>
+            <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>เลขที่ Project order :</strong> <!--<input type="text" name="fs_id" value="<?php   echo $fs_id;?>">--><input type="text" name="fs_id" value="<?php   if($fs_id == ""){echo check_projectorder($conn);}else{echo $fs_id;};?>" id="fs_id" class="inpfoder" > <strong> วันที่ :</strong> <input type="text" name="date_forder" readonly value="<?php   if($date_forder==""){echo date("d/m/Y");}else{ echo $date_forder;}?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_forder'});</script></td>
           </tr>
           <tr>
             <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>ชื่อผู้ติดต่อ :</strong>
@@ -439,12 +439,12 @@ Vat 7%</strong></td>
     <tbody id="exp" name="exp">
     <?php  
 		$fo_id = $_GET['fo_id'];
-		$quQry = mysql_query("SELECT * FROM `s_project_product` WHERE fo_id = '".$fo_id."' ORDER BY id ASC");
-		$numRowPro = mysql_num_rows($quQry);
+		$quQry = mysqli_query($conn,"SELECT * FROM `s_project_product` WHERE fo_id = '".$fo_id."' ORDER BY id ASC");
+		$numRowPro = mysqli_num_rows($quQry);
 		$rowCal = 1;
 		$sumPrice = 0;
 		$sumCost = 0;
-		while($rowPro = mysql_fetch_array($quQry)){
+		while($rowPro = mysqli_fetch_array($quQry)){
 			?>
 			<tr>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;"><?php   echo $rowCal;?></td>
@@ -454,8 +454,8 @@ Vat 7%</strong></td>
 			  <select name="cpro[]" id="cpro<?php   echo $rowCal;?>" class="inputselect" style="width:90%;">
 					<option value="">กรุณาเลือกรายการ</option>
 					<?php  
-						$qupro1 = @mysql_query("SELECT * FROM s_group_project ORDER BY group_name ASC");
-						while($row_qupro1 = @mysql_fetch_array($qupro1)){
+						$qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_project ORDER BY group_name ASC");
+						while($row_qupro1 = @mysqli_fetch_array($qupro1)){
 						  ?>
 							<option value="<?php   echo $row_qupro1['group_id'];?>" <?php   if($rowPro['cpro'] == $row_qupro1['group_id']){echo 'selected';}?>><?php   echo $row_qupro1['group_name'];?></option>
 						  <?php  	
@@ -613,7 +613,7 @@ Vat 7%</strong></td>
               </tr>
             </table></td>
             <td style="border:0;padding:0;width:40%;vertical-align:top;padding-left:5px;font-size:12px;border:1px solid #000000;padding-top:10px;"><p><strong>
-              เลขที่สัญญาซื้อขาย : <input type="text" name="r_id" value="<?php   echo $r_id;?>" id="r_id" class="inpfoder" ><!--<input type="text" name="r_id" value="<?php   if($r_id == ""){echo check_contactfo("R".date("Y/m/"));}else{echo $r_id;};?>" id="r_id" class="inpfoder" >--><br><br>
+              เลขที่สัญญาซื้อขาย : <input type="text" name="r_id" value="<?php   echo $r_id;?>" id="r_id" class="inpfoder" ><!--<input type="text" name="r_id" value="<?php   if($r_id == ""){echo check_contactfo($conn);}else{echo $r_id;};?>" id="r_id" class="inpfoder" >--><br><br>
               วันเริ่มสัญญา : </strong>
               <input type="text" name="date_quf" readonly value="<?php   if($date_quf==""){echo date("d/m/Y");}else{ echo $date_quf;}?>" class="inpfoder"/>
               <script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_quf'});</script> 
@@ -646,8 +646,8 @@ Vat 7%</strong></td>
         <select name="service_type" id="service_type" class="inputselect" style="width:50%;">
          	<option value="">กรุณาเลือกการบริการ</option>
           <?php  
-                	$quservicetype = @mysql_query("SELECT * FROM s_group_service ORDER BY group_name ASC");
-					while($row_servicetype = @mysql_fetch_array($quservicetype)){
+                	$quservicetype = @mysqli_query($conn,"SELECT * FROM s_group_service ORDER BY group_name ASC");
+					while($row_servicetype = @mysqli_fetch_array($quservicetype)){
 					  ?>
           <option value="<?php   echo $row_servicetype['group_id'];?>" <?php   if($service_type == $row_servicetype['group_id']){echo 'selected';}?>><?php   echo $row_servicetype['group_name'];?></option>
           <?php  	
@@ -668,8 +668,8 @@ Vat 7%</strong></td>
                   <!--<select name="cs_company" id="cs_company" class="inputselect" style="width:50%;display: none;">
                     <option value="">กรุณาเลือกช่างบริการ</option>
                     <?php  
-						/*$qutechtype = @mysql_query("SELECT * FROM s_group_technician ORDER BY group_name ASC");
-						while($row_techtype = @mysql_fetch_array($qutechtype)){
+						/*$qutechtype = @mysqli_query($conn,"SELECT * FROM s_group_technician ORDER BY group_name ASC");
+						while($row_techtype = @mysqli_fetch_array($qutechtype)){
 						  ?>
 						<option value="<?php   echo $row_techtype['group_id'];?>" <?php   if($cs_company == $row_techtype['group_id']){echo 'selected';}?>><?php   echo $row_techtype['group_name'];?></option>
 						<?php  	
@@ -695,8 +695,8 @@ Vat 7%</strong></td>
                 <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong><!--<input type="text" name="cs_sell" value="<?php   echo $cs_sell;?>" id="cs_sell" class="inpfoder" style="width:50%;text-align:center;">-->
                 <select name="cs_sell" id="cs_sell" class="inputselect" style="width:50%;">
                 <?php  
-                	$qusaletype = @mysql_query("SELECT * FROM s_group_sale ORDER BY group_name ASC");
-					while($row_saletype = @mysql_fetch_array($qusaletype)){
+                	$qusaletype = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
+					while($row_saletype = @mysqli_fetch_array($qusaletype)){
 					  ?>
 					  	<option value="<?php   echo $row_saletype['group_id'];?>" <?php   if($cs_sell == $row_saletype['group_id']){echo 'selected';}?>><?php   echo $row_saletype['group_name'];?></option>
 					  <?php  	
@@ -745,7 +745,7 @@ Vat 7%</strong></td>
 			$a_not_exists = array();
 			post_param($a_param,$a_not_exists); 
 			?>
-      <input name="mode" type="hidden" id="mode" value="<?php   echo $_GET[mode];?>">
+      <input name="mode" type="hidden" id="mode" value="<?php   echo $_GET["mode"];?>">
       <input name="status_use" type="hidden" id="status_use" value="<?php   echo $status_use;?>">
       <input name="st_setting" type="hidden" id="st_setting" value="<?php   echo $st_setting;?>">
       <input name="<?php   echo $PK_field;?>" type="hidden" id="<?php   echo $PK_field;?>" value="<?php   echo $_GET[$PK_field];?>">
