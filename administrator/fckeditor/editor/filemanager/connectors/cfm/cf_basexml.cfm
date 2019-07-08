@@ -35,7 +35,7 @@
 	<cfargument name="currentFolder" required="true">
 
 	<cfset SetXmlHeaders()>
-	<cfoutput><?xml version="1.0" encoding="utf-8" ?></cfoutput>
+	<cfoutput><?php xml version="1.0" encoding="utf-8" ?></cfoutput>
 	<cfoutput><Connector command="#ARGUMENTS.command#" resourceType="#ARGUMENTS.resourceType#"></cfoutput>
 	<cfoutput><CurrentFolder path="#HTMLEditFormat(ARGUMENTS.currentFolder)#" url="#HTMLEditFormat( GetUrlFromPath( resourceType, currentFolder, command ) )#" /></cfoutput>
 	<cfset REQUEST.HeaderSent = true>
@@ -53,7 +53,7 @@
 		<cfset CreateXmlFooter() >
 	<cfelse>
 		<cfset SetXmlHeaders()>
-		<cfoutput><?xml version="1.0" encoding="utf-8" ?></cfoutput>
+		<cfoutput><?php xml version="1.0" encoding="utf-8" ?></cfoutput>
 		<cfoutput><Connector></cfoutput>
 		<cfset SendErrorNode( ARGUMENTS.number, ARGUMENTS.text )>
 		<cfset CreateXmlFooter() >

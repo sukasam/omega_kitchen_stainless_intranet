@@ -1,4 +1,4 @@
-<?php  
+<?php    
 /**
  * PHPSense Pagination Class
  *

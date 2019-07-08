@@ -1,4 +1,4 @@
-<?php
+<?php  
 
 // Adapted for mPDF from TCPDF barcode. Original Details left below.
 

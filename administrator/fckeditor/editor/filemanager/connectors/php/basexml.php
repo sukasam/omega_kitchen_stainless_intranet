@@ -1,4 +1,4 @@
-<?php
+<?php  
 /*
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net
  * Copyright (C) 2003-2008 Frederico Caldeira Knabben
@@ -47,7 +47,7 @@ function CreateXmlHeader( $command, $resourceType, $currentFolder )
 	SetXmlHeaders() ;
 
 	// Create the XML document header.
-	echo '<?xml version="1.0" encoding="utf-8" ?>' ;
+	echo '<?php xml version="1.0" encoding="utf-8" ?>' ;
 
 	// Create the main "Connector" node.
 	echo '<Connector command="' . $command . '" resourceType="' . $resourceType . '">' ;
@@ -75,7 +75,7 @@ function SendError( $number, $text )
 		SetXmlHeaders() ;
 
 		// Create the XML document header
-		echo '<?xml version="1.0" encoding="utf-8" ?>' ;
+		echo '<?php xml version="1.0" encoding="utf-8" ?>' ;
 
 		echo '<Connector>' ;
 

@@ -1,4 +1,4 @@
-<?php  
+<?php    
 if($_POST[seo]=="Submit"){
 	$sql="update s_module set tag_title='$_POST[tag_title]' ,tag_meta='$_POST[tag_meta]' where module_name='".$check_module."' ";
 	@mysqli_query($conn,$sql);
@@ -19,13 +19,13 @@ $tag_meta=$rec_tag["tag_meta"];
       <table width="100%" border="0">
         <tr >
           <td class="name" style="vertical-align:top;">Tag title </td>
-          <td><textarea name="tag_title" rows="3" id="tag_title"><?php   echo $tag_title;?></textarea>
+          <td><textarea name="tag_title" rows="3" id="tag_title"><?php     echo $tag_title;?></textarea>
               
 </td>
         </tr>
         <tr >
           <td nowrap="nowrap" class="name" style="vertical-align:top;">Tag meta</td>
-        <td><textarea name="tag_meta" rows="3" id="tag_meta"><?php   echo $tag_meta;?></textarea>
+        <td><textarea name="tag_meta" rows="3" id="tag_meta"><?php     echo $tag_meta;?></textarea>
                </td>
         </tr>
         <tr >

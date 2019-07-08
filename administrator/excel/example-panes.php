@@ -1,4 +1,4 @@
-<?php  
+<?php    
 
 # Example of using the WriteExcel module to create worksheet panes.
 #

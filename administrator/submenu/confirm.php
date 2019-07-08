@@ -1,4 +1,4 @@
-<? 
+<?php  
 
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
@@ -51,7 +51,7 @@
 
 <HEAD>
 
-<TITLE><? echo $s_title;?></TITLE>
+<TITLE><?php   echo $s_title;?></TITLE>
 
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 
@@ -73,13 +73,13 @@
 
 </HEAD>
 
-<? include ("../../include/function_script.php"); ?>
+<?php  include ("../../include/function_script.php"); ?>
 
 <BODY>
 
 <DIV id=body-wrapper>
 
-<? include("../left.php");?>
+<?php  include("../left.php");?>
 
 <DIV id=main-content>
 
@@ -87,7 +87,7 @@
 
 </NOSCRIPT>
 
-<? include('../top.php');?>
+<?php  include('../top.php');?>
 
 <P id=page-intro>What would you like to do?</P>
 
@@ -111,7 +111,7 @@
 
 
 
-<H3 align="left"><? echo $page_name; ?></H3>
+<H3 align="left"><?php   echo $page_name; ?></H3>
 
 <DIV class=clear>
 
@@ -129,15 +129,15 @@
 
     <ul>
 
-      <? 
+      <?php  
 
 					$msg = "";
 
 				  foreach ($_POST[del] as $key =>$value) { ?>
 
-      <li> <? echo Show_data($tbl_name,$PK_field, $value, $field_confirm_showname) ; ?>
+      <li> <?php   echo Show_data($tbl_name,$PK_field, $value, $field_confirm_showname) ; ?>
 
-        <? $msg .= $value . " " ;
+        <?php  $msg .= $value . " " ;
 
                      }
 
@@ -147,9 +147,9 @@
 
     </ul>
 
-    <? $msg = trim ($msg); ?>
+    <?php  $msg = trim ($msg); ?>
 
-    <input name="msg" type="hidden" id="msg" value="<? echo $msg; ?>">
+    <input name="msg" type="hidden" id="msg" value="<?php   echo $msg; ?>">
 
     <p>
 
@@ -163,7 +163,7 @@
 
     <input type="reset" name="Reset" value="Reset" class=button>
 
-    <? 
+    <?php  
 
 			post_param($a_param,$a_not_exists); 
 
@@ -203,7 +203,7 @@
 
 
 
-<? include("../footer.php");?>
+<?php  include("../footer.php");?>
 
 </DIV><!-- End #main-content -->
 

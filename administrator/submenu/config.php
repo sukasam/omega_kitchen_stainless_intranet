@@ -1,4 +1,4 @@
-<?
+<?php 
 
 	$PK_field = "id";
 	$FR_field = "menucate_id";

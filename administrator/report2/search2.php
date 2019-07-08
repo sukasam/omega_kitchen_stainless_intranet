@@ -1,4 +1,4 @@
-<?php   
+<?php     
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -80,14 +80,14 @@
   </tr>
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search" id="rscus">
-<?php   
+<?php     
   	$qu_cus = mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
 	while($row_cus = @mysqli_fetch_array($qu_cus)){
 		?>
 		 <tr>
-            <td><A href="javascript:void(0);" onclick="get_product('<?php   echo $row_cus['group_id'];?>','<?php   echo $row_cus['group_name'];?>','<?php   echo $_GET['protype']?>');"><?php   echo $row_cus['group_name'];?></A></td>
+            <td><A href="javascript:void(0);" onclick="get_product('<?php     echo $row_cus['group_id'];?>','<?php     echo $row_cus['group_name'];?>','<?php     echo $_GET['protype']?>');"><?php     echo $row_cus['group_name'];?></A></td>
           </tr>
-		<?php  	
+		<?php    	
 	}
   ?>
 </table>

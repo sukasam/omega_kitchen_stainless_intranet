@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -30,7 +30,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><?php   echo $s_title;?></TITLE>
+<TITLE><?php     echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -61,23 +61,23 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
 </script>
 </HEAD>
-<?php   include ("../../include/function_script.php"); ?>
+<?php     include ("../../include/function_script.php"); ?>
 <BODY>
 <DIV id=body-wrapper>
-<?php   include("../left.php");?>
+<?php     include("../left.php");?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<?php   include('../top.php');?>
-<P id=page-intro><?php   echo $page_name; ?></P>
+<?php     include('../top.php');?>
+<P id=page-intro><?php     echo $page_name; ?></P>
 
 <UL class=shortcut-buttons-set>
-    <?php   
+    <?php     
 	if ($FR_module <> "") { 
 	$param2 = get_return_param();
 	?>
   
-  <?php   }?> 
+  <?php     }?> 
   <LI><A class=shortcut-button href="../first_order/index.php?"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>
   กลับ</SPAN></A></LI>
 </UL>
@@ -87,17 +87,17 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right" style="padding-right:15px;">
 
-<H3 align="left"><?php   echo $check_module. " ( ".get_foid($conn,$_GET['fo_id'])." )"; ?></H3>
+<H3 align="left"><?php     echo $check_module. " ( ".get_foid($conn,$_GET['fo_id'])." )"; ?></H3>
 <div style="float:right;padding-top:5px;">
 	<form name="form1" method="get" action="service_close.php">
-    <input name="keyword" type="text" id="keyword" value="<?php   echo $keyword;?>">
+    <input name="keyword" type="text" id="keyword" value="<?php     echo $keyword;?>">
     <input name="Action" type="submit" id="Action" value="ค้นหา">
-    <?php  
+    <?php    
 			$a_not_exists = array('keyword');
 			$param2 = get_param($a_param,$a_not_exists);
 			  ?>
-    <a href="service_close.php?<?php   echo $param2;?>">แสดงทั้งหมด</a>
-    <?php   
+    <a href="service_close.php?<?php     echo $param2;?>">แสดงทั้งหมด</a>
+    <?php     
 			/*$a_not_exists = array();
 			post_param($a_param,$a_not_exists);*/
 			?>
@@ -106,9 +106,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <div style="float:right;margin-right:20px;padding-top:5px;display:none;">  
 	<label><strong>สถานะการยืนยัน : </strong></label>
     <select name="catalog_master" id="catalog_master" style="height:24px;" onChange="MM_jumpMenu('parent',this,0)">
-		<option value="index.php?app_id=0" <?php   if($_GET['app_id'] == 0){echo "selected";}?>>รอการอนุมัติ</option>
-		 <option value="index.php?app_id=1" <?php   if($_GET['app_id'] == 1){echo "selected";}?>>อนุมัติ</option>
-         <option value="index.php?app_id=2" <?php   if($_GET['app_id'] == 2){echo "selected";}?>>ไม่อนุมัติ</option>
+		<option value="index.php?app_id=0" <?php     if($_GET['app_id'] == 0){echo "selected";}?>>รอการอนุมัติ</option>
+		 <option value="index.php?app_id=1" <?php     if($_GET['app_id'] == 1){echo "selected";}?>>อนุมัติ</option>
+         <option value="index.php?app_id=2" <?php     if($_GET['app_id'] == 2){echo "selected";}?>>ไม่อนุมัติ</option>
   	</select>
     </div>
 <DIV class=clear>
@@ -120,37 +120,37 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     <TABLE>
       <THEAD>
         <TR>
-          <TH width="4%" <?php   Show_Sort_bg ("user_id", $orderby) ?>> <?php  
+          <TH width="4%" <?php     Show_Sort_bg ("user_id", $orderby) ?>> <?php    
 		$a_not_exists = array('orderby','sortby');
 		$param2 = get_param($a_param,$a_not_exists);
 	?>
-            <?php    Show_Sort_new ("user_id", "ลำดับ.", $orderby, $sortby,$page,$param2);?>
+            <?php      Show_Sort_new ("user_id", "ลำดับ.", $orderby, $sortby,$page,$param2);?>
             &nbsp;</TH>
           <TH width="8%"><div align="center"><a>IR ID</a></div></TH>
           <TH width="24%"><a>ชื่อลูกค้า</a></TH>
           <TH width="23%"><a>สถานที่ติดตั้ง</a></TH>
           <TH width="15%"><div align="left"><a>ช่างเบิก</a></div></TH>
           <TH width="9%"><div align="center"><a>การยืนยัน</a></div></TH>
-          <TH width="10%"><div align="center"><a href="../service_report4/?b=<?php   echo $rec[$PK_field]; ?>&s=<?php   echo $rec["st_setting"]; ?>&page=<?php   echo $_GET['page']; ?>&<?php   echo $FK_field; ?>=<?php   echo $_REQUEST["$FK_field"];?>"><img src="../icons/status_on.gif" width="10" height="10"></a> <a>Open / </a><a href="../service_report4/?b=<?php   echo $rec[$PK_field]; ?>&s=<?php   echo $rec["st_setting"]; ?>&page=<?php   echo $_GET['page']; ?>&<?php   echo $FK_field; ?>=<?php   echo $_REQUEST["$FK_field"];?>"><img src="../icons/status_off.gif" width="10" height="10"></a> <a>Close</a></div></TH>
+          <TH width="10%"><div align="center"><a href="../service_report4/?b=<?php     echo $rec[$PK_field]; ?>&s=<?php     echo $rec["st_setting"]; ?>&page=<?php     echo $_GET['page']; ?>&<?php     echo $FK_field; ?>=<?php     echo $_REQUEST["$FK_field"];?>"><img src="../icons/status_on.gif" width="10" height="10"></a> <a>Open / </a><a href="../service_report4/?b=<?php     echo $rec[$PK_field]; ?>&s=<?php     echo $rec["st_setting"]; ?>&page=<?php     echo $_GET['page']; ?>&<?php     echo $FK_field; ?>=<?php     echo $_REQUEST["$FK_field"];?>"><img src="../icons/status_off.gif" width="10" height="10"></a> <a>Close</a></div></TH>
           <TH width="7%"><div align="center"><a>ดาวโหลด</a></div></TH>
           </TR>
       </THEAD>
       <TFOOT>
         </TFOOT>
       <TBODY>
-        <?php   
+        <?php     
 					if($orderby=="") $orderby = "sr.".$PK_field;
 					if ($sortby =="") $sortby ="DESC";
 					
 				   	$sql = "SELECT sr . * , fd.cd_name FROM $tbl_name AS sr, s_first_order AS fd WHERE sr.cus_id = fd.fo_id AND sr.cus_id ='".$_GET['fo_id']."'";
 					if ($_GET[$PK_field] <> "") $sql .= " and ($PK_field  = '" . $_GET[$PK_field] . " ' ) ";					
 					if ($_GET[$FR_field] <> "") $sql .= " and ($FR_field  = '" . $_GET[$FR_field] . " ' ) ";					
- 					if ($_GET[keyword] <> "") { 
-						$sql .= " and ( " .  $PK_field  . " like '%$_GET[keyword]%' ";
+ 					if ($_GET["keyword"] <> "") { 
+						$sql .= " and ( " .  $PK_field  . " like '%".$_GET["keyword"]."%' ";
 						if (count ($search_key) > 0) { 
 							$search_text = " and ( " ;
 							foreach ($search_key as $key=>$value) { 
-									$subtext .= "or " . $value  . " like '%" . $_GET[keyword] . "%'";
+									$subtext .= "or " . $value  . " like '%" . $_GET["keyword"] . "%'";
 							}	
 						}
 						$sql .=  $subtext . " ) ";
@@ -177,28 +177,28 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					$counter++;
 				   ?>
         <TR>
-          <TD style="vertical-align:middle;"><span class="text"><?php   echo sprintf("%04d",$counter); ?></span></TD>
-          <TD style="vertical-align:middle;"><?php   $chaf = preg_replace("/\//","-",$rec["sv_id"]); ?><div align="center"><span class="text"><a href="../../upload/service_report_open/<?php   echo $chaf;?>.pdf" target="_blank"><?php   echo $rec["sv_id"] ; ?></a></span></div></TD>
-          <TD style="vertical-align:middle;"><span class="text"><?php   echo get_customername($conn,$rec["cus_id"]); ?></span></TD>
-          <TD style="vertical-align:middle;"><span class="text"><?php   echo get_localsettingname($conn,$rec["cus_id"]); ?></span></TD>
-          <TD style="vertical-align:middle;"><?php   echo get_technician_name($conn,$rec["loc_contact"]);?></TD>
-          <TD style="vertical-align:middle"><?php   if($rec["approve"] == 1){?>
+          <TD style="vertical-align:middle;"><span class="text"><?php     echo sprintf("%04d",$counter); ?></span></TD>
+          <TD style="vertical-align:middle;"><?php     $chaf = preg_replace("/\//","-",$rec["sv_id"]); ?><div align="center"><span class="text"><a href="../../upload/service_report_open/<?php     echo $chaf;?>.pdf" target="_blank"><?php     echo $rec["sv_id"] ; ?></a></span></div></TD>
+          <TD style="vertical-align:middle;"><span class="text"><?php     echo get_customername($conn,$rec["cus_id"]); ?></span></TD>
+          <TD style="vertical-align:middle;"><span class="text"><?php     echo get_localsettingname($conn,$rec["cus_id"]); ?></span></TD>
+          <TD style="vertical-align:middle;"><?php     echo get_technician_name($conn,$rec["loc_contact"]);?></TD>
+          <TD style="vertical-align:middle"><?php     if($rec["approve"] == 1){?>
             <IMG src="../images/icons/yes_approve.png" height="28" title="อนุมัติ">
-            <?php   }else if($rec["approve"] == 2){?>
+            <?php     }else if($rec["approve"] == 2){?>
             <IMG src="../images/icons/no_approve.png" height="28" title="ไม่อนุมัติ">
-            <?php   }else{?>
+            <?php     }else{?>
             <IMG src="../images/icons/wait_approve.png" height="28" title="รออนุมัติ">
-            <?php   }?></TD>
+            <?php     }?></TD>
           <TD style="vertical-align:middle"><div align="center">
-            <?php   if($rec["st_setting"]==0) {?>
+            <?php     if($rec["st_setting"]==0) {?>
            <img src="../icons/status_on.gif" width="10" height="10">
-            <?php   } else{?>
+            <?php     } else{?>
             <img src="../icons/status_off.gif" width="10" height="10">
-            <?php   }?>
+            <?php     }?>
           </div></TD>
-          <TD style="vertical-align:middle;"><div align="center"><a href="../../upload/service_report_open/<?php   echo $chaf;?>.pdf" target="_blank"><img src="../images/icon2/backup.png" alt="" width="25" height="25" style="margin-left:10px;" title="ดาวน์โหลดรายงานช่างซ่ิอม"></a></div></TD>
+          <TD style="vertical-align:middle;"><div align="center"><a href="../../upload/service_report_open/<?php     echo $chaf;?>.pdf" target="_blank"><img src="../images/icon2/backup.png" alt="" width="25" height="25" style="margin-left:10px;" title="ดาวน์โหลดรายงานช่างซ่ิอม"></a></div></TD>
           </TR>  
-		<?php   }?>
+		<?php     }?>
       </TBODY>
     </TABLE>
     <br><br>
@@ -207,12 +207,12 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
               <OPTION selected value="">กรุณาเลือก...</OPTION>
               <OPTION value="del">ลบ</OPTION>
             </SELECT>            
-            <?php  
+            <?php    
 				$a_not_exists = array();
 				post_param($a_param,$a_not_exists); 
 			?>
             <input class=button name="Action2" type="submit" id="Action2" value="ตกลง">
-          </DIV> <DIV class=pagination> <?php   include("../include/page_show.php");?> </DIV>
+          </DIV> <DIV class=pagination> <?php     include("../include/page_show.php");?> </DIV>
   </form>  
 </DIV><!-- End #tab1 -->
 
@@ -224,7 +224,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <DIV class=clear></DIV><!-- Start Notifications -->
 <!-- End Notifications -->
 
-<?php   include("../footer.php");?>
+<?php     include("../footer.php");?>
 </DIV><!-- End #main-content -->
 </DIV>
 </BODY>

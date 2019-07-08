@@ -1,4 +1,4 @@
-<?php   
+<?php     
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -67,9 +67,9 @@
 	  <tr>
 	    <th colspan="3" style="text-align:left;font-size:12px;"><p>บริษัท โอเมก้า แมชชีนเนอรี่ (1999) จำกัด<br />
 	      รายงานการเปิดใบงานลูกค้า<br />
-        ประเภทลูกค้า  : <?php   if($_POST['ctype'] != ""){echo custype_name($conn,$_POST['ctype']);}else{echo "ทั้งหมด";}?><br />
-        ประเภทบริการ  : <?php   if($_POST['sr_ctype']){echo get_servicename($conn,$_POST['sr_ctype']);}else{echo "ทั้งหมด";}?></p></th>
-	    <th colspan="4" style="text-align:right;font-size:11px;"><?php   echo $dateshow;?></th>
+        ประเภทลูกค้า  : <?php     if($_POST['ctype'] != ""){echo custype_name($conn,$_POST['ctype']);}else{echo "ทั้งหมด";}?><br />
+        ประเภทบริการ  : <?php     if($_POST['sr_ctype']){echo get_servicename($conn,$_POST['sr_ctype']);}else{echo "ทั้งหมด";}?></p></th>
+	    <th colspan="4" style="text-align:right;font-size:11px;"><?php     echo $dateshow;?></th>
       </tr>
       <tr>
         <th width="21%">ชื่อลูกค้า / บริษัท + เบอร์โทร</th>
@@ -84,102 +84,102 @@
         </table></th>
         <th>ชื่อช่าง</th>
       </tr>
-      <?php   
+      <?php     
 		$sql = "SELECT * FROM s_first_order as fr, s_service_report as sv WHERE sv.cus_id = fr.fo_id ".$condition." ".$daterriod." AND sv.st_setting = 0 ORDER BY sv.job_open ASC";
 	  	$qu_fr = @mysqli_query($conn,$sql);
 		$sum = 0;
 		while($row_fr = @mysqli_fetch_array($qu_fr)){
 			?>
 			<tr>
-              <td><?php   echo $row_fr['cd_name'];?><br />
-              <?php   echo $row_fr['cd_tel'];?></td>
-              <td><?php   echo province_name($conn,$row_fr['cd_province']);?></td>
-              <td> <?php   echo $row_fr['detail_recom'];?></td>
-              <td><?php   echo $row_fr['sv_id'];?></td>
+              <td><?php     echo $row_fr['cd_name'];?><br />
+              <?php     echo $row_fr['cd_tel'];?></td>
+              <td><?php     echo province_name($conn,$row_fr['cd_province']);?></td>
+              <td> <?php     echo $row_fr['detail_recom'];?></td>
+              <td><?php     echo $row_fr['sv_id'];?></td>
               <td style="padding:0;">
               	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tbreport" style="margin-bottom:5px;">
-                <?php   
+                <?php     
 					if($row_fr['pro_pod1'] != ""){
 						?>
 						<tr>
-                          <td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_pod1'];?></td>
-                          <td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_sn1'];?></td>
+                          <td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_pod1'];?></td>
+                          <td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_sn1'];?></td>
                          </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['pro_pod2'] != ""){
 						?>
 						<tr>
-                          <td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_pod2'];?></td>
-                          <td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_sn2'];?></td>
+                          <td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_pod2'];?></td>
+                          <td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_sn2'];?></td>
                         </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['pro_pod3'] != ""){
 						?>
 						<tr>
-                          <td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_pod3'];?></td>
-                          <td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_sn3'];?></td>
+                          <td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_pod3'];?></td>
+                          <td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_sn3'];?></td>
                         </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['pro_pod4'] != ""){
 						?>
 						<tr>
-                          <td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_pod4'];?></td>
-                          <td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_sn4'];?></td>
+                          <td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_pod4'];?></td>
+                          <td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_sn4'];?></td>
                         </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['pro_pod5'] != ""){
 						?>
 						<tr>
-                          <td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_pod5'];?></td>
-                          <td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_sn5'];?></td>
+                          <td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_pod5'];?></td>
+                          <td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_sn5'];?></td>
                         </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['pro_pod6'] != ""){
 						?>
 						<tr>
-                          <td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_pod6'];?></td>
-                          <td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_sn6'];?></td>
+                          <td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_pod6'];?></td>
+                          <td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_sn6'];?></td>
                         </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['pro_pod6'] != ""){
 						?>
 						<tr>
-                          <td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_pod7'];?></td>
-                          <td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_sn7'];?></td>
+                          <td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_pod7'];?></td>
+                          <td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_sn7'];?></td>
                         </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
               </table></td>
-              <td><?php   echo get_technician_id($conn,$row_fr['loc_contact']);?></td>
+              <td><?php     echo get_technician_id($conn,$row_fr['loc_contact']);?></td>
             </tr>
 			
 			
             
-			<?php  
+			<?php    
 			$sum += 1;
 		}
 	  ?>
       <tr>
-			  <td colspan="6" style="text-align:right;"> <strong>ใบบริการที่ได้เปิดทั้งหมด&nbsp;&nbsp;<?php   echo $sum;?>&nbsp;&nbsp;ใบงาน&nbsp;&nbsp;</strong></td>
+			  <td colspan="6" style="text-align:right;"> <strong>ใบบริการที่ได้เปิดทั้งหมด&nbsp;&nbsp;<?php     echo $sum;?>&nbsp;&nbsp;ใบงาน&nbsp;&nbsp;</strong></td>
 	  </tr>
     </table>
 

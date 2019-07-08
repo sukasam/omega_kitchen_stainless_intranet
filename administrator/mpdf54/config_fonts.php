@@ -1,4 +1,4 @@
-<?php
+<?php  
 
 
 // Optionally define a folder which contains TTF fonts

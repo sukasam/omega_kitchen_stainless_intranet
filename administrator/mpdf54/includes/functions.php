@@ -1,4 +1,4 @@
-<?php
+<?php  
 
 // mPDF 5.7
 // Replace a section of an array with the elements in reverse

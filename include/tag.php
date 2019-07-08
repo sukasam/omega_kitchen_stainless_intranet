@@ -1,4 +1,4 @@
- <?php  
+ <?php    
  	$sql = "select * from b_tag where pages='".$pages."' ";
 	$query = @mysqli_query($conn,$sql);
 	$rec_tag = @mysqli_fetch_array($query);

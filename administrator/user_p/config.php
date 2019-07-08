@@ -1,4 +1,4 @@
-<?
+<?php 
 	$PK_field = "user_p_id";
 	//$FR_field = "";
 	$FR_module="user";

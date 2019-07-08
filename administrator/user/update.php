@@ -1,4 +1,4 @@
-<?
+<?php 
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -117,7 +117,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><? echo $s_title;?></TITLE>
+<TITLE><?php   echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -154,15 +154,15 @@ function check(frm){
 }	
 </script>
 </HEAD>
-<? include ("../../include/function_script.php"); ?>
+<?php  include ("../../include/function_script.php"); ?>
 <BODY>
 <DIV id=body-wrapper>
-<? include("../left.php");?>
+<?php  include("../left.php");?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<? include('../top.php');?>
-<P id=page-intro><? if ($mode == "add") { ?>Enter new information<? } else { ?>แก้ไข	[<? echo $page_name; ?>]<? } ?>	</P>
+<?php  include('../top.php');?>
+<P id=page-intro><?php  if ($mode == "add") { ?>Enter new information<?php  } else { ?>แก้ไข	[<?php   echo $page_name; ?>]<?php  } ?>	</P>
 <UL class=shortcut-buttons-set>
   <LI><A class=shortcut-button href="javascript:history.back()"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>
   กลับ</SPAN></A></LI>
@@ -172,7 +172,7 @@ function check(frm){
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right">
 
-<H3 align="left"><? echo $page_name; ?></H3>
+<H3 align="left"><?php   echo $page_name; ?></H3>
 <DIV class=clear>
   
 </DIV></DIV><!-- End .content-box-header -->
@@ -181,63 +181,63 @@ function check(frm){
   <form action="update.php" method="post"  name="form1" id="form1"   onSubmit="return check(this)" enctype="multipart/form-data">
     <div class="formArea">
       <fieldset>
-        <legend><? echo $page_name; ?></legend>
+        <legend><?php   echo $page_name; ?></legend>
         <table width="100%" cellspacing="0" cellpadding="0" border="0">
           <tr>
             <td><table class="formFields" cellspacing="0" width="100%">
               <tr >
                 <td class="name">ชื่อ-นามสกุล <span class="required">*</span></td>
-                <td><input name="name" type="text" id="name"  value="<? echo $name; ?>" style="width:200px;"></td>
+                <td><input name="name" type="text" id="name"  value="<?php   echo $name; ?>" style="width:200px;"></td>
               </tr>
               <tr >
                 <td class="name">ชื่อเข้าใช้งาน <span class="required">*</span></td>
-                <td><input name="username" type="text" id="username"  value="<? echo $username; ?>"  style="width:200px;"></td>
+                <td><input name="username" type="text" id="username"  value="<?php   echo $username; ?>"  style="width:200px;"></td>
               </tr>
-              <? if ($_REQUEST[mode] == "add") { ?>
+              <?php  if ($_REQUEST[mode] == "add") { ?>
               <tr >
                 <td class="name">รหัสผ่าน <span class="required">*</span></td>
-                <td><input name="password" type="password" id="password" value="<? echo $password;?>"  style="width:200px;"></td>
+                <td><input name="password" type="password" id="password" value="<?php   echo $password;?>"  style="width:200px;"></td>
               </tr>
-              <? } ?>
-              <? if ($_REQUEST[mode] == "update") { ?>
+              <?php  } ?>
+              <?php  if ($_REQUEST[mode] == "update") { ?>
               <tr >
                 <td class="name">รหัสผ่านเดิม</td>
                 <td>*****
-                  <input type="hidden" name="password" id="password" value="<? echo $password;?>"></td>
+                  <input type="hidden" name="password" id="password" value="<?php   echo $password;?>"></td>
               </tr>
               <tr >
                 <td class="name">รหัสผ่านใหม่</td>
                 <td><input name="new_p" type="password" id="new_p"  style="width:200px;"></td>
               </tr>
-              <? } ?>
+              <?php  } ?>
               <tr>
                 <td nowrap class="name">รูปภาพ<br>
                   <small>Size 155px x 136px</small></td>
                 <td><input name="ufimages" type="file" id="ufimages">
                   <br>
-					<?php
+					<?php  
 					  if($u_images != ""){?>
-                  <img src="../../upload/user/<? echo $u_images?>" width="155">[ <a href="?mode=<? echo $_GET["mode"]?>&<? echo $PK_field?>=<? echo $$PK_field;?>&<? echo $FR_field?>=<? echo $$FR_field;?>&del_id=<? echo $u_images;?>&page=<? echo $page;?>">Delete</a>]
-                  <? }?>
-                  <input name="u_images" type="hidden" value="<?php echo $u_images; ?>">
+                  <img src="../../upload/user/<?php   echo $u_images?>" width="155">[ <a href="?mode=<?php   echo $_GET["mode"]?>&<?php   echo $PK_field?>=<?php   echo $$PK_field;?>&<?php   echo $FR_field?>=<?php   echo $$FR_field;?>&del_id=<?php   echo $u_images;?>&page=<?php   echo $page;?>">Delete</a>]
+                  <?php  }?>
+                  <input name="u_images" type="hidden" value="<?php   echo $u_images; ?>">
                   </td>
               </tr>
               <!--
               <tr >
                 <td class="name">Super admin</td>
-                <td><input name="admin_flag" type="checkbox" id="admin_flag" value="1" <? if($admin_flag == 1) echo "checked";?>></td>
+                <td><input name="admin_flag" type="checkbox" id="admin_flag" value="1" <?php  if($admin_flag == 1) echo "checked";?>></td>
               </tr>
               -->
               <tr >
                 <td class="name">&nbsp;</td>
                 <td><input type="submit" name="Submit" value="Submit" class=button>
                   <input type="reset" name="Submit" value="Reset" class=button>
-                  <? 
+                  <?php  
 			$a_not_exists = array();
 			post_param($a_param,$a_not_exists); 
 			?>
-                  <input name="mode" type="hidden" id="mode" value="<? echo $_REQUEST[mode];?>">
-                  <input name="<? echo $PK_field;?>" type="hidden" id="<? echo $PK_field;?>" value="<? echo $_REQUEST[$PK_field];?>"></td>
+                  <input name="mode" type="hidden" id="mode" value="<?php   echo $_REQUEST[mode];?>">
+                  <input name="<?php   echo $PK_field;?>" type="hidden" id="<?php   echo $PK_field;?>" value="<?php   echo $_REQUEST[$PK_field];?>"></td>
               </tr>
               <tr >
                 <td class="name">&nbsp;</td>
@@ -257,11 +257,11 @@ function check(frm){
 <DIV class=clear></DIV><!-- Start Notifications -->
 <!-- End Notifications -->
 
-<? include("../footer.php");?>
+<?php  include("../footer.php");?>
 </DIV><!-- End #main-content -->
 </DIV>
-<? if($msg_user==1){?>
+<?php  if($msg_user==1){?>
 <script language=JavaScript>alert('Username ซ้ำ กรุณาเปลี่ยน Username ใหม่ !');</script>
-<? }?>
+<?php  }?>
 </BODY>
 </HTML>

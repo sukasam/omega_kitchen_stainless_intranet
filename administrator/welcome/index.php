@@ -1,4 +1,4 @@
-<?php 
+<?php   
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -7,7 +7,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><?php  echo $s_title;?></TITLE>
+<TITLE><?php    echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -19,10 +19,10 @@
 <META name=GENERATOR content="MSHTML 8.00.7600.16535"></HEAD>
 <BODY onLoad="clock();">
 <DIV id=body-wrapper>
-<?php  include("../left.php");?>
+<?php    include("../left.php");?>
 <DIV id=main-content><!-- Main Content Section with everything --><NOSCRIPT><!-- Show a notification if the user has disabled javascript -->
 </NOSCRIPT><!-- Page Head -->
-<?php  include('../top.php');?>
+<?php    include('../top.php');?>
 
 <div class="bbmainmenu">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbmainindex">
@@ -57,7 +57,7 @@
     </table>
 </div>
 
-<?php  //include('../footer.php');?>
+<?php    //include('../footer.php');?>
 </DIV>
 <!-- End #main-content -->
 </DIV>

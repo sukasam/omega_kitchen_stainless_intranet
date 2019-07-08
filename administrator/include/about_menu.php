@@ -39,14 +39,14 @@
        Laboratories</SPAN></A></div>
    </LI>
     <div align="center">
-      <?php   
+      <?php     
 	if ($FR_module <> "") { 
 	$param2 = get_return_param();
 	?>
       </div>
-    <LI><A class=shortcut-button href="../<?php   echo $FR_module; ?>/?<?php   if($param2 <> "") echo $param2;?>"><SPAN><IMG src="../images/btn_back.gif"  alt=icon width="35" border="0"><BR>
+    <LI><A class=shortcut-button href="../<?php     echo $FR_module; ?>/?<?php     if($param2 <> "") echo $param2;?>"><SPAN><IMG src="../images/btn_back.gif"  alt=icon width="35" border="0"><BR>
     Back</SPAN></A></LI>
-  <?php   }?> 
+  <?php     }?> 
 </UL>
 
 </div>

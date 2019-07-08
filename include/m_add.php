@@ -1,4 +1,4 @@
-<?php  
+<?php    
 		$field = $value = "";
 		reset($fieldlist);
 			 while(list(,$s_key) = each($fieldlist))

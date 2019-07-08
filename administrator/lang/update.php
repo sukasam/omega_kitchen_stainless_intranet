@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -87,7 +87,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><?php   echo $s_title;?></TITLE>
+<TITLE><?php     echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -124,15 +124,15 @@ function check(frm){
 }	
 </script>
 </HEAD>
-<?php   include ("../../include/function_script.php"); ?>
+<?php     include ("../../include/function_script.php"); ?>
 <BODY>
 <DIV id=body-wrapper>
-<?php   include("../left.php");?>
+<?php     include("../left.php");?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<?php   include('../top.php');?>
-<P id=page-intro><?php   if ($mode == "add") { ?>Enter new information<?php   } else { ?>Update  details	[<?php   echo $page_name; ?>]<?php   } ?>	</P>
+<?php     include('../top.php');?>
+<P id=page-intro><?php     if ($mode == "add") { ?>Enter new information<?php     } else { ?>Update  details	[<?php     echo $page_name; ?>]<?php     } ?>	</P>
 <UL class=shortcut-buttons-set>
   <LI><A class=shortcut-button href="javascript:history.back()"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>Back</SPAN></A></LI>
 </UL>
@@ -141,7 +141,7 @@ function check(frm){
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right">
 
-<H3 align="left"><?php   echo ucfirst ($page_name); ?></H3>
+<H3 align="left"><?php     echo ucfirst ($page_name); ?></H3>
 <DIV class=clear>
   
 </DIV></DIV><!-- End .content-box-header -->
@@ -150,50 +150,50 @@ function check(frm){
   <form action="update.php" method="post"  name="form1" id="form1"  enctype="multipart/form-data"  onSubmit="return check(this)">
     <div class="formArea">
       <fieldset>
-        <legend><?php   echo ucfirst ($page_name); ?></legend>
+        <legend><?php     echo ucfirst ($page_name); ?></legend>
         <table width="100%" cellspacing="0" cellpadding="0" border="0">
           <tr>
             <td><table class="formFields" cellspacing="0" width="100%">
               <tr >
                 <td class="name">Lang Name <span class="required">*</span></td>
-                <td><input name="lang_name" type="text" id="lang_name"  value="<?php   echo $lang_name; ?>" style="width:200px;"></td>
+                <td><input name="lang_name" type="text" id="lang_name"  value="<?php     echo $lang_name; ?>" style="width:200px;"></td>
               </tr>
               <tr >
                 <td class="name">Lang Key <span class="required">*</span></td>
-                <td><input name="lang_key" type="text" id="lang_key"  value="<?php   echo $lang_key; ?>" style="width:200px;"></td>
+                <td><input name="lang_key" type="text" id="lang_key"  value="<?php     echo $lang_key; ?>" style="width:200px;"></td>
               </tr>
               <tr >
                 <td nowrap class="name">Lang Images</td>
                 <td><input name="fimages" type="file" id="fimages">
                   <br>
-                  <?php   
+                  <?php     
 				  if($_GET['mode'] != 'add'){
 					  if(!empty($lang_images)){?>
-                  <img src="../../upload/lang/<?php   echo $lang_images?>" alt="" width="60">[ <a href="?mode=<?php   echo $_GET["mode"]?>&<?php   echo $PK_field?>=<?php   echo $$PK_field;?>&<?php   echo $FR_field?>=<?php   echo $$FR_field;?>&del_id=<?php   echo $lang_images;?>&page=<?php   echo $page;?>">Delete</a>]
-                  <?php   }?>
-                  <input name="lang_images" type="hidden" value="<?php   echo $lang_images; ?>">
-                  <?php   }?></td>
+                  <img src="../../upload/lang/<?php     echo $lang_images?>" alt="" width="60">[ <a href="?mode=<?php     echo $_GET["mode"]?>&<?php     echo $PK_field?>=<?php     echo $$PK_field;?>&<?php     echo $FR_field?>=<?php     echo $$FR_field;?>&del_id=<?php     echo $lang_images;?>&page=<?php     echo $page;?>">Delete</a>]
+                  <?php     }?>
+                  <input name="lang_images" type="hidden" value="<?php     echo $lang_images; ?>">
+                  <?php     }?></td>
               </tr>
-              <?php   if ($_REQUEST[mode] == "add") { ?>
-              <?php   } ?>
-              <?php   if ($_REQUEST[mode] == "update") { ?>
-              <?php   } ?>
+              <?php     if ($_REQUEST[mode] == "add") { ?>
+              <?php     } ?>
+              <?php     if ($_REQUEST[mode] == "update") { ?>
+              <?php     } ?>
               <!--
               <tr >
                 <td class="name">Super admin</td>
-                <td><input name="admin_flag" type="checkbox" id="admin_flag" value="1" <?php   if($admin_flag == 1) echo "checked";?>></td>
+                <td><input name="admin_flag" type="checkbox" id="admin_flag" value="1" <?php     if($admin_flag == 1) echo "checked";?>></td>
               </tr>
               -->
               <tr >
                 <td class="name">&nbsp;</td>
                 <td><input type="submit" name="Submit" value="Submit" class=button>
                   <input type="reset" name="Submit" value="Reset" class=button>
-                  <?php   
+                  <?php     
 			$a_not_exists = array();
 			post_param($a_param,$a_not_exists); 
 			?>
-                  <input name="mode" type="hidden" id="mode" value="<?php   echo $_REQUEST[mode];?>">
-                  <input name="<?php   echo $PK_field;?>" type="hidden" id="<?php   echo $PK_field;?>" value="<?php   echo $_REQUEST[$PK_field];?>"></td>
+                  <input name="mode" type="hidden" id="mode" value="<?php     echo $_REQUEST[mode];?>">
+                  <input name="<?php     echo $PK_field;?>" type="hidden" id="<?php     echo $PK_field;?>" value="<?php     echo $_REQUEST[$PK_field];?>"></td>
               </tr>
             </table></td>
           </tr>
@@ -209,11 +209,11 @@ function check(frm){
 <DIV class=clear></DIV><!-- Start Notifications -->
 <!-- End Notifications -->
 
-<?php   include("../footer.php");?>
+<?php     include("../footer.php");?>
 </DIV><!-- End #main-content -->
 </DIV>
-<?php   if($msg_user==1){?>
+<?php     if($msg_user==1){?>
 <script language=JavaScript>alert('Username ซ้ำ กรุณาเปลี่ยน Username ใหม่ !');</script>
-<?php   }?>
+<?php     }?>
 </BODY>
 </HTML>

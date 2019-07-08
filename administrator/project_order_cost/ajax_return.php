@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	include_once("../../include/aplication_top.php");
 	header("Content-type: text/html; charset=windows-874");
 	header("Cache-Control: no-cache, must-revalidate");
@@ -29,9 +29,9 @@
 		while($row_cus = @mysqli_fetch_array($qu_cus)){
 			?>
 			 <tr>
-				<td><A href="javascript:void(0);" onclick="get_product('<?php   echo $row_cus['group_id'];?>','<?php   echo $row_cus['group_name'];?>','<?php   echo $keys;?>');"><?php   echo $row_cus['group_name'];?></A></td>
+				<td><A href="javascript:void(0);" onclick="get_product('<?php     echo $row_cus['group_id'];?>','<?php     echo $row_cus['group_name'];?>','<?php     echo $keys;?>');"><?php     echo $row_cus['group_name'];?></A></td>
 			  </tr>
-			<?php  	
+			<?php    	
 		}
 		//echo "SELECT cd_name FROM s_first_order ".$consd." ORDER BY cd_name ASC";
 	}
@@ -47,9 +47,9 @@
 		while($row_cus = @mysqli_fetch_array($qu_cus)){
 			?>
 			 <tr>
-				<td><A href="javascript:void(0);" onclick="get_pod('<?php   echo $row_cus['group_id'];?>','<?php   echo $row_cus['group_name'];?>','<?php   echo $keys;?>');"><?php   echo $row_cus['group_name'];?></A></td>
+				<td><A href="javascript:void(0);" onclick="get_pod('<?php     echo $row_cus['group_id'];?>','<?php     echo $row_cus['group_name'];?>','<?php     echo $keys;?>');"><?php     echo $row_cus['group_name'];?></A></td>
 			  </tr>
-			<?php  	
+			<?php    	
 		}
 		//echo "SELECT cd_name FROM s_first_order ".$consd." ORDER BY cd_name ASC";
 	}
@@ -62,8 +62,8 @@
 		$qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_typeproduct ORDER BY group_name ASC");
 		while($row_qupro1 = @mysqli_fetch_array($qupro1)){
 		  ?>
-			<option value="<?php   echo $row_qupro1['group_id'];?>" <?php   if($group_id == $row_qupro1['group_id']){echo 'selected';}?>><?php   echo $row_qupro1['group_name'];?></option>
-		  <?php  	
+			<option value="<?php     echo $row_qupro1['group_id'];?>" <?php     if($group_id == $row_qupro1['group_id']){echo 'selected';}?>><?php     echo $row_qupro1['group_name'];?></option>
+		  <?php    	
 		}
 
 		//echo "SELECT * FROM s_group_typeproduct ORDER BY group_name ASC";
@@ -77,8 +77,8 @@
 		$qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_project ORDER BY group_name ASC");
 		while($row_qupro1 = @mysqli_fetch_array($qupro1)){
 		  ?>
-			<option value="<?php   echo $row_qupro1['group_id'];?>" <?php   if($group_id == $row_qupro1['group_id']){echo 'selected';}?>><?php   echo $row_qupro1['group_name'];?></option>
-		  <?php  	
+			<option value="<?php     echo $row_qupro1['group_id'];?>" <?php     if($group_id == $row_qupro1['group_id']){echo 'selected';}?>><?php     echo $row_qupro1['group_name'];?></option>
+		  <?php    	
 		}
 
 		//echo "SELECT * FROM s_group_typeproduct ORDER BY group_name ASC";
@@ -92,8 +92,8 @@
 		$qupros1 = @mysqli_query($conn,"SELECT * FROM s_group_pod ORDER BY group_name ASC");
 		while($row_qupros1 = @mysqli_fetch_array($qupros1)){
 		  ?>
-			<option value="<?php   echo $row_qupros1['group_name'];?>" <?php   if($group_id == $row_qupros1['group_id']){echo 'selected';}?>><?php   echo $row_qupros1['group_name'];?></option>
-		  <?php  	
+			<option value="<?php     echo $row_qupros1['group_name'];?>" <?php     if($group_id == $row_qupros1['group_id']){echo 'selected';}?>><?php     echo $row_qupros1['group_name'];?></option>
+		  <?php    	
 		}
 
 		//echo "SELECT * FROM s_group_typeproduct ORDER BY group_name ASC";

@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -9,7 +9,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><?php   echo $s_title;?></TITLE>
+<TITLE><?php     echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -34,21 +34,21 @@ function check_select(frm){
 }	
 </script>
 </HEAD>
-<?php   include ("../../include/function_script.php"); ?>
+<?php     include ("../../include/function_script.php"); ?>
 <BODY>
 <DIV id=body-wrapper>
-<?php   include("../left.php");?>
+<?php     include("../left.php");?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<?php   include('../top.php');?>
-<P id=page-intro><?php   echo 'Permission'; ?>  | <a href="tag.php">Tag Keyword</a></P>
+<?php     include('../top.php');?>
+<P id=page-intro><?php     echo 'Permission'; ?>  | <a href="tag.php">Tag Keyword</a></P>
  
   <!-- End .shortcut-buttons-set -->
 <DIV class=clear></DIV><!-- End .clear -->
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right" style="padding-right:15px;">
-<H3 align="left"><?php   echo 'Permission'; ?></H3>
+<H3 align="left"><?php     echo 'Permission'; ?></H3>
 <br>
 <DIV class=clear>
 
@@ -79,7 +79,7 @@ function check_select(frm){
 <DIV class=clear></DIV><!-- Start Notifications -->
 <!-- End Notifications -->
 
-<?php   include("../footer.php");?>
+<?php     include("../footer.php");?>
 </DIV><!-- End #main-content -->
 </DIV>
 </BODY>

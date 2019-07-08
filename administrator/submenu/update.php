@@ -1,4 +1,4 @@
-<?
+<?php 
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -84,7 +84,7 @@
 
 <HEAD>
 
-<TITLE><? echo $s_title;?></TITLE>
+<TITLE><?php   echo $s_title;?></TITLE>
 
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 
@@ -142,13 +142,13 @@ function check(frm){
 
 </HEAD>
 
-<? include ("../../include/function_script.php"); ?>
+<?php  include ("../../include/function_script.php"); ?>
 
 <BODY>
 
 <DIV id=body-wrapper>
 
-<? include("../left.php");?>
+<?php  include("../left.php");?>
 
 <DIV id=main-content>
 
@@ -156,9 +156,9 @@ function check(frm){
 
 </NOSCRIPT>
 
-<? include('../top.php');?>
+<?php  include('../top.php');?>
 
-<P id=page-intro><? if ($mode == "add") { ?>Enter new information<? } else { ?>Update  details	[<? echo $page_name; ?>]<? } ?>	</P>
+<P id=page-intro><?php  if ($mode == "add") { ?>Enter new information<?php  } else { ?>Update  details	[<?php   echo $page_name; ?>]<?php  } ?>	</P>
 
 <UL class=shortcut-buttons-set>
 
@@ -176,7 +176,7 @@ function check(frm){
 
 
 
-<H3 align="left"><? echo ucfirst ($page_name); ?></H3>
+<H3 align="left"><?php   echo ucfirst ($page_name); ?></H3>
 
 <DIV class=clear>
 
@@ -194,7 +194,7 @@ function check(frm){
 
       <fieldset>
 
-      <legend><? echo ucfirst ($page_name); ?> </legend>
+      <legend><?php   echo ucfirst ($page_name); ?> </legend>
 
         <table width="100%" cellspacing="0" cellpadding="0" border="0">
 
@@ -208,9 +208,9 @@ function check(frm){
 
                 <td>
 
-                <select name="<?=$FR_field?>2" id="<?=$FR_field?>2">
+                <select name="<?php =$FR_field?>2" id="<?php =$FR_field?>2">
 
-                <? 
+                <?php  
 
 				$sqlcatemenu = "select * from tb_menu_cate";
 
@@ -218,9 +218,9 @@ function check(frm){
 
 				while($rscatemenu = @mysqli_fetch_array($querycatemenu)){?>
 
-                <option value="<?=$rscatemenu['menucate_id']?>" <? if($rscatemenu['menucate_id']==$_REQUEST['menucate_id']){echo "selected";}?>><?=$rscatemenu['menucate_name']?></option>
+                <option value="<?php =$rscatemenu['menucate_id']?>" <?php  if($rscatemenu['menucate_id']==$_REQUEST['menucate_id']){echo "selected";}?>><?php =$rscatemenu['menucate_name']?></option>
 
-                <? }?>
+                <?php  }?>
 
                 </select>
 
@@ -232,7 +232,7 @@ function check(frm){
 
                 <td nowrap class="name">Menu Name</td>
 
-                <td><input name="submenu_name" type="text" id="submenu_name"  value="<? echo $submenu_name; ?>" size="60"></td>
+                <td><input name="submenu_name" type="text" id="submenu_name"  value="<?php   echo $submenu_name; ?>" size="60"></td>
 
               </tr>
 
@@ -240,19 +240,19 @@ function check(frm){
 
                 <td nowrap class="name">URL link</td>
 
-                <td><input name="submenu_url_link" type="text" id="submenu_url_link"  value="<? echo $submenu_url_link; ?>" size="60"></td>
+                <td><input name="submenu_url_link" type="text" id="submenu_url_link"  value="<?php   echo $submenu_url_link; ?>" size="60"></td>
 
               </tr>
 
               
 
-              <? if ($_GET["mode"] == "add") { ?>
+              <?php  if ($_GET["mode"] == "add") { ?>
 
-              <? } ?>
+              <?php  } ?>
 
-              <? if ($_GET["mode"] == "update") { ?>
+              <?php  if ($_GET["mode"] == "update") { ?>
 
-              <? } ?>
+              <?php  } ?>
 
           </table></td>
 
@@ -270,7 +270,7 @@ function check(frm){
 
       <input type="reset" name="Submit" value="Reset" class="button">
 
-      <? 
+      <?php  
 
 			$a_not_exists = array();
 
@@ -278,9 +278,9 @@ function check(frm){
 
 			?>
 
-      <input name="mode" type="hidden" id="mode" value="<? echo $_REQUEST[mode];?>">
+      <input name="mode" type="hidden" id="mode" value="<?php   echo $_REQUEST[mode];?>">
 
-      <input name="<? echo $PK_field;?>" type="hidden" id="<? echo $PK_field;?>" value="<? echo $_GET[$PK_field];?>">
+      <input name="<?php   echo $PK_field;?>" type="hidden" id="<?php   echo $PK_field;?>" value="<?php   echo $_GET[$PK_field];?>">
 
     </div>
 
@@ -302,17 +302,17 @@ function check(frm){
 
 
 
-<? include("../footer.php");?>
+<?php  include("../footer.php");?>
 
 </DIV><!-- End #main-content -->
 
 </DIV>
 
-<? if($msg_user==1){?>
+<?php  if($msg_user==1){?>
 
 <script language=JavaScript>alert('Menu name ซ้ำ กรุณาเปลี่ยน Menu name ใหม่ !');</script>
 
-<? }?>
+<?php  }?>
 
 </BODY>
 

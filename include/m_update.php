@@ -1,4 +1,4 @@
-<?php  
+<?php    
 		$sql = "update  $tbl_name set  ";
 			 while(list(,$s_key) = each($fieldlist))
 		{

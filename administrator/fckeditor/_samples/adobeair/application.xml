@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?php xml version="1.0" encoding="utf-8" ?>
 <application xmlns="http://ns.adobe.com/air/application/1.0">
 	<id>net.fckeditor.air.samples.sample01</id>
 	<name>FCKeditor Sample Application 1.0</name>

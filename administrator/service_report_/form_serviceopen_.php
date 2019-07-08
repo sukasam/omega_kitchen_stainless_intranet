@@ -1,5 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php
+<?php  
 	
 	
 	$finfos = get_firstorder($conn,$_POST['cus_id']);

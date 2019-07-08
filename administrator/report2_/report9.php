@@ -1,4 +1,4 @@
-<?php   
+<?php     
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -33,7 +33,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>เลือกตามเขต / จังหวัด ( <?php   echo province_name($conn,$cd_province);?> )</title>
+<title>เลือกตามเขต / จังหวัด ( <?php     echo province_name($conn,$cd_province);?> )</title>
 <style type="text/css">
  .tbreport{
  	font-size:10px;
@@ -56,13 +56,13 @@
 	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tbreport">
 	  <tr>
 	    <th colspan="2" style="text-align:left;font-size:12px;">บริษัท โอเมก้า แมชชีนเนอรี่ (1999) จำกัด<br />
-รายงานตามเขต / จังหวัด ( <?php   echo province_name($conn,$cd_province);?> )<br />
+รายงานตามเขต / จังหวัด ( <?php     echo province_name($conn,$cd_province);?> )<br />
 ประเภทลูกค้า  :
-<?php   if($_POST['ctype'] != ""){echo custype_name($conn,$_POST['ctype']);}else{echo "ทั้งหมด";}?>
+<?php     if($_POST['ctype'] != ""){echo custype_name($conn,$_POST['ctype']);}else{echo "ทั้งหมด";}?>
 <br />
 ประเภทบริการ  :
-<?php   if($_POST['sr_ctype']){echo get_servicename($conn,$_POST['sr_ctype']);}else{echo "ทั้งหมด";}?></th>
-	    <th colspan="6" style="text-align:right;font-size:11px;"><?php   echo $dateshow;?></th>
+<?php     if($_POST['sr_ctype']){echo get_servicename($conn,$_POST['sr_ctype']);}else{echo "ทั้งหมด";}?></th>
+	    <th colspan="6" style="text-align:right;font-size:11px;"><?php     echo $dateshow;?></th>
       </tr>
       <tr>
         <th width="21%">ชื่อลูกค้า / บริษัท + เบอร์โทร</th>
@@ -71,27 +71,27 @@
         <th width="19%">กลุ่มลูกค้า</th>
         <th width="15%">ประเภทลูกค้า</th>
       </tr>
-      <?php   
+      <?php     
 		$sql = "SELECT * FROM s_first_order as fr, s_service_report as sv WHERE sv.cus_id = fr.fo_id ".$condition." ".$daterriod." ORDER BY fr.cd_name ASC";
 	  	$qu_fr = @mysqli_query($conn,$sql);
 		$sum = 0;
 		while($row_fr = @mysqli_fetch_array($qu_fr)){
 			?>
 			<tr>
-              <td><?php   echo $row_fr['cd_name'];?><br />
-              <?php   echo $row_fr['cd_tel'];?></td>
-              <td><?php   echo $row_fr['loc_name'];?><br />
-              <?php   echo $row_fr['loc_address'];?></td>
-              <td><?php   echo province_name($conn,$row_fr['cd_province']);?></td>
-              <td><?php   echo get_groupcusname($conn,$row_fr['cg_type']);?></td>
-              <td><?php   echo custype_name($conn,$row_fr['sr_ctype']);?></td>
+              <td><?php     echo $row_fr['cd_name'];?><br />
+              <?php     echo $row_fr['cd_tel'];?></td>
+              <td><?php     echo $row_fr['loc_name'];?><br />
+              <?php     echo $row_fr['loc_address'];?></td>
+              <td><?php     echo province_name($conn,$row_fr['cd_province']);?></td>
+              <td><?php     echo get_groupcusname($conn,$row_fr['cg_type']);?></td>
+              <td><?php     echo custype_name($conn,$row_fr['sr_ctype']);?></td>
             </tr>
-			<?php  
+			<?php    
 			$sum += 1;
 		}
 	  ?>
       <tr>
-		<td colspan="5" style="text-align:right;"> <strong>ให้บริการตามตามเขต / จังหวัดทั้งหมด&nbsp;&nbsp;<?php   echo $sum;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
+		<td colspan="5" style="text-align:right;"> <strong>ให้บริการตามตามเขต / จังหวัดทั้งหมด&nbsp;&nbsp;<?php     echo $sum;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
 	  </tr>
     </table>
 

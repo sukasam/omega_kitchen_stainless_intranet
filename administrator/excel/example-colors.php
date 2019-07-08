@@ -1,4 +1,4 @@
-<?php  
+<?php    
 
 # Demonstrates Spreadsheet::WriteExcel's named colors and the Excel
 # color palette.

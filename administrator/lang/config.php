@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	$PK_field = "lang_id"; 
 	$check_module = "Language Management";
 	$page_name = "Language Management";

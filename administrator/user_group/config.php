@@ -1,4 +1,4 @@
-<?
+<?php 
 	$PK_field = "user_group_id";
 	$FR_field = "user_id";
 	$check_module = "จัดการกลุ่มผู้ใช้งาน";

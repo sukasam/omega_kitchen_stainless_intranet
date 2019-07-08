@@ -1,4 +1,4 @@
-<?
+<?php 
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -44,7 +44,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><? echo $s_title;?></TITLE>
+<TITLE><?php   echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -69,15 +69,15 @@ function check(frm){
 }	
 </script>
 </HEAD>
-<? include ("../../include/function_script.php"); ?>
+<?php  include ("../../include/function_script.php"); ?>
 <BODY>
 <DIV id=body-wrapper>
-<? include("../left.php");?>
+<?php  include("../left.php");?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<? include('../top.php');?>
-<P id=page-intro><? if ($mode == "add") { ?>Enter new information<? } else { ?>แก้ไข	[<? echo $check_module; ?>]<? } ?>	</P>
+<?php  include('../top.php');?>
+<P id=page-intro><?php  if ($mode == "add") { ?>Enter new information<?php  } else { ?>แก้ไข	[<?php   echo $check_module; ?>]<?php  } ?>	</P>
 <UL class=shortcut-buttons-set>
   <LI><A class=shortcut-button href="javascript:history.back()"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>
   กลับ</SPAN></A></LI>
@@ -87,7 +87,7 @@ function check(frm){
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right">
 
-<H3 align="left"><? echo $check_module; ?></H3>
+<H3 align="left"><?php   echo $check_module; ?></H3>
 <DIV class=clear>
   
 </DIV></DIV><!-- End .content-box-header -->
@@ -96,14 +96,14 @@ function check(frm){
   <form action="update.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
     <div class="formArea">
       <fieldset>
-      <legend><? echo ucfirst ($page_name); ?> form </legend>
+      <legend><?php   echo ucfirst ($page_name); ?> form </legend>
         <table width="100%" cellspacing="0" cellpadding="0" border="0">
           <tr>
             <td><table class="formFields" cellspacing="0" width="100%">
               <tr >
-                <td width="19%" valign="top" class="name">User : <? echo $user_name;?></td>
+                <td width="19%" valign="top" class="name">User : <?php   echo $user_name;?></td>
                 <td width="81%"><select name="group_id[]" size="10" multiple>
-                    <?
+                    <?php 
 					  	unset($a_group_id);
 					  	$sql = "select * from s_user_group where user_id = '$_GET[user_id]' ";
 						$query = @mysqli_query($conn,$sql);
@@ -115,8 +115,8 @@ function check(frm){
 						$query = @mysqli_query($conn,$sql);
 						while($rec = @mysqli_fetch_array($query)){
 					  ?>
-                    <option value="<? echo $rec[group_id];?>" <? if( @in_array($rec[group_id],$a_group_id) ) echo "selected";?>><? echo $rec[group_name];?></option>
-                    <? } ?>
+                    <option value="<?php   echo $rec[group_id];?>" <?php  if( @in_array($rec[group_id],$a_group_id) ) echo "selected";?>><?php   echo $rec[group_name];?></option>
+                    <?php  } ?>
                   </select>
                 </td>
               </tr>
@@ -128,12 +128,12 @@ function check(frm){
     <div class="formArea">
       <input type="submit" name="Submit" value="Submit" class="button">
       <input type="reset" name="Submit" value="Reset" class="button">
-      <? 
+      <?php  
 			$a_not_exists = array();
 			post_param($a_param,$a_not_exists); 
 			?>
-      <input name="mode" type="hidden" id="mode" value="<? echo $_GET["mode"];?>">
-      <input name="<? echo $PK_field;?>" type="hidden" id="<? echo $PK_field;?>" value="<? echo $_GET[$PK_field];?>">
+      <input name="mode" type="hidden" id="mode" value="<?php   echo $_GET["mode"];?>">
+      <input name="<?php   echo $PK_field;?>" type="hidden" id="<?php   echo $PK_field;?>" value="<?php   echo $_GET[$PK_field];?>">
     </div>
   </form>
 </DIV>
@@ -144,11 +144,11 @@ function check(frm){
 <DIV class=clear></DIV><!-- Start Notifications -->
 <!-- End Notifications -->
 
-<? include("../footer.php");?>
+<?php  include("../footer.php");?>
 </DIV><!-- End #main-content -->
 </DIV>
-<? if($msg_user==1){?>
+<?php  if($msg_user==1){?>
 <script language=JavaScript>alert('Username ซ้ำ กรุณาเปลี่ยน Username ใหม่ !');</script>
-<? }?>
+<?php  }?>
 </BODY>
 </HTML>

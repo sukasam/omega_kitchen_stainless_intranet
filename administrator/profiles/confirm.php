@@ -1,4 +1,4 @@
-<?php   
+<?php     
 include ("../../include/config.php"); 
 include ("../../include/connect.php"); 
 include ("../../include/function.php"); 
@@ -35,7 +35,7 @@ include ("config.php");
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><?php   echo $s_title;?></TITLE>
+<TITLE><?php     echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -46,14 +46,14 @@ include ("config.php");
 <SCRIPT type=text/javascript src="../js/jquery.wysiwyg.js"></SCRIPT>
 <META name=GENERATOR content="MSHTML 8.00.7600.16535">
 </HEAD>
-<?php   include ("../../include/function_script.php"); ?>
+<?php     include ("../../include/function_script.php"); ?>
 <BODY>
 <DIV id=body-wrapper>
-<?php   include("../left.php");?>
+<?php     include("../left.php");?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<?php   include('../top.php');?>
+<?php     include('../top.php');?>
 <P id=page-intro>What would you like to do?</P>
 
 <UL class=shortcut-buttons-set>
@@ -65,7 +65,7 @@ include ("config.php");
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right">
 
-<H3 align="left"><?php   echo ucfirst ($page_name); ?></H3>
+<H3 align="left"><?php     echo ucfirst ($page_name); ?></H3>
 <DIV class=clear>
   
 </DIV></DIV><!-- End .content-box-header -->
@@ -74,24 +74,24 @@ include ("config.php");
   <form name="form1" method="post" action="confirm.php">
     <p>The following data will be removed: </p>
     <ul>
-      <?php   
+      <?php     
 					$msg = "";
 				  foreach ($del as $key =>$value) { ?>
-      <li> <?php   echo Show_data($tbl_name,$PK_field, $value, $field_confirm_showname) ; ?>
-        <?php   $msg .= $value . " " ;
+      <li> <?php     echo Show_data($tbl_name,$PK_field, $value, $field_confirm_showname) ; ?>
+        <?php     $msg .= $value . " " ;
                      }
 				  ?>
       </li>
     </ul>
-    <?php   $msg = trim ($msg); ?>
-    <input name="msg" type="hidden" id="msg" value="<?php   echo $msg; ?>">
+    <?php     $msg = trim ($msg); ?>
+    <input name="msg" type="hidden" id="msg" value="<?php     echo $msg; ?>">
     <p>
       <input name="confirm" type="checkbox" id="confirm" value="yes" >
       Confirm removal.
     </p>
     <input name="Action" type="submit" id="Action" value="ตกลง" class=button>
     <input type="reset" name="Reset" value="ยกเลิก" class=button>
-    <?php   
+    <?php     
 			post_param($a_param,$a_not_exists); 
 			?>
   </form>
@@ -111,7 +111,7 @@ include ("config.php");
 <DIV class=clear></DIV><!-- Start Notifications -->
 <!-- End Notifications -->
 
-<?php   include("../footer.php");?>
+<?php     include("../footer.php");?>
 </DIV><!-- End #main-content -->
 </DIV>
 </BODY>

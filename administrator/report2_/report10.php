@@ -1,4 +1,4 @@
-<?php   
+<?php     
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -57,11 +57,11 @@
 	    <th colspan="2" style="text-align:left;font-size:12px;">บริษัท โอเมก้า แมชชีนเนอรี่ (1999) จำกัด<br />
 รายงานตามมูลค่าการใช้<br />
 ประเภทลูกค้า  :
-<?php   if($_POST['ctype'] != ""){echo custype_name($conn,$_POST['ctype']);}else{echo "ทั้งหมด";}?>
+<?php     if($_POST['ctype'] != ""){echo custype_name($conn,$_POST['ctype']);}else{echo "ทั้งหมด";}?>
 <br />
 ประเภทบริการ  :
-<?php   if($_POST['sr_ctype']){echo get_servicename($conn,$_POST['sr_ctype']);}else{echo "ทั้งหมด";}?></th>
-	    <th width="47%" colspan="2" style="text-align:right;font-size:11px;vertical-align:bottom;"><?php   echo $dateshow;?></th>
+<?php     if($_POST['sr_ctype']){echo get_servicename($conn,$_POST['sr_ctype']);}else{echo "ทั้งหมด";}?></th>
+	    <th width="47%" colspan="2" style="text-align:right;font-size:11px;vertical-align:bottom;"><?php     echo $dateshow;?></th>
       </tr>
       <tr>
         <th width="31%">ชื่อลูกค้า / บริษัท + เบอร์โทร</th>
@@ -74,7 +74,7 @@
         </table>
        </th>
       </tr>
-      <?php   
+      <?php     
 		$sql = "SELECT * FROM s_first_order as fr, s_service_report as sv WHERE sv.cus_id = fr.fo_id ".$condition." ".$daterriod." ORDER BY fr.cd_name ASC";
 	  	$qu_fr = @mysqli_query($conn,$sql);
 		$sum = 0;
@@ -82,65 +82,65 @@
 				
 			?>
 			<tr>
-              <td><?php   echo $row_fr['cd_name'];?><br />
-              <?php   echo $row_fr['cd_tel'];?></td>
-              <td><?php   echo province_name($conn,$row_fr['cd_province']);?></td>   
+              <td><?php     echo $row_fr['cd_name'];?><br />
+              <?php     echo $row_fr['cd_tel'];?></td>
+              <td><?php     echo province_name($conn,$row_fr['cd_province']);?></td>   
               <td style="padding:0;">
               	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tbreport" style="margin-bottom:5px;">
-                <?php   
+                <?php     
 					if($row_fr['cpro1'] != ""){
 						?>
 						<tr>
-                          <td style="border:0;padding-bottom:0;" width="37%"><?php   echo get_sparpart_name($conn,$row_fr['cpro1']);?></td>
-                          <td style="border:0;padding-bottom:0;text-align:right;" width="37%"><?php   echo number_format($row_fr['cprice1']);?>&nbsp;&nbsp;</td>
+                          <td style="border:0;padding-bottom:0;" width="37%"><?php     echo get_sparpart_name($conn,$row_fr['cpro1']);?></td>
+                          <td style="border:0;padding-bottom:0;text-align:right;" width="37%"><?php     echo number_format($row_fr['cprice1']);?>&nbsp;&nbsp;</td>
                         </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['cpro2'] != ""){
 						?>
 						<tr>
-                          <td style="border:0;padding-bottom:0;padding-top:0;" width="33%"><?php   echo get_sparpart_name($conn,$row_fr['cpro2']);?></td>
-                          <td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="33%"><?php   echo number_format($row_fr['cprice2']);?>&nbsp;&nbsp;</td>
+                          <td style="border:0;padding-bottom:0;padding-top:0;" width="33%"><?php     echo get_sparpart_name($conn,$row_fr['cpro2']);?></td>
+                          <td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="33%"><?php     echo number_format($row_fr['cprice2']);?>&nbsp;&nbsp;</td>
                         </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['cpro3'] != ""){
 						?>
 						<tr>
-                          <td style="border:0;padding-bottom:0;padding-top:0;" width="33%"><?php   echo get_sparpart_name($conn,$row_fr['cpro3']);?></td>
-                          <td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="33%"><?php   echo number_format($row_fr['cprice3']);?>&nbsp;&nbsp;</td>
+                          <td style="border:0;padding-bottom:0;padding-top:0;" width="33%"><?php     echo get_sparpart_name($conn,$row_fr['cpro3']);?></td>
+                          <td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="33%"><?php     echo number_format($row_fr['cprice3']);?>&nbsp;&nbsp;</td>
                         </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['cpro4'] != ""){
 						?>
 						<tr>
-                          <td style="border:0;padding-bottom:0;padding-top:0;" width="33%"><?php   echo get_sparpart_name($conn,$row_fr['cpro4']);?></td>
-                          <td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="33%"><?php   echo number_format($row_fr['cprice4']);?>&nbsp;&nbsp;</td>
+                          <td style="border:0;padding-bottom:0;padding-top:0;" width="33%"><?php     echo get_sparpart_name($conn,$row_fr['cpro4']);?></td>
+                          <td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="33%"><?php     echo number_format($row_fr['cprice4']);?>&nbsp;&nbsp;</td>
                         </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['cpro5'] != ""){
 						?>
 						<tr>
-                          <td style="border:0;padding-bottom:0;padding-top:0;" width="33%"><?php   echo get_sparpart_name($conn,$row_fr['cpro5']);?></td>
-                          <td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="33%"><?php   echo number_format($row_fr['cprice5']);?>&nbsp;&nbsp;</td>
+                          <td style="border:0;padding-bottom:0;padding-top:0;" width="33%"><?php     echo get_sparpart_name($conn,$row_fr['cpro5']);?></td>
+                          <td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="33%"><?php     echo number_format($row_fr['cprice5']);?>&nbsp;&nbsp;</td>
                         </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
               </table></td>      
             </tr>
 			
-			<?php  
+			<?php    
 			$sum += ($row_fr['cprice1']+$row_fr['cprice2']+$row_fr['cprice3']+$row_fr['cprice4']+$row_fr['cprice5']);
 		}
 		
@@ -148,7 +148,7 @@
       <tr>
 			  <td>&nbsp;</td>
 			  <td>&nbsp;</td>
-			  <td style="padding:5px 0 0;text-align:right;">มูลต่ารวมทั้งหมด&nbsp;&nbsp;&nbsp;<?php   echo number_format($sum);?>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			  <td style="padding:5px 0 0;text-align:right;">มูลต่ารวมทั้งหมด&nbsp;&nbsp;&nbsp;<?php     echo number_format($sum);?>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 	  </tr>
     </table>
 

@@ -1,4 +1,4 @@
-<?php   
+<?php     
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -72,11 +72,11 @@
 	    <th colspan="4" style="text-align:left;font-size:12px;"> บริษัท โอเมก้า แมชชีนเนอรี่ (1999) จำกัด<br />
 รายงานการแจ้งซ่อม หรือตามให้บริการต่างๆ<br />
 ประเภทลูกค้า  :
-<?php   if($_POST['ctype'] != ""){echo custype_name($conn,$_POST['ctype']);}else{echo "ทั้งหมด";}?>
+<?php     if($_POST['ctype'] != ""){echo custype_name($conn,$_POST['ctype']);}else{echo "ทั้งหมด";}?>
 <br />
 ประเภทบริการ  :
-<?php   if($_POST['sr_ctype']){echo get_servicename($conn,$_POST['sr_ctype']);}else{echo "ทั้งหมด";}?></th>
-	    <th colspan="4" style="text-align:right;font-size:11px;"><?php   echo $dateshow;?></th>
+<?php     if($_POST['sr_ctype']){echo get_servicename($conn,$_POST['sr_ctype']);}else{echo "ทั้งหมด";}?></th>
+	    <th colspan="4" style="text-align:right;font-size:11px;"><?php     echo $dateshow;?></th>
       </tr>
       <tr>
         <th width="21%">ชื่อลูกค้า / บริษัท + เบอร์โทร</th>
@@ -87,47 +87,47 @@
         <th width="10%">รุ่นเครื่อง</th>
         <th width="9%">ชื่อช่าง</th>
       </tr>
-      <?php   
+      <?php     
 		$sql = "SELECT * FROM s_first_order as fr, s_service_report as sv WHERE sv.cus_id = fr.fo_id  ".$condition." ".$daterriod." ORDER BY fr.cd_name ASC";
 	  	$qu_fr = @mysqli_query($conn,$sql);
 		$sum = 0;
 		while($row_fr = @mysqli_fetch_array($qu_fr)){
 			?>
 			<tr>
-              <td><?php   echo $row_fr['cd_name'];?><br />
-              <?php   echo $row_fr['cd_tel'];?></td>
-              <td><?php   echo province_name($conn,$row_fr['cd_province']);?></td>
+              <td><?php     echo $row_fr['cd_name'];?><br />
+              <?php     echo $row_fr['cd_tel'];?></td>
+              <td><?php     echo province_name($conn,$row_fr['cd_province']);?></td>
               <td>
               	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbreport">
-                  <?php   
+                  <?php     
 				  	$chk = get_fixlist($row_fr['ckf_list']);
 					for($i=0;$i<sizeof($chk);$i++){
 						if(get_fixname($conn,$chk[$i]) != ""){
 							?>
 		  <tr>
-							<td style="border:0;padding-bottom:0;padding-top:0;"><?php   echo get_fixname($conn,$chk[$i]);?></td>
+							<td style="border:0;padding-bottom:0;padding-top:0;"><?php     echo get_fixname($conn,$chk[$i]);?></td>
 			  	  </tr>
-							<?php  
+							<?php    
 						}
 					}
 				  ?>
                 </table>
     		  </td>
-              <td><?php   echo $row_fr['detail_recom2'];?></td>
-              <td><?php   echo $row_fr['loc_pro'];?></td>
-              <td><?php   echo $row_fr['loc_seal'];?></td>
-              <td><?php   echo get_technician_id($conn,$row_fr['loc_contact']);?></td>
+              <td><?php     echo $row_fr['detail_recom2'];?></td>
+              <td><?php     echo $row_fr['loc_pro'];?></td>
+              <td><?php     echo $row_fr['loc_seal'];?></td>
+              <td><?php     echo get_technician_id($conn,$row_fr['loc_contact']);?></td>
             </tr>
 			
 			
             
-			<?php  
+			<?php    
 			$sum += 1;
 		}
 	  ?>
       
       <tr>
-			  <td colspan="8" style="text-align:right;"> <strong>ให้บริการตามการแจ้งซ่อมทั้งหมด&nbsp;&nbsp;<?php   echo $sum;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
+			  <td colspan="8" style="text-align:right;"> <strong>ให้บริการตามการแจ้งซ่อมทั้งหมด&nbsp;&nbsp;<?php     echo $sum;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
 	  </tr>
     </table>
 

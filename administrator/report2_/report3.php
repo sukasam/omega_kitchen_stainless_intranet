@@ -1,4 +1,4 @@
-<?php   
+<?php     
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -61,11 +61,11 @@
 	    <th colspan="5" style="text-align:left;font-size:12px;">	      บริษัท โอเมก้า แมชชีนเนอรี่ (1999) จำกัด<br />
 รายงานการให้บริการตามกลุ่มลูกค้า<br />
 ประเภทลูกค้า  :
-<?php   if($_POST['ctype'] != ""){echo custype_name($conn,$_POST['ctype']);}else{echo "ทั้งหมด";}?>
+<?php     if($_POST['ctype'] != ""){echo custype_name($conn,$_POST['ctype']);}else{echo "ทั้งหมด";}?>
 <br />
 ประเภทบริการ  :
-<?php   if($_POST['sr_ctype']){echo get_servicename($conn,$_POST['sr_ctype']);}else{echo "ทั้งหมด";}?></th>
-	    <th width="26%" colspan="4" style="text-align:right;font-size:11px;vertical-align:bottom;"><?php   echo $dateshow;?></th>
+<?php     if($_POST['sr_ctype']){echo get_servicename($conn,$_POST['sr_ctype']);}else{echo "ทั้งหมด";}?></th>
+	    <th width="26%" colspan="4" style="text-align:right;font-size:11px;vertical-align:bottom;"><?php     echo $dateshow;?></th>
       </tr>
       <tr>
         <th width="19%">ชื่อลูกค้า / บริษัท + เบอร์โทร</th>
@@ -75,7 +75,7 @@
         <th width="14%">วันที่ให้บริการ</th>
         <th>รายละเอียดการให้บริการ</th>
       </tr>
-      <?php   
+      <?php     
 		$sql = "SELECT * FROM s_first_order as fr, s_service_report as sv WHERE sv.cus_id = fr.fo_id ".$condition." ".$daterriod." ORDER BY fr.cd_name ASC";
 	  	$qu_fr = @mysqli_query($conn,$sql);
 		$sum = 0;
@@ -83,20 +83,20 @@
 			
 			?>
 			<tr>
-              <td><?php   echo $row_fr['cd_name'];?><br />
-              <?php   echo $row_fr['cd_tel'];?></td>
-              <td><?php   echo province_name($conn,$row_fr['cd_province']);?></td>
-              <td><?php   echo $row_fr['sv_id'];?></td>
-              <td><?php   echo format_date($row_fr['job_open'])." / ". ($row_fr['job_close']);?></td>
-              <td><?php   echo format_date($row_fr['sr_stime']);?></td>   
-              <td><?php   echo $row_fr['detail_recom'];?></td>              
+              <td><?php     echo $row_fr['cd_name'];?><br />
+              <?php     echo $row_fr['cd_tel'];?></td>
+              <td><?php     echo province_name($conn,$row_fr['cd_province']);?></td>
+              <td><?php     echo $row_fr['sv_id'];?></td>
+              <td><?php     echo format_date($row_fr['job_open'])." / ". ($row_fr['job_close']);?></td>
+              <td><?php     echo format_date($row_fr['sr_stime']);?></td>   
+              <td><?php     echo $row_fr['detail_recom'];?></td>              
             </tr>
-			<?php  
+			<?php    
 			$sum += 1;
 		}
 	  ?>
       <tr>
-			  <td colspan="8" style="text-align:right;"> <strong>ให้บริการตามกลุ่มลูกค้าทั้งหมด&nbsp;&nbsp;<?php   echo $sum;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
+			  <td colspan="8" style="text-align:right;"> <strong>ให้บริการตามกลุ่มลูกค้าทั้งหมด&nbsp;&nbsp;<?php     echo $sum;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
 	  </tr>
     </table>
 

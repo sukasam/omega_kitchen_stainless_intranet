@@ -1,4 +1,4 @@
-<?
+<?php 
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -53,7 +53,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><? echo $s_title;?></TITLE>
+<TITLE><?php   echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -82,15 +82,15 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 }
 </script>
 </HEAD>
-<? include ("../../include/function_script.php"); ?>
+<?php  include ("../../include/function_script.php"); ?>
 <BODY>
 <DIV id=body-wrapper>
-<? include("../left.php");?>
+<?php  include("../left.php");?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<? include('../top.php');?>
-<P id=page-intro><? echo $page_name; ?></P>
+<?php  include('../top.php');?>
+<P id=page-intro><?php   echo $page_name; ?></P>
 
 <UL class=shortcut-buttons-set>
     <LI><A class=shortcut-button href="../service_report_approve/index.php"><SPAN><IMG  alt=icon src="../images/icons/icon-48-section.png"><BR>
@@ -103,13 +103,13 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     ใบคืนอะไหล่</SPAN></A></LI>
     <LI><A class=shortcut-button href="../service_report_approve/index4.php"><SPAN><IMG  alt=icon src="../images/icons/icon-48-section.png"><BR>
     ใบรายงานติดตั้ง</SPAN></A></LI>
-    <? 
+    <?php  
 	if ($FR_module <> "") { 
 	$param2 = get_return_param();
 	?>
-  <LI><A class=shortcut-button href="../<? echo $FR_module; ?>/?<? if($param2 <> "") echo $param2;?>"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>
+  <LI><A class=shortcut-button href="../<?php   echo $FR_module; ?>/?<?php  if($param2 <> "") echo $param2;?>"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>
   กลับ</SPAN></A></LI>
-  <? }?> 
+  <?php  }?> 
 </UL>
   
   <!-- End .shortcut-buttons-set -->
@@ -117,17 +117,17 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right" style="padding-right:15px;">
 
-<H3 align="left"><? echo $check_module; ?></H3>
+<H3 align="left"><?php   echo $check_module; ?></H3>
 <div style="float:right;padding-top:5px;">
 	<form name="form1" method="get" action="index2.php">
-    <input name="keyword" type="text" id="keyword" value="<? echo $keyword;?>">
+    <input name="keyword" type="text" id="keyword" value="<?php   echo $keyword;?>">
     <input name="Action" type="submit" id="Action" value="ค้นหา">
-    <?
+    <?php 
 			$a_not_exists = array('keyword');
 			$param2 = get_param($a_param,$a_not_exists);
 			  ?>
-    <a href="index.php?<? echo $param2;?>">แสดงทั้งหมด</a>
-    <? 
+    <a href="index.php?<?php   echo $param2;?>">แสดงทั้งหมด</a>
+    <?php  
 			/*$a_not_exists = array();
 			post_param($a_param,$a_not_exists);*/
 			?>
@@ -136,10 +136,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <div style="float:right;margin-right:20px;padding-top:5px;">  
 	<label><strong>สถานะการยืนยัน : </strong></label>
     <select name="catalog_master" id="catalog_master" style="height:24px;" onChange="MM_jumpMenu('parent',this,0)">
-		<option value="index2.php?app_id=0" <?php if($_GET['app_id'] == 0){echo "selected";}?>>รอการอนุมัติ</option>
-		 <option value="index2.php?app_id=1" <?php if($_GET['app_id'] == 1){echo "selected";}?>>อนุมัติ</option>
-         <option value="index2.php?app_id=2" <?php if($_GET['app_id'] == 2){echo "selected";}?>>ไม่อนุมัติ</option>
-         <!--<option value="index2.php?app_id=3" <?php if($_GET['app_id'] == 3){echo "selected";}?>>จ่ายแล้ว</option>-->
+		<option value="index2.php?app_id=0" <?php   if($_GET['app_id'] == 0){echo "selected";}?>>รอการอนุมัติ</option>
+		 <option value="index2.php?app_id=1" <?php   if($_GET['app_id'] == 1){echo "selected";}?>>อนุมัติ</option>
+         <option value="index2.php?app_id=2" <?php   if($_GET['app_id'] == 2){echo "selected";}?>>ไม่อนุมัติ</option>
+         <!--<option value="index2.php?app_id=3" <?php   if($_GET['app_id'] == 3){echo "selected";}?>>จ่ายแล้ว</option>-->
   	</select>
     </div>
 <DIV class=clear>
@@ -152,11 +152,11 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
       <THEAD>
         <TR>
           <TH width="5%"><INPUT class=check-all type=checkbox name="ca" value="true" onClick="chkAll(this.form, 'del[]', this.checked)"></TH>
-          <TH width="5%" <? Show_Sort_bg ("user_id", $orderby) ?>> <?
+          <TH width="5%" <?php  Show_Sort_bg ("user_id", $orderby) ?>> <?php 
 		$a_not_exists = array('orderby','sortby');
 		$param2 = get_param($a_param,$a_not_exists);
 	?>
-            <?  Show_Sort_new ("user_id", "ลำดับ.", $orderby, $sortby,$page,$param2);?>
+            <?php   Show_Sort_new ("user_id", "ลำดับ.", $orderby, $sortby,$page,$param2);?>
             &nbsp;</TH>
           <TH width="9%"><div align="center"><a>RP ID</a></div></TH>
           <TH width="22%"><a>ชื่อลูกค้า</a></TH>
@@ -169,19 +169,19 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
       <TFOOT>
         </TFOOT>
       <TBODY>
-        <? 
+        <?php  
 					if($orderby=="") $orderby = "sr.".$PK_field;
 					if ($sortby =="") $sortby ="DESC";
 					
 				   	$sql = "SELECT sr . * , fd.cd_name FROM $tbl_name AS sr, s_first_order AS fd WHERE sr.cus_id = fd.fo_id";
 					if ($_GET[$PK_field] <> "") $sql .= " and ($PK_field  = '" . $_GET[$PK_field] . " ' ) ";					
 					if ($_GET[$FR_field] <> "") $sql .= " and ($FR_field  = '" . $_GET[$FR_field] . " ' ) ";					
- 					if ($_GET[keyword] <> "") { 
-						$sql .= " and ( " .  $PK_field  . " like '%$_GET[keyword]%' ";
+ 					if ($_GET["keyword"] <> "") { 
+						$sql .= " and ( " .  $PK_field  . " like '%".$_GET["keyword"]."%' ";
 						if (count ($search_key) > 0) { 
 							$search_text = " and ( " ;
 							foreach ($search_key as $key=>$value) { 
-									$subtext .= "or " . $value  . " like '%" . $_GET[keyword] . "%'";
+									$subtext .= "or " . $value  . " like '%" . $_GET["keyword"] . "%'";
 							}	
 						}
 						$sql .=  $subtext . " ) ";
@@ -208,22 +208,22 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					$counter++;
 				   ?>
         <TR>
-          <TD style="vertical-align:middle;"><INPUT type=checkbox name="del[]" value="<? echo $rec[$PK_field]; ?>" ></TD>
-          <TD style="vertical-align:middle;"><span class="text"><? echo sprintf("%04d",$counter); ?></span></TD>
-          <TD style="vertical-align:middle;"><?php $chaf = preg_replace("/\//","-",$rec["sv_id"]); ?><div align="center"><span class="text"><a href="../../upload/service_report_open/<?php echo $chaf;?>.pdf" target="_blank"><? echo $rec["sv_id"] ; ?></a></span></div></TD>
-          <TD style="vertical-align:middle;"><span class="text"><? echo get_customername($conn,$rec["cus_id"]); ?></span></TD>
-          <TD style="vertical-align:middle;"><span class="text"><? echo get_localsettingname($conn,$rec["cus_id"]); ?></span></TD>
-          <TD style="vertical-align:middle;"><?php echo get_technician_name($conn,$rec["loc_contact"]);?></TD>
-          <TD style="vertical-align:middle"><select name="jumpMenu" id="jumpMenu" onChange="MM_jumpMenu('parent',this,0)" style=" <?php if($rec["approve"] == "0"){echo "background:#FF0;color:#000;";}elseif($rec["approve"] == "1"){echo "background:#090;color:#FFF;";}elseif($rec["approve"] == "3"){echo "background:#C60;color:#FFF;";}else{echo "background:#F00;color:#FFF;";}?>">
-            <option value="index2.php?action=apps&cc=0&sr_id=<? echo $rec["sr_id"];?>&page=<?php echo $_GET['page'];?>" <?php if($rec["approve"] == "0"){echo 'selected="selected"';}?> style="background:#FFF;color:#000;">รอการอนุมัติ</option>
-            <option value="index2.php?action=apps&cc=1&sr_id=<? echo $rec["sr_id"];?>&page=<?php echo $_GET['page'];?>" <?php if($rec["approve"] == "1"){echo 'selected="selected"';}?> style="background:#FFF;color:#000;">อนุมัติ</option>
-            <option value="index2.php?action=apps&cc=2&sr_id=<? echo $rec["sr_id"];?>&page=<?php echo $_GET['page'];?>" <?php if($rec["approve"] == "2"){echo 'selected="selected"';}?> style="background:#FFF;color:#000;">ไม่อนุมัติ</option>
-            <!--<option value="index2.php?action=apps&cc=3&sr_id=<? echo $rec["sr_id"];?>&page=<?php echo $_GET['page'];?>" <?php if($rec["approve"] == "3"){echo 'selected="selected"';}?> style="background:#FFF;color:#000;">จ่ายแล้ว</option>-->
+          <TD style="vertical-align:middle;"><INPUT type=checkbox name="del[]" value="<?php   echo $rec[$PK_field]; ?>" ></TD>
+          <TD style="vertical-align:middle;"><span class="text"><?php   echo sprintf("%04d",$counter); ?></span></TD>
+          <TD style="vertical-align:middle;"><?php   $chaf = preg_replace("/\//","-",$rec["sv_id"]); ?><div align="center"><span class="text"><a href="../../upload/service_report_open/<?php   echo $chaf;?>.pdf" target="_blank"><?php   echo $rec["sv_id"] ; ?></a></span></div></TD>
+          <TD style="vertical-align:middle;"><span class="text"><?php   echo get_customername($conn,$rec["cus_id"]); ?></span></TD>
+          <TD style="vertical-align:middle;"><span class="text"><?php   echo get_localsettingname($conn,$rec["cus_id"]); ?></span></TD>
+          <TD style="vertical-align:middle;"><?php   echo get_technician_name($conn,$rec["loc_contact"]);?></TD>
+          <TD style="vertical-align:middle"><select name="jumpMenu" id="jumpMenu" onChange="MM_jumpMenu('parent',this,0)" style=" <?php   if($rec["approve"] == "0"){echo "background:#FF0;color:#000;";}elseif($rec["approve"] == "1"){echo "background:#090;color:#FFF;";}elseif($rec["approve"] == "3"){echo "background:#C60;color:#FFF;";}else{echo "background:#F00;color:#FFF;";}?>">
+            <option value="index2.php?action=apps&cc=0&sr_id=<?php   echo $rec["sr_id"];?>&page=<?php   echo $_GET['page'];?>" <?php   if($rec["approve"] == "0"){echo 'selected="selected"';}?> style="background:#FFF;color:#000;">รอการอนุมัติ</option>
+            <option value="index2.php?action=apps&cc=1&sr_id=<?php   echo $rec["sr_id"];?>&page=<?php   echo $_GET['page'];?>" <?php   if($rec["approve"] == "1"){echo 'selected="selected"';}?> style="background:#FFF;color:#000;">อนุมัติ</option>
+            <option value="index2.php?action=apps&cc=2&sr_id=<?php   echo $rec["sr_id"];?>&page=<?php   echo $_GET['page'];?>" <?php   if($rec["approve"] == "2"){echo 'selected="selected"';}?> style="background:#FFF;color:#000;">ไม่อนุมัติ</option>
+            <!--<option value="index2.php?action=apps&cc=3&sr_id=<?php   echo $rec["sr_id"];?>&page=<?php   echo $_GET['page'];?>" <?php   if($rec["approve"] == "3"){echo 'selected="selected"';}?> style="background:#FFF;color:#000;">จ่ายแล้ว</option>-->
           </select></TD>
           <TD style="vertical-align:middle;"><!-- Icons -->
-            <div align="center"><a href="../../upload/service_report_open/<?php echo $chaf;?>.pdf" target="_blank"><img src="../images/icon2/backup.png" width="25" height="25" title="ดาวน์โหลดรายงานช่างซ่ิอม" style="margin-left:10px;"></a></div></TD>
+            <div align="center"><a href="../../upload/service_report_open/<?php   echo $chaf;?>.pdf" target="_blank"><img src="../images/icon2/backup.png" width="25" height="25" title="ดาวน์โหลดรายงานช่างซ่ิอม" style="margin-left:10px;"></a></div></TD>
           </TR>  
-		<? }?>
+		<?php  }?>
       </TBODY>
     </TABLE>
     <br><br>
@@ -232,12 +232,12 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
               <OPTION selected value="">กรุณาเลือก...</OPTION>
               <OPTION value="del">ลบ</OPTION>
             </SELECT>            
-            <?
+            <?php 
 				$a_not_exists = array();
 				post_param($a_param,$a_not_exists); 
 			?>
             <input class=button name="Action2" type="submit" id="Action2" value="ตกลง">
-          </DIV> <DIV class=pagination > <? include("../include/page_show.php");?> </DIV>
+          </DIV> <DIV class=pagination > <?php  include("../include/page_show.php");?> </DIV>
   </form>  
 </DIV><!-- End #tab1 -->
 
@@ -249,7 +249,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <DIV class=clear></DIV><!-- Start Notifications -->
 <!-- End Notifications -->
 
-<? include("../footer.php");?>
+<?php  include("../footer.php");?>
 </DIV><!-- End #main-content -->
 </DIV>
 </BODY>

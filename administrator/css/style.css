@@ -928,3 +928,19 @@ div.validateresult{background:#FF9; padding:12px; margin:-20px -20px 20px -20px;
 .setting li label {
     cursor: pointer;
 }
+.hide{
+	display: none !important;
+}
+.tbMain{
+	
+}
+.tbMain tr{
+	
+}
+.tbMain tr th{
+	border: 1px solid #DDDDDD;
+	text-align: center;
+}
+.tbMain tr td{
+	border: 1px solid #DDDDDD;
+}

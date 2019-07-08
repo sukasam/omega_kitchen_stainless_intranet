@@ -1,4 +1,4 @@
-<?php   
+<?php     
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -297,27 +297,27 @@
 	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tbreport">
 	  <tr>
 	    <th colspan="5" style="text-align:left;font-size:12px;">บริษัท โอเมก้า แมชชีนเนอรี่ (1999) จำกัด<br />
-        รายงานคุมสัญญาเช่า (<?php   echo $bselect;?>)</th>
-	    <th colspan="5" style="text-align:right;font-size:11px;"><span style="text-align:right;font-size:12px;"><?php   echo $dateshow;?></span></th>
+        รายงานคุมสัญญาเช่า (<?php     echo $bselect;?>)</th>
+	    <th colspan="5" style="text-align:right;font-size:11px;"><span style="text-align:right;font-size:12px;"><?php     echo $dateshow;?></span></th>
       </tr>
       <tr>
-        <?php   if($_REQUEST['sh1'] == 1){?><th width="6%">สัญญาเช่า</th><?php   }?>
-        <?php   if($_REQUEST['sh2'] == 1){?><th width="14%">ชื่อลูกค้า / บริษัท + เบอร์โทร</th><?php   }?>
-        <?php   if($_REQUEST['sh3'] == 1){?><th width="15%">ชื่อร้าน / สถานที่ติดตั้ง</th><?php   }?>
-        <?php   if($_REQUEST['sh4'] == 1){?><th width="10%">ประเภทลูกค้า</th><?php   }?>
-        <?php   if($_REQUEST['sh10'] == 1){?><th width="10%">กลุ่มลูกค้า</th><?php   }?>
-        <?php   if($_REQUEST['sh5'] == 1 || $_REQUEST['sh6'] == 1 || $_REQUEST['sh7'] == 1){?><th width="39%"><table width="100%" border="0" cellpadding="0" cellspacing="0" class="tbreport">
+        <?php     if($_REQUEST['sh1'] == 1){?><th width="6%">สัญญาเช่า</th><?php     }?>
+        <?php     if($_REQUEST['sh2'] == 1){?><th width="14%">ชื่อลูกค้า / บริษัท + เบอร์โทร</th><?php     }?>
+        <?php     if($_REQUEST['sh3'] == 1){?><th width="15%">ชื่อร้าน / สถานที่ติดตั้ง</th><?php     }?>
+        <?php     if($_REQUEST['sh4'] == 1){?><th width="10%">ประเภทลูกค้า</th><?php     }?>
+        <?php     if($_REQUEST['sh10'] == 1){?><th width="10%">กลุ่มลูกค้า</th><?php     }?>
+        <?php     if($_REQUEST['sh5'] == 1 || $_REQUEST['sh6'] == 1 || $_REQUEST['sh7'] == 1){?><th width="39%"><table width="100%" border="0" cellpadding="0" cellspacing="0" class="tbreport">
           <tr>
-            <?php   if($_REQUEST['sh5'] == 1){?><th style="border:0;" width="40%">ประเภทสินค้า</th><?php   }?>
-            <?php   if($_REQUEST['sh6'] == 1){?><th style="border:0;" width="40%">รุ่นเครื่อง/SN</th><?php   }?>
-            <?php   if($_REQUEST['sh7'] == 1){?><th style="border:0;" width="20%">ราคาขาย/ค่าเช่า</th><?php   }?>
+            <?php     if($_REQUEST['sh5'] == 1){?><th style="border:0;" width="40%">ประเภทสินค้า</th><?php     }?>
+            <?php     if($_REQUEST['sh6'] == 1){?><th style="border:0;" width="40%">รุ่นเครื่อง/SN</th><?php     }?>
+            <?php     if($_REQUEST['sh7'] == 1){?><th style="border:0;" width="20%">ราคาขาย/ค่าเช่า</th><?php     }?>
           </tr>
-        </table></th><?php   }?>
-		<?php   if($_REQUEST['sh11'] == 1){?><th width="7%">เงินประกัน</th><?php   }?>
-        <?php   if($_REQUEST['sh8'] == 1){?><th width="7%">วันเริ่มสัญญา</th><?php   }?>
-        <?php   if($_REQUEST['sh9'] == 1){?><th width="6%">สิ้นสุดสัญญา</th><?php   }?>
+        </table></th><?php     }?>
+		<?php     if($_REQUEST['sh11'] == 1){?><th width="7%">เงินประกัน</th><?php     }?>
+        <?php     if($_REQUEST['sh8'] == 1){?><th width="7%">วันเริ่มสัญญา</th><?php     }?>
+        <?php     if($_REQUEST['sh9'] == 1){?><th width="6%">สิ้นสุดสัญญา</th><?php     }?>
       </tr>
-      <?php   
+      <?php     
 	 	$sql = "SELECT * FROM s_first_order WHERE 1 ".$condition." ".$codi." ".$daterriod." ".$conttact." ".$orderby;
 		//echo $sql;
 		
@@ -331,107 +331,107 @@
 				
 			?>
 			<tr>
-              <?php   if($_REQUEST['sh1'] == 1){?><td><?php   echo $row_fr['r_id'];?></td><?php   }?>
-              <?php   if($_REQUEST['sh2'] == 1){?><td><?php   echo $row_fr['cd_name'];?><br />
-              <?php   echo $row_fr['cd_tel'];?></td><?php   }?>
-              <?php   if($_REQUEST['sh3'] == 1){?><td><?php   echo $row_fr['loc_name'];?><br />
-              <?php   echo $row_fr['loc_address'];?></td><?php   }?>
-              <?php   if($_REQUEST['sh4'] == 1){?><td><?php   echo custype_name($conn,$row_fr['ctype']);?></td><?php   }?>
-              <?php   if($_REQUEST['sh10'] == 1){?><td><?php   echo get_groupcusname($conn,$row_fr['cg_type']);?></td><?php   }?>
-              <?php   if($_REQUEST['sh5'] == 1 || $_REQUEST['sh6'] == 1 || $_REQUEST['sh7'] == 1){?><td style="padding:0;">
+              <?php     if($_REQUEST['sh1'] == 1){?><td><?php     echo $row_fr['r_id'];?></td><?php     }?>
+              <?php     if($_REQUEST['sh2'] == 1){?><td><?php     echo $row_fr['cd_name'];?><br />
+              <?php     echo $row_fr['cd_tel'];?></td><?php     }?>
+              <?php     if($_REQUEST['sh3'] == 1){?><td><?php     echo $row_fr['loc_name'];?><br />
+              <?php     echo $row_fr['loc_address'];?></td><?php     }?>
+              <?php     if($_REQUEST['sh4'] == 1){?><td><?php     echo custype_name($conn,$row_fr['ctype']);?></td><?php     }?>
+              <?php     if($_REQUEST['sh10'] == 1){?><td><?php     echo get_groupcusname($conn,$row_fr['cg_type']);?></td><?php     }?>
+              <?php     if($_REQUEST['sh5'] == 1 || $_REQUEST['sh6'] == 1 || $_REQUEST['sh7'] == 1){?><td style="padding:0;">
               	<table width="94%" border="0" cellpadding="0" cellspacing="0" class="tbreport" style="margin-bottom:5px;">
-                <?php   
+                <?php     
 					if($row_fr['cpro1'] != ""){
 						?>
 						<tr>
-                          <?php   if($_REQUEST['sh5'] == 1){?><td style="border:0;padding-bottom:0;" width="37%"><?php   echo get_proname($conn,$row_fr['cpro1']);?></td><?php   }?>
-                          <?php   if($_REQUEST['sh6'] == 1){?>
-                          <td style="border:0;padding-bottom:0;" width="31%"><?php   echo $row_fr['pro_pod1']." / ".$row_fr['pro_sn1'];?></td><?php   }?>
-                          <?php   if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;text-align:right;" width="32%"><?php   echo number_format($row_fr['cprice1']);?>&nbsp;&nbsp;&nbsp;</td><?php   }?>
-                          <?php   $sumtotal += $row_fr['cprice1'];?>
+                          <?php     if($_REQUEST['sh5'] == 1){?><td style="border:0;padding-bottom:0;" width="37%"><?php     echo get_proname($conn,$row_fr['cpro1']);?></td><?php     }?>
+                          <?php     if($_REQUEST['sh6'] == 1){?>
+                          <td style="border:0;padding-bottom:0;" width="31%"><?php     echo $row_fr['pro_pod1']." / ".$row_fr['pro_sn1'];?></td><?php     }?>
+                          <?php     if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;text-align:right;" width="32%"><?php     echo number_format($row_fr['cprice1']);?>&nbsp;&nbsp;&nbsp;</td><?php     }?>
+                          <?php     $sumtotal += $row_fr['cprice1'];?>
                         </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['cpro2'] != ""){
 						?>
 						<tr>
-                          <?php   if($_REQUEST['sh5'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="37%"><?php   echo get_proname($conn,$row_fr['cpro2']);?></td><?php   }?>
-                          <?php   if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="31%"><?php   echo $row_fr['pro_pod2']." / ".$row_fr['pro_sn2'];?></td><?php   }?>
-                          <?php   if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="32%"><?php   echo number_format($row_fr['cprice2']);?>&nbsp;&nbsp;&nbsp;</td><?php   }?>
-                          <?php   $sumtotal += $row_fr['cprice2'];?>
+                          <?php     if($_REQUEST['sh5'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="37%"><?php     echo get_proname($conn,$row_fr['cpro2']);?></td><?php     }?>
+                          <?php     if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="31%"><?php     echo $row_fr['pro_pod2']." / ".$row_fr['pro_sn2'];?></td><?php     }?>
+                          <?php     if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="32%"><?php     echo number_format($row_fr['cprice2']);?>&nbsp;&nbsp;&nbsp;</td><?php     }?>
+                          <?php     $sumtotal += $row_fr['cprice2'];?>
                         </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['cpro3'] != ""){
 						?>
 						<tr>
-                          <?php   if($_REQUEST['sh5'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="37%"><?php   echo get_proname($conn,$row_fr['cpro3']);?></td><?php   }?>
-                          <?php   if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="31%"><?php   echo $row_fr['pro_pod3']." / ".$row_fr['pro_sn3'];?></td><?php   }?>
-                          <?php   if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="32%"><?php   echo number_format($row_fr['cprice3']);?>&nbsp;&nbsp;&nbsp;</td><?php   }?>
-                          <?php   $sumtotal += $row_fr['cprice3'];?>
+                          <?php     if($_REQUEST['sh5'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="37%"><?php     echo get_proname($conn,$row_fr['cpro3']);?></td><?php     }?>
+                          <?php     if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="31%"><?php     echo $row_fr['pro_pod3']." / ".$row_fr['pro_sn3'];?></td><?php     }?>
+                          <?php     if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="32%"><?php     echo number_format($row_fr['cprice3']);?>&nbsp;&nbsp;&nbsp;</td><?php     }?>
+                          <?php     $sumtotal += $row_fr['cprice3'];?>
                         </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['cpro4'] != ""){
 						?>
 						<tr>
-                          <?php   if($_REQUEST['sh5'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="37%"><?php   echo get_proname($conn,$row_fr['cpro4']);?></td><?php   }?>
-                          <?php   if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="31%"><?php   echo $row_fr['pro_pod4']." / ".$row_fr['pro_sn4'];?></td><?php   }?>
-                          <?php   if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="32%"><?php   echo number_format($row_fr['cprice4']);?>&nbsp;&nbsp;&nbsp;</td><?php   }?>
-                          <?php   $sumtotal += $row_fr['cprice4'];?>
+                          <?php     if($_REQUEST['sh5'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="37%"><?php     echo get_proname($conn,$row_fr['cpro4']);?></td><?php     }?>
+                          <?php     if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="31%"><?php     echo $row_fr['pro_pod4']." / ".$row_fr['pro_sn4'];?></td><?php     }?>
+                          <?php     if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="32%"><?php     echo number_format($row_fr['cprice4']);?>&nbsp;&nbsp;&nbsp;</td><?php     }?>
+                          <?php     $sumtotal += $row_fr['cprice4'];?>
                         </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['cpro5'] != ""){
 						?>
 						<tr>
-                          <?php   if($_REQUEST['sh5'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="37%"><?php   echo get_proname($conn,$row_fr['cpro5']);?></td><?php   }?>
-                          <?php   if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="31%"><?php   echo $row_fr['pro_pod5']." / ".$row_fr['pro_sn5'];?></td><?php   }?>
-                          <?php   if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="32%"><?php   echo number_format($row_fr['cprice5']);?>&nbsp;&nbsp;&nbsp;</td><?php   }?>
-                          <?php   $sumtotal += $row_fr['cprice5'];?>
+                          <?php     if($_REQUEST['sh5'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="37%"><?php     echo get_proname($conn,$row_fr['cpro5']);?></td><?php     }?>
+                          <?php     if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="31%"><?php     echo $row_fr['pro_pod5']." / ".$row_fr['pro_sn5'];?></td><?php     }?>
+                          <?php     if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="32%"><?php     echo number_format($row_fr['cprice5']);?>&nbsp;&nbsp;&nbsp;</td><?php     }?>
+                          <?php     $sumtotal += $row_fr['cprice5'];?>
                         </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['cpro6'] != ""){
 						?>
 						<tr>
-                          <?php   if($_REQUEST['sh5'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="37%"><?php   echo get_proname($conn,$row_fr['cpro6']);?></td><?php   }?>
-                          <?php   if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="31%"><?php   echo $row_fr['pro_pod6']." / ".$row_fr['pro_sn6'];?></td><?php   }?>
-                          <?php   if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="32%"><?php   echo number_format($row_fr['cprice6']);?>&nbsp;&nbsp;&nbsp;</td><?php   }?>
-                          <?php   $sumtotal += $row_fr['cprice6'];?>
+                          <?php     if($_REQUEST['sh5'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="37%"><?php     echo get_proname($conn,$row_fr['cpro6']);?></td><?php     }?>
+                          <?php     if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="31%"><?php     echo $row_fr['pro_pod6']." / ".$row_fr['pro_sn6'];?></td><?php     }?>
+                          <?php     if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="32%"><?php     echo number_format($row_fr['cprice6']);?>&nbsp;&nbsp;&nbsp;</td><?php     }?>
+                          <?php     $sumtotal += $row_fr['cprice6'];?>
                         </tr>
-						<?php  	
+						<?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['cpro7'] != ""){
 						?>
 						<tr>
-                          <?php   if($_REQUEST['sh5'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="37%"><?php   echo get_proname($conn,$row_fr['cpro7']);?></td><?php   }?>
-                          <?php   if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="31%"><?php   echo $row_fr['pro_pod7']." / ".$row_fr['pro_sn7'];?></td><?php   }?>
-                          <?php   if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="32%"><?php   echo number_format($row_fr['cprice7']);?>&nbsp;&nbsp;&nbsp;</td><?php   }?>
-                          <?php   $sumtotal += $row_fr['cprice7'];?>
+                          <?php     if($_REQUEST['sh5'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="37%"><?php     echo get_proname($conn,$row_fr['cpro7']);?></td><?php     }?>
+                          <?php     if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;" width="31%"><?php     echo $row_fr['pro_pod7']." / ".$row_fr['pro_sn7'];?></td><?php     }?>
+                          <?php     if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;padding-top:0;text-align:right;" width="32%"><?php     echo number_format($row_fr['cprice7']);?>&nbsp;&nbsp;&nbsp;</td><?php     }?>
+                          <?php     $sumtotal += $row_fr['cprice7'];?>
                         </tr>
-						<?php  
+						<?php    
 						
 					}
 				?>
-              </table></td><?php   }?>
-              <?php   if($_REQUEST['sh11'] == 1){?><td><?php   echo number_format($row_fr['money_garuntree'],2);?></td><?php   }?>
-              <?php   if($_REQUEST['sh8'] == 1){?><td><?php   echo format_date($row_fr['date_quf']);?></td><?php   }?>
-              <?php   if($_REQUEST['sh9'] == 1){?><td><?php   echo format_date($row_fr['date_qut']);?></td><?php   }?>
+              </table></td><?php     }?>
+              <?php     if($_REQUEST['sh11'] == 1){?><td><?php     echo number_format($row_fr['money_garuntree'],2);?></td><?php     }?>
+              <?php     if($_REQUEST['sh8'] == 1){?><td><?php     echo format_date($row_fr['date_quf']);?></td><?php     }?>
+              <?php     if($_REQUEST['sh9'] == 1){?><td><?php     echo format_date($row_fr['date_qut']);?></td><?php     }?>
             </tr>
-			<?php  
+			<?php    
 			$sum += 1;	
 			$sumgaruntree += $row_fr['money_garuntree'];
 				
@@ -439,9 +439,9 @@
 		}
 	  ?>
       <tr>
-		<td colspan="9" style="text-align:right;"> <strong>รวมยอดเงินประกันทั้งสิ้น <?php   echo number_format($sumgaruntree,2);?> บาท<br />
-	    รวมยอดค่าเช่าทั้งสิ้น <?php   echo number_format($sumtotal,2);?> บาท<br />
-	    ทั้งหมด&nbsp;&nbsp;<?php   echo $sum;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
+		<td colspan="9" style="text-align:right;"> <strong>รวมยอดเงินประกันทั้งสิ้น <?php     echo number_format($sumgaruntree,2);?> บาท<br />
+	    รวมยอดค่าเช่าทั้งสิ้น <?php     echo number_format($sumtotal,2);?> บาท<br />
+	    ทั้งหมด&nbsp;&nbsp;<?php     echo $sum;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
 	  </tr>
     </table>
 

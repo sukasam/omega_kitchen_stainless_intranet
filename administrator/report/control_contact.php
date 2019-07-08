@@ -1,4 +1,4 @@
-<?php   
+<?php     
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -63,282 +63,282 @@ function popup(url,name,windowWidth,windowHeight){
     	<ul>
         	<li style="width:170px;">
             	<select name="base1" size="10" id="base1" style="width:170px;">
-                  <option value="1" onclick="window.location='?base1=1'" <?php   if($_REQUEST['base1'] == 1){echo 'selected="selected"';}?>>แยกตามประเภทลูกค้า</option>
-                  <option value="2" onclick="window.location='?base1=2'" <?php   if($_REQUEST['base1'] == 2){echo 'selected="selected"';}?>>แยกตามกลุ่มลูกค้า</option>
-                  <option value="3" onclick="window.location='?base1=3'" <?php   if($_REQUEST['base1'] == 3){echo 'selected="selected"';}?>>เรียงตามเลขสัญญา</option>
-                  <option value="4" onclick="window.location='?base1=4'" <?php   if($_REQUEST['base1'] == 4){echo 'selected="selected"';}?>>เรียงตามรายชื่อลูกค้า</option>
+                  <option value="1" onclick="window.location='?base1=1'" <?php     if($_REQUEST['base1'] == 1){echo 'selected="selected"';}?>>แยกตามประเภทลูกค้า</option>
+                  <option value="2" onclick="window.location='?base1=2'" <?php     if($_REQUEST['base1'] == 2){echo 'selected="selected"';}?>>แยกตามกลุ่มลูกค้า</option>
+                  <option value="3" onclick="window.location='?base1=3'" <?php     if($_REQUEST['base1'] == 3){echo 'selected="selected"';}?>>เรียงตามเลขสัญญา</option>
+                  <option value="4" onclick="window.location='?base1=4'" <?php     if($_REQUEST['base1'] == 4){echo 'selected="selected"';}?>>เรียงตามรายชื่อลูกค้า</option>
                 </select>
             </li>
             <li style="width:170px;">
-            	 <?php   
+            	 <?php     
 	 	if($_REQUEST['base1'] == 1){
 	 ?>
      	<select name="basebox2" size="10" id="basebox2" style="width:170px;">
-             <option value="1" onclick="window.location='?base1=1&basebox2=1'" <?php   if($_REQUEST['basebox2'] == 1){echo 'selected="selected"';}?>>วันที่</option>
-             <option value="2" onclick="window.location='?base1=1&basebox2=2'" <?php   if($_REQUEST['basebox2'] == 2){echo 'selected="selected"';}?>>ประเภทลูกค้า</option>
-             <option value="3" onclick="window.location='?base1=1&basebox2=3'" <?php   if($_REQUEST['basebox2'] == 3){echo 'selected="selected"';}?>>พนักงานขาย</option>
+             <option value="1" onclick="window.location='?base1=1&basebox2=1'" <?php     if($_REQUEST['basebox2'] == 1){echo 'selected="selected"';}?>>วันที่</option>
+             <option value="2" onclick="window.location='?base1=1&basebox2=2'" <?php     if($_REQUEST['basebox2'] == 2){echo 'selected="selected"';}?>>ประเภทลูกค้า</option>
+             <option value="3" onclick="window.location='?base1=1&basebox2=3'" <?php     if($_REQUEST['basebox2'] == 3){echo 'selected="selected"';}?>>พนักงานขาย</option>
         </select>
         
-       <?php   }?> 
+       <?php     }?> 
 	   
-	   <?php   
+	   <?php     
 	 	if($_REQUEST['base1'] == 2){
 			?>
 			<select name="basebox2" size="10" id="basebox2" style="width:170px;">
-              <option value="1" onclick="window.location='?base1=2&basebox2=1'" <?php   if($_REQUEST['basebox2'] == 1){echo 'selected="selected"';}?>>วันที่</option>
-              <option value="2" onclick="window.location='?base1=2&basebox2=2'" <?php   if($_REQUEST['basebox2'] == 2){echo 'selected="selected"';}?>>กลุ่มลูกค้า</option>
-              <option value="3" onclick="window.location='?base1=2&basebox2=3'" <?php   if($_REQUEST['basebox2'] == 3){echo 'selected="selected"';}?>>พนักงานขาย</option>
+              <option value="1" onclick="window.location='?base1=2&basebox2=1'" <?php     if($_REQUEST['basebox2'] == 1){echo 'selected="selected"';}?>>วันที่</option>
+              <option value="2" onclick="window.location='?base1=2&basebox2=2'" <?php     if($_REQUEST['basebox2'] == 2){echo 'selected="selected"';}?>>กลุ่มลูกค้า</option>
+              <option value="3" onclick="window.location='?base1=2&basebox2=3'" <?php     if($_REQUEST['basebox2'] == 3){echo 'selected="selected"';}?>>พนักงานขาย</option>
             </select>
-			<?php  	
+			<?php    	
 		}
 	 ?>	   
-	   <?php   
+	   <?php     
 	 	if($_REQUEST['base1'] == 3){
 			?> 
                         <select name="basebox2" size="10" id="basebox2" style="width:170px;">
-                          <option value="1" onclick="window.location='?base1=3&basebox2=1'" <?php   if($_REQUEST['basebox2'] == 1){echo 'selected="selected"';}?>>ประเภทลูกค้า</option>
-                          <option value="2" onclick="window.location='?base1=3&basebox2=2'" <?php   if($_REQUEST['basebox2'] == 2){echo 'selected="selected"';}?>>กลุ่มลูกค้า</option>
-                          <option value="3" onclick="window.location='?base1=3&basebox2=3'" <?php   if($_REQUEST['basebox2'] == 3){echo 'selected="selected"';}?>>วันที่เริ่มสัญญา-สิ้นสุด</option>
-                          <option value="4" onclick="window.location='?base1=3&basebox2=4'" <?php   if($_REQUEST['basebox2'] == 4){echo 'selected="selected"';}?>>พนักงานขาย</option>
+                          <option value="1" onclick="window.location='?base1=3&basebox2=1'" <?php     if($_REQUEST['basebox2'] == 1){echo 'selected="selected"';}?>>ประเภทลูกค้า</option>
+                          <option value="2" onclick="window.location='?base1=3&basebox2=2'" <?php     if($_REQUEST['basebox2'] == 2){echo 'selected="selected"';}?>>กลุ่มลูกค้า</option>
+                          <option value="3" onclick="window.location='?base1=3&basebox2=3'" <?php     if($_REQUEST['basebox2'] == 3){echo 'selected="selected"';}?>>วันที่เริ่มสัญญา-สิ้นสุด</option>
+                          <option value="4" onclick="window.location='?base1=3&basebox2=4'" <?php     if($_REQUEST['basebox2'] == 4){echo 'selected="selected"';}?>>พนักงานขาย</option>
                         </select>
-			<?php  	
+			<?php    	
 		}
 	 ?>
 	 
-	 <?php   
+	 <?php     
 	 	if($_REQUEST['base1'] == 4){
 			?> 
                  <select name="basebox2" size="10" id="basebox2" style="width:170px;">
-						  <option value="1" onclick="window.location='?base1=4&basebox2=1'" <?php   if($_REQUEST['basebox2'] == 1){echo 'selected="selected"';}?>>ประเภทลูกค้า</option>
-                          <option value="2" onclick="window.location='?base1=4&basebox2=2'" <?php   if($_REQUEST['basebox2'] == 2){echo 'selected="selected"';}?>>กลุ่มลูกค้า</option>
-                          <option value="3" onclick="window.location='?base1=4&basebox2=3'" <?php   if($_REQUEST['basebox2'] == 3){echo 'selected="selected"';}?>>วันที่เริ่มสัญญา-สิ้นสุด</option>
-                          <option value="4" onclick="window.location='?base1=4&basebox2=4'" <?php   if($_REQUEST['basebox2'] == 4){echo 'selected="selected"';}?>>พนักงานขาย</option>
+						  <option value="1" onclick="window.location='?base1=4&basebox2=1'" <?php     if($_REQUEST['basebox2'] == 1){echo 'selected="selected"';}?>>ประเภทลูกค้า</option>
+                          <option value="2" onclick="window.location='?base1=4&basebox2=2'" <?php     if($_REQUEST['basebox2'] == 2){echo 'selected="selected"';}?>>กลุ่มลูกค้า</option>
+                          <option value="3" onclick="window.location='?base1=4&basebox2=3'" <?php     if($_REQUEST['basebox2'] == 3){echo 'selected="selected"';}?>>วันที่เริ่มสัญญา-สิ้นสุด</option>
+                          <option value="4" onclick="window.location='?base1=4&basebox2=4'" <?php     if($_REQUEST['basebox2'] == 4){echo 'selected="selected"';}?>>พนักงานขาย</option>
                  </select
-			><?php  	
+			><?php    	
 		}
 	 ?>
             </li>
             
             <!--baseboxlist1-->
             <li style="width:170px;">
-            <?php   
+            <?php     
 				if($_REQUEST['base1'] == 1 && $_REQUEST['basebox2'] == 1){
 					?>
 					<select name="baseboxlist3" size="10" id="baseboxlist3" style="width:170px;">
-                          <option value="1" onclick="window.location='?base1=1&basebox2=1&baseboxlist3=1'" <?php   if($_REQUEST['baseboxlist3'] == 1){echo 'selected="selected"';}?>>วันที่คีย์</option>
-                          <option value="2" onclick="window.location='?base1=1&basebox2=1&baseboxlist3=2'" <?php   if($_REQUEST['baseboxlist3'] == 2){echo 'selected="selected"';}?>>วันที่เริ่มสัญญา-สิ้นสุด</option>
-                          <option value="3" onclick="window.location='?base1=1&basebox2=1&baseboxlist3=3'" <?php   if($_REQUEST['baseboxlist3'] == 3){echo 'selected="selected"';}?>>วันที่ติดตั้ง</option>
+                          <option value="1" onclick="window.location='?base1=1&basebox2=1&baseboxlist3=1'" <?php     if($_REQUEST['baseboxlist3'] == 1){echo 'selected="selected"';}?>>วันที่คีย์</option>
+                          <option value="2" onclick="window.location='?base1=1&basebox2=1&baseboxlist3=2'" <?php     if($_REQUEST['baseboxlist3'] == 2){echo 'selected="selected"';}?>>วันที่เริ่มสัญญา-สิ้นสุด</option>
+                          <option value="3" onclick="window.location='?base1=1&basebox2=1&baseboxlist3=3'" <?php     if($_REQUEST['baseboxlist3'] == 3){echo 'selected="selected"';}?>>วันที่ติดตั้ง</option>
                         </select>
-					<?php  
+					<?php    
 				}
 				if($_REQUEST['base1'] == 1 && $_REQUEST['basebox2'] == 2){
 					?>
 					<select name="baseboxlist3" size="10" id="baseboxlist3" style="width:170px;">
-                          <?php  
+                          <?php    
 							$quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
 							$runs = 1;
 							while($row_cgcus = @mysqli_fetch_array($quccustommer)){
 								if(substr($row_cgcus['group_name'],0,2) != "SR"){
 									if($row_cgcus['group_id'] != 1 && $row_cgcus['group_id'] != 25 && $row_cgcus['group_id'] != 7 && $row_cgcus['group_id'] != 3 && $row_cgcus['group_id'] != 23){
 										?>
-										<option value="<?php   echo $row_cgcus['group_id'];?>" <?php   if($runs == 1){echo 'selected';}?>><?php   echo $row_cgcus['group_name'];?></option>
-										<?php  	
+										<option value="<?php     echo $row_cgcus['group_id'];?>" <?php     if($runs == 1){echo 'selected';}?>><?php     echo $row_cgcus['group_name'];?></option>
+										<?php    	
 									}
 								}
 							$runs++;}
 							?>
                           
                         </select>
-					<?php  
+					<?php    
 				}
 				if($_REQUEST['base1'] == 1 && $_REQUEST['basebox2'] == 3){
 					?>
 					<select name="baseboxlist3" size="10" id="baseboxlist3" style="width:170px;">
-							<?php  
+							<?php    
                                 $qusaletype = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
 								$runs = 1;
                                 while($row_saletype = @mysqli_fetch_array($qusaletype)){
                                   ?>
-                                    <option value="<?php   echo $row_saletype['group_id'];?>" ><?php   echo $row_saletype['group_name'];?></option>
-                                  <?php  	
+                                    <option value="<?php     echo $row_saletype['group_id'];?>" ><?php     echo $row_saletype['group_name'];?></option>
+                                  <?php    	
                                 $runs++;}
                             ?>
                         </select>
-					<?php  
+					<?php    
 				}
 			?>
             </li>
             
             <!--baseboxlist1-->
             <li style="width:190px;">
-            	<?php   
+            	<?php     
 				if($_REQUEST['base1'] == 1 && $_REQUEST['basebox2'] == 1 && $_REQUEST['baseboxlist3'] == 1){
 					?>
 						<fieldset style="height:146px;">
-                        	วันที่คีย์<br /><input type="text" name="create_date" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'create_date'});</script>
-                            ถึงวันที่คีย์<br /> <input type="text" name="create_dateto" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'create_dateto'});</script>
+                        	วันที่คีย์<br /><input type="text" name="create_date" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'create_date'});</script>
+                            ถึงวันที่คีย์<br /> <input type="text" name="create_dateto" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'create_dateto'});</script>
                             
                         </fieldset>
-					<?php  
+					<?php    
 				}
 				if($_REQUEST['base1'] == 1 && $_REQUEST['basebox2'] == 1 && $_REQUEST['baseboxlist3'] == 2){
 					?>
 						<fieldset style="height:146px;">
-                        	ระหว่างวันที่<br /><input type="text" name="date_quf" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_quf'});</script><br />
-                            ถึง วันที<br /><input type="text" name="date_qut" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_qut'});</script>
+                        	ระหว่างวันที่<br /><input type="text" name="date_quf" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_quf'});</script><br />
+                            ถึง วันที<br /><input type="text" name="date_qut" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_qut'});</script>
                         </fieldset>
-					<?php  
+					<?php    
 				}
 				if($_REQUEST['base1'] == 1 && $_REQUEST['basebox2'] == 1 && $_REQUEST['baseboxlist3'] == 3){
 					?>
 						<fieldset style="height:146px;">
-                        	วันที่ติดตั้ง<br /><input type="text" name="cs_setting" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'cs_setting'});</script>
+                        	วันที่ติดตั้ง<br /><input type="text" name="cs_setting" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'cs_setting'});</script>
                         </fieldset>
-					<?php  
+					<?php    
 				}
 				?>
             </li>
             
             <!--baseboxlist2-->
             <li style="width:170px;">
-            <?php   
+            <?php     
 				if($_REQUEST['base1'] == 2 && $_REQUEST['basebox2'] == 1){
 					?>
 					<select name="baseboxlist3" size="10" id="baseboxlist3" style="width:170px;">
-                          <option value="1" onclick="window.location='?base1=2&basebox2=1&baseboxlist3=1'" <?php   if($_REQUEST['baseboxlist3'] == 1){echo 'selected="selected"';}?>>วันที่คีย์</option>
-                          <option value="2" onclick="window.location='?base1=2&basebox2=1&baseboxlist3=2'" <?php   if($_REQUEST['baseboxlist3'] == 2){echo 'selected="selected"';}?>>วันที่เริ่มสัญญา-สิ้นสุด</option>
-                          <option value="3" onclick="window.location='?base1=2&basebox2=1&baseboxlist3=3'" <?php   if($_REQUEST['baseboxlist3'] == 3){echo 'selected="selected"';}?>>วันที่ติดตั้ง</option>
+                          <option value="1" onclick="window.location='?base1=2&basebox2=1&baseboxlist3=1'" <?php     if($_REQUEST['baseboxlist3'] == 1){echo 'selected="selected"';}?>>วันที่คีย์</option>
+                          <option value="2" onclick="window.location='?base1=2&basebox2=1&baseboxlist3=2'" <?php     if($_REQUEST['baseboxlist3'] == 2){echo 'selected="selected"';}?>>วันที่เริ่มสัญญา-สิ้นสุด</option>
+                          <option value="3" onclick="window.location='?base1=2&basebox2=1&baseboxlist3=3'" <?php     if($_REQUEST['baseboxlist3'] == 3){echo 'selected="selected"';}?>>วันที่ติดตั้ง</option>
                         </select>
-					<?php  
+					<?php    
 				}
 				if($_REQUEST['base1'] == 2 && $_REQUEST['basebox2'] == 2){
 					?>
 					<select name="baseboxlist3" size="10" id="baseboxlist3" style="width:170px;">
-                          <?php  
+                          <?php    
 							$qucgtype = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
 							$runs = 1;
 							while($row_cgtype = @mysqli_fetch_array($qucgtype)){
 							  if(substr(trim($row_cgtype['group_name']),0,2) != "SV"){
 								?>
-								<option value="<?php   echo $row_cgtype['group_id'];?>"><?php   echo $row_cgtype['group_name'];?></option>
-							  <?php  	  
+								<option value="<?php     echo $row_cgtype['group_id'];?>"><?php     echo $row_cgtype['group_name'];?></option>
+							  <?php    	  
 							  }
 							$runs++;}
 							?>
                           
                         </select>
-					<?php  
+					<?php    
 				}
 				if($_REQUEST['base1'] == 2 && $_REQUEST['basebox2'] == 3){
 					?>
 					<select name="baseboxlist3" size="10" id="baseboxlist3" style="width:170px;">
-							<?php  
+							<?php    
                                 $qusaletype = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
 								$runs = 1;
                                 while($row_saletype = @mysqli_fetch_array($qusaletype)){
                                   ?>
-                                    <option value="<?php   echo $row_saletype['group_id'];?>"><?php   echo $row_saletype['group_name'];?></option>
-                                  <?php  	
+                                    <option value="<?php     echo $row_saletype['group_id'];?>"><?php     echo $row_saletype['group_name'];?></option>
+                                  <?php    	
                                 $runs++;}
                             ?>
                         </select>
-					<?php  
+					<?php    
 				}
 			?>
             </li>
             
             <!--baseboxlist1-->
             <li style="width:190px;">
-            	<?php   
+            	<?php     
 				if($_REQUEST['base1'] == 2 && $_REQUEST['basebox2'] == 1 && $_REQUEST['baseboxlist3'] == 1){
 					?>
 						<fieldset style="height:146px;">
-                        	วันที่คีย์<br /><input type="text" name="create_date" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'create_date'});</script>
-                           ถึงวันที่คีย์<br /> <input type="text" name="create_dateto" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'create_dateto'});</script>
+                        	วันที่คีย์<br /><input type="text" name="create_date" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'create_date'});</script>
+                           ถึงวันที่คีย์<br /> <input type="text" name="create_dateto" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'create_dateto'});</script>
                         </fieldset>
-					<?php  
+					<?php    
 				}
 				if($_REQUEST['base1'] == 2 && $_REQUEST['basebox2'] == 1 && $_REQUEST['baseboxlist3'] == 2){
 					?>
 						<fieldset style="height:146px;">
-                        	ระหว่างวันที่<br /><input type="text" name="date_quf" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_quf'});</script>
+                        	ระหว่างวันที่<br /><input type="text" name="date_quf" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_quf'});</script>
                             <br />
-                          ถึง วันที<br /><input type="text" name="date_qut" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_qut'});</script>
+                          ถึง วันที<br /><input type="text" name="date_qut" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_qut'});</script>
                         </fieldset>
-					<?php  
+					<?php    
 				}
 				if($_REQUEST['base1'] == 2 && $_REQUEST['basebox2'] == 1 && $_REQUEST['baseboxlist3'] == 3){
 					?>
 						<fieldset style="height:146px;">
-                        	วันที่ติดตั้ง<br /><input type="text" name="cs_setting" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'cs_setting'});</script>
+                        	วันที่ติดตั้ง<br /><input type="text" name="cs_setting" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'cs_setting'});</script>
                         </fieldset>
-					<?php  
+					<?php    
 				}
 				?>
             </li>
             
            <!--box1=3-->
             <li style="width:190px;">
-            	<?php   
+            	<?php     
 					if($_REQUEST['base1'] == 3 && $_REQUEST['basebox2'] == 1){
 						?>
                         <select name="baseboxlist3" size="10" id="baseboxlist3" style="width:170px;">
-						<?php  
+						<?php    
 							$quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
 							$runs = 1;
 							while($row_cgcus = @mysqli_fetch_array($quccustommer)){
 								if(substr($row_cgcus['group_name'],0,2) != "SR"){
 									if($row_cgcus['group_id'] != 1 && $row_cgcus['group_id'] != 25 && $row_cgcus['group_id'] != 7 && $row_cgcus['group_id'] != 3 && $row_cgcus['group_id'] != 23){
 									?>
-									<option value="<?php   echo $row_cgcus['group_id'];?>"><?php   echo $row_cgcus['group_name'];?></option>
-									<?php  
+									<option value="<?php     echo $row_cgcus['group_id'];?>"><?php     echo $row_cgcus['group_name'];?></option>
+									<?php    
 									}
 								}
 							$runs++;}
 							?>
                             </select>
-						<?php  
+						<?php    
 					}
 					if($_REQUEST['base1'] == 3 && $_REQUEST['basebox2'] == 2){
 						?>
 						<select name="baseboxlist3" size="10" id="baseboxlist3" style="width:170px;">
-                          <?php  
+                          <?php    
 							$qucgtype = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
 							$runs = 1;
 							while($row_cgtype = @mysqli_fetch_array($qucgtype)){
 							  if(substr(trim($row_cgtype['group_name']),0,2) != "SV"){
 							  ?>
-								<option value="<?php   echo $row_cgtype['group_id'];?>"><?php   echo $row_cgtype['group_name'];?></option>
-							  <?php  	
+								<option value="<?php     echo $row_cgtype['group_id'];?>"><?php     echo $row_cgtype['group_name'];?></option>
+							  <?php    	
 							  }
 							$runs++;}
 							?>
                           
                         </select>
-						<?php  	
+						<?php    	
 					}
 					if($_REQUEST['base1'] == 3 && $_REQUEST['basebox2'] == 3){
 						?>
 						<fieldset style="height:146px;">
-                        	ระหว่างวันที่<br /><input type="text" name="date_quf" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_quf'});</script><br />
-                            ถึง วันที<br /><input type="text" name="date_qut" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_qut'});</script>
+                        	ระหว่างวันที่<br /><input type="text" name="date_quf" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_quf'});</script><br />
+                            ถึง วันที<br /><input type="text" name="date_qut" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_qut'});</script>
                         </fieldset>
-						<?php  
+						<?php    
 					}
 					if($_REQUEST['base1'] == 3 && $_REQUEST['basebox2'] == 4){
 						?>
 						<select name="baseboxlist3" size="10" id="baseboxlist3" style="width:170px;">
-							<?php  
+							<?php    
                                 $qusaletype = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
 								$runs = 1;
                                 while($row_saletype = @mysqli_fetch_array($qusaletype)){
                                   ?>
-                                    <option value="<?php   echo $row_saletype['group_id'];?>"><?php   echo $row_saletype['group_name'];?></option>
-                                  <?php  	
+                                    <option value="<?php     echo $row_saletype['group_id'];?>"><?php     echo $row_saletype['group_name'];?></option>
+                                  <?php    	
                                 $runs++;}
                             ?>
                         </select>
-						<?php  
+						<?php    
 					}
 				?>
             </li>
@@ -346,66 +346,66 @@ function popup(url,name,windowWidth,windowHeight){
             
             <!--box1=4-->
             <li style="width:190px;">
-            	<?php   
+            	<?php     
 					if($_REQUEST['base1'] == 4 && $_REQUEST['basebox2'] == 1){
 						?>
                         <select name="baseboxlist3" size="10" id="baseboxlist3" style="width:170px;">
-						<?php  
+						<?php    
 							$quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
 							$runs = 1;
 							while($row_cgcus = @mysqli_fetch_array($quccustommer)){
 								if(substr($row_cgcus['group_name'],0,2) != "SR"){
 									if($row_cgcus['group_id'] != 1 && $row_cgcus['group_id'] != 25 && $row_cgcus['group_id'] != 7 && $row_cgcus['group_id'] != 3 && $row_cgcus['group_id'] != 23){
 									?>
-									<option value="<?php   echo $row_cgcus['group_id'];?>" <?php   if($runs == 1){echo 'selected';}?>><?php   echo $row_cgcus['group_name'];?></option>
-									<?php  
+									<option value="<?php     echo $row_cgcus['group_id'];?>" <?php     if($runs == 1){echo 'selected';}?>><?php     echo $row_cgcus['group_name'];?></option>
+									<?php    
 									}
 								}
 							$runs++;}
 							?>
                             </select>
-						<?php  
+						<?php    
 					}
 					if($_REQUEST['base1'] == 4 && $_REQUEST['basebox2'] == 2){
 						?>
 						<select name="baseboxlist3" size="10" id="baseboxlist3" style="width:170px;">
-                          <?php  
+                          <?php    
 							$qucgtype = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
 							$runs = 1;
 							while($row_cgtype = @mysqli_fetch_array($qucgtype)){
 							  if(substr(trim($row_cgtype['group_name']),0,2) != "SV"){
 							  ?>
-								<option value="<?php   echo $row_cgtype['group_id'];?>"><?php   echo $row_cgtype['group_name'];?></option>
-							  <?php  
+								<option value="<?php     echo $row_cgtype['group_id'];?>"><?php     echo $row_cgtype['group_name'];?></option>
+							  <?php    
 							  }
 							$runs++;}
 							?>
                           
                         </select>
-						<?php  	
+						<?php    	
 					}
 					if($_REQUEST['base1'] == 4 && $_REQUEST['basebox2'] == 3){
 						?>
 						<fieldset style="height:146px;">
-                        	ระหว่างวันที่<br /><input type="text" name="date_quf" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_quf'});</script><br />
-                            ถึง วันที<br /><input type="text" name="date_qut" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_qut'});</script>
+                        	ระหว่างวันที่<br /><input type="text" name="date_quf" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_quf'});</script><br />
+                            ถึง วันที<br /><input type="text" name="date_qut" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_qut'});</script>
                         </fieldset>
-						<?php  
+						<?php    
 					}
 					if($_REQUEST['base1'] == 4 && $_REQUEST['basebox2'] == 4){
 						?>
 						<select name="baseboxlist3" size="10" id="baseboxlist3" style="width:170px;">
-							<?php  
+							<?php    
                                 $qusaletype = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
 								$runs = 1;
                                 while($row_saletype = @mysqli_fetch_array($qusaletype)){
                                   ?>
-                                    <option value="<?php   echo $row_saletype['group_id'];?>"><?php   echo $row_saletype['group_name'];?></option>
-                                  <?php  	
+                                    <option value="<?php     echo $row_saletype['group_id'];?>"><?php     echo $row_saletype['group_name'];?></option>
+                                  <?php    	
                                 $runs++;}
                             ?>
                         </select>
-						<?php  
+						<?php    
 					}
 				?>
             </li>
@@ -413,7 +413,7 @@ function popup(url,name,windowWidth,windowHeight){
             
         </ul>
     </div>
-    <?php   
+    <?php     
 	if($_GET['base1'] == 3 && !isset($_GET['basebox2'])){
 	?>
     	
@@ -449,9 +449,9 @@ function popup(url,name,windowWidth,windowHeight){
               </tr>
         </table>
         </div>
-     <?php   }?>
+     <?php     }?>
      
-     <?php   
+     <?php     
 	 	if($_GET['base1'] == 4){
      		?>
             
@@ -473,11 +473,11 @@ function popup(url,name,windowWidth,windowHeight){
         </table>
         </div>
 			
-			<?php  
+			<?php    
      	}
 	 ?>
      
-    <?php   
+    <?php     
 		if(($_GET['base1'] != 1 || $_GET['basebox2'] != 1) && ($_GET['base1'] != 2 || $_GET['basebox2'] != 1) && ($_GET['base1'] != 3 || $_GET['basebox2'] != 3) && ($_GET['base1'] != 4 || $_GET['basebox2'] != 3)){
 			?>
 			<div style="clear:both;padding-top:20px;font-size:13px;">
@@ -492,17 +492,17 @@ function popup(url,name,windowWidth,windowHeight){
               </tr>
               <tr class="formFields">
                 <td nowrap="nowrap" class="name">เริ่มวันที่</td>
-                <td><input type="text" name="date_fm" readonly="readonly" value="<?php   echo date("d/m/Y");?>" class="inpfoder"/>
+                <td><input type="text" name="date_fm" readonly="readonly" value="<?php     echo date("d/m/Y");?>" class="inpfoder"/>
                   <script language="JavaScript" type="text/javascript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
               </tr>
               <tr class="formFields">
                 <td nowrap="nowrap" class="name">ถึงวันที่</td>
-                <td><input type="text" name="date_to" readonly="readonly" value="<?php   echo date("d/m/Y");?>" class="inpfoder"/>
+                <td><input type="text" name="date_to" readonly="readonly" value="<?php     echo date("d/m/Y");?>" class="inpfoder"/>
                   <script language="JavaScript" type="text/javascript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
               </tr>
         </table>
             </div>
-			<?php  	
+			<?php    	
 		}
 	?>
     <div style="clear:both;padding-top:20px;font-size:13px;">

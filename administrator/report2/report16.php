@@ -1,4 +1,4 @@
-<?php   
+<?php     
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -81,25 +81,25 @@
 	    <th colspan="3" style="text-align:left;font-size:12px;">บริษัท โอเมก้า แมชชีนเนอรี่ (1999) จำกัด<br />
 รายงานใบคืน<br />
 ประเภทใบบริการ  : ใบคืน</th>
-	    <th colspan="4" style="text-align:right;font-size:11px;"><?php   echo $dateshow;?></th>
+	    <th colspan="4" style="text-align:right;font-size:11px;"><?php     echo $dateshow;?></th>
       </tr>
       <tr>
-        <?php   if($_REQUEST['sh1'] == 1){?><th width="13%">ชื่อลูกค้า / บริษัท + เบอร์โทร</th><?php   }?>
-        <?php   if($_REQUEST['sh2'] == 1){?><th width="18%">ชื่อร้าน / สถานที่ติดตั้ง</th><?php   }?>
-        <?php   if($_REQUEST['sh3'] == 1){?><th width="17%">รายละเอียดการเปลี่ยน</th><?php   }?>
-        <?php   if($_REQUEST['sh4'] == 1 || $_REQUEST['sh5'] == 1 || $_REQUEST['sh8'] == 1){?><th width="35%"><table width="100%" border="0" cellpadding="0" cellspacing="0" class="tbreport">
+        <?php     if($_REQUEST['sh1'] == 1){?><th width="13%">ชื่อลูกค้า / บริษัท + เบอร์โทร</th><?php     }?>
+        <?php     if($_REQUEST['sh2'] == 1){?><th width="18%">ชื่อร้าน / สถานที่ติดตั้ง</th><?php     }?>
+        <?php     if($_REQUEST['sh3'] == 1){?><th width="17%">รายละเอียดการเปลี่ยน</th><?php     }?>
+        <?php     if($_REQUEST['sh4'] == 1 || $_REQUEST['sh5'] == 1 || $_REQUEST['sh8'] == 1){?><th width="35%"><table width="100%" border="0" cellpadding="0" cellspacing="0" class="tbreport">
           <tr>
-            <?php   if($_REQUEST['sh4'] == 1){?><td style="border-bottom:none;" width="40%"><strong>รายการอะไหล่</strong></td><?php   }?>
-            <?php   if($_REQUEST['sh5'] == 1){?><td style="border-bottom:none;" width="20%"><strong>จำนวนยืม</strong></td><?php   }?>
-			<?php   if($_REQUEST['sh31'] == 1){?><td style="border-bottom:none;" width="18%"><strong>จำนวนคืน</strong></td><?php   }?>
-            <?php   if($_REQUEST['sh8'] == 1){?><td style="border-bottom:none;" width="22%"><strong>รวมมูลค่า</strong></td><?php   }?>
+            <?php     if($_REQUEST['sh4'] == 1){?><td style="border-bottom:none;" width="40%"><strong>รายการอะไหล่</strong></td><?php     }?>
+            <?php     if($_REQUEST['sh5'] == 1){?><td style="border-bottom:none;" width="20%"><strong>จำนวนยืม</strong></td><?php     }?>
+			<?php     if($_REQUEST['sh31'] == 1){?><td style="border-bottom:none;" width="18%"><strong>จำนวนคืน</strong></td><?php     }?>
+            <?php     if($_REQUEST['sh8'] == 1){?><td style="border-bottom:none;" width="22%"><strong>รวมมูลค่า</strong></td><?php     }?>
           </tr>
-        </table></th><?php   }?>
-        <?php   if($_REQUEST['sh6'] == 1){?><th width="7%"><strong>วันที่เบิก</strong></th><?php   }?>
-        <?php   if($_REQUEST['sh7'] == 1){?><th width="5%"><strong>วันที่คืน</strong></th><?php   }?>
-        <?php   if($_REQUEST['sh9'] == 1){?><th width="5%"><strong>ผุ้เบิก</strong></th><?php   }?>
+        </table></th><?php     }?>
+        <?php     if($_REQUEST['sh6'] == 1){?><th width="7%"><strong>วันที่เบิก</strong></th><?php     }?>
+        <?php     if($_REQUEST['sh7'] == 1){?><th width="5%"><strong>วันที่คืน</strong></th><?php     }?>
+        <?php     if($_REQUEST['sh9'] == 1){?><th width="5%"><strong>ผุ้เบิก</strong></th><?php     }?>
       </tr>
-      <?php   
+      <?php     
 	  	
 		
 		$dbservice = "s_service_report5";
@@ -113,17 +113,17 @@
 						
 			?>
 			<tr>
-              <?php   if($_REQUEST['sh1'] == 1){?><td><?php   echo $row_fr['cd_name'];?><br />
-              <?php   echo $row_fr['cd_tel'];?></td><?php   }?>
-              <?php   if($_REQUEST['sh2'] == 1){?><td><?php   echo $row_fr['loc_name'];?><br />
-              <?php   echo $row_fr['loc_address'];?></td><?php   }?>
-              <?php   if($_REQUEST['sh3'] == 1){?><td><?php   echo $row_fr['detail_recom'];?></td><?php   }?>
-              <?php   if($_REQUEST['sh4'] == 1 || $_REQUEST['sh5'] == 1 || $_REQUEST['sh8'] == 1){?><td style="padding:0;">
-              	<?php   
+              <?php     if($_REQUEST['sh1'] == 1){?><td><?php     echo $row_fr['cd_name'];?><br />
+              <?php     echo $row_fr['cd_tel'];?></td><?php     }?>
+              <?php     if($_REQUEST['sh2'] == 1){?><td><?php     echo $row_fr['loc_name'];?><br />
+              <?php     echo $row_fr['loc_address'];?></td><?php     }?>
+              <?php     if($_REQUEST['sh3'] == 1){?><td><?php     echo $row_fr['detail_recom'];?></td><?php     }?>
+              <?php     if($_REQUEST['sh4'] == 1 || $_REQUEST['sh5'] == 1 || $_REQUEST['sh8'] == 1){?><td style="padding:0;">
+              	<?php     
 				$qu_pfirst = @mysqli_query($conn,"SELECT * FROM ".$dbservicesub." WHERE sr_id = '".$row_fr['sr_id']."'");
 				?>
 				<table border="0" width="95%" cellspacing="0" cellpadding="0" class="tbreport">
-				<?php  
+				<?php    
 				$totalamount = 0;
 				while($row = @mysqli_fetch_array($qu_pfirst)){
 					if($row['codes 	'] != "" || $row['lists'] != ""){
@@ -131,12 +131,12 @@
 						$totalamount += $row['opens'];
 					?>
 					<tr>
-					  <?php   if($_REQUEST['sh4'] == 1){?><td style="border-bottom:none;" width="40%"><?php   echo get_sparpart_name($conn,$row['lists']);?></td><?php   }?>
-					  <?php   if($_REQUEST['sh5'] == 1){?><td align="center" style="border-bottom:none;" width="17%"><?php   echo $row['opens'];?></td><?php   }?>
-                      <?php   if($_REQUEST['sh31'] == 1){?><td align="center" style="border-bottom:none;" width="19%"><?php   echo $row['remains'];?></td><?php   }?>
-					  <?php   if($_REQUEST['sh8'] == 1){?><td align="right" style="border-bottom:none;" width="24%"><?php   echo number_format($total,2);?></td><?php   }?>
+					  <?php     if($_REQUEST['sh4'] == 1){?><td style="border-bottom:none;" width="40%"><?php     echo get_sparpart_name($conn,$row['lists']);?></td><?php     }?>
+					  <?php     if($_REQUEST['sh5'] == 1){?><td align="center" style="border-bottom:none;" width="17%"><?php     echo $row['opens'];?></td><?php     }?>
+                      <?php     if($_REQUEST['sh31'] == 1){?><td align="center" style="border-bottom:none;" width="19%"><?php     echo $row['remains'];?></td><?php     }?>
+					  <?php     if($_REQUEST['sh8'] == 1){?><td align="right" style="border-bottom:none;" width="24%"><?php     echo number_format($total,2);?></td><?php     }?>
 					</tr>
-				<?php   
+				<?php     
 					
 					}	
 				}
@@ -144,20 +144,20 @@
 					
 				?>
                 </table>
-              </td><?php   }?>
-              <?php   if($_REQUEST['sh6'] == 1){?><td style="padding:0;"><?php   echo format_date($row_fr['job_open']);?></td><?php   }?>
-              <?php   if($_REQUEST['sh7'] == 1){?><td style="padding:0;"><?php   echo format_date($row_fr['sr_stime']);?></td><?php   }?>
-              <?php   if($_REQUEST['sh9'] == 1){?><td style="padding:0;"><?php   echo get_technician_id($conn,$row_fr['loc_contact']);?></td><?php   }?>
+              </td><?php     }?>
+              <?php     if($_REQUEST['sh6'] == 1){?><td style="padding:0;"><?php     echo format_date($row_fr['job_open']);?></td><?php     }?>
+              <?php     if($_REQUEST['sh7'] == 1){?><td style="padding:0;"><?php     echo format_date($row_fr['sr_stime']);?></td><?php     }?>
+              <?php     if($_REQUEST['sh9'] == 1){?><td style="padding:0;"><?php     echo get_technician_id($conn,$row_fr['loc_contact']);?></td><?php     }?>
             </tr>
-			<?php  
+			<?php    
 			$sum += 1;
 		}
 	  ?>
       <tr>
-			  <td colspan="7" style="text-align:right;"> <strong>จำนวน<?php   if($_POST['sr_stock'] == "s_service_report2"){echo 'ใบเบิก';}else{echo "ใบคืน";}?>ทั้งหมด&nbsp;&nbsp;<?php   echo $sum;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
+			  <td colspan="7" style="text-align:right;"> <strong>จำนวน<?php     if($_POST['sr_stock'] == "s_service_report2"){echo 'ใบเบิก';}else{echo "ใบคืน";}?>ทั้งหมด&nbsp;&nbsp;<?php     echo $sum;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
 	  </tr>
       <tr>
-			  <td colspan="7" style="text-align:right;"> <strong>รวมอะไหล่ที่เบิก&nbsp;&nbsp;<?php   echo $totals;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
+			  <td colspan="7" style="text-align:right;"> <strong>รวมอะไหล่ที่เบิก&nbsp;&nbsp;<?php     echo $totals;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
 	  </tr>
     </table>
 

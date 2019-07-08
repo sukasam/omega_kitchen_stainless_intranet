@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -19,7 +19,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><?php   echo $s_title;?></TITLE>
+<TITLE><?php     echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -49,15 +49,15 @@ function check_select(frm){
 }	
 </script>
 </HEAD>
-<?php   include ("../../include/function_script.php"); ?>
+<?php     include ("../../include/function_script.php"); ?>
 <BODY>
 <DIV id=body-wrapper>
-<?php   include("../left.php");?>
+<?php     include("../left.php");?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<?php   include('../top.php');?>
-<P id=page-intro><?php   echo $page_name; ?></P>
+<?php     include('../top.php');?>
+<P id=page-intro><?php     echo $page_name; ?></P>
 
 <UL class=shortcut-buttons-set>
   <LI><A class=shortcut-button href="../report/?mid=16"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
@@ -71,7 +71,7 @@ function check_select(frm){
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right" style="padding-right:15px;">
 
-<H3 align="left"><?php   echo $page_name; ?></H3>
+<H3 align="left"><?php     echo $page_name; ?></H3>
 <DIV class=clear>
 
 </DIV></DIV><!-- End .content-box-header -->
@@ -113,7 +113,7 @@ function check_select(frm){
 </DIV><!-- End #tab1 -->
 
 
-<?php   
+<?php     
 	if($_GET['act'] == 1){
 		?>
 		<DIV class=content-box><!-- Start Content Box -->
@@ -135,12 +135,12 @@ function check_select(frm){
                             <td nowrap class="name">ประเภทบริการ</td>
                             <td><select name="sr_ctype" id="sr_ctype">
                               <option value="">กรุณาเลือก</option>
-                              <?php   
+                              <?php     
                                     $qu_cusftype = @mysqli_query($conn,"SELECT * FROM s_group_service ORDER BY group_name ASC");
                                     while($row_cusftype = @mysqli_fetch_array($qu_cusftype)){
                                         ?>
-                              <option value="<?php   echo $row_cusftype['group_id'];?>" <?php   if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php   echo $row_cusftype['group_name'];?></option>
-                              <?php  
+                              <option value="<?php     echo $row_cusftype['group_id'];?>" <?php     if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php     echo $row_cusftype['group_name'];?></option>
+                              <?php    
                                     }
                                 ?>
                             </select></td>
@@ -150,12 +150,12 @@ function check_select(frm){
                             <td width="90%">
                             <select name="ctype" id="ctype" class="inputselect" >
                             	<option value="">กรุณาเลือก</option>
-								<?php  
+								<?php    
                                     $quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
                                     while($row_cgcus = @mysqli_fetch_array($quccustommer)){
                                       ?>
-                                        <option value="<?php   echo $row_cgcus['group_id'];?>" <?php   if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php   echo $row_cgcus['group_name'];?></option>
-                                      <?php  	
+                                        <option value="<?php     echo $row_cgcus['group_id'];?>" <?php     if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php     echo $row_cgcus['group_name'];?></option>
+                                      <?php    	
                                     }
                                 ?>
                             </select>
@@ -176,11 +176,11 @@ function check_select(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                         </table></td>
                       </tr>
@@ -196,7 +196,7 @@ function check_select(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-		<?php  	
+		<?php    	
 	}
 	if($_GET['act'] == 2){
 		?>
@@ -219,12 +219,12 @@ function check_select(frm){
                             <td nowrap class="name">ประเภทบริการ</td>
                             <td><select name="sr_ctype" id="sr_ctype">
                               <option value="">กรุณาเลือก</option>
-                              <?php   
+                              <?php     
                                     $qu_cusftype = @mysqli_query($conn,"SELECT * FROM s_group_service ORDER BY group_name ASC");
                                     while($row_cusftype = @mysqli_fetch_array($qu_cusftype)){
                                         ?>
-                              <option value="<?php   echo $row_cusftype['group_id'];?>" <?php   if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php   echo $row_cusftype['group_name'];?></option>
-                              <?php  
+                              <option value="<?php     echo $row_cusftype['group_id'];?>" <?php     if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php     echo $row_cusftype['group_name'];?></option>
+                              <?php    
                                     }
                                 ?>
                             </select></td>
@@ -234,12 +234,12 @@ function check_select(frm){
                             <td width="90%">
                             <select name="ctype" id="ctype" class="inputselect" >
                             	<option value="">กรุณาเลือก</option>
-								<?php  
+								<?php    
                                     $quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
                                     while($row_cgcus = @mysqli_fetch_array($quccustommer)){
                                       ?>
-                                        <option value="<?php   echo $row_cgcus['group_id'];?>" <?php   if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php   echo $row_cgcus['group_name'];?></option>
-                                      <?php  	
+                                        <option value="<?php     echo $row_cgcus['group_id'];?>" <?php     if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php     echo $row_cgcus['group_name'];?></option>
+                                      <?php    	
                                     }
                                 ?>
                             </select>
@@ -260,11 +260,11 @@ function check_select(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                         </table></td>
                       </tr>
@@ -280,7 +280,7 @@ function check_select(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-		<?php  
+		<?php    
 	}
 	if($_GET['act'] == 3){
 		?>
@@ -303,12 +303,12 @@ function check_select(frm){
                             <td nowrap class="name">ประเภทบริการ</td>
                             <td><select name="sr_ctype" id="sr_ctype">
                               <option value="">กรุณาเลือก</option>
-                              <?php   
+                              <?php     
                                     $qu_cusftype = @mysqli_query($conn,"SELECT * FROM s_group_service ORDER BY group_name ASC");
                                     while($row_cusftype = @mysqli_fetch_array($qu_cusftype)){
                                         ?>
-                              <option value="<?php   echo $row_cusftype['group_id'];?>" <?php   if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php   echo $row_cusftype['group_name'];?></option>
-                              <?php  
+                              <option value="<?php     echo $row_cusftype['group_id'];?>" <?php     if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php     echo $row_cusftype['group_name'];?></option>
+                              <?php    
                                     }
                                 ?>
                             </select></td>
@@ -318,12 +318,12 @@ function check_select(frm){
                             <td width="90%">
                             <select name="ctype" id="ctype" class="inputselect" >
                             	<option value="">กรุณาเลือก</option>
-								<?php  
+								<?php    
                                     $quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
                                     while($row_cgcus = @mysqli_fetch_array($quccustommer)){
                                       ?>
-                                        <option value="<?php   echo $row_cgcus['group_id'];?>" <?php   if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php   echo $row_cgcus['group_name'];?></option>
-                                      <?php  	
+                                        <option value="<?php     echo $row_cgcus['group_id'];?>" <?php     if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php     echo $row_cgcus['group_name'];?></option>
+                                      <?php    	
                                     }
                                 ?>
                             </select>
@@ -339,11 +339,11 @@ function check_select(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">&nbsp;</td>
@@ -363,7 +363,7 @@ function check_select(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-		<?php  
+		<?php    
 	}
 	if($_GET['act'] == 4){
 		?>
@@ -386,12 +386,12 @@ function check_select(frm){
                             <td width="10%" nowrap class="name">ประเภทลูกค้า</td>
                             <td width="90%">
                             <select name="ctype" id="ctype" class="inputselect" >
-								<?php  
+								<?php    
                                     $quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
                                     while($row_cgcus = @mysqli_fetch_array($quccustommer)){
                                       ?>
-                                        <option value="<?php   echo $row_cgcus['group_id'];?>" <?php   if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php   echo $row_cgcus['group_name'];?></option>
-                                      <?php  	
+                                        <option value="<?php     echo $row_cgcus['group_id'];?>" <?php     if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php     echo $row_cgcus['group_name'];?></option>
+                                      <?php    	
                                     }
                                 ?>
                             </select>
@@ -401,12 +401,12 @@ function check_select(frm){
                             <td nowrap class="name">ประเภทบริการ</td>
                             <td><select name="sr_ctype" id="sr_ctype">
                                 <option value="">กรุณาเลือก</option>
-                                <?php   
+                                <?php     
                                     $qu_cusftype = @mysqli_query($conn,"SELECT * FROM s_group_service ORDER BY group_name ASC");
                                     while($row_cusftype = @mysqli_fetch_array($qu_cusftype)){
                                         ?>
-                                        <option value="<?php   echo $row_cusftype['group_id'];?>" <?php   if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php   echo $row_cusftype['group_name'];?></option>
-                                        <?php  
+                                        <option value="<?php     echo $row_cusftype['group_id'];?>" <?php     if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php     echo $row_cusftype['group_name'];?></option>
+                                        <?php    
                                     }
                                 ?>
                             </select></td>
@@ -421,11 +421,11 @@ function check_select(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">&nbsp;</td>
@@ -445,7 +445,7 @@ function check_select(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-		<?php  
+		<?php    
 	}
 	if($_GET['act'] == 5){
 		?>
@@ -468,12 +468,12 @@ function check_select(frm){
                             <td nowrap class="name">ประเภทบริการ</td>
                             <td><select name="sr_ctype" id="sr_ctype">
                               <option value="">กรุณาเลือก</option>
-                              <?php   
+                              <?php     
                                     $qu_cusftype = @mysqli_query($conn,"SELECT * FROM s_group_service ORDER BY group_name ASC");
                                     while($row_cusftype = @mysqli_fetch_array($qu_cusftype)){
                                         ?>
-                              <option value="<?php   echo $row_cusftype['group_id'];?>" <?php   if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php   echo $row_cusftype['group_name'];?></option>
-                              <?php  
+                              <option value="<?php     echo $row_cusftype['group_id'];?>" <?php     if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php     echo $row_cusftype['group_name'];?></option>
+                              <?php    
                                     }
                                 ?>
                             </select></td>
@@ -483,12 +483,12 @@ function check_select(frm){
                             <td width="90%">
                             <select name="ctype" id="ctype" class="inputselect" >
                             	<option value="">กรุณาเลือก</option>
-								<?php  
+								<?php    
                                     $quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
                                     while($row_cgcus = @mysqli_fetch_array($quccustommer)){
                                       ?>
-                                        <option value="<?php   echo $row_cgcus['group_id'];?>" <?php   if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php   echo $row_cgcus['group_name'];?></option>
-                                      <?php  	
+                                        <option value="<?php     echo $row_cgcus['group_id'];?>" <?php     if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php     echo $row_cgcus['group_name'];?></option>
+                                      <?php    	
                                     }
                                 ?>
                             </select>
@@ -513,11 +513,11 @@ function check_select(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">&nbsp;</td>
@@ -537,7 +537,7 @@ function check_select(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-		<?php  
+		<?php    
 	}
 	if($_GET['act'] == 6){
 		?>
@@ -560,12 +560,12 @@ function check_select(frm){
                             <td nowrap class="name">เลือกอะไหล่</td>
                             <td><select name="cpro" id="cpro_ecip">
                             	<option value="">กรุณาเลือก</option>
-                              <?php  
+                              <?php    
                                   $qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
                                   while($row_qupro1 = @mysqli_fetch_array($qupro1)){
                                     ?>
-                                      <option value="<?php   echo $row_qupro1['group_id'];?>"><?php   echo $row_qupro1['group_name'];?></option>
-                                    <?php  	
+                                      <option value="<?php     echo $row_qupro1['group_id'];?>"><?php     echo $row_qupro1['group_name'];?></option>
+                                    <?php    	
                                   }
                               ?>
                           </select>                              <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search2.php?protype=cpro_ecip');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a></td>
@@ -579,12 +579,12 @@ function check_select(frm){
                             <td nowrap class="name">ประเภทบริการ</td>
                             <td><select name="sr_ctype" id="sr_ctype">
                               <option value="">กรุณาเลือก</option>
-                              <?php   
+                              <?php     
                                     $qu_cusftype = @mysqli_query($conn,"SELECT * FROM s_group_service ORDER BY group_name ASC");
                                     while($row_cusftype = @mysqli_fetch_array($qu_cusftype)){
                                         ?>
-                              <option value="<?php   echo $row_cusftype['group_id'];?>" <?php   if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php   echo $row_cusftype['group_name'];?></option>
-                              <?php  
+                              <option value="<?php     echo $row_cusftype['group_id'];?>" <?php     if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php     echo $row_cusftype['group_name'];?></option>
+                              <?php    
                                     }
                                 ?>
                             </select></td>
@@ -593,12 +593,12 @@ function check_select(frm){
                             <td nowrap class="name">ประเภทลูกค้า</td>
                             <td><select name="ctype2" id="ctype2" class="inputselect" >
                               <option value="">กรุณาเลือก</option>
-                              <?php  
+                              <?php    
                                     $quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
                                     while($row_cgcus = @mysqli_fetch_array($quccustommer)){
                                       ?>
-                              <option value="<?php   echo $row_cgcus['group_id'];?>" <?php   if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php   echo $row_cgcus['group_name'];?></option>
-                              <?php  	
+                              <option value="<?php     echo $row_cgcus['group_id'];?>" <?php     if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php     echo $row_cgcus['group_name'];?></option>
+                              <?php    	
                                     }
                                 ?>
                             </select></td>
@@ -613,11 +613,11 @@ function check_select(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">&nbsp;</td>
@@ -637,7 +637,7 @@ function check_select(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-		<?php  
+		<?php    
 	}
 	if($_GET['act'] == 7){
 		?>
@@ -660,14 +660,14 @@ function check_select(frm){
                             <td nowrap class="name">เลือกอาการเสีย</td>
                             <td><select name="sfix" id="sfix">
                             	<option value="">กรุณาเลือก</option>
-                                    <?php   
+                                    <?php     
 										$qu_fix = @mysqli_query($conn,"SELECT * FROM s_group_fix ORDER BY group_name ASC");
 										$numfix = @mysqli_num_rows($qu_fix);
 										$nd = 1;
 										while($row_fix = @mysqli_fetch_array($qu_fix)){
                                             ?>
-                                            <option value="<?php   echo $row_fix['group_id'];?>"><?php   echo $row_fix['group_name'];?></option>
-                                            <?php  
+                                            <option value="<?php     echo $row_fix['group_id'];?>"><?php     echo $row_fix['group_name'];?></option>
+                                            <?php    
                                         }
                                     ?>
                                 </select></td>
@@ -687,11 +687,11 @@ function check_select(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">&nbsp;</td>
@@ -711,7 +711,7 @@ function check_select(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-		<?php  
+		<?php    
 	}
 	if($_GET['act'] == 8){
 		?>
@@ -734,12 +734,12 @@ function check_select(frm){
                             <td nowrap class="name">ชื่อช่าง</td>
                             <td><select name="loc_contact" id="loc_contact">
                             	<!--<option value="">กรุณาเลือก</option>-->
-                                    <?php   
+                                    <?php     
                                         $qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_technician ORDER BY group_name ASC");
                                         while($row_custec = @mysqli_fetch_array($qu_custec)){
                                             ?>
-                                            <option value="<?php   echo $row_custec['group_id'];?>" <?php   if($row_custec['group_id'] == $loc_contact){echo 'selected';}?>><?php   echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
-                                            <?php  
+                                            <option value="<?php     echo $row_custec['group_id'];?>" <?php     if($row_custec['group_id'] == $loc_contact){echo 'selected';}?>><?php     echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
+                                            <?php    
                                         }
                                     ?>
                                 </select></td>
@@ -748,12 +748,12 @@ function check_select(frm){
                             <td nowrap class="name">ประเภทบริการ</td>
                             <td><select name="sr_ctype" id="sr_ctype">
                               <option value="">กรุณาเลือก</option>
-                              <?php   
+                              <?php     
                                     $qu_cusftype = @mysqli_query($conn,"SELECT * FROM s_group_service ORDER BY group_name ASC");
                                     while($row_cusftype = @mysqli_fetch_array($qu_cusftype)){
                                         ?>
-                              <option value="<?php   echo $row_cusftype['group_id'];?>" <?php   if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php   echo $row_cusftype['group_name'];?></option>
-                              <?php  
+                              <option value="<?php     echo $row_cusftype['group_id'];?>" <?php     if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php     echo $row_cusftype['group_name'];?></option>
+                              <?php    
                                     }
                                 ?>
                             </select></td>
@@ -762,12 +762,12 @@ function check_select(frm){
                             <td nowrap class="name">ประเภทลูกค้า</td>
                             <td><select name="ctype2" id="ctype2" class="inputselect" >
                               <option value="">กรุณาเลือก</option>
-                              <?php  
+                              <?php    
                                     $quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
                                     while($row_cgcus = @mysqli_fetch_array($quccustommer)){
                                       ?>
-                              <option value="<?php   echo $row_cgcus['group_id'];?>" <?php   if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php   echo $row_cgcus['group_name'];?></option>
-                              <?php  	
+                              <option value="<?php     echo $row_cgcus['group_id'];?>" <?php     if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php     echo $row_cgcus['group_name'];?></option>
+                              <?php    	
                                     }
                                 ?>
                             </select></td>
@@ -785,12 +785,12 @@ function check_select(frm){
                             <td>
                             	<select id="cpro_ecip" name="cpro">
                                 <option value="">กรุณาเลือกรายการ</option>
-                                	 <?php   
+                                	 <?php     
                                     $qu_sparpart = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
                                     while($row_sparpart = @mysqli_fetch_array($qu_sparpart)){
                                         ?>
-                                        <option value="<?php   echo $row_sparpart['group_id'];?>"><?php   echo $row_sparpart['group_name'];?></option>
-                                     <?php  
+                                        <option value="<?php     echo $row_sparpart['group_id'];?>"><?php     echo $row_sparpart['group_name'];?></option>
+                                     <?php    
                                     }
                                 ?>
                                     
@@ -807,11 +807,11 @@ function check_select(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                         </table></td>
                       </tr>
@@ -827,7 +827,7 @@ function check_select(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-		<?php  
+		<?php    
 	}
 	if($_GET['act'] == 9){
 		?>
@@ -850,12 +850,12 @@ function check_select(frm){
                             <td width="10%" nowrap class="name">จังหวัด</td>
                             <td width="90%">
                             <select name="cd_province" id="cd_province" class="inputselect">
-							<?php  
+							<?php    
                                 $quprovince = @mysqli_query($conn,"SELECT * FROM s_province ORDER BY province_id ASC");
                                 while($row_province = @mysqli_fetch_array($quprovince)){
                                   ?>
-                                    <option value="<?php   echo $row_province['province_id'];?>" <?php   if($cd_province == $row_province['province_id']){echo 'selected';}?>><?php   echo $row_province['province_name'];?></option>
-                                  <?php  	
+                                    <option value="<?php     echo $row_province['province_id'];?>" <?php     if($cd_province == $row_province['province_id']){echo 'selected';}?>><?php     echo $row_province['province_name'];?></option>
+                                  <?php    	
                                 }
                             ?>
                         </select>
@@ -865,12 +865,12 @@ function check_select(frm){
                             <td nowrap class="name">ประเภทบริการ</td>
                             <td><select name="sr_ctype" id="sr_ctype">
                                 <option value="">กรุณาเลือก</option>
-                                <?php   
+                                <?php     
                                     $qu_cusftype = @mysqli_query($conn,"SELECT * FROM s_group_service ORDER BY group_name ASC");
                                     while($row_cusftype = @mysqli_fetch_array($qu_cusftype)){
                                         ?>
-                                        <option value="<?php   echo $row_cusftype['group_id'];?>" <?php   if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php   echo $row_cusftype['group_name'];?></option>
-                                        <?php  
+                                        <option value="<?php     echo $row_cusftype['group_id'];?>" <?php     if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php     echo $row_cusftype['group_name'];?></option>
+                                        <?php    
                                     }
                                 ?>
                             </select></td>
@@ -885,11 +885,11 @@ function check_select(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                         </table></td>
                       </tr>
@@ -905,7 +905,7 @@ function check_select(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-		<?php  
+		<?php    
 	}
 	if($_GET['act'] == 10){
 		?>
@@ -933,12 +933,12 @@ function check_select(frm){
                             <td nowrap class="name">ประเภทบริการ</td>
                             <td><select name="sr_ctype" id="sr_ctype">
                               <option value="">กรุณาเลือก</option>
-                              <?php   
+                              <?php     
                                     $qu_cusftype = @mysqli_query($conn,"SELECT * FROM s_group_service ORDER BY group_name ASC");
                                     while($row_cusftype = @mysqli_fetch_array($qu_cusftype)){
                                         ?>
-                              <option value="<?php   echo $row_cusftype['group_id'];?>" <?php   if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php   echo $row_cusftype['group_name'];?></option>
-                              <?php  
+                              <option value="<?php     echo $row_cusftype['group_id'];?>" <?php     if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php     echo $row_cusftype['group_name'];?></option>
+                              <?php    
                                     }
                                 ?>
                               </select></td>
@@ -953,11 +953,11 @@ function check_select(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">&nbsp;</td>
@@ -977,7 +977,7 @@ function check_select(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-		<?php  
+		<?php    
 	}
 ?>
 
@@ -989,7 +989,7 @@ function check_select(frm){
 <DIV class=clear></DIV><!-- Start Notifications -->
 <!-- End Notifications -->
 
-<?php   include("../footer.php");?>
+<?php     include("../footer.php");?>
 </DIV><!-- End #main-content -->
 </DIV>
 </BODY>

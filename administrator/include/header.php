@@ -1,4 +1,4 @@
- <?php  
+ <?php    
  	$sql = "select show_status from b_banner_config where page_name_en='".$pages_config_banner."' ";
 	$query = @mysqli_query($conn,$sql);
 	$rec_config = @mysqli_fetch_array($query);
@@ -7,7 +7,7 @@
 	if($show_status==0){
  ?>
 <script type="text/javascript" src="/Scripts/AC_RunActiveContent.js"></script>
-<?php  
+<?php    
 	$sql_banner = " select * from b_banner where status=0 ";
 	$query_banner = @mysqli_query($conn,$sql_banner);
 	$rec_banner = @mysqli_fetch_array ($query_banner);
@@ -26,34 +26,34 @@
 		if($rec_banner['link_description']!=""){
 ?>
 
-<a href="<?php   echo $_SERVER['SERVER_NAME']?>details.php?desc_id=<?php   echo $rec_banner['banner_id']?>" target="_blank">
-<img src="<?php   echo $path_img;?>" width="880" height="126" border="0" />
+<a href="<?php     echo $_SERVER['SERVER_NAME']?>details.php?desc_id=<?php     echo $rec_banner['banner_id']?>" target="_blank">
+<img src="<?php     echo $path_img;?>" width="880" height="126" border="0" />
 </a>
-<?php   
+<?php     
 	}else{// link_description
 		
 ?>
-<a href="http://<?php   echo $rec_banner['link_url']?>" target="_blank">
-<img src="<?php   echo $path_img;?>" width="880" height="126" border="0" />
+<a href="http://<?php     echo $rec_banner['link_url']?>" target="_blank">
+<img src="<?php     echo $path_img;?>" width="880" height="126" border="0" />
 </a>
 
 
-<?php  	
+<?php    	
 	} // end if link_description
 	}else{ 
 	
 	?>
-<img src="<?php   echo $path_img;?>" width="880" height="126" border="0" />
-    <?php  
+<img src="<?php     echo $path_img;?>" width="880" height="126" border="0" />
+    <?php    
 	} //end if check link
   }
 }
 ?>
-<?php   } //end if show_status?>
+<?php     } //end if show_status?>
 
 
 
-<?php  
+<?php    
 	$sql_background = " select * from b_background where status=0 ";
 	$query_background = @mysqli_query($conn,$sql_background);
 	$rec_background = @mysqli_fetch_array ($query_background);
@@ -72,13 +72,13 @@
 body {
                 font-family: Arial, Helvetica, sans-serif;
                 color: #555;
-                background: #4aaaee url('<?php   echo $path_img;?>') top no-repeat <?php   echo $fixed;?>;
+                background: #4aaaee url('<?php     echo $path_img;?>') top no-repeat <?php     echo $fixed;?>;
                 font-size: 12px;
 				margin:0; padding:0;
       }	
-#body_bg{background: #48a9ed url(../images/body_bg.jpg) repeat-y top; width:902px; float:none; margin:auto; margin-top:<?php   echo $margin_top;?>px;}  
+#body_bg{background: #48a9ed url(../images/body_bg.jpg) repeat-y top; width:902px; float:none; margin:auto; margin-top:<?php     echo $margin_top;?>px;}  
 </style>
-<?php   }else{?>
+<?php     }else{?>
 <style type="text/css">
 body {
                 font-family: Arial, Helvetica, sans-serif;
@@ -89,4 +89,4 @@ body {
      }
 #body_bg{background: #48a9ed url(../images/body_bg.jpg) repeat-y top; width:902px; float:none; margin:auto; margin-top:165px;}
 </style>
-<?php   }?>
+<?php     }?>

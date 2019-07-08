@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	$PK_field = "id";
 	//$FR_field = "";
 	$check_module = "Setting";

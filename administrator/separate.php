@@ -1,4 +1,4 @@
-<?php   
+<?php     
 	include ("../include/config.php");
 	include ("../include/connect.php");
 	include ("../include/function.php");
@@ -12,7 +12,7 @@
 
 <body>
 
-<?php   
+<?php     
 	$qu_fq = @mysqli_query($conn,"SELECT * FROM s_first_order ORDER BY fo_id DESC");
 	while($row_fq = mysqli_fetch_array($qu_fq)){
 		if(substr($row_fq['fs_id'],0,2) == "SV"){

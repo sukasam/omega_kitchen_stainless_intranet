@@ -1,4 +1,4 @@
-<?php   session_start();
+<?php     session_start();
 	
 	$file_ADODB="adodb/adodb.inc.php";
 	if (file_exists($file_ADODB))

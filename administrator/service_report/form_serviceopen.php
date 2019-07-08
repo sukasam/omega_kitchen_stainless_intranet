@@ -5,7 +5,7 @@
 	overflow:hidden;
 }
 </style>
-<?php  
+<?php    
 	
 	
 	$finfos = get_firstorder($conn,$_POST['cus_id']);

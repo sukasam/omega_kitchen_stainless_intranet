@@ -351,7 +351,7 @@
 </cfif>
 
 <cfscript>
-	xmlHeader = '<?xml version="1.0" encoding="utf-8" ?><Connector command="#url.command#" resourceType="#url.type#">';
+	xmlHeader = '<?php xml version="1.0" encoding="utf-8" ?><Connector command="#url.command#" resourceType="#url.type#">';
 	xmlHeader = xmlHeader & '<CurrentFolder path="#url.currentFolder#" url="#userFilesPath##url.type##url.currentFolder#" />';
 	xmlFooter = '</Connector>';
 </cfscript>

@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	$query = @mysqli_query($conn,$sql);
 	$all_row = @mysqli_num_rows($query);
 // ######### �Ҩӹǹ˹�ҷ����� #########

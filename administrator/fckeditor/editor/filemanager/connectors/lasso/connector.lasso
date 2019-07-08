@@ -309,7 +309,7 @@ Content-Type: text/xml; charset=utf-8
 			Wrap the response as XML and output.
 		*/
 		$__html_reply__ = '\
-<?xml version="1.0" encoding="utf-8" ?>
+<?php xml version="1.0" encoding="utf-8" ?>
 <Connector command="' + $Command + '" resourceType="' + $Type + '">';
 
 		if($errorNumber != '102');

@@ -1,4 +1,4 @@
-<?php
+<?php  
 
 /* This script prints out the Unicode coverage of all TrueType font files
    in your font directory. 

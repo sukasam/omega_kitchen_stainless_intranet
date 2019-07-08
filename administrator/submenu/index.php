@@ -1,4 +1,4 @@
-<?
+<?php 
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -49,7 +49,7 @@
 
 				$pre_rank = $rec["rank"]; 
 
-				$pre_gallery_id = $rec["$PK_field"]; 
+				$pre_gallery_id = $rec[$PK_field]; 
 
 			}
 
@@ -79,7 +79,7 @@
 
 <HEAD>
 
-<TITLE><? echo $s_title;?></TITLE>
+<TITLE><?php   echo $s_title;?></TITLE>
 
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 
@@ -129,13 +129,13 @@ function check_select(frm){
 
 </HEAD>
 
-<? include ("../../include/function_script.php"); ?>
+<?php  include ("../../include/function_script.php"); ?>
 
 <BODY>
 
 <DIV id=body-wrapper>
 
-<? include("../left.php");?>
+<?php  include("../left.php");?>
 
 <DIV id=main-content>
 
@@ -143,19 +143,19 @@ function check_select(frm){
 
 </NOSCRIPT>
 
-<? include('../top.php');?>
+<?php  include('../top.php');?>
 
-<P id=page-intro><? echo $page_name; ?></P>
+<P id=page-intro><?php   echo $page_name; ?></P>
 
 
 
 <UL class=shortcut-buttons-set>
 
-  <LI><A class=shortcut-button href="update.php?mode=add<? if ($param <> "") echo "&".$param; ?>"><SPAN><IMG src="../images/pencil_48.png"  alt=icon width="32"><BR>
+  <LI><A class=shortcut-button href="update.php?mode=add<?php  if ($param <> "") echo "&".$param; ?>"><SPAN><IMG src="../images/pencil_48.png"  alt=icon width="32"><BR>
 
     เพิ่ม</SPAN></A></LI>
 
-    <? 
+    <?php  
 
 	if ($FR_module <> "") { 
 
@@ -163,10 +163,10 @@ function check_select(frm){
 
 	?>
 
-  <LI><A class=shortcut-button href="../<? echo $FR_module; ?>/?<? if($param2 <> "") echo $param2;?>"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>
+  <LI><A class=shortcut-button href="../<?php   echo $FR_module; ?>/?<?php  if($param2 <> "") echo $param2;?>"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>
   กลับ</SPAN></A></LI>
 
-  <? }?> 
+  <?php  }?> 
 
 </UL>
 
@@ -182,15 +182,15 @@ function check_select(frm){
 
 
 
-<H3 align="left"><? echo $check_module; ?></H3>
+<H3 align="left"><?php   echo $check_module; ?></H3>
 
 <br><form name="form1" method="get" action="index.php">
 
-    <input name="keyword" type="text" id="keyword" value="<? echo $keyword;?>">
+    <input name="keyword" type="text" id="keyword" value="<?php   echo $keyword;?>">
 
     <input name="Action" type="submit" id="Action" value="Search">
 
-    <?
+    <?php 
 
 			$a_not_exists = array('keyword');
 
@@ -198,9 +198,9 @@ function check_select(frm){
 
 			  ?>
 
-    <a href="index.php?<? echo $param2;?>">Show All</a>
+    <a href="index.php?<?php   echo $param2;?>">Show All</a>
 
-    <? 
+    <?php  
 
 			$a_not_exists = array();
 
@@ -230,7 +230,7 @@ function check_select(frm){
 
           <TH width="0%"><INPUT class=check-all type=checkbox name="ca" value="true" onClick="chkAll(this.form, 'del[]', this.checked)"></TH>
 
-          <TH width="0%" <? Show_Sort_bg ($PK_field, $orderby) ?>> <?
+          <TH width="0%" <?php  Show_Sort_bg ($PK_field, $orderby) ?>> <?php 
 
 		$a_not_exists = array('orderby','sortby');
 
@@ -238,19 +238,19 @@ function check_select(frm){
 
 	?>
 
-            <?  Show_Sort_new ($PK_field, "No.", $orderby, $sortby,$page,$param2);?>
+            <?php   Show_Sort_new ($PK_field, "No.", $orderby, $sortby,$page,$param2);?>
 
             &nbsp;</TH>
 
-          <TH width="40%" <? Show_Sort_bg ("submenu_name", $orderby) ?>>
+          <TH width="40%" <?php  Show_Sort_bg ("submenu_name", $orderby) ?>>
 
-           <?  Show_Sort_new ("submenu_name", "Menu Name", $orderby, $sortby,$page,$param2);  ?>
+           <?php   Show_Sort_new ("submenu_name", "Menu Name", $orderby, $sortby,$page,$param2);  ?>
 
             &nbsp;</TH>
 
-          <TH width="40%" <? Show_Sort_bg ("submenu_url_link", $orderby) ?>>
+          <TH width="40%" <?php  Show_Sort_bg ("submenu_url_link", $orderby) ?>>
 
-           <?  Show_Sort_new ("submenu_url_link", "URL link", $orderby, $sortby,$page,$param2);?>
+           <?php   Show_Sort_new ("submenu_url_link", "URL link", $orderby, $sortby,$page,$param2);?>
 
   &nbsp;</TH>
 
@@ -270,7 +270,7 @@ function check_select(frm){
 
       <TBODY>
 
-        <? 
+        <?php  
 
 					if($_REQUEST[orderby]==""){$orderby = $tbl_name.".rank";}else{$orderby=$_REQUEST[orderby];}
 
@@ -284,9 +284,9 @@ function check_select(frm){
 
 					if ($_GET[$FR_field] <> "") $sql .= " and ($FR_field  = '" . $_GET[$FR_field] . " ' ) ";					
 
- 					if ($_GET[keyword] <> "") { 
+ 					if ($_GET["keyword"] <> "") { 
 
-						$sql .= "and ( " .  $PK_field  . " like '%$_GET[keyword]%' ";
+						$sql .= "and ( " .  $PK_field  . " like '%".$_GET["keyword"]."%' ";
 
 						if (count ($search_key) > 0) { 
 
@@ -294,7 +294,7 @@ function check_select(frm){
 
 							foreach ($search_key as $key=>$value) { 
 
-									$subtext .= "or " . $value  . " like '%" . $_GET[keyword] . "%'";
+									$subtext .= "or " . $value  . " like '%" . $_GET["keyword"] . "%'";
 
 							}	
 
@@ -328,25 +328,25 @@ function check_select(frm){
 
         <TR>
 
-          <TD><INPUT type=checkbox name="del[]" value="<? echo $rec[$PK_field]; ?>" ></TD>
+          <TD><INPUT type=checkbox name="del[]" value="<?php   echo $rec[$PK_field]; ?>" ></TD>
 
-          <TD><span class="text"><? echo $counter ; ?></span></TD>
+          <TD><span class="text"><?php   echo $counter ; ?></span></TD>
 
-          <TD><span class="text"><? echo $rec["submenu_name"] ; ?></span></TD>
+          <TD><span class="text"><?php   echo $rec["submenu_name"] ; ?></span></TD>
 
-          <TD><span class="text"><? echo $rec["submenu_url_link"] ; ?></span></TD>
+          <TD><span class="text"><?php   echo $rec["submenu_url_link"] ; ?></span></TD>
 
-          <TD align="center" nowrap><a href="?m=0&id=<? echo $rec[$PK_field]; if($param <> "") {?>&<? echo $param; }?>&<? echo $FR_field; ?>=<? echo $_REQUEST["$FR_field"];?>&orderby=rank&sortby=asc">UP</a> | <a href="?m=1&id=<? echo $rec[$PK_field]; if($param <> "") {?>&<? echo $param; }?>&<? echo $FR_field; ?>=<? echo $_REQUEST["$FR_field"];?>&orderby=rank&sortby=asc">DOWN</a></TD>
+          <TD align="center" nowrap><a href="?m=0&id=<?php   echo $rec[$PK_field]; if($param <> "") {?>&<?php   echo $param; }?>&<?php   echo $FR_field; ?>=<?php   echo $_REQUEST["$FR_field"];?>&orderby=rank&sortby=asc">UP</a> | <a href="?m=1&id=<?php   echo $rec[$PK_field]; if($param <> "") {?>&<?php   echo $param; }?>&<?php   echo $FR_field; ?>=<?php   echo $_REQUEST["$FR_field"];?>&orderby=rank&sortby=asc">DOWN</a></TD>
 
           <TD><!-- Icons -->
 
-            <A title=Edit href="update.php?mode=update&<? echo $PK_field; ?>=<? echo $rec["$PK_field"]; if($param <> "") {?>&<? echo $param; }?>"><IMG alt=Edit src="../images/pencil.png"></A> <A title=Delete  href="#"></A></TD>
+            <A title=Edit href="update.php?mode=update&<?php   echo $PK_field; ?>=<?php   echo $rec[$PK_field]; if($param <> "") {?>&<?php   echo $param; }?>"><IMG alt=Edit src="../images/pencil.png"></A> <A title=Delete  href="#"></A></TD>
 
-          <TD><A title=Delete  href="#"><IMG alt=Delete src="../images/cross.png" onClick="confirmDelete('?action=delete&<? echo $PK_field; ?>=<? echo $rec[$PK_field];?>&<? echo $FR_field; ?>=<? echo $rec[$FR_field];?>','<? echo $title_del;?>  <? echo $rec[$PK_field];?> : <? echo $rec[$title_del_name];?>')"></A></TD>
+          <TD><A title=Delete  href="#"><IMG alt=Delete src="../images/cross.png" onClick="confirmDelete('?action=delete&<?php   echo $PK_field; ?>=<?php   echo $rec[$PK_field];?>&<?php   echo $FR_field; ?>=<?php   echo $rec[$FR_field];?>','<?php   echo $title_del;?>  <?php   echo $rec[$PK_field];?> : <?php   echo $rec[$title_del_name];?>')"></A></TD>
 
         </TR>  
 
-		<? }?>
+		<?php  }?>
 
       </TBODY>
 
@@ -364,7 +364,7 @@ function check_select(frm){
 
             </SELECT>            
 
-            <?
+            <?php 
 
 				$a_not_exists = array();
 
@@ -374,7 +374,7 @@ function check_select(frm){
 
             <input class=button name="Action2" type="submit" id="Action2" value="Apply to selected">
 
-          </DIV> <DIV class=pagination> <? include("../include/page_show.php");?> </DIV>
+          </DIV> <DIV class=pagination> <?php  include("../include/page_show.php");?> </DIV>
 
   </form>  
 
@@ -398,7 +398,7 @@ function check_select(frm){
 
 
 
-<? include("../footer.php");?>
+<?php  include("../footer.php");?>
 
 </DIV><!-- End #main-content -->
 

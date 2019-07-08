@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -38,7 +38,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><?php   echo $s_title;?></TITLE>
+<TITLE><?php     echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -83,15 +83,15 @@ function check9(frm){
 </script>
 <link href="../../SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css">
 </HEAD>
-<?php   include ("../../include/function_script.php"); ?>
+<?php     include ("../../include/function_script.php"); ?>
 <BODY>
 <DIV id=body-wrapper>
-<?php   include("../left.php");?>
+<?php     include("../left.php");?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<?php   include('../top.php');?>
-<P id=page-intro><?php   echo $page_name; ?></P>
+<?php     include('../top.php');?>
+<P id=page-intro><?php     echo $page_name; ?></P>
 
 <UL class=shortcut-buttons-set>
   <LI><A class=shortcut-button href="../report/?mid=16"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
@@ -105,7 +105,7 @@ function check9(frm){
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right" style="padding-right:15px;">
 
-<H3 align="left"><?php   echo $page_name; ?></H3>
+<H3 align="left"><?php     echo $page_name; ?></H3>
 <DIV class=clear>
 
 </DIV></DIV><!-- End .content-box-header -->
@@ -144,7 +144,7 @@ function check9(frm){
 </DIV><!-- End .content-box-content -->
 </DIV>
 
-<?php   
+<?php     
 	if($_GET['act'] == 1){
 			?>
 			<DIV class=content-box><!-- Start Content Box -->
@@ -191,11 +191,11 @@ function check9(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">รายการแสดง</td>
@@ -236,11 +236,11 @@ function check9(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-			<?php  
+			<?php    
 	}
 ?>
 
-<?php   
+<?php     
 	if($_GET['act'] == 2){
 			?>
 			<DIV class=content-box><!-- Start Content Box -->
@@ -262,12 +262,12 @@ function check9(frm){
                             <td width="10%" nowrap class="name">จังหวัด</td>
                             <td width="90%">
                             <select name="cd_province" id="cd_province" class="inputselect">
-							<?php  
+							<?php    
                                 $quprovince = @mysqli_query($conn,"SELECT * FROM s_province ORDER BY province_id ASC");
                                 while($row_province = @@mysqli_fetch_array($quprovince)){
                                   ?>
-                                    <option value="<?php   echo $row_province['province_id'];?>" <?php   if($cd_province == $row_province['province_id']){echo 'selected';}?>><?php   echo $row_province['province_name'];?></option>
-                                  <?php  	
+                                    <option value="<?php     echo $row_province['province_id'];?>" <?php     if($cd_province == $row_province['province_id']){echo 'selected';}?>><?php     echo $row_province['province_name'];?></option>
+                                  <?php    	
                                 }
                             ?>
                         </select>
@@ -283,11 +283,11 @@ function check9(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">รายการแสดง</td>
@@ -328,11 +328,11 @@ function check9(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-			<?php  
+			<?php    
 	}
 ?>
 
-<?php   
+<?php     
 	if($_GET['act'] == 3){
 			?>
 			<DIV class=content-box><!-- Start Content Box -->
@@ -354,12 +354,12 @@ function check9(frm){
                             <td width="10%" nowrap class="name">กลุ่มลูกค้า</td>
                             <td width="90%">
                             <select name="cg_type" id="cg_type" class="inputselect">
-								<?php  
+								<?php    
                                     $qucgtype = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
                                     while($row_cgtype = @@mysqli_fetch_array($qucgtype)){
                                       ?>
-                                        <option value="<?php   echo $row_cgtype['group_id'];?>" <?php   if($cg_type == $row_cgtype['group_id']){echo 'selected';}?>><?php   echo $row_cgtype['group_name'];?></option>
-                                      <?php  	
+                                        <option value="<?php     echo $row_cgtype['group_id'];?>" <?php     if($cg_type == $row_cgtype['group_id']){echo 'selected';}?>><?php     echo $row_cgtype['group_name'];?></option>
+                                      <?php    	
                                     }
                                 ?>
                             </select>
@@ -369,13 +369,13 @@ function check9(frm){
                             <td nowrap class="name">ประเภทลูกค้า</td>
                             <td><select name="ctype" id="ctype" class="inputselect">
                             	<option value="">เลือกประเภทลูกค้า</option>
-                              <?php  
+                              <?php    
                                     $quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
                                     while($row_cgcus = @@mysqli_fetch_array($quccustommer)){
                                      if(substr($row_cgcus['group_name'],0,2) != "SR"){
 										?>
-                              <option value="<?php   echo $row_cgcus['group_id'];?>" <?php   if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php   echo $row_cgcus['group_name'];?></option>
-                              <?php  		 
+                              <option value="<?php     echo $row_cgcus['group_id'];?>" <?php     if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php     echo $row_cgcus['group_name'];?></option>
+                              <?php    		 
 									 }
                                     }
                                 ?>
@@ -385,12 +385,12 @@ function check9(frm){
                             <td nowrap class="name">รุ่นเครื่อง</td>
                             <td><select name="pro_pod" id="pro_pod" class="inputselect" style="width:250px;">
                               <option value="">กรุณาเลือกรายการ</option>
-                              <?php  
+                              <?php    
                                           $qupros1 = @mysqli_query($conn,"SELECT * FROM s_group_pod ORDER BY group_name ASC");
                                           while($row_qupros1 = @@mysqli_fetch_array($qupros1)){
                                             ?>
-                              <option value="<?php   echo $row_qupros1['group_name'];?>"><?php   echo $row_qupros1['group_name'];?></option>
-                              <?php  	
+                              <option value="<?php     echo $row_qupros1['group_name'];?>"><?php     echo $row_qupros1['group_name'];?></option>
+                              <?php    	
                                           }
                                       ?>
                             </select>
@@ -406,11 +406,11 @@ function check9(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">รายการแสดง</td>
@@ -448,11 +448,11 @@ function check9(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-			<?php  
+			<?php    
 	}
 ?>
 
-<?php   
+<?php     
 	if($_GET['act'] == 4){
 			?>
 			<DIV class=content-box><!-- Start Content Box -->
@@ -474,12 +474,12 @@ function check9(frm){
                             <td width="10%" nowrap class="name">รายการสินค้า</td>
                             <td width="90%">
                             <select name="cpro" id="cpro" class="inputselect" style="width:450px;">
-                                  <?php  
+                                  <?php    
                                       $qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_typeproduct ORDER BY group_name ASC");
                                       while($row_qupro1 = @@mysqli_fetch_array($qupro1)){
                                         ?>
-                                          <option value="<?php   echo $row_qupro1['group_id'];?>" <?php   if($cpro1 == $row_qupro1['group_id']){echo 'selected';}?>><?php   echo $row_qupro1['group_name'];?></option>
-                                        <?php  	
+                                          <option value="<?php     echo $row_qupro1['group_id'];?>" <?php     if($cpro1 == $row_qupro1['group_id']){echo 'selected';}?>><?php     echo $row_qupro1['group_name'];?></option>
+                                        <?php    	
                                       }
                                   ?>
                               </select>
@@ -495,11 +495,11 @@ function check9(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">รายการแสดง</td>
@@ -540,11 +540,11 @@ function check9(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-			<?php  
+			<?php    
 	}
 ?>
 
-<?php   
+<?php     
 	if($_GET['act'] == 5){
 			?>
 			<DIV class=content-box><!-- Start Content Box -->
@@ -566,12 +566,12 @@ function check9(frm){
                             <td width="10%" nowrap class="name">รุ่นเครื่อง</td>
                             <td width="90%"><select name="pro_pod" id="pro_pod" class="inputselect" style="width:250px;">
                                         <option value="">กรุณาเลือกรายการ</option>
-                                      <?php  
+                                      <?php    
                                           $qupros1 = @mysqli_query($conn,"SELECT * FROM s_group_pod ORDER BY group_name ASC");
                                           while($row_qupros1 = @@mysqli_fetch_array($qupros1)){
                                             ?>
-                                              <option value="<?php   echo $row_qupros1['group_name'];?>"><?php   echo $row_qupros1['group_name'];?></option>
-                                            <?php  	
+                                              <option value="<?php     echo $row_qupros1['group_name'];?>"><?php     echo $row_qupros1['group_name'];?></option>
+                                            <?php    	
                                           }
                                       ?>
                                   </select><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search_pod.php?protype=pro_pod');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a></td>
@@ -586,11 +586,11 @@ function check9(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">รายการแสดง</td>
@@ -629,11 +629,11 @@ function check9(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-			<?php  
+			<?php    
 	}
 ?>
 
-<?php   
+<?php     
 	if($_GET['act'] == 6){
 			?>
 			<DIV class=content-box><!-- Start Content Box -->
@@ -655,13 +655,13 @@ function check9(frm){
                             <td width="10%" nowrap class="name">ประเภทลูกค้า</td>
                             <td width="90%">
                             <select name="ctype" id="ctype" class="inputselect">
-								<?php  
+								<?php    
                                     $quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
                                     while($row_cgcus = @@mysqli_fetch_array($quccustommer)){
                                      if(substr($row_cgcus['group_name'],0,2) != "SR"){
 										?>
-                                        <option value="<?php   echo $row_cgcus['group_id'];?>" <?php   if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php   echo $row_cgcus['group_name'];?></option>
-                                       <?php  		 
+                                        <option value="<?php     echo $row_cgcus['group_id'];?>" <?php     if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php     echo $row_cgcus['group_name'];?></option>
+                                       <?php    		 
 									 }
                                     }
                                 ?>
@@ -678,11 +678,11 @@ function check9(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">รายการแสดง</td>
@@ -724,19 +724,19 @@ function check9(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-			<?php  
+			<?php    
 	}
 ?>
 
-<?php   
+<?php     
 	if($_GET['act'] == 7){
 			?>
 			<DIV class=content-box><!-- Start Content Box --><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></DIV>
-			<?php  
+			<?php    
 	}
 ?>
 
-<?php   
+<?php     
 	if($_GET['act'] == 8){
 			?>
 			<DIV class=content-box><!-- Start Content Box -->
@@ -768,11 +768,11 @@ function check9(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">&nbsp;</td>
@@ -792,11 +792,11 @@ function check9(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-			<?php  
+			<?php    
 	}
 ?>
 
-<?php   
+<?php     
 	if($_GET['act'] == 9){
 			?>
 			<DIV class=content-box><!-- Start Content Box -->
@@ -818,12 +818,12 @@ function check9(frm){
                             <td width="10%" nowrap class="name">ชื่อผู้ขาย</td>
                             <td width="90%">
                             <select name="cs_sell" id="cs_sell" class="inputselect" style="width:250px;">
-							<?php  
+							<?php    
                                 $qusaletype = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
                                 while($row_saletype = @@mysqli_fetch_array($qusaletype)){
                                   ?>
-                                    <option value="<?php   echo $row_saletype['group_id'];?>"><?php   echo $row_saletype['group_name'];?></option>
-                                  <?php  	
+                                    <option value="<?php     echo $row_saletype['group_id'];?>"><?php     echo $row_saletype['group_name'];?></option>
+                                  <?php    	
 									}
 								?>
 							</select>
@@ -839,11 +839,11 @@ function check9(frm){
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">รายการแสดง</td>
@@ -882,7 +882,7 @@ function check9(frm){
             </DIV><!-- End #tab1 -->
             </DIV><!-- End .content-box-content -->
             </DIV>
-			<?php  
+			<?php    
 	}
 	
 	if($_GET['act'] == 10){
@@ -927,7 +927,7 @@ function check9(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-			<?php  
+			<?php    
 	}
 	
 	if($_GET['act'] == 12){
@@ -962,12 +962,12 @@ function check9(frm){
                             <td width="90%">
                             <select name="cg_type" id="cg_type" class="inputselect">
                             <option value="">เลือกกลุ่มลูกค้า</option>
-								<?php  
+								<?php    
                                     $qucgtype = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
                                     while($row_cgtype = @@mysqli_fetch_array($qucgtype)){
                                       ?>
-                                        <option value="<?php   echo $row_cgtype['group_id'];?>" <?php   if($cg_type == $row_cgtype['group_id']){echo 'selected';}?>><?php   echo $row_cgtype['group_name'];?></option>
-                                      <?php  	
+                                        <option value="<?php     echo $row_cgtype['group_id'];?>" <?php     if($cg_type == $row_cgtype['group_id']){echo 'selected';}?>><?php     echo $row_cgtype['group_name'];?></option>
+                                      <?php    	
                                     }
                                 ?>
                             </select>
@@ -977,13 +977,13 @@ function check9(frm){
                             <td nowrap class="name">ประเภทลูกค้า</td>
                             <td><select name="ctype" id="ctype" class="inputselect">
                             	<option value="">เลือกประเภทลูกค้า</option>
-                              <?php  
+                              <?php    
                                     $quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
                                     while($row_cgcus = @@mysqli_fetch_array($quccustommer)){
                                      if(substr($row_cgcus['group_name'],0,2) != "SR"){
 										?>
-                              <option value="<?php   echo $row_cgcus['group_id'];?>" <?php   if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php   echo $row_cgcus['group_name'];?></option>
-                              <?php  		 
+                              <option value="<?php     echo $row_cgcus['group_id'];?>" <?php     if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php     echo $row_cgcus['group_name'];?></option>
+                              <?php    		 
 									 }
                                     }
                                 ?>
@@ -1002,11 +1002,11 @@ function check9(frm){
                           
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">รายการแสดง</td>
@@ -1051,7 +1051,7 @@ function check9(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-			<?php  
+			<?php    
 		
 	}
 
@@ -1074,13 +1074,13 @@ function check9(frm){
                         <td><table class="formFields" cellspacing="0" width="100%">
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่
-                               <input type="text" name="date_fm" readonly value="<?php   if($_GET['df'] != ""){list ($s_year, $s_month, $s_day) = split ("-", $_GET['df']);echo $s_day."/".$s_month."/".$s_year;}else{echo date("d/m/Y");}?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script>
+                               <input type="text" name="date_fm" readonly value="<?php     if($_GET['df'] != ""){list ($s_year, $s_month, $s_day) = split("-", $_GET['df']);echo $s_day."/".$s_month."/".$s_year;}else{echo date("d/m/Y");}?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script>
                                &nbsp;&nbsp; ถึงวันที่ 
-                              <input type="text" name="date_to" readonly value="<?php   echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                              <input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                             <td width="90%"><span class="name">
-                              <input name="priod" type="radio" value="0" <?php   if($_GET['poi']== 0){echo 'checked';}?>>
+                              <input name="priod" type="radio" value="0" <?php     if($_GET['poi']== 0){echo 'checked';}?>>
                               กำหนดช่วงเวลา&nbsp;
-                              <input name="priod" type="radio" value="1" <?php   if($_GET['poi'] == 1){echo 'checked';}?>>
+                              <input name="priod" type="radio" value="1" <?php     if($_GET['poi'] == 1){echo 'checked';}?>>
                               ไม่กำหนดช่วงเวลา </span>&nbsp;&nbsp;<input type="submit" name="Submit" value="Submit" class="button">
                             
                             </td>
@@ -1092,14 +1092,14 @@ function check9(frm){
                 </div> <br>              
               </form>
               
-              <?php   
+              <?php     
 			  	if($_GET['res'] == "show"){
 					?>
 			  <table width="100%" border="1" cellspacing="0" cellpadding="0">
                       <tr>
                         <td>&nbsp;</td>
                         <td>
-                        <div align="right"><?php  
+                        <div align="right"><?php    
                         	if($_GET['poi'] == 0){
 								echo $dateshow = "เริ่มวันที่ : ".format_date($_GET['df'])."&nbsp;&nbsp;ถึงวันที่ : ".format_date($_GET['dt']); 
 							}else{
@@ -1127,55 +1127,55 @@ function check9(frm){
 		              </tr>
 			          <tr>
 			            <td><strong>ชื่อร้าน/ชื่อบริษัท</strong></td>
-			            <td><?php   
+			            <td><?php     
 							if($_GET['poi'] == 0){
 										$daterriod4 = " AND `date_forder`  between '".$_GET['df']."' and '".$_GET['dt']."'"; 
-										list ($s_year, $s_month, $s_day) = split ("-", $_GET['df']);
+										list ($s_year, $s_month, $s_day) = split("-", $_GET['df']);
 										$datefm = $s_day."/".$s_month."/".$s_year;
-										list ($s_year, $s_month, $s_day) = split ("-", $_GET['dt']);
+										list ($s_year, $s_month, $s_day) = split("-", $_GET['dt']);
 										$dateft = $s_day."/".$s_month."/".$s_year;
 									}
 									$sql1 = "SELECT * FROM s_first_order AS fr WHERE 1 ".$daterriod4." ORDER BY fr.cd_name ASC";
 	  						$qu_fr1 = @mysqli_num_rows(@mysqli_query($conn,$sql1));
 								?>
-			              <a href="report1.php?date_fm=<?php   echo $datefm;?>&date_to=<?php   echo $dateft;?>&priod=<?php   echo $_GET['poi'];?>" target="_blank"><?php   echo number_format($qu_fr1);?></a></td>
+			              <a href="report1.php?date_fm=<?php     echo $datefm;?>&date_to=<?php     echo $dateft;?>&priod=<?php     echo $_GET['poi'];?>" target="_blank"><?php     echo number_format($qu_fr1);?></a></td>
 			            <td><strong>รายการ</strong></td>
 		              </tr>
-			          <?php   
+			          <?php     
 					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
 						while($roecus = @mysqli_fetch_array($typecus)){
 							?>
-			          <?php  	
+			          <?php    	
 						}
 					  ?>
-			          <?php   
+			          <?php     
 					  	$typepro = @mysqli_query($conn,"SELECT * FROM s_group_product ORDER BY group_name ASC");
 						while($roepro = @mysqli_fetch_array($typepro)){
 							?>
-			          <?php  	
+			          <?php    	
 						}
 					  ?>
-			          <?php   
+			          <?php     
 					  	$typepod = @mysqli_query($conn,"SELECT * FROM s_group_pod ORDER BY group_name ASC");
 						while($roepod = @mysqli_fetch_array($typepod)){
 							?>
-			          <?php  	
+			          <?php    	
 						}
 					  ?>
-			          <?php   
+			          <?php     
 					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
 						while($roetypecus = @mysqli_fetch_array($typecus)){
 							if(substr($roetypecus['group_name'],0,2) != "SR"){
 								?>
-			          <?php  	
+			          <?php    	
 							}
 						}
 					  ?>
-			          <?php   
+			          <?php     
 					  	$typesale = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
 						while($roesale = @mysqli_fetch_array($typesale)){
 							?>
-			          <?php  	
+			          <?php    	
 						}
 					  ?>
 		            </table>
@@ -1192,57 +1192,57 @@ function check9(frm){
 			            <td></td>
 			            <td><strong>รายการ</strong></td>
 		              </tr>
-			          <?php   
+			          <?php     
 					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
 						while($roecus = @mysqli_fetch_array($typecus)){
 							?>
 			          <tr>
-			            <td>&nbsp;&nbsp;&nbsp;- <?php   echo $roecus['group_name'];?></td>
-			            <td><?php   
+			            <td>&nbsp;&nbsp;&nbsp;- <?php     echo $roecus['group_name'];?></td>
+			            <td><?php     
 									if($_GET['poi'] == 0){
 										$daterriod4 = " AND `date_forder`  between '".$_GET['df']."' and '".$_GET['dt']."'"; 
-										list ($s_year, $s_month, $s_day) = split ("-", $_GET['df']);
+										list ($s_year, $s_month, $s_day) = split("-", $_GET['df']);
 										$datefm = $s_day."/".$s_month."/".$s_year;
-										list ($s_year, $s_month, $s_day) = split ("-", $_GET['dt']);
+										list ($s_year, $s_month, $s_day) = split("-", $_GET['dt']);
 										$dateft = $s_day."/".$s_month."/".$s_year;
 									}
 									$sql1 = "SELECT * FROM s_first_order AS fr WHERE fr.cg_type = '".$roecus['group_id']."' ".$daterriod4." ORDER BY fr.cd_name ASC";
 	  						$qu_fr1 = @mysqli_num_rows(@mysqli_query($conn,$sql1));
 								?>
-			              <a href="report3.php?date_fm=<?php   echo $datefm;?>&date_to=<?php   echo $dateft;?>&priod=<?php   echo $_GET['poi'];?>&cg_type=<?php   echo $roecus['group_id'];?>" target="_blank"><?php   echo number_format($qu_fr1);?></a></td>
+			              <a href="report3.php?date_fm=<?php     echo $datefm;?>&date_to=<?php     echo $dateft;?>&priod=<?php     echo $_GET['poi'];?>&cg_type=<?php     echo $roecus['group_id'];?>" target="_blank"><?php     echo number_format($qu_fr1);?></a></td>
 			            <td>รายการ</td>
 		              </tr>
-			          <?php  	
+			          <?php    	
 						}
 					  ?>
-			          <?php   
+			          <?php     
 					  	$typepro = @mysqli_query($conn,"SELECT * FROM s_group_product ORDER BY group_name ASC");
 						while($roepro = @mysqli_fetch_array($typepro)){
 							?>
-			          <?php  	
+			          <?php    	
 						}
 					  ?>
-			          <?php   
+			          <?php     
 					  	$typepod = @mysqli_query($conn,"SELECT * FROM s_group_pod ORDER BY group_name ASC");
 						while($roepod = @mysqli_fetch_array($typepod)){
 							?>
-			          <?php  	
+			          <?php    	
 						}
 					  ?>
-			          <?php   
+			          <?php     
 					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
 						while($roetypecus = @mysqli_fetch_array($typecus)){
 							if(substr($roetypecus['group_name'],0,2) != "SR"){
 								?>
-			          <?php  	
+			          <?php    	
 							}
 						}
 					  ?>
-			          <?php   
+			          <?php     
 					  	$typesale = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
 						while($roesale = @mysqli_fetch_array($typesale)){
 							?>
-			          <?php  	
+			          <?php    	
 						}
 					  ?>
 		            </table>
@@ -1254,18 +1254,18 @@ function check9(frm){
                         <th width="10%"><strong style="color:#FF0000;">จำนวน</strong></th>
                         <th width="7%">&nbsp;</th>
                       </tr>
-                      <?php   
+                      <?php     
 					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
 						while($roecus = @mysqli_fetch_array($typecus)){
 							?>
-                      <?php  	
+                      <?php    	
 						}
 					  ?>
-                      <?php   
+                      <?php     
 					  	$typepro = @mysqli_query($conn,"SELECT * FROM s_group_product ORDER BY group_name ASC");
 						while($roepro = @mysqli_fetch_array($typepro)){
 							?>
-                      <?php  	
+                      <?php    	
 						}
 					  ?>
                       <tr>
@@ -1273,43 +1273,43 @@ function check9(frm){
                         <td>&nbsp;</td>
                         <td><strong>รายการ</strong></td>
                       </tr>
-                      <?php   
+                      <?php     
 					  	$typepod = @mysqli_query($conn,"SELECT * FROM s_group_pod ORDER BY group_name ASC");
 						while($roepod = @mysqli_fetch_array($typepod)){
 							?>
                       <tr>
-                        <td>&nbsp;&nbsp;&nbsp;- <?php   echo $roepod['group_name'];?></td>
-                        <td><?php   
+                        <td>&nbsp;&nbsp;&nbsp;- <?php     echo $roepod['group_name'];?></td>
+                        <td><?php     
 									if($_GET['poi'] == 0){
 										$daterriod4 = " AND `date_forder`  between '".$_GET['df']."' and '".$_GET['dt']."'"; 
-										list ($s_year, $s_month, $s_day) = split ("-", $_GET['df']);
+										list ($s_year, $s_month, $s_day) = split("-", $_GET['df']);
 										$datefm = $s_day."/".$s_month."/".$s_year;
-										list ($s_year, $s_month, $s_day) = split ("-", $_GET['dt']);
+										list ($s_year, $s_month, $s_day) = split("-", $_GET['dt']);
 										$dateft = $s_day."/".$s_month."/".$s_year;
 									}
 									$sql1 = "SELECT * FROM s_first_order AS fr WHERE (fr.pro_pod1 LIKE '%".$roepod['group_name']."%' OR fr.pro_pod2 LIKE '%".$roepod['group_name']."%' OR fr.pro_pod3 LIKE '%".$roepod['group_name']."%' OR fr.pro_pod4 LIKE '%".$roepod['group_name']."%' OR fr.pro_pod5 LIKE '%".$roepod['group_name']."%' OR fr.pro_pod6 LIKE '%".$roepod['group_name']."%' OR fr.pro_pod7 LIKE '%".$roepod['group_name']."%')  ".$daterriod4." ORDER BY fr.cd_name ASC";
 	  						$qu_fr1 = @mysqli_num_rows(@mysqli_query($conn,$sql1));
 								?>
-                          <a href="report5.php?date_fm=<?php   echo $datefm;?>&date_to=<?php   echo $dateft;?>&priod=<?php   echo $_GET['poi'];?>&pro_pod=<?php   echo $roepod['group_name'];?>" target="_blank"><?php   echo number_format($qu_fr1);?></a></td>
+                          <a href="report5.php?date_fm=<?php     echo $datefm;?>&date_to=<?php     echo $dateft;?>&priod=<?php     echo $_GET['poi'];?>&pro_pod=<?php     echo $roepod['group_name'];?>" target="_blank"><?php     echo number_format($qu_fr1);?></a></td>
                         <td>รายการ</td>
                       </tr>
-                      <?php  	
+                      <?php    	
 						}
 					  ?>
-                      <?php   
+                      <?php     
 					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
 						while($roetypecus = @mysqli_fetch_array($typecus)){
 							if(substr($roetypecus['group_name'],0,2) != "SR"){
 								?>
-                      <?php  	
+                      <?php    	
 							}
 						}
 					  ?>
-                      <?php   
+                      <?php     
 					  	$typesale = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
 						while($roesale = @mysqli_fetch_array($typesale)){
 							?>
-                      <?php  	
+                      <?php    	
 						}
 					  ?>
                     </table>
@@ -1321,25 +1321,25 @@ function check9(frm){
                         <th width="10%"><strong style="color:#FF0000;">จำนวน</strong></th>
                         <th width="7%">&nbsp;</th>
                       </tr>
-                      <?php   
+                      <?php     
 					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
 						while($roecus = @mysqli_fetch_array($typecus)){
 							?>
-                      <?php  	
+                      <?php    	
 						}
 					  ?>
-                      <?php   
+                      <?php     
 					  	$typepro = @mysqli_query($conn,"SELECT * FROM s_group_product ORDER BY group_name ASC");
 						while($roepro = @mysqli_fetch_array($typepro)){
 							?>
-                      <?php  	
+                      <?php    	
 						}
 					  ?>
-                      <?php   
+                      <?php     
 					  	$typepod = @mysqli_query($conn,"SELECT * FROM s_group_pod ORDER BY group_name ASC");
 						while($roepod = @mysqli_fetch_array($typepod)){
 							?>
-                      <?php  	
+                      <?php    	
 						}
 					  ?>
                       <tr>
@@ -1347,36 +1347,36 @@ function check9(frm){
                         <td>&nbsp;</td>
                         <td><strong>รายการ</strong></td>
                       </tr>
-                      <?php   
+                      <?php     
 					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
 						while($roetypecus = @mysqli_fetch_array($typecus)){
 							if(substr($roetypecus['group_name'],0,2) != "SR"){
 								?>
                       <tr>
-                        <td>&nbsp;&nbsp;&nbsp;- <?php   echo $roetypecus['group_name'];?></td>
-                        <td><?php   
+                        <td>&nbsp;&nbsp;&nbsp;- <?php     echo $roetypecus['group_name'];?></td>
+                        <td><?php     
 									if($_GET['poi'] == 0){
 										$daterriod4 = " AND `date_forder`  between '".$_GET['df']."' and '".$_GET['dt']."'"; 
-										list ($s_year, $s_month, $s_day) = split ("-", $_GET['df']);
+										list ($s_year, $s_month, $s_day) = split("-", $_GET['df']);
 										$datefm = $s_day."/".$s_month."/".$s_year;
-										list ($s_year, $s_month, $s_day) = split ("-", $_GET['dt']);
+										list ($s_year, $s_month, $s_day) = split("-", $_GET['dt']);
 										$dateft = $s_day."/".$s_month."/".$s_year;
 									}
 									$sql1 = "SELECT * FROM s_first_order AS fr WHERE fr.ctype = '".$roetypecus['group_id']."' ".$daterriod4." ORDER BY fr.cd_name ASC";
 	  						$qu_fr1 = @mysqli_num_rows(@mysqli_query($conn,$sql1));
 								?>
-                          <a href="report6.php?date_fm=<?php   echo $datefm;?>&date_to=<?php   echo $dateft;?>&priod=<?php   echo $_GET['poi'];?>&ctype=<?php   echo $roetypecus['group_id'];?>" target="_blank"><?php   echo number_format($qu_fr1);?></a></td>
+                          <a href="report6.php?date_fm=<?php     echo $datefm;?>&date_to=<?php     echo $dateft;?>&priod=<?php     echo $_GET['poi'];?>&ctype=<?php     echo $roetypecus['group_id'];?>" target="_blank"><?php     echo number_format($qu_fr1);?></a></td>
                         <td>รายการ</td>
                       </tr>
-                      <?php  	
+                      <?php    	
 							}
 						}
 					  ?>
-                      <?php   
+                      <?php     
 					  	$typesale = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
 						while($roesale = @mysqli_fetch_array($typesale)){
 							?>
-                      <?php  	
+                      <?php    	
 						}
 					  ?>
                     </table>
@@ -1388,33 +1388,33 @@ function check9(frm){
                         <th width="10%"><strong style="color:#FF0000;">จำนวน</strong></th>
                         <th width="7%">&nbsp;</th>
                       </tr>
-                      <?php   
+                      <?php     
 					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_type ORDER BY group_name ASC");
 						while($roecus = @mysqli_fetch_array($typecus)){
 							?>
-                      <?php  	
+                      <?php    	
 						}
 					  ?>
-                      <?php   
+                      <?php     
 					  	$typepro = @mysqli_query($conn,"SELECT * FROM s_group_product ORDER BY group_name ASC");
 						while($roepro = @mysqli_fetch_array($typepro)){
 							?>
-                      <?php  	
+                      <?php    	
 						}
 					  ?>
-                      <?php   
+                      <?php     
 					  	$typepod = @mysqli_query($conn,"SELECT * FROM s_group_pod ORDER BY group_name ASC");
 						while($roepod = @mysqli_fetch_array($typepod)){
 							?>
-                      <?php  	
+                      <?php    	
 						}
 					  ?>
-                      <?php   
+                      <?php     
 					  	$typecus = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
 						while($roetypecus = @mysqli_fetch_array($typecus)){
 							if(substr($roetypecus['group_name'],0,2) != "SR"){
 								?>
-                      <?php  	
+                      <?php    	
 							}
 						}
 					  ?>
@@ -1423,34 +1423,34 @@ function check9(frm){
                         <td>&nbsp;</td>
                         <td><strong>รายการ</strong></td>
                       </tr>
-                      <?php   
+                      <?php     
 					  	$typesale = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
 						while($roesale = @mysqli_fetch_array($typesale)){
 							?>
                       <tr>
-                        <td>&nbsp;&nbsp;&nbsp;- <?php   echo $roesale['group_name'];?></td>
-                        <td><?php   
+                        <td>&nbsp;&nbsp;&nbsp;- <?php     echo $roesale['group_name'];?></td>
+                        <td><?php     
 									if($_GET['poi'] == 0){
 										$daterriod4 = " AND `date_forder`  between '".$_GET['df']."' and '".$_GET['dt']."'"; 
-										list ($s_year, $s_month, $s_day) = split ("-", $_GET['df']);
+										list ($s_year, $s_month, $s_day) = split("-", $_GET['df']);
 										$datefm = $s_day."/".$s_month."/".$s_year;
-										list ($s_year, $s_month, $s_day) = split ("-", $_GET['dt']);
+										list ($s_year, $s_month, $s_day) = split("-", $_GET['dt']);
 										$dateft = $s_day."/".$s_month."/".$s_year;
 									}
 									$sql1 = "SELECT * FROM s_first_order AS fr WHERE fr.cs_sell = '".$roesale['group_id']."' ".$daterriod4." ORDER BY fr.cd_name ASC";
 	  						$qu_fr1 = @mysqli_num_rows(@mysqli_query($conn,$sql1));
 								?>
-                          <a href="report9.php?date_fm=<?php   echo $datefm;?>&date_to=<?php   echo $dateft;?>&priod=<?php   echo $_GET['poi'];?>&cs_sell=<?php   echo $roesale['group_id'];?>" target="_blank"><?php   echo number_format($qu_fr1);?></a></td>
+                          <a href="report9.php?date_fm=<?php     echo $datefm;?>&date_to=<?php     echo $dateft;?>&priod=<?php     echo $_GET['poi'];?>&cs_sell=<?php     echo $roesale['group_id'];?>" target="_blank"><?php     echo number_format($qu_fr1);?></a></td>
                         <td>รายการ</td>
                       </tr>
-                      <?php  	
+                      <?php    	
 						}
 					  ?>
                     </table>
                   </div>
 		        </div>
 		      </div>
-			  <?php  
+			  <?php    
 				}
 			  ?>
               
@@ -1459,7 +1459,7 @@ function check9(frm){
             
             </DIV><!-- End .content-box-content -->
             </DIV>
-		<?php  
+		<?php    
 
 	}
 ?>
@@ -1470,7 +1470,7 @@ function check9(frm){
 <DIV class=clear></DIV><!-- Start Notifications -->
 <!-- End Notifications -->
 
-<?php   include("../footer.php");?>
+<?php     include("../footer.php");?>
 </DIV><!-- End #main-content -->
 </DIV>
 <script type="text/javascript">

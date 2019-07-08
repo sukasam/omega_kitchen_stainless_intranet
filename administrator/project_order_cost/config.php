@@ -1,5 +1,5 @@
 
-<?php  
+<?php    
 	$PK_field = "fo_id";
 	//$FR_field = "";
 	$check_module = "Project Order Cost";

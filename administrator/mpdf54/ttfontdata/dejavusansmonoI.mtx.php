@@ -1,4 +1,4 @@
-<?php 
+<?php   
 $name='DejaVuSansMono-Oblique';
 $type='TTF';
 $desc=array (

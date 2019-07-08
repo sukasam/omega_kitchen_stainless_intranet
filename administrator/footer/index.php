@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -19,7 +19,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><?php   echo $s_title;?></TITLE>
+<TITLE><?php     echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -44,20 +44,20 @@ function check_select(frm){
 }	
 </script>
 </HEAD>
-<?php   include ("../../include/function_script.php"); ?>
+<?php     include ("../../include/function_script.php"); ?>
 <BODY>
 <DIV id=body-wrapper>
-<?php   include("../left.php");?>
+<?php     include("../left.php");?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<?php   include('../top.php');?>
-<P id=page-intro><?php   echo ucfirst ($page_name); ?></P>
+<?php     include('../top.php');?>
+<P id=page-intro><?php     echo ucfirst ($page_name); ?></P>
 <DIV class=clear></DIV><!-- End .clear -->
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right" style="padding-right:15px;">
 
-<H3 align="left"><?php   echo ucfirst ($check_module); ?></H3>
+<H3 align="left"><?php     echo ucfirst ($check_module); ?></H3>
 <br>
 <DIV class=clear>
 
@@ -68,8 +68,8 @@ function check_select(frm){
     <TABLE>
       <THEAD>
         <TR>
-          <TH width="100%" <?php   Show_Sort_bg ("descriptions", $orderby) ?>>
-           <?php    Show_Sort_new ("descriptions", "Footer Description", $orderby, $sortby,$page,$param2);?>
+          <TH width="100%" <?php     Show_Sort_bg ("descriptions", $orderby) ?>>
+           <?php      Show_Sort_new ("descriptions", "Footer Description", $orderby, $sortby,$page,$param2);?>
             &nbsp;</TH>
           <TH width="0%"><a>Edit</a></TH>
           </TR>
@@ -77,19 +77,19 @@ function check_select(frm){
       <TFOOT>
         </TFOOT>
       <TBODY>
-        <?php   
+        <?php     
 					if($orderby=="") $orderby = $tbl_name.".".$PK_field;
 					if ($sortby =="") $sortby ="desc";
 					
 				   	$sql = " select *,$tbl_name.create_date as c_date from $tbl_name  where 1 ";
 					if ($_GET[$PK_field] <> "") $sql .= " and ($PK_field  = '" . $_GET[$PK_field] . " ' ) ";					
 					if ($_GET[$FR_field] <> "") $sql .= " and ($FR_field  = '" . $_GET[$FR_field] . " ' ) ";					
- 					/* if ($_GET[keyword] <> "") { 
-						$sql .= "and ( " .  $PK_field  . " like '%$_GET[keyword]%' ";
+ 					/* if ($_GET["keyword"] <> "") { 
+						$sql .= "and ( " .  $PK_field  . " like '%".$_GET["keyword"]."%' ";
 						if (count ($search_key) > 0) { 
 							$search_text = " and ( " ;
 							foreach ($search_key as $key=>$value) { 
-									$subtext .= "or " . $value  . " like '%" . $_GET[keyword] . "%'";
+									$subtext .= "or " . $value  . " like '%" . $_GET["keyword"] . "%'";
 							}	
 						}
 						$sql .=  $subtext . " ) ";
@@ -107,11 +107,11 @@ function check_select(frm){
 				   ?>
         <TR>
           <TD>
-          <span class="text"><?php   echo stripslashes($rec["descriptions"]) ; ?></span></TD>
+          <span class="text"><?php     echo stripslashes($rec["descriptions"]) ; ?></span></TD>
           <TD><!-- Icons -->
-            <A title=Edit href="update.php?mode=update&<?php   echo $PK_field; ?>=<?php   echo $rec["$PK_field"]; if($param <> "") {?>&<?php   echo $param; }?>"><IMG alt=Edit src="../images/pencil.png"></A> <A title=Delete  href="#"></A></TD>
+            <A title=Edit href="update.php?mode=update&<?php     echo $PK_field; ?>=<?php     echo $rec[$PK_field]; if($param <> "") {?>&<?php     echo $param; }?>"><IMG alt=Edit src="../images/pencil.png"></A> <A title=Delete  href="#"></A></TD>
           </TR>  
-		<?php   }?>
+		<?php     }?>
       </TBODY>
     </TABLE>
     <br><br>
@@ -122,7 +122,7 @@ function check_select(frm){
 </DIV><!-- End .content-box-content -->
 </DIV><!-- End .content-box -->
 <DIV class=clear></DIV><!-- Start Notifications -->
-<?php   include("../footer.php");?>
+<?php     include("../footer.php");?>
 </DIV><!-- End #main-content -->
 </DIV>
 </BODY>

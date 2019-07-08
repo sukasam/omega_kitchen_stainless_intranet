@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	include_once("../../include/aplication_top.php");
 	header("Content-type: text/html; charset=utf8");
 	header("Cache-Control: no-cache, must-revalidate");
@@ -51,9 +51,9 @@
 		while($row_cusx = @mysqli_fetch_array($qu_cus)){
 			?>
 			 <tr>
-				<td><A href="javascript:void(0);" onclick="get_customer('<?php   echo $row_cusx['fo_id'];?>','<?php   echo $row_cusx['cd_name'];?>');"><?php   echo $row_cusx['cd_name'];?> (<?php   echo $row_cusx['loc_name']?>)</A></td>
+				<td><A href="javascript:void(0);" onclick="get_customer('<?php     echo $row_cusx['fo_id'];?>','<?php     echo $row_cusx['cd_name'];?>');"><?php     echo $row_cusx['cd_name'];?> (<?php     echo $row_cusx['loc_name']?>)</A></td>
 			  </tr>
-			<?php  	
+			<?php    	
 		}
 		//echo "SELECT cd_name FROM s_first_order ".$consd." ORDER BY cd_name ASC";
 	}
@@ -67,9 +67,9 @@
 		while($row_cusx = @mysqli_fetch_array($qu_cus)){
 			?>
 			 <tr>
-				<td><A href="javascript:void(0);" onclick="get_sparactive('<?php   echo $row_cusx['group_id'];?>','codes<?php   echo $_REQUEST['resdata']?>','listss<?php   echo $_REQUEST['resdata']?>','units<?php   echo $_REQUEST['resdata']?>','prices<?php   echo $_REQUEST['resdata']?>','amounts<?php   echo $_REQUEST['resdata']?>','<?php   echo $_REQUEST['resdata']?>');"><?php   echo $row_cusx['group_spar_id'].'&nbsp;&nbsp;'.$row_cusx['group_name'];?></A></td>
+				<td><A href="javascript:void(0);" onclick="get_sparactive('<?php     echo $row_cusx['group_id'];?>','codes<?php     echo $_REQUEST['resdata']?>','listss<?php     echo $_REQUEST['resdata']?>','units<?php     echo $_REQUEST['resdata']?>','prices<?php     echo $_REQUEST['resdata']?>','amounts<?php     echo $_REQUEST['resdata']?>','<?php     echo $_REQUEST['resdata']?>');"><?php     echo $row_cusx['group_spar_id'].'&nbsp;&nbsp;'.$row_cusx['group_name'];?></A></td>
 			  </tr>
-			<?php  	
+			<?php    	
 		}
 		//echo "SELECT cd_name FROM s_first_order ".$consd." ORDER BY cd_name ASC";
 	}

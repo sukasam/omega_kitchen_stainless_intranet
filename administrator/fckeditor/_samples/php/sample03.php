@@ -1,4 +1,4 @@
-<?php
+<?php  
 /*
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net
  * Copyright (C) 2003-2008 Frederico Caldeira Knabben
@@ -66,7 +66,7 @@ function ChangeToolbar( toolbarName )
 		</table>
 		<br>
 		<form action="sampleposteddata.php" method="post" target="_blank">
-<?php
+<?php  
 // Automatically calculates the editor base path based on the _samples directory.
 // This is usefull only for these samples. A real application should use something like this:
 // $oFCKeditor->BasePath = '/fckeditor/' ;	// '/fckeditor/' is the default value.

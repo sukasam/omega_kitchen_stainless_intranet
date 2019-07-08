@@ -1,9 +1,9 @@
 
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
   <tr>
-    <td width="23%"><div align="left"><?php   echo "Page: " . $page  . " of " . $pagecount . " page(s)";?></div></td>
+    <td width="23%"><div align="left"><?php     echo "Page: " . $page  . " of " . $pagecount . " page(s)";?></div></td>
     <td width="77%"><div align="right">
-      <?php  
+      <?php    
 if (!isset ($limit_page)) $limit_page = 15;
 $parameter = "";
 foreach ($_GET as $key=>$value) {

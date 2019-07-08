@@ -1,4 +1,4 @@
-<?php   
+<?php     
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -7,7 +7,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>ตารางบริการ (วันที่ <?php   echo sprintf("%02d",$_GET['day']).'-'.sprintf("%02d",$_GET['month']).'-'.sprintf("%02d",($_GET['year']+543));?> )</title>
+<title>ตารางบริการ (วันที่ <?php     echo sprintf("%02d",$_GET['day']).'-'.sprintf("%02d",$_GET['month']).'-'.sprintf("%02d",($_GET['year']+543));?> )</title>
 
 <style type="text/css">
 	.tbservice{
@@ -42,7 +42,7 @@
     <th width="23%">เบอร์โทร</th>
     <th width="12%">ดาวน์โหลด</th>
   </tr>
-  <?php   
+  <?php     
   
   	$con = $_GET['year']."-".sprintf("%02d",$_GET['month'])."-".sprintf("%02d",$_GET['day']);		
 	
@@ -68,13 +68,13 @@
 	
   ?>  
   <tr>
-    <td style="text-align:center;"><?php   echo sprintf("%03d",$romn);?></td>
-    <td style="text-align:center;"><?php   echo $scstatus;?></td>
-    <td style="padding-left:10px;padding-right:10px"><?php   echo $finfo['cd_name'];?></td>
-    <td style="text-align:center;"><?php   echo $finfo['cd_tel'];?></td>
-    <td style="text-align:center;"><?php   $chaf = preg_replace("/\//","-",$row_serv["sv_id"]);?><a href="../../upload/service_report_open/<?php   echo $chaf;?>.pdf" target="_blank"><img src="../images/icons/icon-48-category.png" width="25" height="25" title="ใบเปิดงาน"/></a><a href="../../upload/service_report_close/<?php   echo $chaf;?>.pdf" target="_blank"><img src="../images/icons/icon-48-section.png" width="25" height="25" title="ใบปิดงาน"/></a></td>
+    <td style="text-align:center;"><?php     echo sprintf("%03d",$romn);?></td>
+    <td style="text-align:center;"><?php     echo $scstatus;?></td>
+    <td style="padding-left:10px;padding-right:10px"><?php     echo $finfo['cd_name'];?></td>
+    <td style="text-align:center;"><?php     echo $finfo['cd_tel'];?></td>
+    <td style="text-align:center;"><?php     $chaf = preg_replace("/\//","-",$row_serv["sv_id"]);?><a href="../../upload/service_report_open/<?php     echo $chaf;?>.pdf" target="_blank"><img src="../images/icons/icon-48-category.png" width="25" height="25" title="ใบเปิดงาน"/></a><a href="../../upload/service_report_close/<?php     echo $chaf;?>.pdf" target="_blank"><img src="../images/icons/icon-48-section.png" width="25" height="25" title="ใบปิดงาน"/></a></td>
   </tr>
-  <?php   $romn++;}?>
+  <?php     $romn++;}?>
 </table>
 
 </body>

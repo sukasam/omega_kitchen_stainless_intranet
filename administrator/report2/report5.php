@@ -1,4 +1,4 @@
-<?php   
+<?php     
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -74,140 +74,140 @@
 	    <th colspan="5" style="text-align:left;font-size:12px;"> บริษัท โอเมก้า แมชชีนเนอรี่ (1999) จำกัด<br />
 รายงานการแจ้งซ่อม หรือตามให้บริการต่างๆ<br />
 ประเภทลูกค้า  :
-<?php   if($_REQUEST['ctype'] != ""){echo getcustom_type($conn,$_REQUEST['ctype']);}else{echo "ทั้งหมด";}?>
+<?php     if($_REQUEST['ctype'] != ""){echo getcustom_type($conn,$_REQUEST['ctype']);}else{echo "ทั้งหมด";}?>
 <br />
 ประเภทบริการ  :
-<?php   if($_REQUEST['sr_ctype']){echo get_servicename($conn,$_REQUEST['sr_ctype']);}else{echo "ทั้งหมด";}?></th>
-	    <th colspan="3" style="text-align:right;font-size:11px;"><?php   echo $dateshow;?></th>
+<?php     if($_REQUEST['sr_ctype']){echo get_servicename($conn,$_REQUEST['sr_ctype']);}else{echo "ทั้งหมด";}?></th>
+	    <th colspan="3" style="text-align:right;font-size:11px;"><?php     echo $dateshow;?></th>
       </tr>
       <tr>
-        <?php   if($_REQUEST['sh1'] == 1){?><th width="13%">ชื่อลูกค้า / บริษัท</th><?php   }?>
-        <?php   if($_REQUEST['sh1'] == 1){?><th width="13%">ชื่อร้าน / สถานที่ติดตั้ง</th><?php   }?>
-        <?php   if($_REQUEST['sh1'] == 1){?><th width="9%">ประเภทลูกค้า</th><?php   }?>
-        <?php   if($_REQUEST['sh1'] == 1){?><th width="9%">เลขที่ใบบริการ</th><?php   }?>
-        <?php   if($_REQUEST['sh1'] == 1){?><th width="13%">รายการแจ้งซ่อม</th><?php   }?>
-        <?php   if($_REQUEST['sh6'] == 1 || $_REQUEST['sh7'] == 1){?><th><table width="100%" border="0" cellpadding="0" cellspacing="0" class="tbreport">
+        <?php     if($_REQUEST['sh1'] == 1){?><th width="13%">ชื่อลูกค้า / บริษัท</th><?php     }?>
+        <?php     if($_REQUEST['sh1'] == 1){?><th width="13%">ชื่อร้าน / สถานที่ติดตั้ง</th><?php     }?>
+        <?php     if($_REQUEST['sh1'] == 1){?><th width="9%">ประเภทลูกค้า</th><?php     }?>
+        <?php     if($_REQUEST['sh1'] == 1){?><th width="9%">เลขที่ใบบริการ</th><?php     }?>
+        <?php     if($_REQUEST['sh1'] == 1){?><th width="13%">รายการแจ้งซ่อม</th><?php     }?>
+        <?php     if($_REQUEST['sh6'] == 1 || $_REQUEST['sh7'] == 1){?><th><table width="100%" border="0" cellpadding="0" cellspacing="0" class="tbreport">
           <tr>
-            <?php   if($_REQUEST['sh6'] == 1){?><th style="border:0;" width="50%">รุ่นเครื่อง</th><?php   }?>
-            <?php   if($_REQUEST['sh7'] == 1){?><th style="border:0;" width="50%">SN</th><?php   }?>
+            <?php     if($_REQUEST['sh6'] == 1){?><th style="border:0;" width="50%">รุ่นเครื่อง</th><?php     }?>
+            <?php     if($_REQUEST['sh7'] == 1){?><th style="border:0;" width="50%">SN</th><?php     }?>
           </tr>
-        </table></th><?php   }?>
-        <?php   if($_REQUEST['sh8'] == 1){?><th width="17%">รายละเอียดบริการ</th><?php   }?>
-        <?php   if($_REQUEST['sh9'] == 1){?><th width="11%">ชื่อช่าง</th><?php   }?>
+        </table></th><?php     }?>
+        <?php     if($_REQUEST['sh8'] == 1){?><th width="17%">รายละเอียดบริการ</th><?php     }?>
+        <?php     if($_REQUEST['sh9'] == 1){?><th width="11%">ชื่อช่าง</th><?php     }?>
       </tr>
-      <?php   
+      <?php     
 		$sql = "SELECT * FROM s_first_order as fr, s_service_report as sv WHERE sv.cus_id = fr.fo_id  ".$condition." ".$daterriod." ORDER BY fr.cd_name ASC";
 	  	$qu_fr = @mysqli_query($conn,$sql);
 		$sum = 0;
 		while($row_fr = @mysqli_fetch_array($qu_fr)){
 			?>
 			<tr>
-              <?php   if($_REQUEST['sh1'] == 1){?><td><?php   echo $row_fr['cd_name'];?><br />
-              <?php   echo $row_fr['cd_tel'];?></td><?php   }?>
-              <?php   if($_REQUEST['sh2'] == 1){?><td><?php   echo $row_fr['loc_name']."<br />".$row_fr['loc_address'];?></td><?php   }?>
-              <?php   if($_REQUEST['sh3'] == 1){?><td><?php   echo getcustom_type($conn,$row_fr['sr_ctype2']);?></td><?php   }?>
-              <?php   if($_REQUEST['sh4'] == 1){?><td><?php   echo $row_fr['sv_id'];?></td><?php   }?>
-              <?php   if($_REQUEST['sh5'] == 1){?><td>
+              <?php     if($_REQUEST['sh1'] == 1){?><td><?php     echo $row_fr['cd_name'];?><br />
+              <?php     echo $row_fr['cd_tel'];?></td><?php     }?>
+              <?php     if($_REQUEST['sh2'] == 1){?><td><?php     echo $row_fr['loc_name']."<br />".$row_fr['loc_address'];?></td><?php     }?>
+              <?php     if($_REQUEST['sh3'] == 1){?><td><?php     echo getcustom_type($conn,$row_fr['sr_ctype2']);?></td><?php     }?>
+              <?php     if($_REQUEST['sh4'] == 1){?><td><?php     echo $row_fr['sv_id'];?></td><?php     }?>
+              <?php     if($_REQUEST['sh5'] == 1){?><td>
               	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbreport">
-                  <?php   
+                  <?php     
 				  	$chk = get_fixlist($row_fr['ckf_list']);
 					for($i=0;$i<sizeof($chk);$i++){
 						if(get_fixname($conn,$chk[$i]) != ""){
 							?>
 		  <tr>
-							<td style="border:0;padding-bottom:0;padding-top:0;"><?php   echo get_fixname($conn,$chk[$i]);?></td>
+							<td style="border:0;padding-bottom:0;padding-top:0;"><?php     echo get_fixname($conn,$chk[$i]);?></td>
 			  	  </tr>
-							<?php  
+							<?php    
 						}
 					}
 				  ?>
                 </table>
-    		  </td><?php   }?>
-              <?php   if($_REQUEST['sh6'] == 1 || $_REQUEST['sh7'] == 1){?><td><table width="99%" border="0" cellpadding="0" cellspacing="0" class="tbreport" style="margin-bottom:5px;">
-                <?php   
+    		  </td><?php     }?>
+              <?php     if($_REQUEST['sh6'] == 1 || $_REQUEST['sh7'] == 1){?><td><table width="99%" border="0" cellpadding="0" cellspacing="0" class="tbreport" style="margin-bottom:5px;">
+                <?php     
 					if($row_fr['pro_pod1'] != ""){
 						?>
                 <tr>
-                  <?php   if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_pod1'];?></td><?php   }?>
-                  <?php   if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_sn1'];?></td><?php   }?>
+                  <?php     if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_pod1'];?></td><?php     }?>
+                  <?php     if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_sn1'];?></td><?php     }?>
                 </tr>
-                <?php  	
+                <?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['pro_pod2'] != ""){
 						?>
                 <tr>
-                  <?php   if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_pod2'];?></td><?php   }?>
-                  <?php   if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_sn2'];?></td><?php   }?>
+                  <?php     if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_pod2'];?></td><?php     }?>
+                  <?php     if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_sn2'];?></td><?php     }?>
                 </tr>
-                <?php  	
+                <?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['pro_pod3'] != ""){
 						?>
                 <tr>
-                  <?php   if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_pod3'];?></td><?php   }?>
-                  <?php   if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_sn3'];?></td><?php   }?>
+                  <?php     if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_pod3'];?></td><?php     }?>
+                  <?php     if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_sn3'];?></td><?php     }?>
                 </tr>
-                <?php  	
+                <?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['pro_pod4'] != ""){
 						?>
                 <tr>
-                  <?php   if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_pod4'];?></td><?php   }?>
-                  <?php   if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_sn4'];?></td><?php   }?>
+                  <?php     if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_pod4'];?></td><?php     }?>
+                  <?php     if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_sn4'];?></td><?php     }?>
                 </tr>
-                <?php  	
+                <?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['pro_pod5'] != ""){
 						?>
                 <tr>
-                  <?php   if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_pod5'];?></td><?php   }?>
-                  <?php   if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_sn5'];?></td><?php   }?>
+                  <?php     if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_pod5'];?></td><?php     }?>
+                  <?php     if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_sn5'];?></td><?php     }?>
                 </tr>
-                <?php  	
+                <?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['pro_pod6'] != ""){
 						?>
                 <tr>
-                  <?php   if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_pod6'];?></td><?php   }?>
-                  <?php   if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_sn6'];?></td><?php   }?>
+                  <?php     if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_pod6'];?></td><?php     }?>
+                  <?php     if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_sn6'];?></td><?php     }?>
                 </tr>
-                <?php  	
+                <?php    	
 					}
 				?>
-                <?php   
+                <?php     
 					if($row_fr['pro_pod6'] != ""){
 						?>
                 <tr>
-                  <?php   if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_pod7'];?></td><?php   }?>
-                  <?php   if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php   echo $row_fr['pro_sn7'];?></td><?php   }?>
+                  <?php     if($_REQUEST['sh6'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_pod7'];?></td><?php     }?>
+                  <?php     if($_REQUEST['sh7'] == 1){?><td style="border:0;padding-bottom:0;" width="50%"><?php     echo $row_fr['pro_sn7'];?></td><?php     }?>
                 </tr>
-                <?php  	
+                <?php    	
 					}
 				?>
-              </table></td><?php   }?>
-              <?php   if($_REQUEST['sh8'] == 1){?><td><?php   echo $row_fr['detail_recom2'];?></td><?php   }?>
-              <?php   if($_REQUEST['sh9'] == 1){?><td><?php   echo get_technician_id($conn,$row_fr['loc_contact']);?></td><?php   }?>
+              </table></td><?php     }?>
+              <?php     if($_REQUEST['sh8'] == 1){?><td><?php     echo $row_fr['detail_recom2'];?></td><?php     }?>
+              <?php     if($_REQUEST['sh9'] == 1){?><td><?php     echo get_technician_id($conn,$row_fr['loc_contact']);?></td><?php     }?>
             </tr>
 			
 			
             
-			<?php  
+			<?php    
 			$sum += 1;
 		}
 	  ?>
       
       <tr>
-			  <td colspan="8" style="text-align:right;"> <strong>ให้บริการตามการแจ้งซ่อมทั้งหมด&nbsp;&nbsp;<?php   echo $sum;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
+			  <td colspan="8" style="text-align:right;"> <strong>ให้บริการตามการแจ้งซ่อมทั้งหมด&nbsp;&nbsp;<?php     echo $sum;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
 	  </tr>
     </table>
 

@@ -1,4 +1,4 @@
-<?php
+<?php  
 /*
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net
  * Copyright (C) 2003-2008 Frederico Caldeira Knabben
@@ -42,7 +42,7 @@
 					<th>Value</th>
 				</tr>
 			</thead>
-<?php
+<?php  
 
 if ( isset( $_POST ) )
    $postArray = &$_POST ;			// 4.1.0 or later, use $_POST
@@ -58,10 +58,10 @@ foreach ( $postArray as $sForm => $value )
 
 ?>
 			<tr>
-				<th><?php echo $sForm?></th>
-				<td><pre><?php echo $postedValue?></pre></td>
+				<th><?php   echo $sForm?></th>
+				<td><pre><?php   echo $postedValue?></pre></td>
 			</tr>
-<?php
+<?php  
 }
 ?>
 		</table>

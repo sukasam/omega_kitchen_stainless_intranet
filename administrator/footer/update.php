@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -40,7 +40,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><?php   echo $s_title;?></TITLE>
+<TITLE><?php     echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -65,15 +65,15 @@ function check(frm){
 }	
 </script>
 </HEAD>
-<?php   include ("../../include/function_script.php"); ?>
+<?php     include ("../../include/function_script.php"); ?>
 <BODY>
 <DIV id=body-wrapper>
-<?php   include("../left.php");?>
+<?php     include("../left.php");?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<?php   include('../top.php');?>
-<P id=page-intro><?php   if ($mode == "add") { ?>Enter new information<?php   } else { ?>Update  details	[<?php   echo $page_name; ?>]<?php   } ?>	</P>
+<?php     include('../top.php');?>
+<P id=page-intro><?php     if ($mode == "add") { ?>Enter new information<?php     } else { ?>Update  details	[<?php     echo $page_name; ?>]<?php     } ?>	</P>
 <UL class=shortcut-buttons-set>
   <LI><A class=shortcut-button href="javascript:history.back()"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>Back</SPAN></A></LI>
 </UL>
@@ -82,7 +82,7 @@ function check(frm){
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right">
 
-<H3 align="left"><?php   echo ucfirst ($check_module); ?></H3>
+<H3 align="left"><?php     echo ucfirst ($check_module); ?></H3>
 <DIV class=clear>
   
 </DIV></DIV><!-- End .content-box-header -->
@@ -94,7 +94,7 @@ function check(frm){
           <td width="100%" nowrap class="name">รายละเอียด</td>
         </tr>
         <tr >
-          <td nowrap class="name"><?php   //--------เรียกใช้ fckeditor--------------------- 
+          <td nowrap class="name"><?php     //--------เรียกใช้ fckeditor--------------------- 
 						$oFCKeditor = new FCKeditor('descriptions') ;
 						$oFCKeditor->BasePath = '../fckeditor/';
 						$oFCKeditor->ToolbarSet	= 'Default' ;
@@ -108,19 +108,19 @@ function check(frm){
 
       <input type="submit" name="Submit" value="Submit" class="button">
       <input type="reset" name="Submit" value="Reset" class="button">
-      <?php   
+      <?php     
 			$a_not_exists = array();
 			post_param($a_param,$a_not_exists); 
 			?>
-      <input name="mode" type="hidden" id="mode" value="<?php   echo $_GET["mode"];?>">
-      <input name="<?php   echo $PK_field;?>" type="hidden" id="<?php   echo $PK_field;?>" value="<?php   echo $_GET[$PK_field];?>">
+      <input name="mode" type="hidden" id="mode" value="<?php     echo $_GET["mode"];?>">
+      <input name="<?php     echo $PK_field;?>" type="hidden" id="<?php     echo $PK_field;?>" value="<?php     echo $_GET[$PK_field];?>">
 
   </form>
 
 </DIV><!-- End .content-box-content -->
 </DIV><!-- End .content-box -->
 <DIV class=clear></DIV>
-<?php   include("../footer.php");?>
+<?php     include("../footer.php");?>
 </DIV>
 </DIV>
 </BODY>

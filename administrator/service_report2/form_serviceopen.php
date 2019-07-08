@@ -1,5 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php 
+<?php   
 	
 	
 	$finfos = get_firstorder($conn,$_POST['cus_id']);
@@ -43,7 +43,8 @@
 	.tb2 tr td{
 		font-size:10px;
 		font-family:Verdana, Geneva, sans-serif;
-		padding:5px;		
+		padding:5px;
+		border: 1px solid;
 	}
 	
 	.tb3 tr td{
@@ -168,7 +169,7 @@
 			<td>'.get_sparpart_name($conn,$lists[$a]).'</td>
 			<td align="center">'.$units[$a].'</td>
 			<td align="right">'.$prices[$a].'</td>
-			<td align="right">'.$amounts[$a].'</td>
+			<td align="right">'.getStockSpar($conn,$lists[$a]).'</td>
 			<td align="right">'.$opens[$a].'</td>
 			</tr>';
 			

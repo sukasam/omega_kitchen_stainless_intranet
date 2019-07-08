@@ -1,5 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php   
+<?php     
 
 if($_POST["cprice1"] != ""){$prpro1 = number_format($_POST["cprice1"],2);}
 if($_POST["cprice2"] != ""){$prpro2 = number_format($_POST["cprice2"],2);}
@@ -217,7 +217,7 @@ $form = '
             <td style="border:0;padding:0;width:40%;vertical-align:top;padding-left:5px;font-size:10px;border:1px solid #000000;padding-top:10px;">';
 			
 			  //if($_POST['ctype'] != 1){
-				  	 $form .= '<strong>เลขที่สัญญา : </strong> ' .$_POST["r_id"]. '<br><br />';
+				  	 $form .= '<strong>เลขที่สัญญา : </strong> ' .$_POST["r_id"]. '&nbsp;&nbsp;<strong>เลขที่สัญญาเช่า</strong> '.$_POST["r_idrent"].' <strong>เดือน</strong><br><br />';
 					 if($_POST["garun_id"]){ 
 					 	$form .= '<strong>การรับประกันเครื่องอะไหล่ : ' .$_POST["garun_id"]. ' เดือน </strong><br><br />';
 					 }else{

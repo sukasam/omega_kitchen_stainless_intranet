@@ -1,5 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php   
+<?php     
 
 if($_POST["cprice1"] != ""){$prpro1 = number_format($_POST["cprice1"],2);}
 if($_POST["cprice2"] != ""){$prpro2 = number_format($_POST["cprice2"],2);}

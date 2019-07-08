@@ -1,4 +1,4 @@
-<?php  
+<?php    
 /* ******************* 
 Last Revised : 1 Dec, 2006
 /* ******************* 
@@ -138,9 +138,9 @@ function Show_Text ($label,$value) {
 	}
 }
 function format_date_en ($value,$type) { 
-	list ($s_date,$s_time)  = split (" ", $value);
-	list ($s_year, $s_month, $s_day) = split ("-", $s_date);
-	list ($s_hour, $s_minute, $s_second) = split (":", $s_time);
+	list ($s_date,$s_time)  = explode(" ", $value);
+	list ($s_year, $s_month, $s_day) = explode("-", $s_date);
+	list ($s_hour, $s_minute, $s_second) = explode(":", $s_time);
 	$s_month +=0;
 	$s_day += 0;
 	if ($s_day == "0") return "";
@@ -166,13 +166,13 @@ function format_date_en ($value,$type) {
 }
 function format_date_th ($value,$type) { 
 	if (strlen ($value) > 10) { 
-			list ($s_date,$s_time)  = split (" ", $value);
-			list ($s_year, $s_month, $s_day) = split ("-", $s_date);
-			list ($s_hour, $s_minute, $s_second) = split (":", $s_time);
+			list ($s_date,$s_time)  = split(" ", $value);
+			list ($s_year, $s_month, $s_day) = split("-", $s_date);
+			list ($s_hour, $s_minute, $s_second) = split(":", $s_time);
 	}
 	else 
 	{
-			list ($s_year, $s_month, $s_day) = split ("-", $value);
+			list ($s_year, $s_month, $s_day) = split("-", $value);
 	}
 	$s_month +=0;
 	$s_day += 0;
@@ -243,7 +243,7 @@ function NumToThai($value)
   $NumToThai = ""; 
   $Pos    = 0; 
 
- list ($Number, $Satang)  = split ("[.]", $value);
+ list ($Number, $Satang)  = split("[.]", $value);
   // Process 
   while ($Number > 0 ) 
   { 
@@ -400,7 +400,7 @@ function Show_Data($conn,$tbl_name, $key, $value, $fieldname)
 {
 	$sql = "select * from $tbl_name where $key like '" . $value . "'";
 	$query = @mysqli_query($conn,$sql);
-	$fields = split (":", $fieldname);
+	$fields = split(":", $fieldname);
 	$msg = "";
 	if ($rec = @mysqli_fetch_array ($query)) { 
 		foreach ($fields as $key => $value ) { 

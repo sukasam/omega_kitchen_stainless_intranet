@@ -1,5 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php  
+<?php    
 	$PK_field = "user_id";
 	//$FR_field = "";
 	$check_module = "จัดการข้อมูลส่วนตัว";

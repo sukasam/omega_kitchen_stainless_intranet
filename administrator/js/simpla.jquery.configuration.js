@@ -8,7 +8,7 @@ $(document).ready(function(){
 	//Sidebar Accordion Menu:
 		
 		$("#main-nav li ul").hide(); // Hide all sub menus
-		$("#main-nav li a.current").parent().find("ul").slideToggle($conn,"slow"); // Slide down the current menu item's sub menu
+		$("#main-nav li a.current").parent().find("ul").slideToggle("slow"); // Slide down the current menu item's sub menu
 		
 		$("#main-nav li a.nav-top-item").click( // When a top menu item is clicked...
 			function () {
@@ -16,7 +16,7 @@ $(document).ready(function(){
 				$(this).addClass("current");
 				$(this).parent().siblings().find("ul").slideUp("normal"); // Slide up all sub menus except the one clicked
 				
-				$(this).next().slideToggle($conn,"normal");
+				$(this).next().slideToggle("normal");
 				// Slide down the clicked sub menu
 				return false;
 			}

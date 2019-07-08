@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -49,7 +49,7 @@
 
 <HEAD>
 
-<TITLE><?php   echo $s_title;?></TITLE>
+<TITLE><?php     echo $s_title;?></TITLE>
 
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 
@@ -99,13 +99,13 @@ function check(frm){
 
 </HEAD>
 
-<?php   include ("../../include/function_script.php"); ?>
+<?php     include ("../../include/function_script.php"); ?>
 
 <BODY>
 
 <DIV id=body-wrapper>
 
-<?php   include("../left.php");?>
+<?php     include("../left.php");?>
 
 <DIV id=main-content>
 
@@ -113,9 +113,9 @@ function check(frm){
 
 </NOSCRIPT>
 
-<?php   include('../top.php');?>
+<?php     include('../top.php');?>
 
-<P id=page-intro><?php   if ($mode == "add") { ?>เพิ่มเมนู<?php   } else { ?>แก้ไข	[<?php   echo $page_name; ?>]<?php   } ?>	</P>
+<P id=page-intro><?php     if ($mode == "add") { ?>เพิ่มเมนู<?php     } else { ?>แก้ไข	[<?php     echo $page_name; ?>]<?php     } ?>	</P>
 
 <UL class=shortcut-buttons-set>
 
@@ -134,7 +134,7 @@ function check(frm){
 
 
 
-<H3 align="left"><?php   echo $page_name; ?></H3>
+<H3 align="left"><?php     echo $page_name; ?></H3>
 
 <DIV class=clear>
 
@@ -152,7 +152,7 @@ function check(frm){
 
       <fieldset>
 
-      <legend><?php   echo $page_name; ?> </legend>
+      <legend><?php     echo $page_name; ?> </legend>
 
         <table width="100%" cellspacing="0" cellpadding="0" border="0">
 
@@ -164,7 +164,7 @@ function check(frm){
 
                 <td nowrap class="name">ชื่อเมนู</td>
 
-                <td><input name="menucate_name" type="text" id="menucate_name"  value="<?php   echo $menucate_name; ?>" size="60"></td>
+                <td><input name="menucate_name" type="text" id="menucate_name"  value="<?php     echo $menucate_name; ?>" size="60"></td>
 
               </tr>
 
@@ -172,19 +172,19 @@ function check(frm){
 
                 <td nowrap class="name">ลิงค์เมนู</td>
 
-                <td><input name="url_link" type="text" id="url_link"  value="<?php   echo $url_link; ?>" size="60"></td>
+                <td><input name="url_link" type="text" id="url_link"  value="<?php     echo $url_link; ?>" size="60"></td>
 
               </tr>
 
               
 
-              <?php   if ($_GET["mode"] == "add") { ?>
+              <?php     if ($_GET["mode"] == "add") { ?>
 
-              <?php   } ?>
+              <?php     } ?>
 
-              <?php   if ($_GET["mode"] == "update") { ?>
+              <?php     if ($_GET["mode"] == "update") { ?>
 
-              <?php   } ?>
+              <?php     } ?>
 
           </table></td>
 
@@ -202,7 +202,7 @@ function check(frm){
 
       <input type="reset" name="Submit" value="Reset" class="button">
 
-      <?php   
+      <?php     
 
 			$a_not_exists = array();
 
@@ -210,9 +210,9 @@ function check(frm){
 
 			?>
 
-      <input name="mode" type="hidden" id="mode" value="<?php   echo $_REQUEST[mode];?>">
+      <input name="mode" type="hidden" id="mode" value="<?php     echo $_REQUEST[mode];?>">
 
-      <input name="<?php   echo $PK_field;?>" type="hidden" id="<?php   echo $PK_field;?>" value="<?php   echo $_GET[$PK_field];?>">
+      <input name="<?php     echo $PK_field;?>" type="hidden" id="<?php     echo $PK_field;?>" value="<?php     echo $_GET[$PK_field];?>">
 
     </div>
 
@@ -234,17 +234,17 @@ function check(frm){
 
 
 
-<?php   include("../footer.php");?>
+<?php     include("../footer.php");?>
 
 </DIV><!-- End #main-content -->
 
 </DIV>
 
-<?php   if($msg_user==1){?>
+<?php     if($msg_user==1){?>
 
 <script language=JavaScript>alert('Menu name ซ้ำ กรุณาเปลี่ยน Menu name ใหม่ !');</script>
 
-<?php   }?>
+<?php     }?>
 
 </BODY>
 

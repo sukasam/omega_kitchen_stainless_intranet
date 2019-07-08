@@ -1,4 +1,4 @@
-<?php 
+<?php   
 $name='Garuda';
 $type='TTF';
 $desc=array (

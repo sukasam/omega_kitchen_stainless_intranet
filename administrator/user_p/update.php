@@ -1,4 +1,4 @@
-<?
+<?php 
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -46,7 +46,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><? echo $s_title;?></TITLE>
+<TITLE><?php   echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -64,15 +64,15 @@ function confirmDelete(delUrl,text) {
 }
 </script>
 </HEAD>
-<? include ("../../include/function_script.php"); ?>
+<?php  include ("../../include/function_script.php"); ?>
 <BODY>
 <DIV id=body-wrapper>
-<? include("../left.php");?>
+<?php  include("../left.php");?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<? include('../top.php');?>
-<P id=page-intro><? if ($mode == "add") { ?>Enter new information<? } else { ?>Update  details	[<? echo $page_name; ?>]<? } ?>	</P>
+<?php  include('../top.php');?>
+<P id=page-intro><?php  if ($mode == "add") { ?>Enter new information<?php  } else { ?>Update  details	[<?php   echo $page_name; ?>]<?php  } ?>	</P>
 <UL class=shortcut-buttons-set>
   <LI><A class=shortcut-button href="javascript:history.back()"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>Back</SPAN></A></LI>
 </UL>
@@ -81,7 +81,7 @@ function confirmDelete(delUrl,text) {
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right">
 
-<H3 align="left"><? echo ucfirst ($check_module); ?></H3>
+<H3 align="left"><?php   echo ucfirst ($check_module); ?></H3>
 <DIV class=clear>
   
 </DIV></DIV><!-- End .content-box-header -->
@@ -90,7 +90,7 @@ function confirmDelete(delUrl,text) {
   <form action="update.php" method="post" enctype="multipart/form-data" name="form1" id="form1"  >
     <div class="formArea">
       <fieldset>
-      <legend><? echo ucfirst ($page_name); ?> form </legend>
+      <legend><?php   echo ucfirst ($page_name); ?> form </legend>
         <table width="100%" cellspacing="0" cellpadding="0" border="0">
           <tr>
           <td height="54"><table width="100%" border="0" cellspacing="0" class="formFields">
@@ -98,7 +98,7 @@ function confirmDelete(delUrl,text) {
                 <td class="name" style="color:#0C0">
    
                     User &gt;
-                    <? 
+                    <?php  
 							$sql = "select * from s_user where user_id = '$_GET[user_id]' ";
 							$rec = @mysqli_fetch_array(@mysqli_query($conn,$sql));
 							echo $rec[username];
@@ -116,34 +116,34 @@ function confirmDelete(delUrl,text) {
                 <td><div align="center"></div></td>
                 <td><div align="center"></div></td>
               </tr>
-              <?
+              <?php 
 	$counter = 0;
 	$sql = "select * from s_user_p,s_module where user_id = '$_SESSION[s_user_id]' and s_module.module_id = s_user_p.module_id  order by $PK_field desc ";
 		$query = @mysqli_query($conn,$sql);
 		while($rec = @mysqli_fetch_array($query)){
 ?>
-              <tr <? if ($counter++%2) { ?>class="oddrowbg" <? } else { ?> class="evenrowbg"<? } ?>>
-                <td height="26" ><? echo $rec[module_name]; ?></td>
+              <tr <?php  if ($counter++%2) { ?>class="oddrowbg" <?php  } else { ?> class="evenrowbg"<?php  } ?>>
+                <td height="26" ><?php   echo $rec[module_name]; ?></td>
                 <td><div align="center">
-                    <input type="checkbox" name="checkbox" value="checkbox" <? if($rec[read_p] == 1) echo "checked"; ?>>
+                    <input type="checkbox" name="checkbox" value="checkbox" <?php  if($rec[read_p] == 1) echo "checked"; ?>>
                 </div></td>
                 <td><div align="center">
-                    <input type="checkbox" name="checkbox2" value="checkbox" <? if($rec[add_p] == 1) echo "checked"; ?>>
+                    <input type="checkbox" name="checkbox2" value="checkbox" <?php  if($rec[add_p] == 1) echo "checked"; ?>>
                 </div></td>
                 <td><div align="center">
-                    <input type="checkbox" name="checkbox3" value="checkbox" <? if($rec[update_p] == 1) echo "checked"; ?>>
+                    <input type="checkbox" name="checkbox3" value="checkbox" <?php  if($rec[update_p] == 1) echo "checked"; ?>>
                 </div></td>
                 <td><div align="center">
-                    <input type="checkbox" name="checkbox4" value="checkbox" <? if($rec[delete_p] == 1) echo "checked"; ?>>
+                    <input type="checkbox" name="checkbox4" value="checkbox" <?php  if($rec[delete_p] == 1) echo "checked"; ?>>
                 </div></td>
-                <td><div align="center"><a href="?action=Edit&user_id=<? echo $_GET[user_id];?>&mode=<? echo $_GET["mode"]?>&<? echo "$PK_field=".$rec[$PK_field];?>">Edit</a></div></td>
-                <td><div align="center"><a href="javascript:confirmDelete('update.php?action=delete&user_id=<? echo $_GET[user_id];?>&mode=<? echo $_GET["mode"]?>&<? echo "$PK_field=".$rec[$PK_field];?>','Module <? echo $rec[module_name];?>')">Delete</a></div></td>
+                <td><div align="center"><a href="?action=Edit&user_id=<?php   echo $_GET[user_id];?>&mode=<?php   echo $_GET["mode"]?>&<?php   echo "$PK_field=".$rec[$PK_field];?>">Edit</a></div></td>
+                <td><div align="center"><a href="javascript:confirmDelete('update.php?action=delete&user_id=<?php   echo $_GET[user_id];?>&mode=<?php   echo $_GET["mode"]?>&<?php   echo "$PK_field=".$rec[$PK_field];?>','Module <?php   echo $rec[module_name];?>')">Delete</a></div></td>
               </tr>
-              <?
+              <?php 
 			} // end while
 ?>
               <tr >
-                <td height="26" class="name"><?
+                <td height="26" class="name"><?php 
 					  	if($_GET["action"] == "Edit"){
 							$sql = "select * from s_user_p  where $PK_field = '".$_GET[$PK_field]."' ";
 							$query = @mysqli_query($conn,$sql);
@@ -157,33 +157,33 @@ function confirmDelete(delUrl,text) {
 					  ?>
                     <select name="module_id">
                       <option>Select One</option>
-                      <?
+                      <?php 
 								$sql = "select * from s_module order by module_id desc";
 								$query = @mysqli_query($conn,$sql);
 								while($rec = @mysqli_fetch_array($query)){
 							?>
-                      <option value="<? echo $rec[module_id];?>" <? if($module_id == $rec[module_id]) echo "selected";?>><? echo $rec[module_name];?></option>
-                      <? } ?>
+                      <option value="<?php   echo $rec[module_id];?>" <?php  if($module_id == $rec[module_id]) echo "selected";?>><?php   echo $rec[module_name];?></option>
+                      <?php  } ?>
                     </select>
                 </td>
                 <td><div align="center">
-                    <input name="read_p" type="checkbox" id="read_p" value="1" <? if($read_p == "1") echo "checked"; ?>>
+                    <input name="read_p" type="checkbox" id="read_p" value="1" <?php  if($read_p == "1") echo "checked"; ?>>
                 </div></td>
                 <td><div align="center">
-                    <input name="add_p" type="checkbox" id="add_p" value="1" <? if($add_p == "1") echo "checked"; ?>>
+                    <input name="add_p" type="checkbox" id="add_p" value="1" <?php  if($add_p == "1") echo "checked"; ?>>
                 </div></td>
                 <td><div align="center">
-                    <input name="update_p" type="checkbox" id="update_p" value="1" <? if($update_p == "1") echo "checked"; ?>>
+                    <input name="update_p" type="checkbox" id="update_p" value="1" <?php  if($update_p == "1") echo "checked"; ?>>
                 </div></td>
                 <td><div align="center">
-                    <input name="delete_p" type="checkbox" id="delete_p" value="1" <? if($delete_p == "1") echo "checked"; ?>>
+                    <input name="delete_p" type="checkbox" id="delete_p" value="1" <?php  if($delete_p == "1") echo "checked"; ?>>
                 </div></td>
-                <td colspan="2"><?
+                <td colspan="2"><?php 
 							if($_GET["action"] <> "Edit") $option_value = "Add";
 							else $option_value = "Edit";
 						?>
                     <div align="left">
-                      <input name="option" type="submit" id="option" value="<? echo $option_value;?>" class="button">
+                      <input name="option" type="submit" id="option" value="<?php   echo $option_value;?>" class="button">
                   </div></td>
               </tr>
           </table></td>
@@ -192,9 +192,9 @@ function confirmDelete(delUrl,text) {
         </fieldset>
     </div>
     <div class="formArea">
-      <? foreach ($_GET as $key => $value) { ?>
-<input name="<? echo $key;?>" type="hidden" id="<? echo $key;?>" value="<? echo $value;?>">
-      <? } ?>
+      <?php  foreach ($_GET as $key => $value) { ?>
+<input name="<?php   echo $key;?>" type="hidden" id="<?php   echo $key;?>" value="<?php   echo $value;?>">
+      <?php  } ?>
     </div>
   </form>
 </DIV>
@@ -205,11 +205,11 @@ function confirmDelete(delUrl,text) {
 <DIV class=clear></DIV><!-- Start Notifications -->
 <!-- End Notifications -->
 
-<? include("../footer.php");?>
+<?php  include("../footer.php");?>
 </DIV><!-- End #main-content -->
 </DIV>
-<? if($msg_user==1){?>
+<?php  if($msg_user==1){?>
 <script language=JavaScript>alert('Username ซ้ำ กรุณาเปลี่ยน Username ใหม่ !');</script>
-<? }?>
+<?php  }?>
 </BODY>
 </HTML>

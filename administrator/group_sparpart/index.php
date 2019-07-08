@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -19,7 +19,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><?php   echo $s_title;?></TITLE>
+<TITLE><?php     echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -44,32 +44,32 @@ function check_select(frm){
 }	
 </script>
 </HEAD>
-<?php   include ("../../include/function_script.php"); ?>
+<?php     include ("../../include/function_script.php"); ?>
 <BODY>
 <DIV id=body-wrapper>
-<?php   include("../left.php");?>
+<?php     include("../left.php");?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<?php   include('../top.php');?>
-<P id=page-intro><?php   echo $page_name; ?></P>
+<?php     include('../top.php');?>
+<P id=page-intro><?php     echo $page_name; ?></P>
 
 <UL class=shortcut-buttons-set>
-  <LI><A class=shortcut-button href="update.php?mode=add<?php   if ($param <> "") echo "&".$param; ?>"><SPAN><IMG  alt=icon src="../images/pencil_48.png"><BR>
+  <LI><A class=shortcut-button href="index.php"><SPAN><IMG  alt=icon src="../images/menu/mn_serting06.png"><BR>
     สต๊อคอะไหล่</SPAN></A></LI>
-    <LI><A class=shortcut-button href="update.php?mode=add<?php   if ($param <> "") echo "&".$param; ?>"><SPAN><IMG  alt=icon src="../images/pencil_48.png"><BR>
-    เพิ่มสินค้า</SPAN></A></LI>
-    <LI><A class=shortcut-button href="update.php?mode=add<?php   if ($param <> "") echo "&".$param; ?>"><SPAN><IMG  alt=icon src="../images/pencil_48.png"><BR>
+    <LI><A class=shortcut-button href="update.php?mode=add"><SPAN><IMG  alt=icon src="../images/menu/mn_serting21.png"><BR>
+    เพิ่ม/แก้ไข อะไหล่</SPAN></A></LI>
+    <LI><A class=shortcut-button href="../group_sparpart_stockin/update.php"><SPAN><IMG  alt=icon src="../images/menu/mn_serting22.png"><BR>
     รับเข้าสต๊อค</SPAN></A></LI>
-    <LI><A class=shortcut-button href="update.php?mode=add<?php   if ($param <> "") echo "&".$param; ?>"><SPAN><IMG  alt=icon src="../images/pencil_48.png"><BR>
+    <LI><A class=shortcut-button href="update.php?mode=add<?php     if ($param <> "") echo "&".$param; ?>"><SPAN><IMG  alt=icon src="../images/menu/mn_serting23.png"><BR>
     รายงานสต็อค</SPAN></A></LI>
-    <?php   
+    <?php     
 	if ($FR_module <> "") { 
 	$param2 = get_return_param();
 	?>
-  <LI><A class=shortcut-button href="../<?php   echo $FR_module; ?>/?<?php   if($param2 <> "") echo $param2;?>"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>
+  <LI><A class=shortcut-button href="../<?php     echo $FR_module; ?>/?<?php     if($param2 <> "") echo $param2;?>"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>
   กลับ</SPAN></A></LI>
-  <?php   }?> 
+  <?php     }?> 
 </UL>
   
   <!-- End .shortcut-buttons-set -->
@@ -77,16 +77,16 @@ function check_select(frm){
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right" style="padding-right:15px;">
 
-<H3 align="left"><?php   echo $check_module; ?></H3>
+<H3 align="left"><?php     echo $check_module; ?></H3>
 <br><form name="form1" method="get" action="index.php">
-    <input name="keyword" type="text" id="keyword" value="<?php   echo $keyword;?>">
+    <input name="keyword" type="text" id="keyword" value="<?php     echo $keyword;?>">
     <input name="Action" type="submit" id="Action" value="ค้นหา">
-    <?php  
+    <?php    
 			$a_not_exists = array('keyword');
 			$param2 = get_param($a_param,$a_not_exists);
 			  ?>
-    <a href="index.php?<?php   echo $param2;?>">แสดงทั้งหมด</a>
-    <?php   
+    <a href="index.php?<?php     echo $param2;?>">แสดงทั้งหมด</a>
+    <?php     
 			/*$a_not_exists = array();
 			post_param($a_param,$a_not_exists);*/
 			?>
@@ -97,49 +97,37 @@ function check_select(frm){
 <DIV class=content-box-content>
 <DIV id=tab1 class="tab-content default-tab"><!-- This is the target div. id must match the href of this div's tab -->
   <form name="form2" method="post" action="confirm.php" onSubmit="return check_select(this)">
-    <TABLE>
+    <TABLE class="tbMain">
       <THEAD>
         <TR>
-          <TH width="4%"><INPUT class=check-all type=checkbox name="ca" value="true" onClick="chkAll(this.form, 'del[]', this.checked)"></TH>
-          <TH width="11%" <?php   Show_Sort_bg ("user_id", $orderby) ?>> <?php  
-		$a_not_exists = array('orderby','sortby');
-		$param2 = get_param($a_param,$a_not_exists);
-	?>
-            <?php    Show_Sort_new ("user_id", "ลำดับ.", $orderby, $sortby,$page,$param2);?>
-            &nbsp;</TH>
-          <TH width="10%" <?php   Show_Sort_bg ("group_name", $orderby) ?>>
-           <?php    Show_Sort_new ("group_name", "รหัสอะไหล่", $orderby, $sortby,$page,$param2);?>
-            &nbsp;</TH>
-          <TH width="36%" <?php   Show_Sort_bg ("group_name", $orderby) ?>> <?php    Show_Sort_new ("group_name", "ชื่ออะไหล่", $orderby, $sortby,$page,$param2);?>
-            &nbsp;</TH>
-          <!--<TH width="20%" <?php   Show_Sort_bg ("group_name", $orderby) ?>> <?php    Show_Sort_new ("group_name", "จำนวน", $orderby, $sortby,$page,$param2);?>
-  &nbsp;</TH>-->
-          <TH width="11%" <?php   Show_Sort_bg ("group_name", $orderby) ?>> <?php    Show_Sort_new ("group_name", "นาม", $orderby, $sortby,$page,$param2);?>
-  &nbsp;</TH>
-          <TH width="11%" <?php   Show_Sort_bg ("group_name", $orderby) ?>> <?php    Show_Sort_new ("group_stock", "จำนวนคงเหลือ", $orderby, $sortby,$page,$param2);?>
-  &nbsp;</TH>
-          <TH width="9%" <?php   Show_Sort_bg ("group_name", $orderby) ?>> <?php    Show_Sort_new ("group_price", "ราคา/หน่วย", $orderby, $sortby,$page,$param2);?>
-  &nbsp;</TH>
-          <TH width="5%"><a>แก้ไข</a></TH>
-          <TH width="3%"><a>ลบ</a></TH>
+<!--          <TH width="4%"><INPUT class=check-all type=checkbox name="ca" value="true" onClick="chkAll(this.form, 'del[]', this.checked)"></TH>-->
+          <TH width="5%"><a>ลำดับ</a></TH>
+          <TH width="10%"><a>รหัสอะไหล่</a></TH>
+          <TH width="20%" ><a>ชื่ออะไหล่</a></TH>
+          <TH width="10%"><a>คงเหลือ</a></TH>
+          <TH width="14%"><a>ชนิดสินค้า</a></TH>
+          <TH width="12%"><a>ราคาต้นทุนสินค้า</a></TH>
+          <TH width="12%"><a>รวมราคาต้นทุนสินค้า</a></TH>
+          <TH width="12%"><a>ราคาขาย</a></TH>
+          <TH width="5%"><a>ลบ</a></TH>
         </TR>
       </THEAD>
       <TFOOT>
         </TFOOT>
       <TBODY>
-        <?php   
+        <?php     
 					if($orderby=="") $orderby = $tbl_name.".group_spar_id";
 					if ($sortby =="") $sortby ="ASC";
 					
 				   	$sql = " select *,$tbl_name.create_date as c_date from $tbl_name  where 1 ";
 					if ($_GET[$PK_field] <> "") $sql .= " and ($PK_field  = '" . $_GET[$PK_field] . " ' ) ";					
 					if ($_GET[$FR_field] <> "") $sql .= " and ($FR_field  = '" . $_GET[$FR_field] . " ' ) ";					
- 					if ($_GET[keyword] <> "") { 
-						$sql .= "and ( " .  $PK_field  . " like '%$_GET[keyword]%' ";
+ 					if ($_GET["keyword"] <> "") { 
+						$sql .= "and ( " .  $PK_field  . " like '%".$_GET["keyword"]."%' ";
 						if (count ($search_key) > 0) { 
 							$search_text = " and ( " ;
 							foreach ($search_key as $key=>$value) { 
-									$subtext .= "or " . $value  . " like '%" . $_GET[keyword] . "%'";
+									$subtext .= "or " . $value  . " like '%" . $_GET["keyword"] . "%'";
 							}	
 						}
 						$sql .=  $subtext . " ) ";
@@ -156,18 +144,19 @@ function check_select(frm){
 					$counter++;
 				   ?>
         <TR>
-          <TD><INPUT type=checkbox name="del[]" value="<?php   echo $rec[$PK_field]; ?>" ></TD>
-          <TD><span class="text"><?php   echo sprintf("%04d",$counter); ?></span></TD>
-          <TD><span class="text"><?php   echo $rec["group_spar_id"] ; ?></span></TD>
-          <TD><span class="text"><?php   echo $rec["group_name"] ; ?></span></TD>
-          <TD><span class="text"><?php   echo $rec["group_namecall"] ; ?></span></TD>
-          <TD><span class="text"><?php   echo number_format($rec["group_stock"]); ?></span></TD>
-          <TD><span class="text"><?php   echo number_format($rec["group_price"]); ?></span></TD>
-          <TD><!-- Icons -->
-            <A title=Edit href="update.php?mode=update&<?php   echo $PK_field; ?>=<?php   echo $rec["$PK_field"]; if($param <> "") {?>&<?php   echo $param; }?>"><IMG alt=Edit src="../images/pencil.png"></A> <A title=Delete  href="#"></A></TD>
-          <TD><A title=Delete  href="#"><IMG alt=Delete src="../images/cross.png" onClick="confirmDelete('?action=delete&<?php   echo $PK_field; ?>=<?php   echo $rec[$PK_field];?>','Group  <?php   echo $rec[$PK_field];?> : <?php   echo $rec["group_name"];?>')"></A></TD>
+<!--          <TD><INPUT type=checkbox name="del[]" value="<?php     echo $rec[$PK_field]; ?>" ></TD>-->
+          <TD><span class="text"><?php     echo sprintf("%04d",$counter); ?></span></TD>
+          <TD style="text-align: center;"><span class="text"><?php     echo $rec["group_spar_id"] ; ?></span></TD>
+          <TD><span class="text"><?php     echo $rec["group_name"] ; ?></span></TD>
+          <TD style="text-align: center;"><span class="text"><?php     echo number_format($rec["group_stock"]); ?></span></TD>
+          <TD style="text-align: center;"><span class="text"><?php     echo $rec["group_type"] ; ?></span></TD>
+          <TD style="text-align: right;"><span class="text"><?php     echo number_format($rec["group_unit_price"],2); ?></span></TD>
+          <TD style="text-align: right;"><span class="text"><?php     echo number_format($rec["group_stock"]*$rec["group_unit_price"],2) ; ?></span></TD>
+          <TD style="text-align: right;"><span class="text"><?php     echo number_format($rec["group_price"],2); ?></span></TD>
+          <TD style="text-align: center;"><A title=Delete  href="#"><IMG alt=Delete src="../images/cross.png" onClick="confirmDelete('?action=delete&<?php     echo $PK_field; ?>=<?php     echo $rec[$PK_field];?>','Group  <?php     echo $rec[$PK_field];?> : <?php     echo $rec["group_name"];?>')"></A></TD>
+
         </TR>  
-		<?php   }?>
+		<?php     }?>
       </TBODY>
     </TABLE>
     <br><br>
@@ -176,12 +165,12 @@ function check_select(frm){
               <OPTION selected value="">กรุณาเลือก...</OPTION>
               <OPTION value="del">ลบ</OPTION>
             </SELECT>            
-            <?php  
+            <?php    
 				$a_not_exists = array();
 				post_param($a_param,$a_not_exists); 
 			?>
             <input class=button name="Action2" type="submit" id="Action2" value="ตกลง">
-          </DIV> <DIV class=pagination> <?php   include("../include/page_show.php");?> </DIV>
+          </DIV> <DIV class=pagination> <?php     include("../include/page_show.php");?> </DIV>
   </form>  
 </DIV><!-- End #tab1 -->
 
@@ -193,7 +182,7 @@ function check_select(frm){
 <DIV class=clear></DIV><!-- Start Notifications -->
 <!-- End Notifications -->
 
-<?php   include("../footer.php");?>
+<?php     include("../footer.php");?>
 </DIV><!-- End #main-content -->
 </DIV>
 </BODY>

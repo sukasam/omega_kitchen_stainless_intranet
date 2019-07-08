@@ -1,4 +1,4 @@
-<?
+<?php 
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -31,6 +31,10 @@
 		$_POST['sell_date']=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
 
 		if ($_POST["mode"] == "add") { 
+			
+			$_POST['approve'] = 0;
+			$_POST['st_setting'] = 0;
+			$_POST['supply'] = 0;
 		
 			$_POST['detail_recom'] = nl2br($_POST['detail_recom']);
 			$_POST['detail_calpr'] = nl2br($_POST['detail_calpr']);
@@ -46,25 +50,20 @@
 			
 			$_POST['job_last'] = get_lastservice_s($conn,$_POST['cus_id'],"");
 			
-			foreach ($_POST['ckf_list2'] as $value) {
-				$checklist .= $value.',';
-			}
-			
-			$_POST['ckf_list'] = substr($checklist,0,-1);
-			
-			$_POST['ckf_list'];
-			
 			include "../include/m_add.php";
 			
 			
 			$id = mysqli_insert_id($conn);
 			
 			foreach($codes as $a => $b){
-				//$BX_NAME[$a]
-				@mysqli_query($conn,"INSERT INTO `s_service_report4sub` (`r_id`, `sr_id`, `codes`, `lists`, `units`, `prices`, `amounts`, `opens`, `remains`) VALUES (NULL, '".$id."', '".$codes[$a]."', '".$lists[$a]."', '".$units[$a]."', '".$prices[$a]."', '".$amounts[$a]."', '".$opens[$a]."', '".$remains[$a]."');");
-				$idsp = mysqli_insert_id($conn);
-				@mysqli_query($conn,"UPDATE `s_group_sparpart` SET `group_stock` = `group_stock` - '".$opens[$a]."' WHERE `group_id` = '".$lists[$a]."';");
-				@mysqli_query($conn,"UPDATE `s_service_report4sub` SET `amounts` = `amounts` - '".$opens[$a]."' WHERE `r_id` = '".$idsp."';");
+				
+				if($lists[$a] != ""){
+					if($opens[$a] == ""){
+						$opens[$a] = 0;
+					}
+					@mysqli_query($conn,"INSERT INTO `s_service_report4sub` (`r_id`, `sr_id`, `codes`, `lists`, `units`, `prices`, `amounts`, `opens`, `remains`) VALUES (NULL, '".$id."', '".$codes[$a]."', '".$lists[$a]."', '".$units[$a]."', '".$prices[$a]."', '".$amounts[$a]."', '".$opens[$a]."', '0');");
+					@mysqli_query($conn,"UPDATE `s_group_sparpart` SET `group_stock` = `group_stock` - '".$opens[$a]."' WHERE `group_id` = '".$lists[$a]."';");
+				}
 			}
 				
 			include_once("../mpdf54/mpdf.php");
@@ -95,38 +94,18 @@
 			
 			$filename = "";
 			
-			/*foreach ($_POST['ckf_list2'] as $value) {
-				$checklist .= $value.',';
+			
+			$sql2 = "select * from s_service_report4sub where sr_id = '".$_REQUEST[$PK_field]."'";
+			$quPro = @mysqli_query($conn,$sql2);
+			while($rowPro = mysqli_fetch_array($quPro)){
+				@mysqli_query($conn,"UPDATE `s_group_sparpart` SET `group_stock` = `group_stock`+'".$rowPro['opens']."' WHERE `group_id` = '".$rowPro['lists']."';");
 			}
 			
-			$_POST['ckf_list'] = substr($checklist,0,-1);
+			@mysqli_query($conn,"DELETE FROM `s_service_report4sub` WHERE `sr_id` = '".$_REQUEST[$PK_field]."'");
 			
-			$_POST['ckf_list'];*/
 			 
 			include ("../include/m_update.php");
-			
-			/*if ($_FILES['ufimages']['name'] != "") { 
-				$mname="";
-				$mname=gen_random_num(5);
-				$a_size = array('100');				
-				foreach($a_size as $key => $value) {
-					$path = "../../upload/install/";
-					@unlink($path.$_POST['u_images']);
-					$quality = 80;
-					if($filename == "")
-						$name_data=explode(".",$_FILES['ufimages']['name']);
-						$type=$name_data[1];
-						$filename =$mname.".".$type;
-						list($width, $height) = getimagesize($_FILES['ufimages']['name']);
-						uploadfile($path,$filename,$_FILES['ufimages']['tmp_name'],$width, $quality);
-				} // end foreach				
-				$sql = "update $tbl_name set u_images = '$filename' where $PK_field = '".$_POST[$PK_field]."' ";
-				@mysqli_query($conn,$sql);				
-				
-				$_POST['filenames'] = '<img src="../../upload/install/'.$filename.'" width="600">';
-				
-			} // end if ($_FILES[ufimages][name] != "")*/
-			
+
 			if ($_FILES['ufimages']['name'] != "") { 
 				$mname="";	
 				$mname=gen_random_num(5);
@@ -178,19 +157,31 @@
 			$id = $_REQUEST[$PK_field];		
 			
 			foreach($codes as $a => $b){
-				$resupdate = get_plusminus($conn,"s_group_sparpart","s_service_report4sub",$rid[$a],$lists[$a]);
 				
-				@mysqli_query($conn,"UPDATE `s_service_report4sub` SET `codes` = '".$codes[$a]."', `lists` = '".$lists[$a]."', `units` = '".$units[$a]."', `prices` = '".$prices[$a]."', `opens` = '".$opens[$a]."' WHERE `r_id` =".$rid[$a]."");
-				@mysqli_query($conn,"UPDATE `s_group_sparpart` SET `group_stock` = `group_stock` - '".$opens[$a]."' WHERE `group_id` = '".$lists[$a]."';");
-				
-				$amount = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM `s_group_sparpart` WHERE `group_id` = '".$lists[$a]."';"));
-								
-				@mysqli_query($conn,"UPDATE `s_service_report4sub` SET `amounts` = '".$amount['group_stock']."' WHERE `r_id` = '".$rid[$a]."';");	
-				
-				if($opens[$a] == 0){
-					@mysqli_query($conn,"UPDATE `s_service_report4sub` SET `codes` = '', `lists` = '', `units` = '', `prices` = '', `amounts` = '', `opens` = '', `remains` = '' WHERE `r_id` =".$rid[$a]."");
+				if($lists[$a] != ""){
+					if($opens[$a] == ""){
+						$opens[$a] = 0;
+					}
+					@mysqli_query($conn,"INSERT INTO `s_service_report4sub` (`r_id`, `sr_id`, `codes`, `lists`, `units`, `prices`, `amounts`, `opens`, `remains`) VALUES (NULL, '".$id."', '".$codes[$a]."', '".$lists[$a]."', '".$units[$a]."', '".$prices[$a]."', '".$amounts[$a]."', '".$opens[$a]."', '0');");
+					@mysqli_query($conn,"UPDATE `s_group_sparpart` SET `group_stock` = `group_stock` - '".$opens[$a]."' WHERE `group_id` = '".$lists[$a]."';");
 				}
-			}		
+						
+			}	
+//			
+//			foreach($codes as $a => $b){
+//				$resupdate = get_plusminus($conn,"s_group_sparpart","s_service_report4sub",$rid[$a],$lists[$a]);
+//				
+//				@mysqli_query($conn,"UPDATE `s_service_report4sub` SET `codes` = '".$codes[$a]."', `lists` = '".$lists[$a]."', `units` = '".$units[$a]."', `prices` = '".$prices[$a]."', `opens` = '".$opens[$a]."' WHERE `r_id` =".$rid[$a]."");
+//				@mysqli_query($conn,"UPDATE `s_group_sparpart` SET `group_stock` = `group_stock` - '".$opens[$a]."' WHERE `group_id` = '".$lists[$a]."';");
+//				
+//				$amount = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM `s_group_sparpart` WHERE `group_id` = '".$lists[$a]."';"));
+//								
+//				@mysqli_query($conn,"UPDATE `s_service_report4sub` SET `amounts` = '".$amount['group_stock']."' WHERE `r_id` = '".$rid[$a]."';");	
+//				
+//				if($opens[$a] == 0){
+//					@mysqli_query($conn,"UPDATE `s_service_report4sub` SET `codes` = '', `lists` = '', `units` = '', `prices` = '', `amounts` = '', `opens` = '', `remains` = '' WHERE `r_id` =".$rid[$a]."");
+//				}
+//			}		
 				
 			include_once("../mpdf54/mpdf.php");
 			include_once("form_serviceopen.php");
@@ -262,7 +253,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><? echo $s_title;?></TITLE>
+<TITLE><?php   echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -324,15 +315,15 @@ function check(frm){
       }
 </SCRIPT>
 </HEAD>
-<? include ("../../include/function_script.php"); ?>
+<?php  include ("../../include/function_script.php"); ?>
 <BODY>
 <DIV id=body-wrapper>
-<? include("../left.php");?>
+<?php  include("../left.php");?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<? include('../top.php');?>
-<P id=page-intro><? if ($mode == "add") { ?>Enter new information<? } else { ?>แก้ไข	[<? echo $page_name; ?>]<? } ?>	</P>
+<?php  include('../top.php');?>
+<P id=page-intro><?php  if ($mode == "add") { ?>Enter new information<?php  } else { ?>แก้ไข	[<?php   echo $page_name; ?>]<?php  } ?>	</P>
 <UL class=shortcut-buttons-set>
   <LI><A class=shortcut-button href="javascript:history.back()"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>
   กลับ</SPAN></A></LI>
@@ -342,7 +333,7 @@ function check(frm){
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right">
 
-<H3 align="left"><? echo $check_module; ?></H3>
+<H3 align="left"><?php   echo $check_module; ?></H3>
 <DIV class=clear>
   
 </DIV></DIV><!-- End .content-box-header -->
@@ -351,7 +342,7 @@ function check(frm){
   <form action="update.php" method="post" enctype="multipart/form-data" name="form1" id="form1"  onSubmit="return check(this)">
     <div class="formArea">
       <fieldset>
-      <legend><? echo $page_name; ?> </legend>
+      <legend><?php   echo $page_name; ?> </legend>
         <table width="100%" cellspacing="0" cellpadding="0" border="0">
           <tr>
             <td><style>
@@ -446,40 +437,40 @@ function check(frm){
             <td><strong>ชื่อลูกค้า :</strong> 
             	<!--<select name="cus_id" id="cus_id" onChange="checkfirstorder(this.value,'cusadd','cusprovince','custel','cusfax','contactid','datef','datet','cscont','cstel','sloc_name','sevlast','prolist');" style="width:300px;">
                 	<option value="">กรุณาเลือก</option>
-                	<?php 
+                	<?php   
 						$qu_cusf = @mysqli_query($conn,"SELECT * FROM s_first_order ORDER BY cd_name ASC");
 						while($row_cusf = @mysqli_fetch_array($qu_cusf)){
 							?>
-							<option value="<?php echo $row_cusf['fo_id'];?>" <?php if($row_cusf['fo_id'] == $cus_id){echo 'selected';}?>><?php echo $row_cusf['cd_name']." (".$row_cusf['loc_name'].")";?></option>
-							<?php
+							<option value="<?php   echo $row_cusf['fo_id'];?>" <?php   if($row_cusf['fo_id'] == $cus_id){echo 'selected';}?>><?php   echo $row_cusf['cd_name']." (".$row_cusf['loc_name'].")";?></option>
+							<?php  
 						}
 					?>
                 </select>-->
-                <input name="cd_names" type="text" id="cd_names"  value="<?php echo get_customername($conn,$cus_id);?>" style="width:50%;" readonly>
-                <span id="rsnameid"><input type="hidden" name="cus_id" value="<?php echo $cus_id;?>"></span><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
+                <input name="cd_names" type="text" id="cd_names"  value="<?php   echo get_customername($conn,$cus_id);?>" style="width:50%;" readonly>
+                <span id="rsnameid"><input type="hidden" name="cus_id" value="<?php   echo $cus_id;?>"></span><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
             </td>
             <td><strong>ประเภทบริการลูกค้า :</strong> 
             	<select name="sr_ctype" id="sr_ctype">
                 	<!--<option value="">กรุณาเลือก</option>-->
-                	<?php 
+                	<?php   
 						$qu_cusftype = @mysqli_query($conn,"SELECT * FROM s_group_service ORDER BY group_name ASC");
 						while($row_cusftype = @mysqli_fetch_array($qu_cusftype)){
 							?>
-							<option value="<?php echo $row_cusftype['group_id'];?>" <?php if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php echo $row_cusftype['group_name'];?></option>
-							<?php
+							<option value="<?php   echo $row_cusftype['group_id'];?>" <?php   if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php   echo $row_cusftype['group_name'];?></option>
+							<?php  
 						}
 					?>
                 </select>
                 <strong>ประเภทลูกค้า :</strong>
             	<select name="sr_ctype2" id="sr_ctype2">
             	  <!--<option value="">กรุณาเลือก</option>-->
-            	  <?php 
+            	  <?php   
 						$qu_cusftype2 = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
 						while($row_cusftype2 = @mysqli_fetch_array($qu_cusftype2)){
 							if(substr($row_cusftype2['group_name'],0,2) == "SR"){
 							?>
-            	  <option value="<?php echo $row_cusftype2['group_id'];?>" <?php if($row_cusftype2['group_id'] == $sr_ctype2){echo 'selected';}?>><?php echo $row_cusftype2['group_name'];?></option>
-            	  <?php
+            	  <option value="<?php   echo $row_cusftype2['group_id'];?>" <?php   if($row_cusftype2['group_id'] == $sr_ctype2){echo 'selected';}?>><?php   echo $row_cusftype2['group_name'];?></option>
+            	  <?php  
 							}
 						}
 					?>
@@ -487,32 +478,32 @@ function check(frm){
                 </td>
           </tr>
           <tr>
-            <td><strong>ที่อยู่ :</strong> <span id="cusadd"><?php echo $finfo['cd_address'];?></span></td>
-            <td><strong>เลขที่บริการ : <input type="text" name="sv_id" value="<?php if($sv_id == ""){echo check_servicereportinstall($conn);}else{echo $sv_id;};?>" id="sv_id" class="inpfoder" style="border:0;"><!--<input type="text" name="sv_id" value="<?php if($sv_id == ""){echo "SR";}else{echo $sv_id;};?>" id="sv_id" class="inpfoder" style="border:0;">-->&nbsp;&nbsp;เลขที่สัญญา  :</strong> <span id="contactid"><?php echo $finfo['fs_id'];?></span></td>
+            <td><strong>ที่อยู่ :</strong> <span id="cusadd"><?php   echo $finfo['cd_address'];?></span></td>
+            <td><strong>เลขที่บริการ : <input type="text" name="sv_id" value="<?php   if($sv_id == ""){echo check_servicereportinstall($conn);}else{echo $sv_id;};?>" id="sv_id" class="inpfoder" style="border:0;"><!--<input type="text" name="sv_id" value="<?php   if($sv_id == ""){echo "SR";}else{echo $sv_id;};?>" id="sv_id" class="inpfoder" style="border:0;">-->&nbsp;&nbsp;เลขที่สัญญา  :</strong> <span id="contactid"><?php   echo $finfo['fs_id'];?></span></td>
           </tr>
           <tr>
-            <td><strong>จังหวัด :</strong> <span id="cusprovince"><?php echo province_name($conn,$finfo['cd_province']);?></span></td>
-            <td><strong>วันที่  :</strong> <span id="datef"></span><input type="text" name="job_open" readonly value="<? if($job_open==""){echo date("d/m/Y");}else{ echo $job_open;}?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'job_open'});</script></td>
+            <td><strong>จังหวัด :</strong> <span id="cusprovince"><?php   echo province_name($conn,$finfo['cd_province']);?></span></td>
+            <td><strong>วันที่  :</strong> <span id="datef"></span><input type="text" name="job_open" readonly value="<?php  if($job_open==""){echo date("d/m/Y");}else{ echo $job_open;}?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'job_open'});</script></td>
           </tr>
           <tr>
-            <td><strong>โทรศัพท์ :</strong> <span id="custel"><?php echo $finfo['cd_tel'];?></span><strong>&nbsp;&nbsp;&nbsp;&nbsp;แฟกซ์ :</strong> <span id="cusfax"><?php echo $finfo['cd_fax'];?></span></td>
+            <td><strong>โทรศัพท์ :</strong> <span id="custel"><?php   echo $finfo['cd_tel'];?></span><strong>&nbsp;&nbsp;&nbsp;&nbsp;แฟกซ์ :</strong> <span id="cusfax"><?php   echo $finfo['cd_fax'];?></span></td>
             <td><strong>วันติดตั้ง :</strong> <span id="datet"></span>
-              <input type="text" name="job_balance" readonly value="<? if($job_balance==""){echo date("d/m/Y");}else{ echo $job_balance;}?>" class="inpfoder"/>
+              <input type="text" name="job_balance" readonly value="<?php  if($job_balance==""){echo date("d/m/Y");}else{ echo $job_balance;}?>" class="inpfoder"/>
               <script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'job_balance'});</script>
-              <input type="hidden" name="job_close" value="<? if($job_close==""){echo date("d/m/Y");}else{ echo $job_close;}?>" class="inpfoder"/>
+              <input type="hidden" name="job_close" value="<?php  if($job_close==""){echo date("d/m/Y");}else{ echo $job_close;}?>" class="inpfoder"/>
               <strong> วันที่ส่งงาน  :</strong><span style="font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;">
-              <input type="text" name="sr_stime" readonly value="<? if($sr_stime==""){echo date("d/m/Y");}else{ echo $sr_stime;}?>" class="inpfoder"/>
+              <input type="text" name="sr_stime" readonly value="<?php  if($sr_stime==""){echo date("d/m/Y");}else{ echo $sr_stime;}?>" class="inpfoder"/>
               <script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'sr_stime'});</script>
             </span>
               </td>
           </tr>
           <tr>
-            <td><strong>ชื่อผู้ติดต่อ :</strong> <span id="cscont"><?php echo $finfo['c_contact'];?></span>&nbsp;&nbsp;&nbsp;&nbsp;<strong>เบอร์โทร :</strong> <span id="cstel"><?php echo $finfo['c_tel'];?></span></td>
+            <td><strong>ชื่อผู้ติดต่อ :</strong> <span id="cscont"><?php   echo $finfo['c_contact'];?></span>&nbsp;&nbsp;&nbsp;&nbsp;<strong>เบอร์โทร :</strong> <span id="cstel"><?php   echo $finfo['c_tel'];?></span></td>
             <td><strong>เลขที่ใบงาน : 
-              <input type="text" name="srid" value="<?php echo $srid;?>" id="srid" class="inpfoder">
+              <input type="text" name="srid" value="<?php   echo $srid;?>" id="srid" class="inpfoder">
             </strong></td>
           </tr>
-          <?php 
+          <?php   
 		  	if($_GET['mode'] == "update"){
 				?>
 				<tr class="formFields">
@@ -521,23 +512,23 @@ function check(frm){
             </span>
               <input name="ufimages" type="file" id="ufimages">
               <br>
-              <?php
+              <?php  
 					  if(file_exists("../../upload/install/600/".$u_images)){?>
-              <img src="../../upload/install/600/<? echo $u_images?>" width="155">[ <a href="?mode=<? echo $_GET["mode"]?>&<? echo $PK_field?>=<? echo $$PK_field;?>&<? echo $FR_field?>=<? echo $$FR_field;?>&del_id=<? echo $u_images;?>&page=<? echo $page;?>">Delete</a>]
-              <? }?>
-              <input name="u_images" type="hidden" value="<?php echo $u_images; ?>"></td>
+              <img src="../../upload/install/600/<?php   echo $u_images?>" width="155">[ <a href="?mode=<?php   echo $_GET["mode"]?>&<?php   echo $PK_field?>=<?php   echo $$PK_field;?>&<?php   echo $FR_field?>=<?php   echo $$FR_field;?>&del_id=<?php   echo $u_images;?>&page=<?php   echo $page;?>">Delete</a>]
+              <?php  }?>
+              <input name="u_images" type="hidden" value="<?php   echo $u_images; ?>"></td>
           </tr>
-				<?php	
+				<?php  	
 			}
 		  ?>
 	</table>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tb2">
       <tr>
-        <td width="36%"><strong>สถานที่ติดตั้ง / ส่งสินค้า : </strong><span id="sloc_name"><?php echo $finfo['loc_name'];?></span><br />
+        <td width="36%"><strong>สถานที่ติดตั้ง / ส่งสินค้า : </strong><span id="sloc_name"><?php   echo $finfo['loc_name'];?></span><br />
           <br>
           <strong>เลือกสินค้า :</strong>
           <span id="prolist">
-          		<?php 
+          		<?php   
 				$prolist = get_profirstorder($conn,$cus_id);
 				//$lispp = explode(",",$prolist);
 				$plid = "<select name=\"bbfpro\" id=\"bbfpro\" onchange=\"get_podsn(this.value,'lpa1','lpa2','lpa3','".$cus_id."')\">
@@ -552,49 +543,49 @@ function check(frm){
           <br>
           <br />
             <strong>เครื่องล้างจาน / ยี่ห้อ : </strong><span style="font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;" id="lpa1">
-            <input type="text" name="loc_pro" value="<?php echo $loc_pro;?>" id="loc_pro" class="inpfoder" style="width:50%;">
+            <input type="text" name="loc_pro" value="<?php   echo $loc_pro;?>" id="loc_pro" class="inpfoder" style="width:50%;">
             </span><br>
             <br />
-            <strong>รุ่นเครื่อง : </strong><span id="lpa2"><input type="text" name="loc_seal" value="<?php echo $loc_seal;?>" id="loc_seal" class="inpfoder" style="width:20%;"></span>&nbsp;&nbsp;&nbsp;<strong>S/N</strong>&nbsp;<span id="lpa3"><input type="text" name="loc_sn" value="<?php echo $loc_sn;?>" id="loc_sn" class="inpfoder" style="width:20%;"></span><br /><br />
-            <strong>เครื่องป้อนน้ำยา : </strong><input type="text" name="loc_clean" value="<?php echo $loc_clean;?>" id="loc_clean" class="inpfoder" style="width:50%;"><br />
+            <strong>รุ่นเครื่อง : </strong><span id="lpa2"><input type="text" name="loc_seal" value="<?php   echo $loc_seal;?>" id="loc_seal" class="inpfoder" style="width:20%;"></span>&nbsp;&nbsp;&nbsp;<strong>S/N</strong>&nbsp;<span id="lpa3"><input type="text" name="loc_sn" value="<?php   echo $loc_sn;?>" id="loc_sn" class="inpfoder" style="width:20%;"></span><br /><br />
+            <strong>เครื่องป้อนน้ำยา : </strong><input type="text" name="loc_clean" value="<?php   echo $loc_clean;?>" id="loc_clean" class="inpfoder" style="width:50%;"><br />
             <br>
             <strong>ช่างติดตั้ง :</strong>
             <select name="loc_contact" id="loc_contact">
                 	<option value="">กรุณาเลือก</option>
-                	<?php 
+                	<?php   
 						$qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_technician ORDER BY group_name ASC");
 						while($row_custec = @mysqli_fetch_array($qu_custec)){
 							?>
-							<option value="<?php echo $row_custec['group_id'];?>" <?php if($row_custec['group_id'] == $loc_contact){echo 'selected';}?>><?php echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
-							<?php
+							<option value="<?php   echo $row_custec['group_id'];?>" <?php   if($row_custec['group_id'] == $loc_contact){echo 'selected';}?>><?php   echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
+							<?php  
 						}
 					?>
                 </select></td>
         <td width="38%"><strong>ปริมาณน้ำยา</strong><br /><br />
-            <strong>ปริมาณน้ำยาล้าง : </strong><input type="text" name="cl_01" value="<?php echo $cl_01;?>" id="cl_01" class="inpfoder" style="width:20%;"> <strong>ml / rack</strong><br /><br />
-            <strong>ปริมาณน้ำยาช่วยแห้ง : </strong><input type="text" name="cl_02" value="<?php echo $cl_02;?>" id="cl_02" class="inpfoder" style="width:20%;"> <strong>ml / rack</strong><br /><br />
-            <strong>ความเข้มข้น : </strong><input type="text" name="cl_03" value="<?php echo $cl_03;?>" id="cl_03" class="inpfoder" style="width:20%;"> <strong>%</strong><br /><br />
-            <strong>สต๊อกน้ำยา C =</strong> <input type="text" name="cl_04" value="<?php echo $cl_04;?>" id="cl_04" class="inpfoder" style="width:5%;"> <strong>ถัง R = </strong><input type="text" name="cl_05" value="<?php echo $cl_05;?>" id="cl_05" class="inpfoder" style="width:5%;"> <strong>ถัง A =</strong> <input type="text" name="cl_06" value="<?php echo $cl_06;?>" id="cl_06" class="inpfoder" style="width:5%;"> <strong>ถัง</strong><br />
+            <strong>ปริมาณน้ำยาล้าง : </strong><input type="text" name="cl_01" value="<?php   echo $cl_01;?>" id="cl_01" class="inpfoder" style="width:20%;"> <strong>ml / rack</strong><br /><br />
+            <strong>ปริมาณน้ำยาช่วยแห้ง : </strong><input type="text" name="cl_02" value="<?php   echo $cl_02;?>" id="cl_02" class="inpfoder" style="width:20%;"> <strong>ml / rack</strong><br /><br />
+            <strong>ความเข้มข้น : </strong><input type="text" name="cl_03" value="<?php   echo $cl_03;?>" id="cl_03" class="inpfoder" style="width:20%;"> <strong>%</strong><br /><br />
+            <strong>สต๊อกน้ำยา C =</strong> <input type="text" name="cl_04" value="<?php   echo $cl_04;?>" id="cl_04" class="inpfoder" style="width:5%;"> <strong>ถัง R = </strong><input type="text" name="cl_05" value="<?php   echo $cl_05;?>" id="cl_05" class="inpfoder" style="width:5%;"> <strong>ถัง A =</strong> <input type="text" name="cl_06" value="<?php   echo $cl_06;?>" id="cl_06" class="inpfoder" style="width:5%;"> <strong>ถัง</strong><br />
             <strong><br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WG = </span></strong><input type="text" name="cl_07" value="<?php echo $cl_07;?>" id="cl_07" class="inpfoder" style="width:5%;"> <strong> ถัง RG = </strong><input type="text" name="cl_08" value="<?php echo $cl_08;?>" id="cl_08" class="inpfoder" style="width:5%;"> <strong> ถัง </strong>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WG = </span></strong><input type="text" name="cl_07" value="<?php   echo $cl_07;?>" id="cl_07" class="inpfoder" style="width:5%;"> <strong> ถัง RG = </strong><input type="text" name="cl_08" value="<?php   echo $cl_08;?>" id="cl_08" class="inpfoder" style="width:5%;"> <strong> ถัง </strong>
         </td>
         <td width="26%"><p><strong>- ค่าทางด่วน :</strong>
-            <input type="text" name="mn_1" value="<?php echo $mn_1;?>" id="mn_1" class="inpfoder" style="width:20%;">
+            <input type="text" name="mn_1" value="<?php   echo $mn_1;?>" id="mn_1" class="inpfoder" style="width:20%;">
           <strong>บาท</strong></p>
           <p><strong>- ค่าที่พัก : </strong>
-            <input type="text" name="mn_2" value="<?php echo $mn_2;?>" id="mn_2" class="inpfoder" style="width:20%;">
+            <input type="text" name="mn_2" value="<?php   echo $mn_2;?>" id="mn_2" class="inpfoder" style="width:20%;">
             <strong>บาท</strong></p>
           <p><strong>- ค่านำมัน : </strong>
-            <input type="text" name="mn_3" value="<?php echo $mn_3;?>" id="mn_3" class="inpfoder" style="width:20%;">
+            <input type="text" name="mn_3" value="<?php   echo $mn_3;?>" id="mn_3" class="inpfoder" style="width:20%;">
             <strong>บาท</strong></p>
           <p><strong>- ค่าแก๊ส : </strong>
-            <input type="text" name="mn_5" value="<?php echo $mn_5;?>" id="mn_5" class="inpfoder" style="width:20%;">
+            <input type="text" name="mn_5" value="<?php   echo $mn_5;?>" id="mn_5" class="inpfoder" style="width:20%;">
             <strong>บาท</strong></p>
           <p><strong>- อื่นๆ</strong>
             <strong>:</strong>
-            <input type="text" name="mn_4" value="<?php echo $mn_4;?>" id="mn_4" class="inpfoder" style="width:20%;">
+            <input type="text" name="mn_4" value="<?php   echo $mn_4;?>" id="mn_4" class="inpfoder" style="width:20%;">
             <strong>บาท</strong></p>
-          <p><strong>รวมมูลค่า&nbsp;<?php echo number_format($mn_1+$mn_2+$mn_3+$mn_4+$mn_5,2);?>&nbsp;บาท</strong></p></td>
+          <p><strong>รวมมูลค่า&nbsp;<?php   echo number_format($mn_1+$mn_2+$mn_3+$mn_4+$mn_5,2);?>&nbsp;บาท</strong></p></td>
       </tr>
     </table>
     <center>
@@ -615,7 +606,7 @@ function check(frm){
         <td width="9%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:center;"><strong>จำนวนเบิก</strong></td>
         <!--<td width="9%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:center;"><strong>จำนวนคงเหลือ</strong></td>-->
         </tr>
-        <?php 
+        <?php   
 		 $qu = @mysqli_query($conn,"SELECT * FROM s_service_report4sub WHERE sr_id = '".$sr_id."' ORDER BY r_id ASC");
 		 while($row_sub = @mysqli_fetch_array($qu)){
 			 $brid[] = $row_sub['r_id'];
@@ -630,27 +621,27 @@ function check(frm){
 		 for($i=1;$i<=18;$i++){
 		?>
 		<tr >
-        <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:center;"><?php echo $i;?></td>
-        <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><input type="text" name="codes[]" id="codes<?php echo $i;?>" value="<?php echo $bcodes[$i-1];?>" style="width:100%" readonly><input type="hidden" name="r_id[]" value="<?php echo $brid[$i-1]?>"></td>
+        <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:center;"><?php   echo $i;?></td>
+        <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><input type="text" name="codes[]" id="codes<?php   echo $i;?>" value="<?php   echo $bcodes[$i-1];?>" style="width:100%" readonly><input type="hidden" name="r_id[]" value="<?php   echo $brid[$i-1]?>"></td>
         <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;">
-        <span id="listss<?php echo $i;?>"><select name="lists[]" id="lists<?php echo $i;?>" class="inputselect" style="width:92%" onchange="showspare(this.value,'<?php echo "codes".$i;?>','<?php echo "units".$i;?>','<?php echo "prices".$i;?>','<?php echo "amounts".$i;?>')">
+        <span id="listss<?php   echo $i;?>"><select name="lists[]" id="lists<?php   echo $i;?>" class="inputselect" style="width:92%" onchange="showspare(this.value,'<?php   echo "codes".$i;?>','<?php   echo "units".$i;?>','<?php   echo "prices".$i;?>','<?php   echo "amounts".$i;?>')">
         <option value="">กรุณาเลือกรายการอะไหล่</option>
-                <?php
+                <?php  
                 	$qucgspare = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
 					while($row_spare = @mysqli_fetch_array($qucgspare)){
 					  ?>
-					  	<option value="<?php echo $row_spare['group_id'];?>" <?php if($blists[$i-1] == $row_spare['group_id']){echo 'selected';}?>><?php echo $row_spare['group_name'];?></option>
-					  <?php	
+					  	<option value="<?php   echo $row_spare['group_id'];?>" <?php   if($blists[$i-1] == $row_spare['group_id']){echo 'selected';}?>><?php   echo $row_spare['group_name'];?></option>
+					  <?php  	
 					}
 				?>
-            </select></span><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search2.php?resdata=<?php echo $i;?>');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a></td>
-        <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><input type="text" name="units[]" id="units<?php echo $i;?>" value="<?php echo $bunits[$i-1];?>" style="width:100%;text-align:center;" readonly></td>
-        <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><input type="text" name="prices[]" id="prices<?php echo $i;?>" value="<?php if($bprices[$i-1] != 0){echo $bprices[$i-1];}?>" style="width:100%;text-align:right;" readonly></td>
-        <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><input type="text" name="amounts[]" id="amounts<?php echo $i;?>" value="<?php if($bamounts[$i-1] != 0){echo $bamounts[$i-1];}?>" style="width:100%;text-align:right;" readonly></td>
-        <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><input type="text" name="opens[]" id="opens<?php echo $i;?>" value="<?php if($bopens[$i-1] != 0){echo $bopens[$i-1];}?>" style="width:100%;text-align:right;" onkeypress="return isNumberKey(event)"></td>
-        <!--<td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><input type="text" name="remains[]" id="remains" value="<?php if($bremains[$i-1] != 0){echo $bremains[$i-1];}?>" style="width:100%;text-align:right;"><input type="hidden" name="r_id[]" value="<?php echo $brid[$i-1]?>"></td>-->
+            </select></span><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search2.php?resdata=<?php   echo $i;?>');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a></td>
+        <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><input type="text" name="units[]" id="units<?php   echo $i;?>" value="<?php   echo $bunits[$i-1];?>" style="width:100%;text-align:center;" readonly></td>
+        <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><input type="text" name="prices[]" id="prices<?php   echo $i;?>" value="<?php   if($bprices[$i-1] != 0){echo $bprices[$i-1];}?>" style="width:100%;text-align:right;" readonly></td>
+        <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><input type="text" name="amounts[]" id="amounts<?php   echo $i;?>" value="<?php   echo getStockSpar($conn,$blists[$i-1]);?>" style="width:100%;text-align:right;" readonly></td>
+        <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><input type="text" name="opens[]" id="opens<?php   echo $i;?>" value="<?php   if($bopens[$i-1] != 0){echo $bopens[$i-1];}?>" style="width:100%;text-align:right;" onkeypress="return isNumberKey(event)"></td>
+        <!--<td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><input type="text" name="remains[]" id="remains" value="<?php   if($bremains[$i-1] != 0){echo $bremains[$i-1];}?>" style="width:100%;text-align:right;"><input type="hidden" name="r_id[]" value="<?php   echo $brid[$i-1]?>"></td>-->
         </tr>
-				<?php	
+				<?php  	
 			}
 		?>
         <tr >
@@ -674,12 +665,12 @@ function check(frm){
               <tr>
                 <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong >
                   <select name="loc_contact2" id="loc_contact2" style="width:50%;">
-                      <?php 
+                      <?php   
 						$qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_technician ORDER BY group_name ASC");
 						while($row_custec = @mysqli_fetch_array($qu_custec)){
 							?>
-                      <option value="<?php echo $row_custec['group_id'];?>" <?php if($row_custec['group_id'] == $loc_contact2){echo 'selected';}?>><?php echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
-                      <?php
+                      <option value="<?php   echo $row_custec['group_id'];?>" <?php   if($row_custec['group_id'] == $loc_contact2){echo 'selected';}?>><?php   echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
+                      <?php  
 						}
 					?>
                   </select>
@@ -690,7 +681,7 @@ function check(frm){
               </tr>
               <tr>
                 <td style="font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่ : </strong>
-                  <input type="text" name="loc_date2" readonly value="<? if($loc_date2==""){echo date("d/m/Y");}else{ echo $loc_date2;}?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'loc_date2'});</script></td>
+                  <input type="text" name="loc_date2" readonly value="<?php  if($loc_date2==""){echo date("d/m/Y");}else{ echo $loc_date2;}?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'loc_date2'});</script></td>
               </tr>
             </table>
 
@@ -700,12 +691,12 @@ function check(frm){
               <tr>
                 <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>
                   <select name="cs_sell" id="cs_sell" class="inputselect" style="width:50%;">
-                    <?php 
+                    <?php   
 						$qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_technician WHERE 1 AND (group_id = 12 OR group_id = 13) ORDER BY group_name ASC");
 						while($row_custec = @mysqli_fetch_array($qu_custec)){
 							?>
-                    <option value="<?php echo $row_custec['group_id'];?>" <?php if($row_custec['group_id'] == $cs_sell){echo 'selected';}?>><?php echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
-                    <?php
+                    <option value="<?php   echo $row_custec['group_id'];?>" <?php   if($row_custec['group_id'] == $cs_sell){echo 'selected';}?>><?php   echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
+                    <?php  
 						}
 					?>
                   </select>
@@ -716,7 +707,7 @@ function check(frm){
               </tr>
               <tr>
                 <td style="font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่ :</strong>
-                  <input type="text" name="sell_date" readonly value="<? if($sell_date==""){echo date("d/m/Y");}else{ echo $sell_date;}?>" class="inpfoder"/>
+                  <input type="text" name="sell_date" readonly value="<?php  if($sell_date==""){echo date("d/m/Y");}else{ echo $sell_date;}?>" class="inpfoder"/>
               <script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'sell_date'});</script></td>
               </tr>
             </table>
@@ -726,12 +717,12 @@ function check(frm){
               <tr>
                 <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong >
                   <select name="loc_contact3" id="loc_contact3" style="width:50%;">
-                    <?php 
+                    <?php   
 						$qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_technician ORDER BY group_name ASC");
 						while($row_custec = @mysqli_fetch_array($qu_custec)){
 							?>
-                    <option value="<?php echo $row_custec['group_id'];?>" <?php if($row_custec['group_id'] == $loc_contact3){echo 'selected';}?>><?php echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
-                    <?php
+                    <option value="<?php   echo $row_custec['group_id'];?>" <?php   if($row_custec['group_id'] == $loc_contact3){echo 'selected';}?>><?php   echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
+                    <?php  
 						}
 					?>
                   </select>
@@ -742,7 +733,7 @@ function check(frm){
               </tr>
               <tr>
                 <td style="font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่ :</strong>
-                  <input type="text" name="loc_date3" readonly value="<? if($loc_date3==""){echo date("d/m/Y");}else{ echo $loc_date3;}?>" class="inpfoder"/>
+                  <input type="text" name="loc_date3" readonly value="<?php  if($loc_date3==""){echo date("d/m/Y");}else{ echo $loc_date3;}?>" class="inpfoder"/>
               <script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'loc_date3'});</script></td>
 
 
@@ -758,30 +749,18 @@ function check(frm){
     <div class="formArea">
       <input type="submit" name="Submit" value="Submit" class="button">
       <input type="reset" name="Submit" value="Reset" class="button">
-      <? 
+      <?php  
 			$a_not_exists = array();
 			post_param($a_param,$a_not_exists); 
 			?>
-      <input name="mode" type="hidden" id="mode" value="<? echo $_GET["mode"];?>">
-      <input name="ckl_list" type="hidden" id="ckl_list" value="<? echo $ckl_list;?>">
-      <input name="ckw_list" type="hidden" id="ckw_list" value="<? echo $ckw_list;?>">
-      <input name="detail_recom2" type="hidden" id="detail_recom2" value="<? echo strip_tags($detail_recom2);?>">
-      
-      <input name="cpro1" type="hidden" id="cpro1" value="<? echo $cpro1;?>">
-      <input name="cpro2" type="hidden" id="cpro2" value="<? echo $cpro2;?>">
-      <input name="cpro3" type="hidden" id="cpro3" value="<? echo $cpro3;?>">
-      <input name="cpro4" type="hidden" id="cpro4" value="<? echo $cpro4;?>">
-      <input name="cpro5" type="hidden" id="cpro5" value="<? echo $cpro5;?>">
-      
-      <input name="camount1" type="hidden" id="camount1" value="<? echo $camount1;?>">
-      <input name="camount2" type="hidden" id="camount2" value="<? echo $camount2;?>">
-      <input name="camount3" type="hidden" id="camount3" value="<? echo $camount3;?>">
-      <input name="camount4" type="hidden" id="camount4" value="<? echo $camount4;?>">
-      <input name="camount5" type="hidden" id="camount5" value="<? echo $camount5;?>">  
-      
-      <input name="st_setting" type="hidden" id="st_setting" value="<? echo $st_setting;?>">         
+
+     <input name="mode" type="hidden" id="mode" value="<?php   echo $_GET["mode"];?>">  
+      <input name="detail_recom2" type="hidden" id="detail_recom2" value="<?php   echo strip_tags($detail_recom2);?>">
+	  <input name="st_setting" type="hidden" id="    border: 1px solid;" value="<?php   echo $st_setting;?>">       
+      <input name="approve" type="hidden" id="approve" value="<?php   echo $approve;?>">  
+      <input name="supply" type="hidden" id="supply" value="<?php   echo $supply;?>">        
     
-      <input name="<? echo $PK_field;?>" type="hidden" id="<? echo $PK_field;?>" value="<? echo $_GET[$PK_field];?>">
+      <input name="<?php   echo $PK_field;?>" type="hidden" id="<?php   echo $PK_field;?>" value="<?php   echo $_GET[$PK_field];?>">
     </div>
   </form>
 </DIV>
@@ -792,11 +771,11 @@ function check(frm){
 <DIV class=clear></DIV><!-- Start Notifications -->
 <!-- End Notifications -->
 
-<? include("../footer.php");?>
+<?php  include("../footer.php");?>
 </DIV><!-- End #main-content -->
 </DIV>
-<? if($msg_user==1){?>
+<?php  if($msg_user==1){?>
 <script language=JavaScript>alert('Username ซ้ำ กรุณาเปลี่ยน Username ใหม่ !');</script>
-<? }?>
+<?php  }?>
 </BODY>
 </HTML>

@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -35,7 +35,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><?php   echo $s_title;?></TITLE>
+<TITLE><?php     echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -76,26 +76,26 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 //-->
 </script>
 </HEAD>
-<?php   include ("../../include/function_script.php"); ?>
+<?php     include ("../../include/function_script.php"); ?>
 <BODY>
 <DIV id=body-wrapper>
-<?php   include("../left.php");?>
+<?php     include("../left.php");?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<?php   include('../top.php');?>
-<P id=page-intro><?php   echo $page_name; ?></P>
+<?php     include('../top.php');?>
+<P id=page-intro><?php     echo $page_name; ?></P>
 
 <UL class=shortcut-buttons-set>
-  <!--<LI><A class=shortcut-button href="update.php?mode=add<?php   if ($param <> "") echo "&".$param; ?>"><SPAN><IMG  alt=icon src="../images/pencil_48.png"><BR>
+  <!--<LI><A class=shortcut-button href="update.php?mode=add<?php     if ($param <> "") echo "&".$param; ?>"><SPAN><IMG  alt=icon src="../images/pencil_48.png"><BR>
     เพิ่ม</SPAN></A></LI>-->
-    <?php   
+    <?php     
 	if ($FR_module <> "") { 
 	$param2 = get_return_param();
 	?>
-  <LI><A class=shortcut-button href="../<?php   echo $FR_module; ?>/?<?php   if($param2 <> "") echo $param2;?>"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>
+  <LI><A class=shortcut-button href="../<?php     echo $FR_module; ?>/?<?php     if($param2 <> "") echo $param2;?>"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>
   กลับ</SPAN></A></LI>
-  <?php   }?> 
+  <?php     }?> 
 </UL>
   
   <!-- End .shortcut-buttons-set -->
@@ -103,10 +103,10 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right" style="padding-right:15px;">
 
-<H3 align="left"><?php   echo $check_module; ?></H3>
+<H3 align="left"><?php     echo $check_module; ?></H3>
 <div style="padding-top:4px;">
 
-	<?php   
+	<?php     
 		if($_GET['loccontact'] != ""){
 			$paramLoc = "&loccontact=".$_GET['loccontact'];
 		}
@@ -118,25 +118,25 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 	?>
 
 	<select name="loccontact" id="loccontact" id="jumpMenu" onchange="MM_jumpMenu('parent',this,0)" style="height:30px;">
-      <option value="index.php?month=<?php   echo $monthStart;?>&year=<?php   echo $yesrStart;?><?php   echo $paramCtype;?>"><== กรุณาเลือกชื่อช่าง ==></option>
-          <?php   
+      <option value="index.php?month=<?php     echo $monthStart;?>&year=<?php     echo $yesrStart;?><?php     echo $paramCtype;?>"><== กรุณาเลือกชื่อช่าง ==></option>
+          <?php     
               $qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_technician ORDER BY group_name ASC");
               while($row_custec = @mysqli_fetch_array($qu_custec)){
                   ?>
-                  <option value="index.php?month=<?php   echo $monthStart;?>&year=<?php   echo $yesrStart;?>&loccontact=<?php   echo $row_custec['group_id'];?><?php   echo $paramCtype;?>" <?php   if($row_custec['group_id'] == $_GET['loccontact']){echo 'selected';}?>><?php   echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
-                  <?php  
+                  <option value="index.php?month=<?php     echo $monthStart;?>&year=<?php     echo $yesrStart;?>&loccontact=<?php     echo $row_custec['group_id'];?><?php     echo $paramCtype;?>" <?php     if($row_custec['group_id'] == $_GET['loccontact']){echo 'selected';}?>><?php     echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
+                  <?php    
               }
           ?>
       </select>
       
       <select name="sr_ctype" id="sr_ctype" id="jumpMenu" onchange="MM_jumpMenu('parent',this,0)" style="height:30px;">
-                <option value="index.php?month=<?php   echo $monthStart;?>&year=<?php   echo $yesrStart;?><?php   echo $paramLoc;?>"><== กรุณาเลือกประเภทบริการลูกค้า ==></option>
-                	<?php   
+                <option value="index.php?month=<?php     echo $monthStart;?>&year=<?php     echo $yesrStart;?><?php     echo $paramLoc;?>"><== กรุณาเลือกประเภทบริการลูกค้า ==></option>
+                	<?php     
 						$qu_cusftype = @mysqli_query($conn,"SELECT * FROM s_group_service ORDER BY group_name ASC");
 						while($row_cusftype = @mysqli_fetch_array($qu_cusftype)){
 							?>
-							<option value="index.php?month=<?php   echo $monthStart;?>&year=<?php   echo $yesrStart;?><?php   echo $paramLoc;?>&sr_ctype=<?php   echo $row_cusftype['group_id'];?>" <?php   if($row_cusftype['group_id'] == $_GET['sr_ctype']){echo 'selected';}?>><?php   echo $row_cusftype['group_name'];?></option>
-							<?php  
+							<option value="index.php?month=<?php     echo $monthStart;?>&year=<?php     echo $yesrStart;?><?php     echo $paramLoc;?>&sr_ctype=<?php     echo $row_cusftype['group_id'];?>" <?php     if($row_cusftype['group_id'] == $_GET['sr_ctype']){echo 'selected';}?>><?php     echo $row_cusftype['group_name'];?></option>
+							<?php    
 						}
 					?>
       </select>
@@ -146,7 +146,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 </DIV></DIV><!-- End .content-box-header -->
 <DIV class=content-box-content>
 <DIV id=tab1 class="tab-content default-tab"><!-- This is the target div. id must match the href of this div's tab -->
-  <?php  
+  <?php    
 
 function getmicrotime(){ 
     list($usec, $sec) = explode(" ",microtime()); 
@@ -218,17 +218,17 @@ if($_GET['month'] == 2){
 ?>
 
 
-<div align="center"><span class="currentdate"><?php   echo format_month_th(date ("F", mktime(0,0,0,$_GET['month']-1,1,$_GET['year'])))." ".(date ("Y", mktime(0,0,0,$_GET['month']-1,1,$_GET['year']))+543); ?></span><br>
+<div align="center"><span class="currentdate"><?php     echo format_month_th(date ("F", mktime(0,0,0,$_GET['month']-1,1,$_GET['year'])))." ".(date ("Y", mktime(0,0,0,$_GET['month']-1,1,$_GET['year']))+543); ?></span><br>
   <br>
 </div>
 <div align="center"><br>
   <table width="700" border="0" cellspacing="0" cellpadding="0">
     <tr> 
-      <td><div align="right"><a href="<?php   echo "index.php?month=$prev_month&amp;year=$prev_year$getLocontract$getSr_ctype"?>">&lt;&lt;</a></div></td>
+      <td><div align="right"><a href="<?php     echo "index.php?month=$prev_month&amp;year=$prev_year$getLocontract$getSr_ctype"?>">&lt;&lt;</a></div></td>
       <td width="200"><div align="center">
             
           <select name="month" id="month" onChange="MM_jumpMenu('parent',this,0)">
-            <?php  
+            <?php    
 			for ($i = 1; $i <= 12; $i++) {
 				$link = $i+1;
 				IF($_GET['month'] == $link){
@@ -241,7 +241,7 @@ if($_GET['month'] == 2){
 			?>
           </select>
           <select name="year" id="year" onChange="MM_jumpMenu('parent',this,0)">
-		  <?php  
+		  <?php    
 		  for ($i = date("Y")-10; $i <= (date("Y"))+5; $i++) {
 		  	IF($i == $_GET['year']){
 				$selected = "selected";
@@ -253,7 +253,7 @@ if($_GET['month'] == 2){
 		  ?>
           </select>
         </div></td>
-      <td><div align="left"><a href="<?php   echo "index.php?month=$next_month&amp;year=$next_year$getLocontract$getSr_ctype"; ?>">&gt;&gt;</a></div></td>
+      <td><div align="left"><a href="<?php     echo "index.php?month=$next_month&amp;year=$next_year$getLocontract$getSr_ctype"; ?>">&gt;&gt;</a></div></td>
     </tr>
   </table>
   <br>
@@ -271,7 +271,7 @@ if($_GET['month'] == 2){
           <th><div align="center">เสาร์</div></th>
         </tr>
 		<tr valign="top" bgcolor="#FFFFFF"> 
-		<?php  
+		<?php    
 		for ($i = 1; $i <= $first_day_of_month-1; $i++) {
 			$days_so_far = $days_so_far + 1;
 			$count_boxes = $count_boxes + 1;
@@ -331,7 +331,7 @@ if($_GET['month'] == 2){
 <DIV class=clear></DIV><!-- Start Notifications -->
 <!-- End Notifications -->
 
-<?php   include("../footer.php");?>
+<?php     include("../footer.php");?>
 </DIV><!-- End #main-content -->
 </DIV>
 </BODY>

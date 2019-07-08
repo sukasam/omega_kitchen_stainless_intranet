@@ -8,7 +8,7 @@ class : li a:current is a now active
 
 <DIV id=sidebar>
 
-<?php   //$pageURL = $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+<?php     //$pageURL = $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 //	$pp = strrpos($_SERVER["SCRIPT_NAME"],"/");
  //   $pageURL = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/"));
 //	echo "<center>".$_SERVER["REQUEST_URI"]."</center>";
@@ -20,15 +20,15 @@ class : li a:current is a now active
   <DIV id=sidebar-wrapper>
       
    <div align="center" style="width:100%;"><A href="#" target="_blank"><IMG  alt="Admin logo" src="../images/logo.png" border="0"></A></div><BR>
-  <DIV id=profile-links>Hello,<A href="#"> <?php   echo $_SESSION["login_name"];?></A><BR>
+  <DIV id=profile-links>Hello,<A href="#"> <?php     echo $_SESSION["login_name"];?></A><BR>
         <BR>
-        <a href="<?php   echo $s_domain.$s_paths;?>" target="_blank" title="View the Site">View the Site</a> | <A title="Sign Out" href="../logout.php">Sign Out</A>
+        <a href="<?php     echo $s_domain.$s_paths;?>" target="_blank" title="View the Site">View the Site</a> | <A title="Sign Out" href="../logout.php">Sign Out</A>
         </DIV>
     <UL id=main-nav>
       <!-- Accordion Menu -->
      
       
-      <?php  
+      <?php    
 
 	  $mid=$_GET['mid'];
 
@@ -63,21 +63,21 @@ class : li a:current is a now active
 				
 
 			if($count<1){ ?>
-      <li><a class='nav-top-item no-submenu <?php   if($mid==$rsmenu['menucate_id']){ echo "current";}?>' href="<?php  =$rsmenu['url_link']?>?mid=<?php  =$rsmenu['menucate_id']?>">
-        <?php  =$rsmenu['menucate_name']?>
+      <li><a class='nav-top-item no-submenu <?php     if($mid==$rsmenu['menucate_id']){ echo "current";}?>' href="<?php    =$rsmenu['url_link']?>?mid=<?php    =$rsmenu['menucate_id']?>">
+        <?php    =$rsmenu['menucate_name']?>
       </a></li>
-      <?php   }else{?>
-      <li><a class='nav-top-item <?php   if($mid==$rsmenu['menucate_id']){ echo "current";}?>' href='#' >
-        <?php  =$rsmenu['menucate_name']?>
+      <?php     }else{?>
+      <li><a class='nav-top-item <?php     if($mid==$rsmenu['menucate_id']){ echo "current";}?>' href='#' >
+        <?php    =$rsmenu['menucate_name']?>
         </a>
-          <?php    echo "<UL>";
+          <?php      echo "<UL>";
 
 						while($rssubmenu=@mysqli_fetch_array($querysubmenu)){ ?>
       </li>
-      <li><a href="<?php  =$rssubmenu['submenu_url_link']?>?smid=<?php  =$rssubmenu['id']?>&amp;mid=<?php  =$rsmenu['menucate_id']?>" <?php   if($subid==$rssubmenu['id']){echo "class='current'";}?>>
-        <?php  =$rssubmenu['submenu_name']?>
+      <li><a href="<?php    =$rssubmenu['submenu_url_link']?>?smid=<?php    =$rssubmenu['id']?>&amp;mid=<?php    =$rsmenu['menucate_id']?>" <?php     if($subid==$rssubmenu['id']){echo "class='current'";}?>>
+        <?php    =$rssubmenu['submenu_name']?>
       </a></li>
-      <?php   }
+      <?php     }
 
                      	echo "</UL>"; // end sub menu
 
@@ -92,19 +92,19 @@ class : li a:current is a now active
       
       <LI></LI>
       
-      <LI><A class='nav-top-item <?php   if($_GET[mid]==9999){ echo "current";}?>'  href="#">User Management</A>
+      <LI><A class='nav-top-item <?php     if($_GET[mid]==9999){ echo "current";}?>'  href="#">User Management</A>
           <UL>
-            <LI><A   href="../../administrator/user/?smid=3&mid=9999" onclick="setCurrent(this)" <?php   if($_GET[smid]==3){echo "class='current'";}?>>User / permission</A></LI>
-            <LI><A  href="../../administrator/group/?smid=4&mid=9999" <?php   if($_GET[smid]==4){echo "class='current'";}?>>User Group / permission</A></LI>   
+            <LI><A   href="../../administrator/user/?smid=3&mid=9999" onclick="setCurrent(this)" <?php     if($_GET[smid]==3){echo "class='current'";}?>>User / permission</A></LI>
+            <LI><A  href="../../administrator/group/?smid=4&mid=9999" <?php     if($_GET[smid]==4){echo "class='current'";}?>>User Group / permission</A></LI>   
           </UL>
       </LI>    
-      <LI><A class='nav-top-item <?php   if($_GET[mid]==8888){ echo "current";}?>'  href="#">Setting</A>
+      <LI><A class='nav-top-item <?php     if($_GET[mid]==8888){ echo "current";}?>'  href="#">Setting</A>
        <UL>
-       	<?php   if($_SESSION["login_id"]==1){?>
-         <LI><A  href="../../administrator/menu/?smid=5&mid=8888" <?php   if($_GET[smid]==5){echo "class='current'";}?>>Menu</A></LI>  
-         <LI><A  href="../../administrator/module/?smid=6&mid=8888" <?php   if($_GET[smid]==6){echo "class='current'";}?>>Module</A></LI> 
-         <?php   }?>
-         <!--<LI><A  href="../../administrator/footer/?smid=7&mid=2" <?php   if($_GET[smid]==7){echo "class='current'";}?>>Webpage Footer</A></LI>       -->
+       	<?php     if($_SESSION["login_id"]==1){?>
+         <LI><A  href="../../administrator/menu/?smid=5&mid=8888" <?php     if($_GET[smid]==5){echo "class='current'";}?>>Menu</A></LI>  
+         <LI><A  href="../../administrator/module/?smid=6&mid=8888" <?php     if($_GET[smid]==6){echo "class='current'";}?>>Module</A></LI> 
+         <?php     }?>
+         <!--<LI><A  href="../../administrator/footer/?smid=7&mid=2" <?php     if($_GET[smid]==7){echo "class='current'";}?>>Webpage Footer</A></LI>       -->
           </UL>
       </LI>
       

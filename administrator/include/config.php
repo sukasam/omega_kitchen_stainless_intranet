@@ -1,4 +1,4 @@
-<?php  
+<?php    
 $s_title="AarhusPuls";
 $web_title="aarhuspuls.com";
 $s_domain="aarhuspuls.com";

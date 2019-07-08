@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -57,7 +57,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><?php   echo $s_title;?></TITLE>
+<TITLE><?php     echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -76,15 +76,15 @@ function confirmDelete(delUrl,text) {
 
 </script>
 </HEAD>
-<?php   include ("../../include/function_script.php"); ?>
+<?php     include ("../../include/function_script.php"); ?>
 <BODY>
 <DIV id=body-wrapper>
-<?php   include("../left.php");?>
+<?php     include("../left.php");?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<?php   include('../top.php');?>
-<P id=page-intro><?php   if ($mode == "add") { ?>Enter new information<?php   } else { ?>แก้ไข	[<?php   echo $page_name; ?>]<?php   } ?>	</P>
+<?php     include('../top.php');?>
+<P id=page-intro><?php     if ($mode == "add") { ?>Enter new information<?php     } else { ?>แก้ไข	[<?php     echo $page_name; ?>]<?php     } ?>	</P>
 <UL class=shortcut-buttons-set>
   <LI><A class=shortcut-button href="javascript:history.back()"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>
   กลับ</SPAN></A></LI>
@@ -94,7 +94,7 @@ function confirmDelete(delUrl,text) {
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right">
 
-<H3 align="left"><?php   echo $check_module; ?></H3>
+<H3 align="left"><?php     echo $check_module; ?></H3>
 <DIV class=clear>
   
 </DIV></DIV><!-- End .content-box-header -->
@@ -103,13 +103,13 @@ function confirmDelete(delUrl,text) {
   <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1"  >
     <div class="formArea">
       <fieldset>
-      <legend><?php   echo $page_name; ?> </legend>
+      <legend><?php     echo $page_name; ?> </legend>
         <table width="100%" cellspacing="0" cellpadding="0" border="0">
           <tr>
           <td height="54"><table width="100%" border="0" cellspacing="0" class="formFields">
               <tr >
                 <td width="199" class="name" style="color:#0C0;">Group &gt;
-                    <?php   
+                    <?php     
 							$sql = "select * from $tbl_name where $PK_field = '".$_GET[$PK_field]."' ";
 							$rec = @mysqli_fetch_array(@mysqli_query($conn,$sql));
 							echo $rec[group_name];
@@ -126,33 +126,33 @@ function confirmDelete(delUrl,text) {
                 <td width="82"><div align="center"></div></td>
                 <td width="131"><div align="center"></div></td>
               </tr>
-              <?php  
+              <?php    
 					$i =0;
 	$sql = "select *,s_module.module_id as module_id from $tbl_name left join s_user_p on $tbl_name.$PK_field = s_user_p.$PK_field  inner join s_module on s_module.module_id = s_user_p.module_id where user_id = '0' and $tbl_name.$PK_field = '".$_GET[$PK_field]."' ";
 		$query = @mysqli_query($conn,$sql);
 		while($rec = @mysqli_fetch_array($query)){
 			$i++;
 	?>
-              <tr <?php   if ($counter++%2) { ?>class="oddrowbg" <?php   } else { ?> class="evenrowbg"<?php   } ?>>
-                <td height="26" class="name">&nbsp;&nbsp; <?php   echo $rec[module_name];?></td>
+              <tr <?php     if ($counter++%2) { ?>class="oddrowbg" <?php     } else { ?> class="evenrowbg"<?php     } ?>>
+                <td height="26" class="name">&nbsp;&nbsp; <?php     echo $rec[module_name];?></td>
                 <td><div align="center">
-                    <?php   if($rec[read_p] == 1) $image = 1; else $image = 0;?>
-                    <img src="../images/check<?php   echo $image?>.gif" border="0"> </div></td>
+                    <?php     if($rec[read_p] == 1) $image = 1; else $image = 0;?>
+                    <img src="../images/check<?php     echo $image?>.gif" border="0"> </div></td>
                 <td valign="middle"><div align="center">
-                    <?php   if($rec[add_p] == 1) $image = 1; else $image = 0;?>
-                    <img src="../images/check<?php   echo $image?>.gif" border="0"> </div></td>
+                    <?php     if($rec[add_p] == 1) $image = 1; else $image = 0;?>
+                    <img src="../images/check<?php     echo $image?>.gif" border="0"> </div></td>
                 <td valign="middle"><div align="center">
-                    <?php   if($rec[update_p] == 1) $image = 1; else $image = 0;?>
-                    <img src="../images/check<?php   echo $image?>.gif" border="0"> </div></td>
+                    <?php     if($rec[update_p] == 1) $image = 1; else $image = 0;?>
+                    <img src="../images/check<?php     echo $image?>.gif" border="0"> </div></td>
                 <td valign="middle"><div align="center">
-                    <?php   if($rec[delete_p] == 1) $image = 1; else $image = 0;?>
-                    <img src="../images/check<?php   echo $image?>.gif" border="0"> </div></td>
-                <td><div align="center"><a href="?action=Edit&mode=<?php   echo $_GET["mode"]?>&<?php   echo "$PK_field=".$rec[$PK_field];?>&user_p_id=<?php   echo $rec[user_p_id];?>&module_id=<?php   echo $rec[module_id];?>&<?php   echo $param;?>">Edit</a></div></td>
-                <td><div align="center"> <a href="permission.php?action=delete&mode=<?php   echo $_GET["mode"]?>&<?php   echo "$PK_field=".$rec[$PK_field];?>&user_p_id=<?php   echo $rec[user_p_id];?>&module_id=<?php   echo $rec[module_id];?>&<?php   echo $param;?>" onClick="return confirm('คุณต้องการลบ module <?php   echo $rec[module_name]; ?>')">Delete</a></div></td>
+                    <?php     if($rec[delete_p] == 1) $image = 1; else $image = 0;?>
+                    <img src="../images/check<?php     echo $image?>.gif" border="0"> </div></td>
+                <td><div align="center"><a href="?action=Edit&mode=<?php     echo $_GET["mode"]?>&<?php     echo "$PK_field=".$rec[$PK_field];?>&user_p_id=<?php     echo $rec[user_p_id];?>&module_id=<?php     echo $rec[module_id];?>&<?php     echo $param;?>">Edit</a></div></td>
+                <td><div align="center"> <a href="permission.php?action=delete&mode=<?php     echo $_GET["mode"]?>&<?php     echo "$PK_field=".$rec[$PK_field];?>&user_p_id=<?php     echo $rec[user_p_id];?>&module_id=<?php     echo $rec[module_id];?>&<?php     echo $param;?>" onClick="return confirm('คุณต้องการลบ module <?php     echo $rec[module_name]; ?>')">Delete</a></div></td>
               </tr>
-              <?php   } // end while?>
+              <?php     } // end while?>
               <tr >
-                <td height="26" class="name"><?php  
+                <td height="26" class="name"><?php    
 					  	if($_GET["action"] == "Edit"){
 							$sql = "select * from s_user_p  where user_p_id = '$_GET[user_p_id]'  ";
 							$query = @mysqli_query($conn,$sql);
@@ -171,33 +171,33 @@ function confirmDelete(delUrl,text) {
 							$query = @mysqli_query($conn,$sql);
 					  ?>
                     <select name="module_id">
-                      <?php   if($_GET["action"] <> "Edit") { ?>
+                      <?php     if($_GET["action"] <> "Edit") { ?>
                       <option>เลือกรายการโมดูล</option>
-                      <?php   } 
+                      <?php     } 
 								while($rec = @mysqli_fetch_array($query)){
 							?>
-                      <option value="<?php   echo $rec[module_id];?>" <?php   if($module_id == $rec[module_id]) echo "selected";?>><?php   echo $rec[module_name];?></option>
-                      <?php   } // end while ?>
+                      <option value="<?php     echo $rec[module_id];?>" <?php     if($module_id == $rec[module_id]) echo "selected";?>><?php     echo $rec[module_name];?></option>
+                      <?php     } // end while ?>
                     </select>
                   <!--<a href="javascript:;" onClick="select_all();">Select All</a>--></td>
                 <td><div align="center">
-                    <input name="read_p" type="checkbox" id="read_p" value="1" <?php   if($read_p == "1") echo "checked"; ?>>
+                    <input name="read_p" type="checkbox" id="read_p" value="1" <?php     if($read_p == "1") echo "checked"; ?>>
                 </div></td>
                 <td><div align="center">
-                    <input name="add_p" type="checkbox" id="add_p" value="1" <?php   if($add_p == "1") echo "checked"; ?>>
+                    <input name="add_p" type="checkbox" id="add_p" value="1" <?php     if($add_p == "1") echo "checked"; ?>>
                 </div></td>
                 <td><div align="center">
-                    <input name="update_p" type="checkbox" id="update_p" value="1" <?php   if($update_p == "1") echo "checked"; ?>>
+                    <input name="update_p" type="checkbox" id="update_p" value="1" <?php     if($update_p == "1") echo "checked"; ?>>
                 </div></td>
                 <td><div align="center">
-                    <input name="delete_p" type="checkbox" id="delete_p" value="1" <?php   if($delete_p == "1") echo "checked"; ?>>
+                    <input name="delete_p" type="checkbox" id="delete_p" value="1" <?php     if($delete_p == "1") echo "checked"; ?>>
                 </div></td>
-                <td colspan="2"><?php  
+                <td colspan="2"><?php    
 							if($_GET["action"] <> "Edit") $option_value = "Add";
 							else $option_value = "Edit";
 						?>
                     <div align="left">
-                      <input name="option" type="submit" id="option" value="<?php   echo $option_value;?>" class="button">
+                      <input name="option" type="submit" id="option" value="<?php     echo $option_value;?>" class="button">
                   </div></td>
               </tr>
           </table></td>
@@ -205,12 +205,12 @@ function confirmDelete(delUrl,text) {
         </table>
         </fieldset>
     </div><br>
-    <div class="formArea"><?php   
+    <div class="formArea"><?php     
 			$a_not_exists = array();
 			post_param($a_param,$a_not_exists); 
 			?>
-      <input name="mode" type="hidden" id="mode" value="<?php   echo $_REQUEST[mode];?>">
-      <input name="<?php   echo $PK_field;?>" type="hidden" id="<?php   echo $PK_field;?>" value="<?php   echo $_REQUEST[$PK_field];?>">
+      <input name="mode" type="hidden" id="mode" value="<?php     echo $_REQUEST[mode];?>">
+      <input name="<?php     echo $PK_field;?>" type="hidden" id="<?php     echo $PK_field;?>" value="<?php     echo $_REQUEST[$PK_field];?>">
     </div>
   </form>
 </DIV>
@@ -221,11 +221,11 @@ function confirmDelete(delUrl,text) {
 <DIV class=clear></DIV><!-- Start Notifications -->
 <!-- End Notifications -->
 
-<?php   include("../footer.php");?>
+<?php     include("../footer.php");?>
 </DIV><!-- End #main-content -->
 </DIV>
-<?php   if($msg_user==1){?>
+<?php     if($msg_user==1){?>
 <script language=JavaScript>alert('Username ซ้ำ กรุณาเปลี่ยน Username ใหม่ !');</script>
-<?php   }?>
+<?php     }?>
 </BODY>
 </HTML>

@@ -1,4 +1,4 @@
-<?php   
+<?php     
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -60,7 +60,7 @@
 	  <tr>
 	    <th colspan="3" style="text-align:left;font-size:12px;">บริษัท โอเมก้า แมชชีนเนอรี่ (1999) จำกัด<br />
         รายงานตามอาการเสีย<br /></th>
-	    <th width="33%" colspan="2" style="text-align:right;font-size:11px;"><?php   echo $dateshow;?></th>
+	    <th width="33%" colspan="2" style="text-align:right;font-size:11px;"><?php     echo $dateshow;?></th>
       </tr>
       <tr>
         <th width="22%">ชื่อลูกค้า / บริษัท + เบอร์โทร</th>
@@ -68,7 +68,7 @@
         <th width="26%">เลขที่บริการ</th>
         <th>รายการอาการเสีย</th>
       </tr>
-      <?php   
+      <?php     
 		$sql = "SELECT * FROM s_first_order as fr, s_service_report as sv WHERE fr.fo_id = sv.cus_id ".$condition." ".$daterriod." ORDER BY fr.cd_name ASC";
 	  	$qu_fr = @mysqli_query($conn,$sql);
 		$sum = 0;
@@ -77,21 +77,21 @@
 				
 			?>
 			<tr>
-              <td><?php   echo $row_fr['cd_name'];?><br />
-              <?php   echo $row_fr['cd_tel'];?></td>
-              <td><?php   echo province_name($conn,$row_fr['cd_province']);?></td>
-              <td><?php   echo $row_fr['sv_id'];?></td>     
+              <td><?php     echo $row_fr['cd_name'];?><br />
+              <?php     echo $row_fr['cd_tel'];?></td>
+              <td><?php     echo province_name($conn,$row_fr['cd_province']);?></td>
+              <td><?php     echo $row_fr['sv_id'];?></td>     
               <td style="">
               	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbreport">
-                  <?php   
+                  <?php     
 				  	$chk = get_fixlist($row_fr['ckf_list']);
 					for($i=0;$i<sizeof($chk);$i++){
 						if(get_fixname($conn,$chk[$i]) != ""){
 							?>
 		  <tr>
-							<td style="border:0;padding-bottom:0;padding-top:0;"><?php   echo get_fixname($conn,$chk[$i]);?></td>
+							<td style="border:0;padding-bottom:0;padding-top:0;"><?php     echo get_fixname($conn,$chk[$i]);?></td>
 						  	</tr>
-							<?php  
+							<?php    
 						}
 					}
 				  ?>
@@ -99,14 +99,14 @@
               </td>      
             </tr>
 			
-			<?php  
+			<?php    
 			$sum += ($row_fr['cprice1']+$row_fr['cprice2']+$row_fr['cprice3']+$row_fr['cprice4']+$row_fr['cprice5']);
 			$sums += 1;
 		}
 		
 	  ?>
       <tr>
-		<td colspan="8" style="text-align:right;"> <strong>ให้บริการตามตามอาการเสียทั้งหมด&nbsp;&nbsp;<?php   echo $sums;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
+		<td colspan="8" style="text-align:right;"> <strong>ให้บริการตามตามอาการเสียทั้งหมด&nbsp;&nbsp;<?php     echo $sums;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
 	  </tr>
     </table>
 

@@ -37,7 +37,7 @@ End Sub
 
 Sub CreateXmlHeader( command, resourceType, currentFolder, url )
 	' Create the XML document header.
-	Response.Write "<?xml version=""1.0"" encoding=""utf-8"" ?>"
+	Response.Write "<?php xml version=""1.0"" encoding=""utf-8"" ?>"
 
 	' Create the main "Connector" node.
 	Response.Write "<Connector command=""" & command & """ resourceType=""" & resourceType & """>"
@@ -54,7 +54,7 @@ Sub SendError( number, text )
 	SetXmlHeaders
 
 	' Create the XML document header.
-	Response.Write "<?xml version=""1.0"" encoding=""utf-8"" ?>"
+	Response.Write "<?php xml version=""1.0"" encoding=""utf-8"" ?>"
 
 	Response.Write "<Connector><Error number=""" & number & """ text=""" & Server.HTMLEncode( text ) & """ /></Connector>"
 

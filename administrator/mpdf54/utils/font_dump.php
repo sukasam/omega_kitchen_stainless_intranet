@@ -1,4 +1,4 @@
-<?php
+<?php  
 
 /* 
    This script prints out all characters in a TrueType font file

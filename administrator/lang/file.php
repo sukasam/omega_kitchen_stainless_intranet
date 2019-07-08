@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -19,7 +19,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><?php   echo $s_title;?></TITLE>
+<TITLE><?php     echo $s_title;?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -44,18 +44,18 @@ function check_select(frm){
 }	
 </script>
 </HEAD>
-<?php   include ("../../include/function_script.php"); ?>
+<?php     include ("../../include/function_script.php"); ?>
 <BODY>
 <DIV id=body-wrapper>
-<?php   include("../left.php");?>
+<?php     include("../left.php");?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<?php   include('../top.php');?>
-<P id=page-intro><?php   echo ucfirst ($page_name); ?> (<?php   echo $_GET['lang_key'];?>)</P>
+<?php     include('../top.php');?>
+<P id=page-intro><?php     echo ucfirst ($page_name); ?> (<?php     echo $_GET['lang_key'];?>)</P>
 
 <UL class=shortcut-buttons-set>
-  <LI><A class=shortcut-button href="../lang/index.php?mid=<?php   echo $_GET['mid'];?>"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>Back</SPAN></A></LI>
+  <LI><A class=shortcut-button href="../lang/index.php?mid=<?php     echo $_GET['mid'];?>"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>Back</SPAN></A></LI>
 </UL>
   
   <!-- End .shortcut-buttons-set -->
@@ -63,7 +63,7 @@ function check_select(frm){
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right" style="padding-right:15px;">
 
-<H3 align="left"><?php   echo ucfirst ($check_module); ?></H3>
+<H3 align="left"><?php     echo ucfirst ($check_module); ?></H3>
 <DIV class=clear>
 
 </DIV></DIV><!-- End .content-box-header -->
@@ -74,20 +74,20 @@ function check_select(frm){
       <THEAD>
         <TR>
           <TH width="4%">&nbsp;</TH>
-          <TH width="10%" <?php   Show_Sort_bg ("user_id", $orderby) ?>> <?php  
+          <TH width="10%" <?php     Show_Sort_bg ("user_id", $orderby) ?>> <?php    
 		$a_not_exists = array('orderby','sortby');
 		$param2 = get_param($a_param,$a_not_exists);
 	?>
-            <?php    Show_Sort_new ("user_id", "No.", $orderby, $sortby,$page,$param2);?>
+            <?php      Show_Sort_new ("user_id", "No.", $orderby, $sortby,$page,$param2);?>
             &nbsp;</TH>
-          <TH width="78%" <?php   Show_Sort_bg ("name", $orderby) ?>><a>File Name</a></TH>
+          <TH width="78%" <?php     Show_Sort_bg ("name", $orderby) ?>><a>File Name</a></TH>
           <TH width="8%"><a>Edit</a></TH>
           </TR>
       </THEAD>
       <TFOOT>
         </TFOOT>
       <TBODY>
-        <?php   
+        <?php     
 			$objScan = scandir("../../language/".$_GET['lang_key']);
 $i=1;
 		foreach ($objScan as $value) {
@@ -97,18 +97,18 @@ $i=1;
 				   ?>
         <TR>
           <TD>&nbsp;</TD>
-          <TD><span class="text"><?php   echo $i-2 ; ?></span></TD>
-          <TD><span class="text"><strong><?php   echo $value;?></strong></span></TD>
+          <TD><span class="text"><?php     echo $i-2 ; ?></span></TD>
+          <TD><span class="text"><strong><?php     echo $value;?></strong></span></TD>
           <TD><!-- Icons -->
-            <A title=Edit href="file_edit.php?<?php   echo $PK_field; ?>=<?php   echo $_GET["lang_id"]; if($param <> "") {?>&<?php   echo $param; }?>&lang_key=<?php   echo $_GET['lang_key'];?>&f=<?php   echo $value;?>"><IMG alt=Edit src="../images/pencil.png"></A> <A title=Delete  href="#"></A></TD>
+            <A title=Edit href="file_edit.php?<?php     echo $PK_field; ?>=<?php     echo $_GET["lang_id"]; if($param <> "") {?>&<?php     echo $param; }?>&lang_key=<?php     echo $_GET['lang_key'];?>&f=<?php     echo $value;?>"><IMG alt=Edit src="../images/pencil.png"></A> <A title=Delete  href="#"></A></TD>
           </TR>  
-		<?php   	}
+		<?php     	}
 			$i++;}
 		?>
       </TBODY>
     </TABLE>
     <br><br>
-     <DIV class=pagination> <?php   include("../include/page_show.php");?> </DIV>
+     <DIV class=pagination> <?php     include("../include/page_show.php");?> </DIV>
   </form>  
 </DIV><!-- End #tab1 -->
 
@@ -120,7 +120,7 @@ $i=1;
 <DIV class=clear></DIV><!-- Start Notifications -->
 <!-- End Notifications -->
 
-<?php   include("../footer.php");?>
+<?php     include("../footer.php");?>
 </DIV><!-- End #main-content -->
 </DIV>
 </BODY>

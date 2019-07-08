@@ -1,4 +1,4 @@
-<?php   
+<?php     
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -65,14 +65,14 @@
   </tr>
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search" id="rscus">
-<?php   
+<?php     
   	$qu_cus = mysqli_query($conn,"SELECT cd_name,loc_name FROM s_first_order ORDER BY cd_name ASC");
 	while($row_cus = @mysqli_fetch_array($qu_cus)){
 		?>
 		 <tr>
-            <td><A href="javascript:void(0);" onclick="get_customer('<?php   echo $row_cus['fo_id'];?>','<?php   echo $row_cus['loc_name'];?>');"><?php   echo $row_cus['cd_name']." ( ".$row_cus['loc_name']." )";?></A></td>
+            <td><A href="javascript:void(0);" onclick="get_customer('<?php     echo $row_cus['fo_id'];?>','<?php     echo $row_cus['loc_name'];?>');"><?php     echo $row_cus['cd_name']." ( ".$row_cus['loc_name']." )";?></A></td>
           </tr>
-		<?php  	
+		<?php    	
 	}
   ?>
 </table>

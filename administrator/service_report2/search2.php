@@ -1,4 +1,4 @@
-<?php   
+<?php     
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");
@@ -43,7 +43,7 @@
 
 <!--<script type="text/javascript">
 	function get_customer(cid,cname){
-		var sCustomerName = self.opener.document.getElementById("<?php   echo $_GET['pro']?>");
+		var sCustomerName = self.opener.document.getElementById("<?php     echo $_GET['pro']?>");
 		sCustomerName.value = cname;
 		window.close();
 	}
@@ -82,7 +82,7 @@
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search">
   <tr>
     <td colspan="2"><strong>ค้นหา&nbsp;&nbsp;:&nbsp;&nbsp;</strong>
-        <input type="text" name="textfield" id="textfield" style="width:85%;" onkeyup="get_sparpart($conn,this.value,'<?php   echo $_GET['resdata']?>');"/>
+        <input type="text" name="textfield" id="textfield" style="width:85%;" onkeyup="get_sparpart(this.value,'<?php     echo $_GET['resdata']?>');"/>
     </td>
   </tr>
 </table>
@@ -92,14 +92,14 @@
   </tr>
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search" id="rscus">
-<?php   
+<?php     
   	$qu_sparcus = mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_spar_id ASC");
 	while($row_sparcus = @mysqli_fetch_array($qu_sparcus)){
 		?>
 		 <tr>
-            <td><A href="javascript:void(0);" onclick="get_sparactive('<?php   echo $row_sparcus['group_id'];?>','codes<?php   echo $_REQUEST['resdata']?>','listss<?php   echo $_REQUEST['resdata']?>','units<?php   echo $_REQUEST['resdata']?>','prices<?php   echo $_REQUEST['resdata']?>','amounts<?php   echo $_REQUEST['resdata']?>','<?php   echo $_REQUEST['resdata']?>');"><?php   echo $row_sparcus['group_spar_id'].'&nbsp;&nbsp;'.$row_sparcus['group_name'];?></A></td>
+            <td><A href="javascript:void(0);" onclick="get_sparactive('<?php     echo $row_sparcus['group_id'];?>','codes<?php     echo $_REQUEST['resdata']?>','listss<?php     echo $_REQUEST['resdata']?>','units<?php     echo $_REQUEST['resdata']?>','prices<?php     echo $_REQUEST['resdata']?>','amounts<?php     echo $_REQUEST['resdata']?>','<?php     echo $_REQUEST['resdata']?>');"><?php     echo $row_sparcus['group_spar_id'].'&nbsp;&nbsp;'.$row_sparcus['group_name'];?></A></td>
           </tr>
-		<?php  	
+		<?php    	
 	}
   ?>
 </table>
