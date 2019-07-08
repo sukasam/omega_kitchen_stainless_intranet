@@ -59,7 +59,7 @@ function check_select(frm){
     สต๊อคอะไหล่</SPAN></A></LI>
     <LI><A class=shortcut-button href="update.php?mode=add"><SPAN><IMG  alt=icon src="../images/menu/mn_serting21.png"><BR>
     เพิ่ม/แก้ไข อะไหล่</SPAN></A></LI>
-    <LI><A class=shortcut-button href="../group_sparpart_stockin/update.php"><SPAN><IMG  alt=icon src="../images/menu/mn_serting22.png"><BR>
+    <LI><A class=shortcut-button href="../group_sparpart_stockin/update.php?mode=add"><SPAN><IMG  alt=icon src="../images/menu/mn_serting22.png"><BR>
     รับเข้าสต๊อค</SPAN></A></LI>
     <LI><A class=shortcut-button href="update.php?mode=add<?php     if ($param <> "") echo "&".$param; ?>"><SPAN><IMG  alt=icon src="../images/menu/mn_serting23.png"><BR>
     รายงานสต็อค</SPAN></A></LI>
