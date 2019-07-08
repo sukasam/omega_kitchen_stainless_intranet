@@ -65,6 +65,9 @@
 			foreach($codes as $a => $b){
 				
 				if($lists[$a] != ""){
+					if($opens[$a] == ""){
+						$opens[$a] = 0;
+					}
 					@mysqli_query($conn,"INSERT INTO `s_service_report2sub` (`r_id`, `sr_id`, `codes`, `lists`, `units`, `prices`, `amounts`, `opens`, `remains`) VALUES (NULL, '".$id."', '".$codes[$a]."', '".$lists[$a]."', '".$units[$a]."', '".$prices[$a]."', '".$amounts[$a]."', '".$opens[$a]."', '".($amounts[$a]-$opens[$a])."');");
 					@mysqli_query($conn,"UPDATE `s_group_sparpart` SET `group_stock` = `group_stock` - '".$opens[$a]."' WHERE `group_id` = '".$lists[$a]."';");
 				}
@@ -114,6 +117,9 @@
 			foreach($codes as $a => $b){
 				
 				if($lists[$a] != ""){
+					if($opens[$a] == ""){
+						$opens[$a] = 0;
+					}
 					@mysqli_query($conn,"INSERT INTO `s_service_report2sub` (`r_id`, `sr_id`, `codes`, `lists`, `units`, `prices`, `amounts`, `opens`, `remains`) VALUES (NULL, '".$id."', '".$codes[$a]."', '".$lists[$a]."', '".$units[$a]."', '".$prices[$a]."', '".$amounts[$a]."', '".$opens[$a]."', '".($amounts[$a]-$opens[$a])."');");
 					@mysqli_query($conn,"UPDATE `s_group_sparpart` SET `group_stock` = `group_stock` - '".$opens[$a]."' WHERE `group_id` = '".$lists[$a]."';");
 				}
