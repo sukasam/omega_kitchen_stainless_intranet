@@ -2059,6 +2059,20 @@ function get_foid($conn,$fo_id){
 	return $row_close['fs_id'];
 }
 
+function get_zone($conn,$group_id){
+	$row_zone = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_group_zone WHERE group_id = '".$group_id."'"));
+	return $row_zone['group_name'];
+}
+
+function findWord($string,$findWord){
+	$pos = strpos($string,$findWord);
+	if($pos !== FALSE){
+		return 'yes';
+	}else{
+		return 'no';
+	}
+}
+
 
 function get_sparpart_id($conn,$gid) {
 	$row_dea = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_sparpart WHERE group_id = '".$gid."'"));
