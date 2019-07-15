@@ -130,6 +130,12 @@ function check_select(frm){
       <LI><A class=shortcut-button href="../report2/?mid=16&act=12"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
       <strong>ตารางคุมสัญญา บริการ</strong><br>
       </SPAN></A></LI>
+      <LI><A class=shortcut-button href="../report2/?mid=16&act=15"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
+      <strong>ตามใบเบิก
+</strong>
+      <br>
+      <br>
+      </SPAN></A></LI>
       <LI><A class=shortcut-button href="../report2/?mid=16&act=13"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
       <strong>ตามใบยืม
 </strong>
@@ -142,15 +148,10 @@ function check_select(frm){
       <br>
       <br>
       </SPAN></A></LI>
-      <LI><A class=shortcut-button href="../report2/?mid=16&act=15"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
-      <strong>ตามใบเบิก
-</strong>
-      <br>
-      <br>
-      </SPAN></A></LI>
+      
       <LI><A class=shortcut-button href="../report2/?mid=16&act=14"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
       <strong>ตาม Installation</strong>
-      <br>
+      <br><br>
       </SPAN></A></LI>
       <LI><A class=shortcut-button href="../report2/?mid=16&act=11"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
       <strong>รายงานสรุป      <br>
@@ -1407,16 +1408,30 @@ S/N
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                       <tr>
                         <td><table class="formFields" cellspacing="0" width="100%">
+                         <tr >
+                            <td nowrap class="name">เลือกรหัส | ชื่ออะไหล่</td>
+                            <td><select name="cpro" id="cpro_ecip">
+                            	<option value="">กรุณาเลือก</option>
+                              <?php 
+                                  $qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+                                  while($row_qupro1 = @mysqli_fetch_array($qupro1)){
+                                    ?>
+                                      <option value="<?php  echo $row_qupro1['group_id'];?>"><?php  echo $row_qupro1['group_spar_id']." | ".$row_qupro1['group_name'];?></option>
+                                    <?php 	
+                                  }
+                              ?>
+                          </select>                              <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search2.php?protype=cpro_ecip');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a></td>
+                          </tr>
                           <tr >
                             <td nowrap class="name">ประเภทบริการ</td>
                             <td><select name="sr_ctype" id="sr_ctype">
                               <option value="">กรุณาเลือก</option>
-                              <?php     
+                              <?php  
                                     $qu_cusftype = @mysqli_query($conn,"SELECT * FROM s_group_service ORDER BY group_name ASC");
                                     while($row_cusftype = @mysqli_fetch_array($qu_cusftype)){
                                         ?>
-                              <option value="<?php     echo $row_cusftype['group_id'];?>" <?php     if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php     echo $row_cusftype['group_name'];?></option>
-                              <?php    
+                              <option value="<?php  echo $row_cusftype['group_id'];?>" <?php  if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php  echo $row_cusftype['group_name'];?></option>
+                              <?php 
                                     }
                                 ?>
                             </select></td>
@@ -1425,13 +1440,13 @@ S/N
                             <td nowrap class="name">ประเภทลูกค้า</td>
                             <td><select name="ctype" id="ctype" class="inputselect" >
                               <option value="">กรุณาเลือก</option>
-                              <?php    
+                              <?php 
                                     $quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
                                     while($row_cgcus = @mysqli_fetch_array($quccustommer)){
 									if(substr($row_cgcus['group_name'],0,2) == "SR"){
                                       ?>
-                              <option value="<?php     echo $row_cgcus['group_id'];?>" <?php     if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php     echo $row_cgcus['group_name'];?></option>
-                              <?php    	
+                              <option value="<?php  echo $row_cgcus['group_id'];?>" <?php  if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php  echo $row_cgcus['group_name'];?></option>
+                              <?php 	
                                     }
 									}
                                 ?>
@@ -1446,12 +1461,12 @@ S/N
                             <td nowrap class="name">ชื่อช่างยืม</td>
                             <td><select name="loc_contact" id="loc_contact">
                              <option value="">กรุณาเลือก</option>
-                              <?php     
+                              <?php  
                                         $qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_technician ORDER BY group_name ASC");
                                         while($row_custec = @mysqli_fetch_array($qu_custec)){
                                             ?>
-                              <option value="<?php     echo $row_custec['group_id'];?>" <?php     if($row_custec['group_id'] == $loc_contact){echo 'selected';}?>><?php     echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
-                              <?php    
+                              <option value="<?php  echo $row_custec['group_id'];?>" <?php  if($row_custec['group_id'] == $loc_contact){echo 'selected';}?>><?php  echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
+                              <?php 
                                         }
                                     ?>
                             </select></td>
@@ -1461,9 +1476,9 @@ S/N
                             <td><input name="opentake" type="radio" id="radio3" value="2" checked>
                               ไม่กำหนด
                               <input name="opentake" type="radio" id="radio3" value="0">
-                              ใบเปิดใบเบิก
+                              ใบเปิดใบยืม
                               <input type="radio" name="opentake" id="radio4" value="1">
-                              ใบปิดใบเบิก</td>
+                              ใบปิดใบยืม</td>
                           </tr>
                           <tr>
                             <td nowrap class="name">&nbsp;</td>
@@ -1475,15 +1490,18 @@ S/N
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php  echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php  echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">รายการแสดง</td>
-                            <td><input name="sh1" type="checkbox" id="sh1" value="1" checked>
+                            <td>
+                             <input name="sh10" type="checkbox" id="sh10" value="1" checked>
+                              เลขที่ใบยืม
+                             <input name="sh1" type="checkbox" id="sh1" value="1" checked>
                               ชื่อลูกค้า / บริษัท + เบอร์โทร
                               <input name="sh2" type="checkbox" id="sh12" value="1" checked>
                               ชื่อร้าน / สถานที่ติดตั้ง
@@ -1503,10 +1521,6 @@ S/N
                               <input name="sh9" type="checkbox" id="sh29" value="1" checked>
                               ผู้เบิก</td>
                           </tr>
-                          <tr>
-                            <td nowrap class="name">&nbsp;</td>
-                            <td>&nbsp;</td>
-                          </tr>
                         </table></td>
                       </tr>
                     </table>
@@ -1521,7 +1535,7 @@ S/N
             
             </DIV><!-- End .content-box-content -->
             </DIV>	
-            <?php    
+            <?php 
 	}
 	
 	if($_GET['act'] == 15){
@@ -1541,16 +1555,30 @@ S/N
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                       <tr>
                         <td><table class="formFields" cellspacing="0" width="100%">
+                         <tr >
+                            <td nowrap class="name">เลือกรหัส | ชื่ออะไหล่</td>
+                            <td><select name="cpro" id="cpro_ecip">
+                            	<option value="">กรุณาเลือก</option>
+                              <?php 
+                                  $qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+                                  while($row_qupro1 = @mysqli_fetch_array($qupro1)){
+                                    ?>
+                                      <option value="<?php  echo $row_qupro1['group_id'];?>"><?php  echo $row_qupro1['group_spar_id']." | ".$row_qupro1['group_name'];?></option>
+                                    <?php 	
+                                  }
+                              ?>
+                          </select>                              <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search2.php?protype=cpro_ecip');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a></td>
+                          </tr>
                           <tr >
                             <td nowrap class="name">ประเภทบริการ</td>
                             <td><select name="sr_ctype" id="sr_ctype">
                               <option value="">กรุณาเลือก</option>
-                              <?php     
+                              <?php  
                                     $qu_cusftype = @mysqli_query($conn,"SELECT * FROM s_group_service ORDER BY group_name ASC");
                                     while($row_cusftype = @mysqli_fetch_array($qu_cusftype)){
                                         ?>
-                              <option value="<?php     echo $row_cusftype['group_id'];?>" <?php     if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php     echo $row_cusftype['group_name'];?></option>
-                              <?php    
+                              <option value="<?php  echo $row_cusftype['group_id'];?>" <?php  if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php  echo $row_cusftype['group_name'];?></option>
+                              <?php 
                                     }
                                 ?>
                             </select></td>
@@ -1559,13 +1587,13 @@ S/N
                             <td nowrap class="name">ประเภทลูกค้า</td>
                             <td><select name="ctype" id="ctype" class="inputselect" >
                               <option value="">กรุณาเลือก</option>
-                              <?php    
+                              <?php 
                                     $quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
                                     while($row_cgcus = @mysqli_fetch_array($quccustommer)){
 									if(substr($row_cgcus['group_name'],0,2) == "SR"){
                                       ?>
-                              <option value="<?php     echo $row_cgcus['group_id'];?>" <?php     if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php     echo $row_cgcus['group_name'];?></option>
-                              <?php    	
+                              <option value="<?php  echo $row_cgcus['group_id'];?>" <?php  if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php  echo $row_cgcus['group_name'];?></option>
+                              <?php 	
                                     }
 									}
                                 ?>
@@ -1580,12 +1608,12 @@ S/N
                             <td nowrap class="name">ชื่อช่างยืม</td>
                             <td><select name="loc_contact" id="loc_contact">
                               <option value="">กรุณาเลือก</option>
-                              <?php     
+                              <?php  
                                         $qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_technician ORDER BY group_name ASC");
                                         while($row_custec = @mysqli_fetch_array($qu_custec)){
                                             ?>
-                              <option value="<?php     echo $row_custec['group_id'];?>" <?php     if($row_custec['group_id'] == $loc_contact){echo 'selected';}?>><?php     echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
-                              <?php    
+                              <option value="<?php  echo $row_custec['group_id'];?>" <?php  if($row_custec['group_id'] == $loc_contact){echo 'selected';}?>><?php  echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
+                              <?php 
                                         }
                                     ?>
                             </select></td>
@@ -1609,11 +1637,11 @@ S/N
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php  echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php  echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">รายการแสดง</td>
@@ -1639,10 +1667,7 @@ S/N
                               <input name="sh9" type="checkbox" id="sh29" value="1" checked>
                               ผู้เบิก</td>
                           </tr>
-                          <tr>
-                            <td nowrap class="name">&nbsp;</td>
-                            <td>&nbsp;</td>
-                          </tr>
+
                         </table></td>
                       </tr>
                     </table>
@@ -1657,7 +1682,7 @@ S/N
             
             </DIV><!-- End .content-box-content -->
             </DIV>	
-            <?php    
+            <?php 
 	}
 	
 	if($_GET['act'] == 14){
@@ -1677,16 +1702,30 @@ S/N
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                       <tr>
                         <td><table class="formFields" cellspacing="0" width="100%">
+                         <tr >
+                            <td nowrap class="name">เลือกรหัส | ชื่ออะไหล่</td>
+                            <td><select name="cpro" id="cpro_ecip">
+                            	<option value="">กรุณาเลือก</option>
+                              <?php 
+                                  $qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+                                  while($row_qupro1 = @mysqli_fetch_array($qupro1)){
+                                    ?>
+                                      <option value="<?php  echo $row_qupro1['group_id'];?>"><?php  echo $row_qupro1['group_spar_id']." | ".$row_qupro1['group_name'];?></option>
+                                    <?php 	
+                                  }
+                              ?>
+                          </select>                              <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search2.php?protype=cpro_ecip');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a></td>
+                          </tr>
                           <tr >
                             <td nowrap class="name">ประเภทบริการ</td>
                             <td><select name="sr_ctype" id="sr_ctype">
                               <option value="">กรุณาเลือก</option>
-                              <?php     
+                              <?php  
                                     $qu_cusftype = @mysqli_query($conn,"SELECT * FROM s_group_service ORDER BY group_name ASC");
                                     while($row_cusftype = @mysqli_fetch_array($qu_cusftype)){
                                         ?>
-                              <option value="<?php     echo $row_cusftype['group_id'];?>" <?php     if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php     echo $row_cusftype['group_name'];?></option>
-                              <?php    
+                              <option value="<?php  echo $row_cusftype['group_id'];?>" <?php  if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php  echo $row_cusftype['group_name'];?></option>
+                              <?php 
                                     }
                                 ?>
                             </select></td>
@@ -1695,13 +1734,13 @@ S/N
                             <td nowrap class="name">ประเภทลูกค้า</td>
                             <td><select name="ctype" id="ctype" class="inputselect" >
                               <option value="">กรุณาเลือก</option>
-                              <?php    
+                              <?php 
                                     $quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
                                     while($row_cgcus = @mysqli_fetch_array($quccustommer)){
 									if(substr($row_cgcus['group_name'],0,2) == "SR"){
                                       ?>
-                              <option value="<?php     echo $row_cgcus['group_id'];?>" <?php     if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php     echo $row_cgcus['group_name'];?></option>
-                              <?php    	
+                              <option value="<?php  echo $row_cgcus['group_id'];?>" <?php  if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php  echo $row_cgcus['group_name'];?></option>
+                              <?php 	
                                     }
 									}
                                 ?>
@@ -1716,12 +1755,12 @@ S/N
                             <td nowrap class="name">รุ่นเครื่อง</td>
                             <td><select name="loc_seal" id="loc_seal" class="inputselect" style="width:250px;">
                               <option value="">กรุณาเลือกรายการ</option>
-                              <?php    
+                              <?php 
                                           $qupros1 = @mysqli_query($conn,"SELECT * FROM s_group_pod ORDER BY group_name ASC");
                                           while($row_qupros1 = @@mysqli_fetch_array($qupros1)){
                                             ?>
-                              <option value="<?php     echo $row_qupros1['group_name'];?>"><?php     echo $row_qupros1['group_name'];?></option>
-                              <?php    	
+                              <option value="<?php  echo $row_qupros1['group_name'];?>"><?php  echo $row_qupros1['group_name'];?></option>
+                              <?php 	
                                           }
                                       ?>
                               </select>
@@ -1737,15 +1776,18 @@ S/N
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php  echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php  echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">รายการแสดง</td>
-                            <td><input name="sh1" type="checkbox" id="sh1" value="1" checked>
+                            <td>
+                             <input name="sh9" type="checkbox" id="sh9" value="1" checked>
+                              เลขที่ใบติดตั้ง
+                             <input name="sh1" type="checkbox" id="sh1" value="1" checked>
                               ชื่อลูกค้า / บริษัท + เบอร์โทร
                               <input name="sh2" type="checkbox" id="sh12" value="1" checked>
                               ชื่อร้าน / สถานที่ติดตั้ง
@@ -1765,6 +1807,10 @@ S/N
                           </tr>
                         </table></td>
                       </tr>
+                      <tr>
+                            <td nowrap class="name">&nbsp;</td>
+                            <td>&nbsp;</td>
+                          </tr>
                     </table>
                     </fieldset>
                 </div><br>
@@ -1777,7 +1823,7 @@ S/N
             
             </DIV><!-- End .content-box-content -->
             </DIV>	
-            <?php    
+            <?php 
 	}
 	
 	if($_GET['act'] == 16){
@@ -1798,16 +1844,30 @@ S/N
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                       <tr>
                         <td><table class="formFields" cellspacing="0" width="100%">
+                         <tr >
+                            <td nowrap class="name">เลือกรหัส | ชื่ออะไหล่</td>
+                            <td><select name="cpro" id="cpro_ecip">
+                            	<option value="">กรุณาเลือก</option>
+                              <?php 
+                                  $qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+                                  while($row_qupro1 = @mysqli_fetch_array($qupro1)){
+                                    ?>
+                                      <option value="<?php  echo $row_qupro1['group_id'];?>"><?php  echo $row_qupro1['group_spar_id']." | ".$row_qupro1['group_name'];?></option>
+                                    <?php 	
+                                  }
+                              ?>
+                          </select>                              <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search2.php?protype=cpro_ecip');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a></td>
+                          </tr>
                           <tr >
                             <td nowrap class="name">ประเภทบริการ</td>
                             <td><select name="sr_ctype" id="sr_ctype">
                               <option value="">กรุณาเลือก</option>
-                              <?php     
+                              <?php  
                                     $qu_cusftype = @mysqli_query($conn,"SELECT * FROM s_group_service ORDER BY group_name ASC");
                                     while($row_cusftype = @mysqli_fetch_array($qu_cusftype)){
                                         ?>
-                              <option value="<?php     echo $row_cusftype['group_id'];?>" <?php     if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php     echo $row_cusftype['group_name'];?></option>
-                              <?php    
+                              <option value="<?php  echo $row_cusftype['group_id'];?>" <?php  if($row_cusftype['group_id'] == $sr_ctype){echo 'selected';}?>><?php  echo $row_cusftype['group_name'];?></option>
+                              <?php 
                                     }
                                 ?>
                             </select></td>
@@ -1816,13 +1876,13 @@ S/N
                             <td nowrap class="name">ประเภทลูกค้า</td>
                             <td><select name="ctype" id="ctype" class="inputselect" >
                               <option value="">กรุณาเลือก</option>
-                              <?php    
+                              <?php 
                                     $quccustommer = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
                                     while($row_cgcus = @mysqli_fetch_array($quccustommer)){
 									if(substr($row_cgcus['group_name'],0,2) == "SR"){
                                       ?>
-                              <option value="<?php     echo $row_cgcus['group_id'];?>" <?php     if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php     echo $row_cgcus['group_name'];?></option>
-                              <?php    	
+                              <option value="<?php  echo $row_cgcus['group_id'];?>" <?php  if($ctype == $row_cgcus['group_id']){echo 'selected';}?>><?php  echo $row_cgcus['group_name'];?></option>
+                              <?php 	
                                     }
 									}
                                 ?>
@@ -1837,12 +1897,12 @@ S/N
                             <td nowrap class="name">ชื่อช่างยืม</td>
                             <td><select name="loc_contact" id="loc_contact">
                              <option value="">กรุณาเลือก</option>
-                              <?php     
+                              <?php  
                                         $qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_technician ORDER BY group_name ASC");
                                         while($row_custec = @mysqli_fetch_array($qu_custec)){
                                             ?>
-                              <option value="<?php     echo $row_custec['group_id'];?>" <?php     if($row_custec['group_id'] == $loc_contact){echo 'selected';}?>><?php     echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
-                              <?php    
+                              <option value="<?php  echo $row_custec['group_id'];?>" <?php  if($row_custec['group_id'] == $loc_contact){echo 'selected';}?>><?php  echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
+                              <?php 
                                         }
                                     ?>
                             </select></td>
@@ -1852,9 +1912,9 @@ S/N
                             <td><input name="opentake" type="radio" id="radio3" value="2" checked>
                               ไม่กำหนด
                               <input name="opentake" type="radio" id="radio3" value="0">
-                              ใบเปิดใบเบิก
+                              ใบเปิดใบคืน
                               <input type="radio" name="opentake" id="radio4" value="1">
-                              ใบปิดใบเบิก</td>
+                              ใบปิดใบคืน</td>
                           </tr>
                           <tr>
                             <td nowrap class="name">&nbsp;</td>
@@ -1866,15 +1926,18 @@ S/N
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">เริ่มวันที่</td>
-                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+                            <td width="90%"><input type="text" name="date_fm" readonly value="<?php  echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
                           </tr>
                           <tr>
                             <td width="10%" nowrap class="name">ถึงวันที่</td>
-                            <td width="90%"><input type="text" name="date_to" readonly value="<?php     echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+                            <td width="90%"><input type="text" name="date_to" readonly value="<?php  echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
                           </tr>
                           <tr>
                             <td nowrap class="name">รายการแสดง</td>
-                            <td><input name="sh1" type="checkbox" id="sh1" value="1" checked>
+                            <td>
+                             <input name="sh10" type="checkbox" id="sh10" value="1" checked>
+                              เลขที่ใบยืม
+                              <input name="sh1" type="checkbox" id="sh1" value="1" checked>
                               ชื่อลูกค้า / บริษัท + เบอร์โทร
                               <input name="sh2" type="checkbox" id="sh12" value="1" checked>
                               ชื่อร้าน / สถานที่ติดตั้ง
@@ -1896,10 +1959,7 @@ S/N
                               <input name="sh9" type="checkbox" id="sh29" value="1" checked>
                               ผู้เบิก</td>
                           </tr>
-                          <tr>
-                            <td nowrap class="name">&nbsp;</td>
-                            <td>&nbsp;</td>
-                          </tr>
+                          
                         </table></td>
                       </tr>
                     </table>
@@ -1914,7 +1974,7 @@ S/N
             
             </DIV><!-- End .content-box-content -->
             </DIV>	
-            <?php    
+            <?php 
 		
 	}
 ?>
