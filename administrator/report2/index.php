@@ -65,6 +65,59 @@ function check_select(frm){
 			frm.choose_action.focus(); return false;
 		}
 }	
+	
+$( document ).ready(function() {
+	
+	$( "#group_spar_id18" ).blur(function() {
+		var group_spar_id = $("#group_spar_id18").val();
+		if(group_spar_id != ""){
+			$.ajax({
+				type: "GET",
+				url: "call_return.php?action=chkProID&group_spar_id="+group_spar_id,
+				success: function(data){
+					//console.log(data);
+					var obj = JSON.parse(data);
+
+					if(obj.status === 'yes'){
+						$("#group_spar_id18").val(obj.group_spar_id);
+						$("#cpro_ecip18").val(obj.group_name);
+						$("#cpro18").val(obj.group_id);
+					}else{
+						$("#cpro_ecip18").val('');
+						$("#cpro18").val("");
+					}
+
+				}
+			});
+		}
+	});
+	
+	$( "#cpro_ecip18" ).blur(function() {
+		var cpro_ecip = $("#cpro_ecip18").val();
+		if(cpro_ecip != ""){
+			$.ajax({
+				type: "GET",
+				url: "call_return.php?action=chkProName&cpro_ecip="+cpro_ecip,
+				success: function(data){
+					//console.log(data);
+					var obj = JSON.parse(data);
+
+					if(obj.status === 'yes'){
+						$("#group_spar_id18").val(obj.group_spar_id);
+						$("#cpro_ecip18").val(obj.group_name);
+						$("#cpro18").val(obj.group_id);
+					}else{
+						$("#group_spar_id18").val('');
+						$("#cpro18").val("");
+					}
+
+				}
+			});
+		}
+	});
+	
+	
+});
 </script>
 
 </HEAD>
@@ -1981,7 +2034,8 @@ S/N
             <?php 
 		
 	}
-		if($_GET['act'] == 18){
+	
+	if($_GET['act'] == 18){
 		?>
 		<DIV class=content-box><!-- Start Content Box -->
             <DIV class=content-box-header align="right" style="padding-right:15px;">
@@ -1998,19 +2052,15 @@ S/N
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                       <tr>
                         <td><table class="formFields" cellspacing="0" width="100%">
-                        <tr >
-                            <td nowrap class="name">เลือกรหัส | ชื่ออะไหล่</td>
-                            <td><select name="cpro" id="cpro_ecip">
-                            	<option value="">กรุณาเลือก</option>
-                              <?php 
-                                  $qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
-                                  while($row_qupro1 = @mysqli_fetch_array($qupro1)){
-                                    ?>
-                                      <option value="<?php  echo $row_qupro1['group_id'];?>"><?php  echo $row_qupro1['group_spar_id']." | ".$row_qupro1['group_name'];?></option>
-                                    <?php 	
-                                  }
-                              ?>
-                          </select>                              <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search2.php?protype=cpro_ecip');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a></td>
+                        <tr>
+                            <td nowrap class="name">ค้นหารหัสอะไหล่</td>
+                            <td><input name="group_spar_id18" type="text" id="group_spar_id18" value="" style="width:40%;"><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search3.php?protype=group_spar_id');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a></td>
+                          </tr>
+                        <tr>
+                            <td nowrap class="name">ค้นหาชื่ออะไหล่</td>
+                            <td><input name="cpro_ecip18" type="text" id="cpro_ecip18" value="" style="width:40%;"><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search3.php?protype=cpro_ecip');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
+                          	<input type="hidden" name="cpro" id="cpro18" value="">
+                            </td>
                           </tr>
 <!--
                           <tr >
@@ -2049,6 +2099,12 @@ S/N
                             </select></td>
                           </tr>
 -->
+                         <tr>
+                            <td nowrap class="name">เลือกฐานข้อมูล</td>
+                            <td><span class="name">
+                              <input type="checkbox" name="database1" value="1" checked> ใบเบิก&nbsp;&nbsp;&nbsp;
+							  <input type="checkbox" name="database2" value="1" checked> ใบยืม<br></td>
+                          </tr>
                           <tr>
                             <td nowrap class="name">&nbsp;</td>
                             <td><span class="name">
@@ -2093,12 +2149,8 @@ S/N
                               ชื่อช่าง</td>
                           </tr>
                           <tr>
-                          	<td>
-                          		
-                          	</td>
-                          	<td>
-                          		
-                          	</td>
+                          	<td></td>
+                          	<td></td>
                           </tr>
                         </table></td>
                       </tr>
