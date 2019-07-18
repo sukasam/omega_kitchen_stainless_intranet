@@ -2067,7 +2067,7 @@ S/N
                             <td nowrap class="name">ชื่อลูกค้า</td>
                             <td><input name="cd_name" type="text" id="cd_name"  value="" style="width:40%;">
                               <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a></td>
-                          </tr>
+                          </tr>-->
                           <tr >
                             <td nowrap class="name">ประเภทบริการ</td>
                             <td><select name="sr_ctype" id="sr_ctype">
@@ -2098,7 +2098,21 @@ S/N
                                 ?>
                             </select></td>
                           </tr>
--->
+
+                          <tr>
+                            <td nowrap class="name">ชื่อช่างยืม</td>
+                            <td><select name="loc_contact" id="loc_contact">
+                              <option value="">กรุณาเลือก</option>
+                              <?php  
+                                        $qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_technician ORDER BY group_name ASC");
+                                        while($row_custec = @mysqli_fetch_array($qu_custec)){
+                                            ?>
+                              <option value="<?php  echo $row_custec['group_id'];?>" <?php  if($row_custec['group_id'] == $loc_contact){echo 'selected';}?>><?php  echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
+                              <?php 
+                                        }
+                                    ?>
+                            </select></td>
+                          </tr>
                          <tr>
                             <td nowrap class="name">เลือกฐานข้อมูล</td>
                             <td><span class="name">
@@ -2147,10 +2161,6 @@ S/N
                               ราคาขาย
                               <input name="sh10" type="checkbox" id="sh45" value="1" checked>
                               ชื่อช่าง</td>
-                          </tr>
-                          <tr>
-                          	<td></td>
-                          	<td></td>
                           </tr>
                         </table></td>
                       </tr>
