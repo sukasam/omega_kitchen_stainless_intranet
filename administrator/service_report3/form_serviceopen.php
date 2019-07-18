@@ -140,9 +140,9 @@
         <td width="4%"><strong>ลำดับ</strong></td>
         <td width="8%"><strong>Code</strong></td>
         <td width="44%"><strong>รายการ</strong></td>
-        <td width="9%"><strong>หน่วยนับ</strong></td>
+		<td width="9%"><strong>หน่วยนับ</strong></td>
+		<td width="9%"><strong>คงเหลือ Stock</strong></td>
         <td width="9%"><strong>ราคา/หน่วย</strong></td>
-        <td width="9%"><strong>จำนวนใน Stock</strong></td>
         <td width="9%"><strong>จำนวนเบิก</strong></td>
         </tr>';
 		
@@ -164,8 +164,8 @@
 			<td>'.$codes[$a].'</td>
 			<td>'.get_sparpart_name($conn,$lists[$a]).'</td>
 			<td align="center">'.$units[$a].'</td>
-			<td align="right">'.$prices[$a].'</td>
 			<td align="right">'.getStockSpar($conn,$lists[$a]).'</td>
+			<td align="right">'.$prices[$a].'</td>
 			<td align="right">'.$opens[$a].'</td>
 			</tr>';
 			
