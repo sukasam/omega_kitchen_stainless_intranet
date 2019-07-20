@@ -627,7 +627,7 @@ function check(frm){
         <span id="listss<?php   echo $i;?>"><select name="lists[]" id="lists<?php   echo $i;?>" class="inputselect" style="width:92%" onchange="showspare(this.value,'<?php   echo "codes".$i;?>','<?php   echo "units".$i;?>','<?php   echo "prices".$i;?>','<?php   echo "amounts".$i;?>')">
         <option value="">กรุณาเลือกรายการอะไหล่</option>
                 <?php  
-                	$qucgspare = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+                	$qucgspare = @mysqli_query($conn,"SELECT * FROM s_group_sparpart WHERE `typespar` != '2' ORDER BY group_name ASC");
 					while($row_spare = @mysqli_fetch_array($qucgspare)){
 					  ?>
 					  	<option value="<?php   echo $row_spare['group_id'];?>" <?php   if($blists[$i-1] == $row_spare['group_id']){echo 'selected';}?>><?php   echo $row_spare['group_name'];?></option>

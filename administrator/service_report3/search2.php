@@ -62,12 +62,24 @@
     xmlHttp.onreadystatechange=function (){
         if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
 			var ds = xmlHttp.responseText.split("|");
-            self.opener.document.getElementById(param1).value=ds[1];
-			self.opener.document.getElementById(param2).innerHTML=ds[2]
-			self.opener.document.getElementById(param3).value=ds[3];
-			self.opener.document.getElementById(param4).value=ds[4];
-			self.opener.document.getElementById(param5).value=ds[5];
-			window.close();
+            window.close();
+			
+			if(ds[5] <= 1){
+				 self.opener.alert(ds[1]+' : อะไหล่สินค้าตัวนี้ไม่เพียงพอสำหรับการยืมอะไหล่');
+				 self.opener.document.getElementById('lists'+resdata).value='';
+				 self.opener.document.getElementById(param1).value='';
+				 self.opener.document.getElementById(param2).value='';
+				 self.opener.document.getElementById(param3).value='';
+				 self.opener.document.getElementById(param4).value='';
+				 self.opener.document.getElementById(param5).value='';
+				 self.opener.document.getElementById('opens'+resdata).value='';
+			}else{
+				self.opener.document.getElementById(param1).value=ds[1];
+				self.opener.document.getElementById(param2).innerHTML=ds[2]
+				self.opener.document.getElementById(param3).value=ds[3];
+				self.opener.document.getElementById(param4).value=ds[4];
+				self.opener.document.getElementById(param5).value=ds[5];
+			}
         } else{
           //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
         }
@@ -93,7 +105,7 @@
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search" id="rscus">
 <?php   
-  	$qu_sparcus = mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_spar_id ASC");
+  	$qu_sparcus = mysqli_query($conn,"SELECT * FROM s_group_sparpart WHERE typespar != '2' ORDER BY group_spar_id ASC");
 	while($row_sparcus = @mysqli_fetch_array($qu_sparcus)){
 		?>
 		 <tr>

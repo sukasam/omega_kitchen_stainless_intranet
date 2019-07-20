@@ -110,7 +110,7 @@ function get_sparpart(pval,resdata){
    xmlHttp.send(null);
 }
 
-function showspare(sval,param1,param2,param3,param4){
+function showspare(sval,param1,param2,param3,param4,idList){
 	var xmlHttp;
    xmlHttp=GetXmlHttpObject(); //Check Support Brownser
    URL = pathLocal+'ajax_return.php?action=getspare&sval='+sval;
@@ -121,10 +121,20 @@ function showspare(sval,param1,param2,param3,param4){
     xmlHttp.onreadystatechange=function (){
         if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
 			var ds = xmlHttp.responseText.split("|");
-            document.getElementById(param1).value=ds[1];
-			document.getElementById(param2).value=ds[2];
-			document.getElementById(param3).value=ds[3];
-			document.getElementById(param4).value=ds[4];
+			if(ds[4] <= 1){
+				 alert(ds[1]+' : อะไหล่สินค้าตัวนี้ไม่เพียงพอสำหรับการเบิกอะไหล่');
+				 document.getElementById('lists'+idList).value='';
+				 document.getElementById(param1).value='';
+				 document.getElementById(param2).value='';
+				 document.getElementById(param3).value='';
+				 document.getElementById(param4).value='';
+				 document.getElementById('opens'+idList).value='';
+			}else{
+				document.getElementById(param1).value=ds[1];
+				document.getElementById(param2).value=ds[2];
+				document.getElementById(param3).value=ds[3];
+				document.getElementById(param4).value=ds[4];
+			}
         } else{
           //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
         }

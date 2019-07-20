@@ -61,7 +61,7 @@
 	if($_GET['action'] == 'getsparpart'){
 		$cd_name = $_REQUEST['pval'];
 		if($cd_name != ""){
-			$consd = "WHERE (group_spar_id LIKE '%".$cd_name."%' OR group_name LIKE '%".$cd_name."%')";
+			$consd = "WHERE typespar != '2' AND (group_spar_id LIKE '%".$cd_name."%' OR group_name LIKE '%".$cd_name."%')";
 		}
 		$qu_cus = mysqli_query($conn,"SELECT * FROM s_group_sparpart ".$consd." ORDER BY group_spar_id ASC");
 		while($row_cusx = @mysqli_fetch_array($qu_cus)){
@@ -81,7 +81,9 @@
 		$row_spare = @mysqli_fetch_array($qu_spare);
 		
 		$selclist = "<select name=\"lists[]\" id=\"lists".$ressdata."\" class=\"inputselect\" style=\"width:92%\" onchange=\"showspare(this.value,'codes".$ressdata."','units".$ressdata."','prices".$ressdata."','amounts".$ressdata."')\">";
-                	$qucgspare = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+                	$qucgspare = @mysqli_query($conn,"SELECT * FROM s_group_sparpart WHERE typespar != '2' ORDER BY group_name ASC");
+					$selclist .= "<option value=\"\">กรุณาเลือกรายการอะไหล่</option>";
+
 					while($row_spares = @mysqli_fetch_array($qucgspare)){
 						$selclist .= "<option value=\"".$row_spares['group_id']."\"";
 						if($sparval == $row_spares['group_id']){$selclist .= "selected=selected";}

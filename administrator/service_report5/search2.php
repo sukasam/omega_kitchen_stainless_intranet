@@ -93,7 +93,7 @@
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search" id="rscus">
 <?php   
-  	$qu_sparcus = mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_spar_id ASC");
+  	$qu_sparcus = mysqli_query($conn,"SELECT * FROM s_group_sparpart WHERE `typespar` != '2' ORDER BY group_spar_id ASC");
 	while($row_sparcus = @mysqli_fetch_array($qu_sparcus)){
 		?>
 		 <tr>
