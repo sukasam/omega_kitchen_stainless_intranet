@@ -38,6 +38,10 @@
 			$_POST['approve'] = 0;
 			$_POST['st_setting'] = 0;
 			$_POST['supply'] = 0;
+			
+			if($_POST['cus_id'] == ""){
+				$_POST['cus_id'] = 1;
+			}
 
 			$_POST['detail_recom'] = nl2br($_POST['detail_recom']);
 			$_POST['detail_calpr'] = nl2br($_POST['detail_calpr']);

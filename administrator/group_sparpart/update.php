@@ -290,7 +290,7 @@ function submitForm(){
                 <td><input name="group_price" type="text" id="group_price"  value="<?php     echo  number_format($group_price); ?>" size="60"></td>
               </tr>
               
-              <tr >
+              <tr style="display: none;">
                 <td nowrap class="name">ประเภทอะไหล่</td>
                 <td><input type="radio" name="typespar" value="1" id="typespar1">อะไหล่สินค้า&nbsp;&nbsp;&nbsp;<input type="radio" name="typespar" value="2" id="typespar2">สินค้าอื่นๆ</td>
               </tr>
