@@ -1547,6 +1547,11 @@ function get_proname($conn,$value) {
 	return $row_protype['group_name'];
 }
 
+function get_proname2($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_typeproduct2 WHERE group_id = '".$value."'"));
+	return $row_protype['group_name'];
+}
+
 function get_projectname($conn,$value) {
 	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_project WHERE group_id = '".$value."'"));
 	return $row_protype['group_name'];

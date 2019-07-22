@@ -6,7 +6,7 @@
 	
 	if($_GET['action'] == 'getpro'){
 		$pid = $_GET['pid'];
-		$rowpro  = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_group_sparpart WHERE group_id = '".$pid."'"));
+		$rowpro  = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_group_typeproduct2 WHERE group_id = '".$pid."'"));
 		echo $rowpro['group_pro_pod']."|".$rowpro['group_pro_sn']."|".number_format($rowpro['group_pro_price']);
 	}
 	
@@ -25,7 +25,7 @@
 			$consd = "WHERE group_name LIKE '%".$cd_name."%'";
 		}
 		//echo "SELECT group_name FROM s_group_typeproduct ".$consd." ORDER BY group_name ASC";
-		$qu_cus = mysqli_query($conn,"SELECT * FROM s_group_sparpart ".$consd." ORDER BY group_name ASC");
+		$qu_cus = mysqli_query($conn,"SELECT * FROM s_group_typeproduct2 ".$consd." ORDER BY group_name ASC");
 		while($row_cus = @mysqli_fetch_array($qu_cus)){
 			?>
 			 <tr>
@@ -59,7 +59,7 @@
 		$group_name = $_REQUEST['group_name'];
 		$protype = $_REQUEST['protype'];
 		
-		$qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+		$qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_typeproduct2 ORDER BY group_name ASC");
 		while($row_qupro1 = @mysqli_fetch_array($qupro1)){
 		  ?>
 			<option value="<?php     echo $row_qupro1['group_id'];?>" <?php     if($group_id == $row_qupro1['group_id']){echo 'selected';}?>><?php     echo $row_qupro1['group_name'];?></option>

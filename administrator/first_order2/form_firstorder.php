@@ -103,7 +103,7 @@ $form = '
     </tr>
     <tr>
       <td style="border:1px solid #000000;padding:5;">1</td>
-      <td style="border:1px solid #000000;text-align:left;padding:5;">'.get_sparpart_name($conn,$_POST["cpro1"]).'</td>
+      <td style="border:1px solid #000000;text-align:left;padding:5;">'.get_proname2($conn,$_POST["cpro1"]).'</td>
       <td style="border:1px solid #000000;padding:5;width:100px;">'.$_POST["pro_pod1"].'</td>
       <td style="border:1px solid #000000;padding:5;">'.$_POST["pro_sn1"].'</td>
       <td style="border:1px solid #000000;padding:5;">'.$_POST["camount1"].'</td>
@@ -112,7 +112,7 @@ $form = '
     </tr>
     <tr>
       <td style="border:1px solid #000000;padding:5;">2</td>
-      <td style="border:1px solid #000000;text-align:left;padding:5;">'.get_sparpart_name($conn,$_POST["cpro2"]).'</td>
+      <td style="border:1px solid #000000;text-align:left;padding:5;">'.get_proname2($conn,$_POST["cpro2"]).'</td>
       <td style="border:1px solid #000000;padding:5;width:100px;">'.$_POST["pro_pod2"].'</td>
       <td style="border:1px solid #000000;padding:5;">'.$_POST["pro_sn2"].'</td>
       <td style="border:1px solid #000000;padding:5;">'.$_POST["camount2"].'</td>
@@ -121,7 +121,7 @@ $form = '
     </tr>
     <tr>
       <td style="border:1px solid #000000;padding:5;">3</td>
-      <td style="border:1px solid #000000;text-align:left;padding:5;">'.get_sparpart_name($conn,$_POST["cpro3"]).'</td>
+      <td style="border:1px solid #000000;text-align:left;padding:5;">'.get_proname2($conn,$_POST["cpro3"]).'</td>
       <td style="border:1px solid #000000;padding:5;width:100px;">'.$_POST["pro_pod3"].'</td>
       <td style="border:1px solid #000000;padding:5;">'.$_POST["pro_sn3"].'</td>
       <td style="border:1px solid #000000;padding:5;">'.$_POST["camount3"].'</td>
@@ -130,7 +130,7 @@ $form = '
     </tr>
     <tr>
       <td style="border:1px solid #000000;padding:5;">4</td>
-      <td style="border:1px solid #000000;text-align:left;padding:5;">'.get_sparpart_name($conn,$_POST["cpro4"]).'</td>
+      <td style="border:1px solid #000000;text-align:left;padding:5;">'.get_proname2($conn,$_POST["cpro4"]).'</td>
       <td style="border:1px solid #000000;padding:5;width:100px;">'.$_POST["pro_pod4"].'</td>
       <td style="border:1px solid #000000;padding:5;">'.$_POST["pro_sn4"].'</td>
       <td style="border:1px solid #000000;padding:5;">'.$_POST["camount4"].'</td>
@@ -139,7 +139,7 @@ $form = '
     </tr>
     <tr>
       <td style="border:1px solid #000000;padding:5;">5</td>
-      <td style="border:1px solid #000000;text-align:left;padding:5;">'.get_sparpart_name($conn,$_POST["cpro5"]).'</td>
+      <td style="border:1px solid #000000;text-align:left;padding:5;">'.get_proname2($conn,$_POST["cpro5"]).'</td>
       <td style="border:1px solid #000000;padding:5;width:100px;">'.$_POST["pro_pod5"].'</td>
       <td style="border:1px solid #000000;padding:5;">'.$_POST["pro_sn5"].'</td>
       <td style="border:1px solid #000000;padding:5;">'.$_POST["camount5"].'</td>
@@ -148,7 +148,7 @@ $form = '
     </tr>
     <tr>
       <td style="border:1px solid #000000;padding:5;">6</td>
-      <td style="border:1px solid #000000;text-align:left;padding:5;">'.get_sparpart_name($conn,$_POST["cpro6"]).'</td>
+      <td style="border:1px solid #000000;text-align:left;padding:5;">'.get_proname2($conn,$_POST["cpro6"]).'</td>
       <td style="border:1px solid #000000;padding:5;width:100px;">'.$_POST["pro_pod6"].'</td>
       <td style="border:1px solid #000000;padding:5;">'.$_POST["pro_sn6"].'</td>
       <td style="border:1px solid #000000;padding:5;">'.$_POST["camount6"].'</td>
@@ -157,7 +157,7 @@ $form = '
     </tr>
     <tr>
       <td style="border:1px solid #000000;padding:5;">7</td>
-      <td style="border:1px solid #000000;text-align:left;padding:5;">'.get_sparpart_name($conn,$_POST["cpro7"]).'</td>
+      <td style="border:1px solid #000000;text-align:left;padding:5;">'.get_proname2($conn,$_POST["cpro7"]).'</td>
       <td style="border:1px solid #000000;padding:5;width:100px;">'.$_POST["pro_pod7"].'</td>
       <td style="border:1px solid #000000;padding:5;">'.$_POST["pro_sn7"].'</td>
       <td style="border:1px solid #000000;padding:5;">'.$_POST["camount7"].'</td>

@@ -2,8 +2,7 @@
 	include ("../../include/config.php");
 	include ("../../include/connect.php");
 	include ("../../include/function.php");	
-	//include ("config.php");
-	$pages="home";
+	include ("config.php");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
@@ -40,7 +39,9 @@
   
 </DIV></DIV><!-- End .content-box-header -->
 <DIV class=content-box-content>
-<?php  include('../include/tag.php');?>
+<?php  include('../include/tag.php');
+//echo $sql;
+?>
 </DIV><!-- End .content-box-content -->
 </DIV><!-- End .content-box -->
 <DIV class=clear></DIV>

@@ -41,7 +41,8 @@
 		$_POST["cprice7"] = str_replace($vowels,"",$_POST["cprice7"]);
 		
 		if ($_POST["mode"] == "add") { 
-		
+				
+				$_POST['st_setting'] = 0;
 				$_POST['fs_id'] = get_snfirstorders($conn,$_POST['fs_id']);
 				$_POST['status_use'] = 1;
 				

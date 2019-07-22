@@ -40,6 +40,8 @@
 		
 		if ($_POST["mode"] == "add") { 
 		
+				$_POST['st_setting'] = 0;
+				$_POST['status_use'] = 1;
 				$_POST['fs_id'] = get_snfirstorders($conn,$_POST['fs_id']);
 				
 				include "../include/m_add.php";
@@ -311,7 +313,7 @@ function chksign(vals){
       <select name="cpro1" id="cpro1" class="inputselect" style="width:90%;">
       		<option value="">กรุณาเลือกรายการ</option>
 		  <?php    
-              $qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+              $qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_typeproduct2 ORDER BY group_name ASC");
               while($row_qupro1 = @mysqli_fetch_array($qupro1)){
                 ?>
                   <option value="<?php     echo $row_qupro1['group_id'];?>" <?php     if($cpro1 == $row_qupro1['group_id']){echo 'selected';}?>><?php     echo $row_qupro1['group_name'];?></option>
@@ -352,7 +354,7 @@ function chksign(vals){
       	<select name="cpro2" id="cpro2" class="inputselect" style="width:90%;">
       		<option value="">กรุณาเลือกรายการ</option>
 		  <?php    
-              $qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+              $qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_typeproduct2 ORDER BY group_name ASC");
               while($row_qupro2 = @mysqli_fetch_array($qupro1)){
                 ?>
                   <option value="<?php     echo $row_qupro2['group_id'];?>" <?php     if($cpro2 == $row_qupro2['group_id']){echo 'selected';}?>><?php     echo $row_qupro2['group_name'];?></option>
@@ -389,7 +391,7 @@ function chksign(vals){
       	<select name="cpro3" id="cpro3" class="inputselect" style="width:90%;">
       		<option value="">กรุณาเลือกรายการ</option>
 		  <?php    
-              $qupro3 = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+              $qupro3 = @mysqli_query($conn,"SELECT * FROM s_group_typeproduct2 ORDER BY group_name ASC");
               while($row_qupro3 = @mysqli_fetch_array($qupro3)){
                 ?>
                   <option value="<?php     echo $row_qupro3['group_id'];?>" <?php     if($cpro3 == $row_qupro3['group_id']){echo 'selected';}?>><?php     echo $row_qupro3['group_name'];?></option>
@@ -425,7 +427,7 @@ function chksign(vals){
       	<select name="cpro4" id="cpro4" class="inputselect" style="width:90%;">
       		<option value="">กรุณาเลือกรายการ</option>
 		  <?php    
-              $qupro4 = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+              $qupro4 = @mysqli_query($conn,"SELECT * FROM s_group_typeproduct2 ORDER BY group_name ASC");
               while($row_qupro4 = @mysqli_fetch_array($qupro4)){
                 ?>
                   <option value="<?php     echo $row_qupro4['group_id'];?>" <?php     if($cpro4 == $row_qupro4['group_id']){echo 'selected';}?>><?php     echo $row_qupro4['group_name'];?></option>
@@ -461,7 +463,7 @@ function chksign(vals){
       	<select name="cpro5" id="cpro5" class="inputselect" style="width:90%;">
       		<option value="">กรุณาเลือกรายการ</option>
 		  <?php    
-              $qupro5 = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+              $qupro5 = @mysqli_query($conn,"SELECT * FROM s_group_typeproduct2 ORDER BY group_name ASC");
               while($row_qupro5 = @mysqli_fetch_array($qupro5)){
                 ?>
                   <option value="<?php     echo $row_qupro5['group_id'];?>" <?php     if($cpro5 == $row_qupro5['group_id']){echo 'selected';}?>><?php     echo $row_qupro5['group_name'];?></option>
@@ -497,7 +499,7 @@ function chksign(vals){
       	<select name="cpro6" id="cpro6" class="inputselect" style="width:90%;" >
       		<option value="">กรุณาเลือกรายการ</option>
 		  <?php    
-              $qupro6 = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+              $qupro6 = @mysqli_query($conn,"SELECT * FROM s_group_typeproduct2 ORDER BY group_name ASC");
               while($row_qupro6 = @mysqli_fetch_array($qupro6)){
                 ?>
                   <option value="<?php     echo $row_qupro6['group_id'];?>" <?php     if($cpro6 == $row_qupro6['group_id']){echo 'selected';}?>><?php     echo $row_qupro6['group_name'];?></option>
@@ -533,7 +535,7 @@ function chksign(vals){
       	<select name="cpro7" id="cpro7" class="inputselect" style="width:90%;">
       		<option value="">กรุณาเลือกรายการ</option>
 		  <?php    
-              $qupro7 = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+              $qupro7 = @mysqli_query($conn,"SELECT * FROM s_group_typeproduct2 ORDER BY group_name ASC");
               while($row_qupro7 = @mysqli_fetch_array($qupro7)){
                 ?>
                   <option value="<?php     echo $row_qupro7['group_id'];?>" <?php     if($cpro7 == $row_qupro7['group_id']){echo 'selected';}?>><?php     echo $row_qupro7['group_name'];?></option>

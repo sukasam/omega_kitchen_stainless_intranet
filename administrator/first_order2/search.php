@@ -88,7 +88,7 @@
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search" id="rscus">
 <?php     
-  	$qu_cus = mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+  	$qu_cus = mysqli_query($conn,"SELECT * FROM s_group_typeproduct2 ORDER BY group_name ASC");
 	while($row_cus = @mysqli_fetch_array($qu_cus)){
 		?>
 		 <tr>
