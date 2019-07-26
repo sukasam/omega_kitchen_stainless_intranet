@@ -51,8 +51,14 @@
 			$copysubdb = @mysqli_query($conn,"SELECT * FROM `s_service_report3sub` WHERE `sr_id` = '".$_GET['sr_id']."'");
 			while($rowsubdb = @mysqli_fetch_array($copysubdb)){
 				if($rowsubdb['lists'] != ""){
-					@mysqli_query($conn,"INSERT INTO `s_service_report5sub` (`r_id`, `sr_id`, `codes`, `lists`, `units`, `prices`, `amounts`, `opens`, `remains`) 
-				VALUES ('".$rowsubdb['r_id']."', '".$rowsubdb['sr_id']."', '".$rowsubdb['codes']."', '".$rowsubdb['lists']."', '".$rowsubdb['units']."', '".$rowsubdb['prices']."', '".$rowsubdb['amounts']."', '".$rowsubdb['opens']."', '".$rowsubdb['remains']."');");
+//					@mysqli_query($conn,"INSERT INTO `s_service_report5sub` (`r_id`, `sr_id`, `codes`, `lists`, `units`, `prices`, `amounts`, `opens`, `remains`) 
+//				VALUES ('".$rowsubdb['r_id']."', '".$rowsubdb['sr_id']."', '".$rowsubdb['codes']."', '".$rowsubdb['lists']."', '".$rowsubdb['units']."', '".$rowsubdb['prices']."', '".$rowsubdb['amounts']."', '".$rowsubdb['opens']."', '".$rowsubdb['remains']."');");
+					
+					$sqlPro3 = "INSERT INTO `s_service_report5sub` (`r_id`, `sr_id`, `codes`, `lists`, `units`, `prices`, `amounts`, `opens`, `remains`) 
+
+					VALUES ( NULL, '".$copydb['sr_id']."', '".$rowsubdb['codes']."', '".$rowsubdb['lists']."', '".$rowsubdb['units']."', '".$rowsubdb['prices']."', '".$rowsubdb['amounts']."', '".$rowsubdb['opens']."', '".$rowsubdb['remains']."');";
+
+					@mysqli_query($conn,$sqlPro3);
 				}
 			}
 		}
