@@ -34,7 +34,7 @@
 	}
 </style>
 <html>
-	<body onLoad="javascript:window.print();window.close();">
+    <body onLoad="javascript:window.print();window.close();">
 	<TABLE class="tbMain">
       <THEAD>
         <TR>
@@ -52,26 +52,27 @@
         </TFOOT>
       <TBODY>
         <?php     
-					if($orderby=="") $orderby = $tbl_name.".group_spar_id";
-					if ($sortby =="") $sortby ="ASC";
-					
-				   	$sql = " select *,$tbl_name.create_date as c_date from $tbl_name  where 1 ";
-					if ($_GET[$PK_field] <> "") $sql .= " and ($PK_field  = '" . $_GET[$PK_field] . " ' ) ";					
-					if ($_GET[$FR_field] <> "") $sql .= " and ($FR_field  = '" . $_GET[$FR_field] . " ' ) ";					
- 					if ($_GET["keyword"] <> "") { 
-						$sql .= "and ( " .  $PK_field  . " like '%".$_GET["keyword"]."%' ";
-						if (count ($search_key) > 0) { 
-							$search_text = " and ( " ;
-							foreach ($search_key as $key=>$value) { 
-									$subtext .= "or " . $value  . " like '%" . $_GET["keyword"] . "%'";
-							}	
-						}
-						$sql .=  $subtext . " ) ";
-					} 
-					if ($orderby <> "") $sql .= " order by " . $orderby;
-					if ($sortby <> "") $sql .= " " . $sortby;
-					include ("../include/page_init.php");
-					//echo $sql;
+//					if($orderby=="") $orderby = $tbl_name.".group_spar_id";
+//					if ($sortby =="") $sortby ="ASC";
+//					
+//				   	$sql = " select *,$tbl_name.create_date as c_date from $tbl_name  where 1 ";
+//					if ($_GET[$PK_field] <> "") $sql .= " and ($PK_field  = '" . $_GET[$PK_field] . " ' ) ";					
+//					if ($_GET[$FR_field] <> "") $sql .= " and ($FR_field  = '" . $_GET[$FR_field] . " ' ) ";					
+// 					if ($_GET["keyword"] <> "") { 
+//						$sql .= "and ( " .  $PK_field  . " like '%".$_GET["keyword"]."%' ";
+//						if (count ($search_key) > 0) { 
+//							$search_text = " and ( " ;
+//							foreach ($search_key as $key=>$value) { 
+//									$subtext .= "or " . $value  . " like '%" . $_GET["keyword"] . "%'";
+//							}	
+//						}
+//						$sql .=  $subtext . " ) ";
+//					} 
+//					if ($orderby <> "") $sql .= " order by " . $orderby;
+//					if ($sortby <> "") $sql .= " " . $sortby;
+//		  
+//					include ("../include/page_init.php");
+					$sql = 'select *,s_group_sparpart.create_date as c_date from s_group_sparpart where 1 order by s_group_sparpart.group_spar_id ASC';
 					$query = @mysqli_query($conn,$sql);
 					if($_GET["page"] == "") $_GET["page"] = 1;
 					$counter = ($_GET["page"]-1)*$pagesize;
