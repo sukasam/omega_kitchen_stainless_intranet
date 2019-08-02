@@ -15,6 +15,8 @@
 		
 		$_POST['group_unit_price'] = preg_replace("/,/","",$_POST['group_unit_price']);
 		$_POST['group_price'] = preg_replace("/,/","",$_POST['group_price']);
+
+		$_POST['group_name'] = addslashes($_POST['group_name']);
 		
 		if ($_POST["mode"] == "add") { 
 			include "../include/m_add.php";
@@ -151,47 +153,50 @@ $( document ).ready(function() {
 	});
 	
 	$( "#group_name" ).blur(function() {
+		var group_spar_id = $("#group_spar_id").val();
 		var group_name = $("#group_name").val();
-		if(group_name){
-			$.ajax({
-					type: "GET",
-					url: "call_return.php?action=chkProName&group_name="+group_name,
-					success: function(data){
-						//console.log(data);
-						var obj = JSON.parse(data);
+		if(group_spar_id == ""){
+			if(group_name){
+				$.ajax({
+						type: "GET",
+						url: "call_return.php?action=chkProName&group_name="+group_name,
+						success: function(data){
+							//console.log(data);
+							var obj = JSON.parse(data);
 
-						if(obj.status === 'yes'){
-							$("#group_id").val(obj.group_id);
-							$("#group_name").val(obj.group_name);
-							$("#group_namecall").val(obj.group_namecall);
-							$("#group_type").val(obj.group_type);
-							$("#group_unit_price").val(obj.group_unit_price);
-							$("#group_price").val(obj.group_price);
-							//$("#typespar").val(obj.typespar);
-							
-							if(obj.typespar == 2){
-								$("#typespar2").attr('checked', true);
+							if(obj.status === 'yes'){
+								$("#group_id").val(obj.group_id);
+								$("#group_name").val(obj.group_name);
+								$("#group_namecall").val(obj.group_namecall);
+								$("#group_type").val(obj.group_type);
+								$("#group_unit_price").val(obj.group_unit_price);
+								$("#group_price").val(obj.group_price);
+								//$("#typespar").val(obj.typespar);
+								
+								if(obj.typespar == 2){
+									$("#typespar2").attr('checked', true);
+								}else{
+									$("#typespar1").attr('checked', true);
+								}
+								$("#mode").val('update');
+								$("#group_spar_id2").val(obj.group_spar_id);
+								$(".editIDPro").removeClass('hide');
 							}else{
-								$("#typespar1").attr('checked', true);
+								$("#mode").val('add');
+								$("#group_name").val('');
+								$("#group_namecall").val('');
+								$("#group_spar_id2").val(group_spar_id);
+								$(".editIDPro").addClass('hide');
 							}
-							$("#mode").val('update');
-							$("#group_spar_id2").val(obj.group_spar_id);
-							$(".editIDPro").removeClass('hide');
-						}else{
-							$("#mode").val('add');
-							$("#group_name").val('');
-							$("#group_namecall").val('');
-							$("#group_spar_id2").val(group_spar_id);
-							$(".editIDPro").addClass('hide');
-						}
 
-						$("#group_spar_id")[0].disabled = true;
-						$("#group_name")[0].disabled = false;
-						$("#group_namecall")[0].disabled = false;
-						$("#edit_spar_id")[0].disabled = false;
-						//$("#group_name").focus();
-					}
-				});
+							$("#group_spar_id")[0].disabled = true;
+							$("#group_name")[0].disabled = false;
+							$("#group_namecall")[0].disabled = false;
+							$("#edit_spar_id")[0].disabled = false;
+							//$("#group_name").focus();
+						}
+					});
+			}
 		}
 		
 	});
