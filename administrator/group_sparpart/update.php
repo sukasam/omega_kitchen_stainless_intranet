@@ -290,7 +290,7 @@ function submitForm(){
                 <td><input name="group_unit_price" type="text" id="group_unit_price"  value="<?php     echo number_format($group_unit_price); ?>" size="60"></td>
               </tr>
               
-              <tr>
+              <tr style="display: none;">
                 <td nowrap class="name">ราคาขาย</td>
                 <td><input name="group_price" type="text" id="group_price"  value="<?php     echo  number_format($group_price); ?>" size="60"></td>
               </tr>

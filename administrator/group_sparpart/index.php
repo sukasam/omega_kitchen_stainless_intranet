@@ -108,7 +108,7 @@ function check_select(frm){
           <TH width="14%"><a>ชนิดสินค้า</a></TH>
           <TH width="12%"><a>ราคาต้นทุนสินค้า</a></TH>
           <TH width="12%"><a>รวมราคาต้นทุนสินค้า</a></TH>
-          <TH width="12%"><a>ราคาขาย</a></TH>
+<!--          <TH width="12%"><a>ราคาขาย</a></TH>-->
           <TH width="5%"><a>ลบ</a></TH>
         </TR>
       </THEAD>
@@ -152,7 +152,7 @@ function check_select(frm){
           <TD style="text-align: center;"><span class="text"><?php     echo $rec["group_type"] ; ?></span></TD>
           <TD style="text-align: right;"><span class="text"><?php     echo number_format($rec["group_unit_price"],2); ?></span></TD>
           <TD style="text-align: right;"><span class="text"><?php     echo number_format($rec["group_stock"]*$rec["group_unit_price"],2) ; ?></span></TD>
-          <TD style="text-align: right;"><span class="text"><?php     echo number_format($rec["group_price"],2); ?></span></TD>
+<!--          <TD style="text-align: right;"><span class="text"><?php     echo number_format($rec["group_price"],2); ?></span></TD>-->
           <TD style="text-align: center;"><A title=Delete  href="#"><IMG alt=Delete src="../images/cross.png" onClick="confirmDelete('?action=delete&<?php     echo $PK_field; ?>=<?php     echo $rec[$PK_field];?>','Group  <?php     echo $rec[$PK_field];?> : <?php     echo $rec["group_name"];?>')"></A></TD>
 
         </TR>  
