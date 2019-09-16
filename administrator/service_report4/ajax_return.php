@@ -1,4 +1,4 @@
-<?php  
+<?php    
 	include_once("../../include/aplication_top.php");
 	header("Content-type: text/html; charset=utf8");
 	header("Cache-Control: no-cache, must-revalidate");
@@ -18,7 +18,16 @@
 	
 		if($_GET['action'] == 'getcusfirsh'){
 		$fpid = $_GET['pid'];
-		$rowcus  = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_first_order WHERE fo_id  = '".$fpid."'"));
+		$chk = $_GET['chk'];
+		
+		$tableDB = '';
+		if($chk == 'po'){
+			$tableDB = 's_project_order';
+		}else{
+			$tableDB = 's_first_order';
+		}
+			
+		$rowcus  = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM ".$tableDB." WHERE fo_id  = '".$fpid."'"));
 		
 		$prolist = get_profirstorder($conn,$fpid);
 		//$lispp = explode(",",$prolist);
@@ -44,16 +53,27 @@
 	
 	if($_GET['action'] == 'getcus'){
 		$cd_name = $_REQUEST['pval'];
+		$chk = $_REQUEST['chk'];
+		
 		if($cd_name != ""){
 			$consd = "AND cd_name LIKE '%".$cd_name."%'";
 		}
-		$qu_cus = mysqli_query($conn,"SELECT fo_id,cd_name,loc_name FROM s_first_order WHERE 1 ".$consd." AND (status_use = '3'  OR status_use = '0') ORDER BY cd_name ASC");
+		
+		$tableDB = '';
+		if($chk == 'po'){
+			$tableDB = 's_project_order';
+		}else{
+			$tableDB = 's_first_order';
+		}
+		
+		$qu_cus = mysqli_query($conn,"SELECT fo_id,cd_name,loc_name FROM ".$tableDB." WHERE 1 ".$consd." AND (status_use = '3'  OR status_use = '0') ORDER BY cd_name ASC");
+		
 		while($row_cusx = @mysqli_fetch_array($qu_cus)){
 			?>
 			 <tr>
-				<td><A href="javascript:void(0);" onclick="get_customer('<?php   echo $row_cusx['fo_id'];?>','<?php   echo $row_cusx['cd_name'];?>');"><?php   echo $row_cusx['cd_name'];?> (<?php   echo $row_cusx['loc_name']?>)</A></td>
+				<td><A href="javascript:void(0);" onclick="get_customer('<?php     echo $row_cusx['fo_id'];?>','<?php     echo $row_cusx['cd_name'];?>','<?php echo $chk;?>');"><?php     echo $row_cusx['cd_name'];?> (<?php     echo $row_cusx['loc_name']?>)</A></td>
 			  </tr>
-			<?php  	
+			<?php    	
 		}
 		//echo "SELECT cd_name FROM s_first_order ".$consd." ORDER BY cd_name ASC";
 	}
@@ -61,15 +81,15 @@
 	if($_GET['action'] == 'getsparpart'){
 		$cd_name = $_REQUEST['pval'];
 		if($cd_name != ""){
-			$consd = "WHERE `typespar` != '2' AND (group_spar_id LIKE '%".$cd_name."%' OR group_name LIKE '%".$cd_name."%')";
+			$consd = "WHERE typespar != '2' AND (group_spar_id LIKE '%".$cd_name."%' OR group_name LIKE '%".$cd_name."%')";
 		}
 		$qu_cus = mysqli_query($conn,"SELECT * FROM s_group_sparpart ".$consd." ORDER BY group_spar_id ASC");
 		while($row_cusx = @mysqli_fetch_array($qu_cus)){
 			?>
 			 <tr>
-				<td><A href="javascript:void(0);" onclick="get_sparactive('<?php   echo $row_cusx['group_id'];?>','codes<?php   echo $_REQUEST['resdata']?>','listss<?php   echo $_REQUEST['resdata']?>','units<?php   echo $_REQUEST['resdata']?>','prices<?php   echo $_REQUEST['resdata']?>','amounts<?php   echo $_REQUEST['resdata']?>','<?php   echo $_REQUEST['resdata']?>');"><?php   echo $row_cusx['group_spar_id'].'&nbsp;&nbsp;'.$row_cusx['group_name'];?></A></td>
+				<td><A href="javascript:void(0);" onclick="get_sparactive('<?php     echo $row_cusx['group_id'];?>','codes<?php     echo $_REQUEST['resdata']?>','listss<?php     echo $_REQUEST['resdata']?>','units<?php     echo $_REQUEST['resdata']?>','prices<?php     echo $_REQUEST['resdata']?>','amounts<?php     echo $_REQUEST['resdata']?>','<?php     echo $_REQUEST['resdata']?>');"><?php     echo $row_cusx['group_spar_id'].'&nbsp;&nbsp;'.$row_cusx['group_name'];?></A></td>
 			  </tr>
-			<?php  	
+			<?php    	
 		}
 		//echo "SELECT cd_name FROM s_first_order ".$consd." ORDER BY cd_name ASC";
 	}
@@ -81,7 +101,9 @@
 		$row_spare = @mysqli_fetch_array($qu_spare);
 		
 		$selclist = "<select name=\"lists[]\" id=\"lists".$ressdata."\" class=\"inputselect\" style=\"width:92%\" onchange=\"showspare(this.value,'codes".$ressdata."','units".$ressdata."','prices".$ressdata."','amounts".$ressdata."')\">";
-                	$qucgspare = @mysqli_query($conn,"SELECT * FROM s_group_sparpart WHERE `typespar` != '2' ORDER BY group_name ASC");
+                	$qucgspare = @mysqli_query($conn,"SELECT * FROM s_group_sparpart WHERE typespar != '2' ORDER BY group_name ASC");
+					$selclist .= "<option value=\"\">กรุณาเลือกรายการอะไหล่</option>";
+
 					while($row_spares = @mysqli_fetch_array($qucgspare)){
 						$selclist .= "<option value=\"".$row_spares['group_id']."\"";
 						if($sparval == $row_spares['group_id']){$selclist .= "selected=selected";}

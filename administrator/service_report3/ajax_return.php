@@ -18,7 +18,16 @@
 	
 		if($_GET['action'] == 'getcusfirsh'){
 		$fpid = $_GET['pid'];
-		$rowcus  = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_first_order WHERE fo_id  = '".$fpid."'"));
+		$chk = $_GET['chk'];
+		
+		$tableDB = '';
+		if($chk == 'po'){
+			$tableDB = 's_project_order';
+		}else{
+			$tableDB = 's_first_order';
+		}
+			
+		$rowcus  = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM ".$tableDB." WHERE fo_id  = '".$fpid."'"));
 		
 		$prolist = get_profirstorder($conn,$fpid);
 		//$lispp = explode(",",$prolist);
@@ -44,16 +53,27 @@
 	
 	if($_GET['action'] == 'getcus'){
 		$cd_name = $_REQUEST['pval'];
+		$chk = $_REQUEST['chk'];
+		
 		if($cd_name != ""){
 			$consd = "AND cd_name LIKE '%".$cd_name."%'";
 		}
-		$qu_cus = mysqli_query($conn,"SELECT fo_id,cd_name,loc_name FROM s_first_order WHERE 1 ".$consd." AND (status_use = '3'  OR status_use = '0') ORDER BY cd_name ASC");
+		
+		$tableDB = '';
+		if($chk == 'po'){
+			$tableDB = 's_project_order';
+		}else{
+			$tableDB = 's_first_order';
+		}
+		
+		$qu_cus = mysqli_query($conn,"SELECT fo_id,cd_name,loc_name FROM ".$tableDB." WHERE 1 ".$consd." AND (status_use = '3'  OR status_use = '0') ORDER BY cd_name ASC");
+		
 		while($row_cusx = @mysqli_fetch_array($qu_cus)){
 			?>
 			 <tr>
-				<td><A href="javascript:void(0);" onclick="get_customer('<?php   echo $row_cusx['fo_id'];?>','<?php   echo $row_cusx['cd_name'];?>');"><?php   echo $row_cusx['cd_name'];?> (<?php   echo $row_cusx['loc_name']?>)</A></td>
+				<td><A href="javascript:void(0);" onclick="get_customer('<?php     echo $row_cusx['fo_id'];?>','<?php     echo $row_cusx['cd_name'];?>','<?php echo $chk;?>');"><?php     echo $row_cusx['cd_name'];?> (<?php     echo $row_cusx['loc_name']?>)</A></td>
 			  </tr>
-			<?php  	
+			<?php    	
 		}
 		//echo "SELECT cd_name FROM s_first_order ".$consd." ORDER BY cd_name ASC";
 	}

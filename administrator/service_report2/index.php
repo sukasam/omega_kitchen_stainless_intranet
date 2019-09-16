@@ -182,7 +182,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					if($orderby=="") $orderby = "sr.".$PK_field;
 					if ($sortby =="") $sortby ="DESC";
 					
-				   	$sql = "SELECT sr . * , fd.cd_name FROM $tbl_name AS sr, s_first_order AS fd WHERE sr.cus_id = fd.fo_id";
+				   	//$sql = "SELECT sr . * , fd.cd_name FROM $tbl_name AS sr, s_first_order AS fd WHERE sr.cus_id = fd.fo_id";
+		  			$sql = "SELECT sr . * FROM $tbl_name AS sr WHERE 1";
 					if ($_GET[$PK_field] <> "") $sql .= " and ($PK_field  = '" . $_GET[$PK_field] . " ' ) ";					
 					if ($_GET[$FR_field] <> "") $sql .= " and ($FR_field  = '" . $_GET[$FR_field] . " ' ) ";					
  					if ($_GET["keyword"] <> "") { 
@@ -197,7 +198,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					} 
 					
 					if ($_GET['app_id'] <> "") { 
-						$sql .= " and ( approve = '$_GET[app_id]' ";
+						$sql .= " and ( approve = '".$_GET['app_id']."' ";
 						$sql .=  $subtext . " ) ";
 					}else{
 						$sql .= " and ( approve = '0' ";
@@ -207,8 +208,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					if ($orderby <> "") $sql .= " order by " . $orderby;
 					if ($sortby <> "") $sql .= " " . $sortby;
 					include ("../include/page_init.php");
-					/*echo $sql;
-					break;*/
+//					echo $sql;
+//					break;
 					$query = @mysqli_query($conn,$sql);
 					if($_GET["page"] == "") $_GET["page"] = 1;
 					$counter = ($_GET["page"]-1)*$pagesize;
@@ -220,8 +221,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           <TD style="vertical-align:middle;"><INPUT type=checkbox name="del[]" value="<?php     echo $rec[$PK_field]; ?>" ></TD>
           <TD style="vertical-align:middle;"><span class="text"><?php     echo sprintf("%04d",$counter); ?></span></TD>
           <TD style="vertical-align:middle;"><?php     $chaf = preg_replace("/\//","-",$rec["sv_id"]); ?><div align="center"><span class="text"><a href="../../upload/service_report_open/<?php     echo $chaf;?>.pdf" target="_blank"><?php     echo $rec["sv_id"] ; ?></a></span></div></TD>
-          <TD style="vertical-align:middle;"><span class="text"><?php     echo get_customername($conn,$rec["cus_id"]); ?></span></TD>
-          <TD style="vertical-align:middle;"><span class="text"><?php     echo get_localsettingname($conn,$rec["cus_id"]); ?></span></TD>
+          <TD style="vertical-align:middle;"><span class="text"><?php     echo get_customername2($conn,$rec["cus_id"],$rec["cus_source"]); ?></span></TD>
+          <TD style="vertical-align:middle;"><span class="text"><?php     echo get_localsettingname2($conn,$rec["cus_id"],$rec["cus_source"]); ?></span></TD>
           <TD style="vertical-align:middle;"><?php     echo get_technician_name($conn,$rec["loc_contact"]);?></TD>
           <TD style="vertical-align:middle"><?php     if($rec["approve"] == 1){?>
             <IMG src="../images/icons/yes_approve.png" height="28" title="อนุมัติ">

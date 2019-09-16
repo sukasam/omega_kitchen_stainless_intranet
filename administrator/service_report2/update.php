@@ -146,6 +146,7 @@
 		 Check_Permission($conn,$check_module,$_SESSION["login_id"],"add");
 	}
 	if ($_GET["mode"] == "update") { 
+		
 		 Check_Permission($conn,$check_module,$_SESSION["login_id"],"update");
 		$sql = "select * from $tbl_name where $PK_field = '" . $_GET[$PK_field] ."'";
 		$query = @mysqli_query($conn,$sql);
@@ -180,7 +181,7 @@
 		$a_sdate=explode("-",$ref_date);
 		$ref_date=$a_sdate[2]."/".$a_sdate[1]."/".$a_sdate[0];
 		
-		$finfo = get_firstorder($conn,$cus_id);
+		$finfo = get_firstorder2($conn,$cus_id,$cus_source);
 		
 		$ckf_list = explode(',',$ckf_list);
 		
@@ -375,8 +376,14 @@ function check(frm){
             <td><strong>ชื่อลูกค้า :</strong> 
             	<!--<select name="cus_id" id="cus_id" onChange="checkfirstorder(this.value,'cusadd','cusprovince','custel','cusfax','contactid','datef','datet','cscont','cstel','sloc_name','sevlast','prolist');" style="width:300px;">
                 	<option value="">กรุณาเลือก</option>
-                	<?php    
-						$qu_cusf = @mysqli_query($conn,"SELECT * FROM s_first_order ORDER BY cd_name ASC");
+                	<?php   
+						$tableDB = '';
+						if($cus_source === 'po'){
+							$tableDB = 's_project_order';
+						}else{
+							$tableDB = 's_first_order';
+						}
+						$qu_cusf = @mysqli_query($conn,"SELECT * FROM ".$tableDB." ORDER BY cd_name ASC");
 						while($row_cusf = @mysqli_fetch_array($qu_cusf)){
 							?>
 							<option value="<?php    echo $row_cusf['fo_id'];?>" <?php    if($row_cusf['fo_id'] == $cus_id){echo 'selected';}?>><?php    echo $row_cusf['cd_name']." (".$row_cusf['loc_name'].")";?></option>
@@ -384,8 +391,9 @@ function check(frm){
 						}
 					?>
                 </select>-->
-                <input name="cd_names" type="text" id="cd_names"  value="<?php    echo get_customername($conn,$cus_id);?>" style="width:50%;" readonly>
-                <span id="rsnameid"><input type="hidden" name="cus_id" value="<?php   echo $cus_id;?>"></span><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
+                <input name="cd_names" type="text" id="cd_names"  value="<?php    echo get_customername2($conn,$cus_id,$cus_source);?>" style="width:50%;" readonly>
+                <input type="hidden" name="cus_source" id="cus_source" value="<?php echo $cus_source;?>">
+                <span id="rsnameid"><input type="hidden" name="cus_id" value="<?php   echo $cus_id;?>"></span><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php?chk=fo');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
             </td>
             <td><strong>ประเภทบริการลูกค้า :</strong> 
             	<select name="sr_ctype" id="sr_ctype">
@@ -455,7 +463,7 @@ function check(frm){
           <strong>เลือกสินค้า :</strong>
           <span id="prolist">
           		<?php   
-				$prolist = get_profirstorder($conn,$cus_id);
+				$prolist = get_profirstorder2($conn,$cus_id,$cus_source);
 				//$lispp = explode(",",$prolist);
 				$plid = "<select name=\"bbfpro\" id=\"bbfpro\" onchange=\"get_podsn(this.value,'lpa1','lpa2','lpa3','".$cus_id."')\">
 								<option value=\"\">กรุณาเลือก</option>       

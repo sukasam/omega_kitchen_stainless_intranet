@@ -16,10 +16,10 @@ function GetXmlHttpObject(){
    return xmlHttp;
 }
 
-function checkfirstorder(pval,param1,param2,param3,param4,param5,param6,param7,param8,param9,param10,param11,param12,param13){
+function checkfirstorder(pval,param1,param2,param3,param4,param5,param6,param7,param8,param9,param10,param11,param12,param13,chk){
 	var xmlHttp;
    xmlHttp=GetXmlHttpObject(); //Check Support Brownser
-   URL = pathLocal+'ajax_return.php?action=getcusfirsh&pid='+pval;
+   URL = pathLocal+'ajax_return.php?action=getcusfirsh&pid='+pval+'&chk='+chk;
    if (xmlHttp==null){
       alert ("Browser does not support HTTP Request");
       return;
@@ -48,6 +48,7 @@ function checkfirstorder(pval,param1,param2,param3,param4,param5,param6,param7,p
    xmlHttp.send(null);
 }
 
+
 function get_podsn(pval,param1,param2,param3,fid){
 	var xmlHttp;
    xmlHttp=GetXmlHttpObject(); //Check Support Brownser
@@ -70,11 +71,11 @@ function get_podsn(pval,param1,param2,param3,fid){
    xmlHttp.send(null);
 }
 
-function get_cus(pval){
+function get_cus(pval,chk){
 	/*alert(pval);*/
 	var xmlHttp;
    xmlHttp=GetXmlHttpObject(); //Check Support Brownser
-   URL = pathLocal+'ajax_return.php?action=getcus&pval='+pval;
+   URL = pathLocal+'ajax_return.php?action=getcus&pval='+pval+'&chk='+chk;
    if (xmlHttp==null){
       alert ("Browser does not support HTTP Request");
       return;
@@ -89,6 +90,7 @@ function get_cus(pval){
    xmlHttp.open("GET",URL,true);
    xmlHttp.send(null);
 }
+
 
 function get_sparpart(pval,resdata){
 	/*alert(pval);*/

@@ -46,7 +46,7 @@
 			@mysqli_query($conn,"DELETE FROM `s_service_report5` WHERE `s_service_report5`.`sr_id` = '".$copydb5['sr_id']."'");
 			@mysqli_query($conn,"DELETE FROM `s_service_report5sub` WHERE `s_service_report5sub`.`sr_id` = '".$copydb5['sr_id']."'");
 			
-			@mysqli_query($conn,"INSERT INTO `s_service_report5` (`sr_id`, `sv_id`, `cus_id`, `sr_ctype`, `sr_ctype2`, `job_open`, `job_close`, `job_balance`, `sr_stime`, `loc_pro`, `loc_seal`, `loc_sn`, `loc_clean`, `loc_contact`, `loc_contact2`, `loc_contact3`, `cs_sell`, `loc_tels`, `cl_01`, `cl_02`, `cl_03`, `cl_04`, `cl_05`, `cl_06`, `cl_07`, `cl_08`, `ckl_list`, `ckw_list`, `ckf_list`, `detail_recom`, `detail_recom2`, `detail_calpr`, `approve`, `supply`, `approve_return`, `st_setting`, `loc_date2`, `sell_date`, `loc_date3`, `create_by`, `create_date`, `update_by`, `update_date`, `delete_by`, `delete_date`) VALUES ('".$copydb['sr_id']."', '".$copydb['sv_id']."', '".$copydb['cus_id']."', '".$copydb['sr_ctype']."', '".$copydb['sr_ctype2']."', '".$copydb['job_open']."', '".$copydb['job_close']."', '".$copydb['job_balance']."', '".$copydb['sr_stime']."', '".$copydb['loc_pro']."', '".$copydb['loc_seal']."', '".$copydb['loc_sn']."', '".$copydb['loc_clean']."', '".$copydb['loc_contact']."', '".$copydb['loc_contact2']."', '".$copydb['loc_contact3']."', '".$copydb['cs_sell']."', '".$copydb['loc_tels']."', '".$copydb['cl_01']."', '".$copydb['cl_02']."', '".$copydb['cl_03']."', '".$copydb['cl_04']."', '".$copydb['cl_05']."', '".$copydb['cl_06']."', '".$copydb['cl_07']."', '".$copydb['cl_08']."', '".$copydb['ckl_list']."', '".$copydb['ckw_list']."', '".$copydb['ckf_list']."', '".$copydb['detail_recom']."', '".$copydb['detail_recom2']."', '".$copydb['detail_calpr']."', '".$copydb['approve']."', '0', '0', '".$copydb['st_setting']."', '".$copydb['loc_date2']."', '".$copydb['sell_date']."', '".$copydb['loc_date3']."', '".$copydb['create_by']."', '".$copydb['create_date']."', '".$copydb['update_by']."', '".$copydb['update_date']."', '".$copydb['delete_by']."', '".$copydb['delete_date']."');");		
+			@mysqli_query($conn,"INSERT INTO `s_service_report5` (`sr_id`, `sv_id`, `cus_id`, `sr_ctype`, `sr_ctype2`, `job_open`, `job_close`, `job_balance`, `sr_stime`, `loc_pro`, `loc_seal`, `loc_sn`, `loc_clean`, `loc_contact`, `loc_contact2`, `loc_contact3`, `cs_sell`, `loc_tels`, `cl_01`, `cl_02`, `cl_03`, `cl_04`, `cl_05`, `cl_06`, `cl_07`, `cl_08`, `ckl_list`, `ckw_list`, `ckf_list`, `detail_recom`, `detail_recom2`, `detail_calpr`, `approve`, `supply`, `approve_return`, `st_setting`, `loc_date2`, `sell_date`, `loc_date3`, `cus_source`, `create_by`, `create_date`, `update_by`, `update_date`, `delete_by`, `delete_date`) VALUES ('".$copydb['sr_id']."', '".$copydb['sv_id']."', '".$copydb['cus_id']."', '".$copydb['sr_ctype']."', '".$copydb['sr_ctype2']."', '".$copydb['job_open']."', '".$copydb['job_close']."', '".$copydb['job_balance']."', '".$copydb['sr_stime']."', '".$copydb['loc_pro']."', '".$copydb['loc_seal']."', '".$copydb['loc_sn']."', '".$copydb['loc_clean']."', '".$copydb['loc_contact']."', '".$copydb['loc_contact2']."', '".$copydb['loc_contact3']."', '".$copydb['cs_sell']."', '".$copydb['loc_tels']."', '".$copydb['cl_01']."', '".$copydb['cl_02']."', '".$copydb['cl_03']."', '".$copydb['cl_04']."', '".$copydb['cl_05']."', '".$copydb['cl_06']."', '".$copydb['cl_07']."', '".$copydb['cl_08']."', '".$copydb['ckl_list']."', '".$copydb['ckw_list']."', '".$copydb['ckf_list']."', '".$copydb['detail_recom']."', '".$copydb['detail_recom2']."', '".$copydb['detail_calpr']."', '".$copydb['approve']."', '0', '0', '".$copydb['st_setting']."', '".$copydb['loc_date2']."', '".$copydb['sell_date']."', '".$copydb['loc_date3']."', '".$copydb['cus_source']."', '".$copydb['create_by']."', '".$copydb['create_date']."', '".$copydb['update_by']."', '".$copydb['update_date']."', '".$copydb['delete_by']."', '".$copydb['delete_date']."');");		
 			
 			$copysubdb = @mysqli_query($conn,"SELECT * FROM `s_service_report3sub` WHERE `sr_id` = '".$_GET['sr_id']."'");
 			while($rowsubdb = @mysqli_fetch_array($copysubdb)){
@@ -215,7 +215,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					if($orderby=="") $orderby = "sr.".$PK_field;
 					if ($sortby =="") $sortby ="DESC";
 					
-				   	$sql = "SELECT sr . * , fd.cd_name FROM $tbl_name AS sr, s_first_order AS fd WHERE sr.cus_id = fd.fo_id";
+				   	//$sql = "SELECT sr . * , fd.cd_name FROM $tbl_name AS sr, s_first_order AS fd WHERE sr.cus_id = fd.fo_id";
+		  
+		  			$sql = "SELECT sr . * FROM $tbl_name AS sr WHERE 1";
+		  
 					if ($_GET[$PK_field] <> "") $sql .= " and ($PK_field  = '" . $_GET[$PK_field] . " ' ) ";					
 					if ($_GET[$FR_field] <> "") $sql .= " and ($FR_field  = '" . $_GET[$FR_field] . " ' ) ";					
  					if ($_GET["keyword"] <> "") { 
@@ -253,8 +256,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           <TD style="vertical-align:middle;"><INPUT type=checkbox name="del[]" value="<?php   echo $rec[$PK_field]; ?>" ></TD>
           <TD style="vertical-align:middle;"><span class="text"><?php   echo sprintf("%04d",$counter); ?></span></TD>
           <TD style="vertical-align:middle;"><?php   $chaf = preg_replace("/\//","-",$rec["sv_id"]); ?><div align="center"><span class="text"><a href="../../upload/service_report_open/<?php   echo $chaf;?>.pdf" target="_blank"><?php   echo $rec["sv_id"] ; ?></a></span></div></TD>
-          <TD style="vertical-align:middle;"><span class="text"><?php   echo get_customername($conn,$rec["cus_id"]); ?></span></TD>
-          <TD style="vertical-align:middle;"><span class="text"><?php   echo get_localsettingname($conn,$rec["cus_id"]); ?></span></TD>
+          <TD style="vertical-align:middle;"><span class="text"><?php   echo get_customername2($conn,$rec["cus_id"],$rec["cus_source"]); ?></span></TD>
+          <TD style="vertical-align:middle;"><span class="text"><?php   echo get_localsettingname2($conn,$rec["cus_id"],$rec["cus_source"]); ?></span></TD>
           <TD style="vertical-align:middle;"><?php   echo get_technician_name($conn,$rec["loc_contact"]);?></TD>
           <TD style="vertical-align:middle"><?php   if($rec["approve"] == 1){?>
             <IMG src="../images/icons/yes_approve.png" height="28" title="อนุมัติ">

@@ -234,7 +234,7 @@
 		$a_sdate=explode("-",$sell_date);
 		$sell_date=$a_sdate[2]."/".$a_sdate[1]."/".$a_sdate[0];
 		
-		$finfo = get_firstorder($conn,$cus_id);
+		$finfo = get_firstorder2($conn,$cus_id,$cus_source);
 		
 		$ckf_list = explode(',',$ckf_list);
 		
@@ -450,8 +450,9 @@ function check(frm){
 						}
 					?>
                 </select>-->
-                <input name="cd_names" type="text" id="cd_names"  value="<?php   echo get_customername($conn,$cus_id);?>" style="width:50%;" readonly>
-                <span id="rsnameid"><input type="hidden" name="cus_id" value="<?php   echo $cus_id;?>"></span><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
+                <input name="cd_names" type="text" id="cd_names"  value="<?php    echo get_customername2($conn,$cus_id,$cus_source);?>" style="width:50%;" readonly>
+                <input type="hidden" name="cus_source" id="cus_source" value="<?php echo $cus_source;?>">
+                <span id="rsnameid"><input type="hidden" name="cus_id" value="<?php   echo $cus_id;?>"></span><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php?chk=fo');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
             </td>
             <td><strong>ประเภทบริการลูกค้า :</strong> 
             	<select name="sr_ctype" id="sr_ctype">

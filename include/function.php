@@ -821,7 +821,7 @@ function Check_Permission($conn,$check_module,$user_id,$action)
 	$groups = "";
 
 	while ($rec = @mysqli_fetch_array ($query)) {
-		$groups .= "or group_id = '$rec[group_id]'";
+		$groups .= "or group_id = '".$rec['group_id']."'";
   	}
   	if ($groups <> "") {
 		$groups = substr ($groups, 3);
@@ -836,57 +836,61 @@ function Check_Permission($conn,$check_module,$user_id,$action)
 	$sql = "select * from s_user where user_id = '$user_id'";
 	$query = @mysqli_query($conn,$sql) or die ("3");
 	if ($rec = @mysqli_fetch_array ($query)) {
-		if ($rec["admin_flag"] == '1' or $_SESSION[s_group_all] == "ALL") {
-				
-		}
-		else
-		{
-/*
-if ($action == "read") $sql .= " read_p like '1'";
-if ($action == "add") $sql .= " add_p like '1'";
-if ($action == "update") $sql .= " update_p like '1'";
-if ($action == "delete") $sql .= " delete_p like '1'";
-*/
+		
+		if(isset($_SESSION['s_group_all'])){
+			if ($rec["admin_flag"] == '1' || $_SESSION['s_group_all'] == "ALL") {
 
-		$sql = "select * from s_user_p where user_id = '$user_id'  and  module_id like '$module_id'";
-
-		$query = @mysqli_query($conn,$sql) or die ("4");
-		if (@mysqli_num_rows ($query)) {
-
-			while ($rec = @mysqli_fetch_array ($query)) {
-				switch ($action) {
-					case "read" : $code = $rec["read_p"]; break;
-					case "add" :  $code = $rec["add_p"]; break;
-					case "update" : $code = $rec["update_p"]; break;
-					case "delete" : $code = $rec["delete_p"]; break;
-				} 
-			}// end while
-			if ( ($code == "0") || ($code == "") ) {
-				header ("location:../error/permission.php");
 			}
+			else
+			{
+	/*
+	if ($action == "read") $sql .= " read_p like '1'";
+	if ($action == "add") $sql .= " add_p like '1'";
+	if ($action == "update") $sql .= " update_p like '1'";
+	if ($action == "delete") $sql .= " delete_p like '1'";
+	*/
 
-		}
-		else
-		{
-			$code ="";
-			if($groups <> "") {
-				$sql = "select sum(read_p) as s_read,sum(add_p) as s_add,sum(update_p) as s_update,sum(delete_p) as s_delete,module_id,group_id from s_user_p group by module_id,group_id having module_id like '$module_id' ".$groups ;
-				//echo $sql;
-				$query = @mysqli_query($conn,$sql) or die("5");
-				if (@mysqli_num_rows ($query) == 0) $code = "";
-				if ($rec = @mysqli_fetch_array  ($query)) {
+			$sql = "select * from s_user_p where user_id = '$user_id'  and  module_id like '$module_id'";
+
+			$query = @mysqli_query($conn,$sql) or die ("4");
+			if (@mysqli_num_rows ($query)) {
+
+				while ($rec = @mysqli_fetch_array ($query)) {
 					switch ($action) {
-						case "read" : $code = $rec["s_read"]; break;
-						case "add" : $code = $rec["s_add"]; break;
-						case "update" : $code = $rec["s_update"]; break;
-						case "delete" : $code = $rec["s_delete"]; break;
-					}// end switch
+						case "read" : $code = $rec["read_p"]; break;
+						case "add" :  $code = $rec["add_p"]; break;
+						case "update" : $code = $rec["update_p"]; break;
+						case "delete" : $code = $rec["delete_p"]; break;
+					} 
+				}// end while
+				if ( ($code == "0") || ($code == "") ) {
+					header ("location:../error/permission.php");
 				}
+
 			}
-  			if (trim($code) == '' or $code == '0') {
-  				header ("location:../error/permission.php");
-  			}
-  }
+			else
+			{
+				$code ="";
+				if($groups <> "") {
+					$sql = "select sum(read_p) as s_read,sum(add_p) as s_add,sum(update_p) as s_update,sum(delete_p) as s_delete,module_id,group_id from s_user_p group by module_id,group_id having module_id like '$module_id' ".$groups ;
+					//echo $sql;
+					$query = @mysqli_query($conn,$sql) or die("5");
+					if (@mysqli_num_rows ($query) == 0) $code = "";
+					if ($rec = @mysqli_fetch_array  ($query)) {
+						switch ($action) {
+							case "read" : $code = $rec["s_read"]; break;
+							case "add" : $code = $rec["s_add"]; break;
+							case "update" : $code = $rec["s_update"]; break;
+							case "delete" : $code = $rec["s_delete"]; break;
+						}// end switch
+					}
+				}
+				if (trim($code) == '' or $code == '0') {
+					header ("location:../error/permission.php");
+				}
+			}	
+		}
+
    }
 }
 else
@@ -905,7 +909,7 @@ function Check_Permission_menu($conn,$check_module,$user_id,$action)
 	$groups = "";
 
 	while ($rec = @mysqli_fetch_array ($query)) {
-		$groups .= "or group_id = '$rec[group_id]'";
+		$groups .= "or group_id = '".$rec['group_id']."'";
   	}
   	if ($groups <> "") {
 		$groups = substr ($groups, 3);
@@ -920,7 +924,7 @@ function Check_Permission_menu($conn,$check_module,$user_id,$action)
 	$sql = "select * from s_user where user_id = '$user_id'";
 	$query = @mysqli_query($conn,$sql) or die ("3");
 	if ($rec = @mysqli_fetch_array ($query)) {
-		if ($rec["admin_flag"] == '1' or $_SESSION[s_group_all] == "ALL") {
+		if ($rec["admin_flag"] == '1' or $_SESSION['s_group_all'] == "ALL") {
 				
 		}
 		else
@@ -1625,6 +1629,19 @@ function get_firstorder($conn,$fo_id) {
 	return $row_first_order;
 }
 
+function get_firstorder2($conn,$fo_id,$chk) {
+	
+	$tableDB = '';
+	if($chk == 'po'){
+		$tableDB = 's_project_order';
+	}else{
+		$tableDB = 's_first_order';
+	}
+	
+	$row_first_order = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  ".$tableDB." WHERE fo_id = '".$fo_id."'"));
+	return $row_first_order;
+}
+
 function get_servicereport($conn,$sv_id) {
 	$row_service_report = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_service_report WHERE sv_id = '".$sv_id."'"));
 	return $row_service_report;
@@ -1636,8 +1653,30 @@ function get_customername($conn,$fo_id) {
 	return $row_first_order['cd_name'];
 }
 
+
+function get_customername2($conn,$fo_id,$chk) {
+	$tableDB = '';
+	if($chk == 'po'){
+		$tableDB = 's_project_order';
+	}else{
+		$tableDB = 's_first_order';
+	}
+	$row_first_order = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  ".$tableDB." WHERE fo_id = '".$fo_id."'"));
+	return $row_first_order['cd_name'];
+}
+
 function get_localsettingname($conn,$fo_id) {
 	$row_first_order = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_first_order WHERE fo_id = '".$fo_id."'"));
+	return $row_first_order['loc_name'];
+}
+
+function get_localsettingname2($conn,$fo_id,$chk) {
+	if($chk == 'po'){
+		$tableDB = 's_project_order';
+	}else{
+		$tableDB = 's_first_order';
+	}
+	$row_first_order = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  ".$tableDB." WHERE fo_id = '".$fo_id."'"));
 	return $row_first_order['loc_name'];
 }
 
@@ -1875,6 +1914,7 @@ function getcustom_type($conn,$val) {
 }
 
 function get_profirstorder($conn,$val) {
+	
 	$row_pfirst = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_first_order WHERE fo_id = '".$val."'"));
 	
 	$row_pfirst['cpro1'];
@@ -1895,6 +1935,37 @@ function get_profirstorder($conn,$val) {
 
 	return $prolist;		
 }
+
+function get_profirstorder2($conn,$val,$chk) {
+	
+	$tableDB = '';
+	if($chk == 'po'){
+		$tableDB = 's_project_order';
+	}else{
+		$tableDB = 's_first_order';
+	}
+	
+	$row_pfirst = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM ".$tableDB." WHERE fo_id = '".$val."'"));
+	
+	$row_pfirst['cpro1'];
+	$row_pfirst['cpro2'];
+	$row_pfirst['cpro3'];
+	$row_pfirst['cpro4'];
+	$row_pfirst['cpro5'];
+	$row_pfirst['cpro6'];
+	$row_pfirst['cpro7'];
+	
+	if($row_pfirst['cpro1'] != ""){$prolist[] = $row_pfirst['cpro1'];}
+	if($row_pfirst['cpro2'] != ""){$prolist[] = $row_pfirst['cpro2'];}
+	if($row_pfirst['cpro3'] != ""){$prolist[] = $row_pfirst['cpro3'];}
+	if($row_pfirst['cpro4'] != ""){$prolist[] = $row_pfirst['cpro4'];}
+	if($row_pfirst['cpro5'] != ""){$prolist[] = $row_pfirst['cpro5'];}
+	if($row_pfirst['cpro6'] != ""){$prolist[] = $row_pfirst['cpro6'];}
+	if($row_pfirst['cpro7'] != ""){$prolist[] = $row_pfirst['cpro7'];}
+
+	return $prolist;		
+}
+
 function get_podfirstorder($conn,$val) {
 	$row_pfirst = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_first_order WHERE fo_id = '".$val."'"));
 	
@@ -2087,6 +2158,13 @@ function get_sparpart_id($conn,$gid) {
 function getStockSpar($conn,$gid){
 	$row_dea = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_sparpart WHERE group_id = '".$gid."'"));
 	return $row_dea['group_stock'];	
+}
+
+function get_username($conn,$user_account) {
+	
+	$row_user = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_user WHERE username = '".$user_account."'"));
+	
+	return $row_user['name'];		
 }
 ?>
 

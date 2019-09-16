@@ -846,7 +846,7 @@ function Check_Permission($conn,$check_module,$user_id,$action)
 	$sql = "select * from s_user where user_id = '$user_id'";
 	$query = @mysqli_query($conn,$sql) or die ("3");
 	if ($rec = @mysqli_fetch_array ($query)) {
-		if ($rec["admin_flag"] == '1' or $_SESSION[s_group_all] == "ALL") {
+		if ($rec["admin_flag"] == '1' or $_SESSION['s_group_all'] == "ALL") {
 				
 		}
 		else
@@ -927,7 +927,7 @@ function Check_Permission_menu($conn,$check_module,$user_id,$action)
 	$sql = "select * from s_user where user_id = '$user_id'";
 	$query = @mysqli_query($conn,$sql) or die ("3");
 	if ($rec = @mysqli_fetch_array ($query)) {
-		if ($rec["admin_flag"] == '1' or $_SESSION[s_group_all] == "ALL") {
+		if ($rec["admin_flag"] == '1' or $_SESSION['s_group_all'] == "ALL") {
 				
 		}
 		else

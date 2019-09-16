@@ -2,7 +2,7 @@
 <?php   
 	
 	
-	$finfos = get_firstorder($conn,$_POST['cus_id']);
+	$finfos = get_firstorder2($conn,$_POST['cus_id'],$_POST['cus_source']);
 	
 	$chk = get_fixlist($_POST['ckf_list']);
 	
