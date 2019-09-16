@@ -123,7 +123,7 @@ function showspare(sval,param1,param2,param3,param4,idList){
     xmlHttp.onreadystatechange=function (){
         if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
 			var ds = xmlHttp.responseText.split("|");
-			if(ds[4] <= 1){
+			if(ds[4] <= 0){
 				 alert(ds[1]+' : อะไหล่สินค้าตัวนี้ไม่เพียงพอสำหรับการยืมอะไหล่');
 				 document.getElementById('lists'+idList).value='';
 				 document.getElementById(param1).value='';
