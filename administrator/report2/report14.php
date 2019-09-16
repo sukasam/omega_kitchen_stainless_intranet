@@ -218,7 +218,9 @@
 
 
 
-		$sql = "SELECT * FROM ".$tableDB." as fr, ".$dbservice." as sv, ".$dbservicesub." as sv2 WHERE sv.cus_id = fr.fo_id AND sv.sr_id = sv2.sr_id ".$condition." ".$daterriod." GROUP by sv.sr_id ORDER BY sv.sr_id DESC";
+		//$sql = "SELECT * FROM ".$tableDB." as fr, ".$dbservice." as sv, ".$dbservicesub." as sv2 WHERE sv.cus_id = fr.fo_id AND sv.sr_id = sv2.sr_id ".$condition." ".$daterriod." GROUP by sv.sr_id ORDER BY sv.sr_id DESC";
+		
+		$sql = "SELECT fr.cd_name,fr.cd_address,fr.loc_name, sv.* FROM ".$tableDB." as fr, ".$dbservice." as sv, ".$dbservicesub." as sv2 WHERE sv.cus_id = fr.fo_id ".$condition." ".$daterriod." GROUP by sv.sr_id ORDER BY sv.sr_id DESC";
 
 	  	$qu_fr = @mysqli_query($conn,$sql);
 
@@ -235,7 +237,6 @@
 		while($row_fr = @mysqli_fetch_array($qu_fr)){
 
 						
-
 			?>
 
 			<tr>
@@ -256,6 +257,7 @@
 
               	<?php  
 
+				//echo "SELECT * FROM ".$dbservicesub." WHERE sr_id = '".$row_fr['sr_id']."'";
 				$qu_pfirst = @mysqli_query($conn,"SELECT * FROM ".$dbservicesub." WHERE sr_id = '".$row_fr['sr_id']."'");
 
 				?>
@@ -270,7 +272,7 @@
 
 				while($row = @mysqli_fetch_array($qu_pfirst)){
 
-					if($row['codes 	'] != "" || $row['lists'] != ""){
+					if($row['codes'] != "" || $row['lists'] != ""){
 
 						$total = $row['prices']*$row['opens'];
 
