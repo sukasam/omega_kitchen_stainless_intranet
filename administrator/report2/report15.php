@@ -28,6 +28,8 @@
 
 	$opentake = $_REQUEST['opentake'];
 
+	$openfrom = $_REQUEST['openfrom'];
+
 	
 
 	$a_sdate=explode("/",$_REQUEST['date_fm']);
@@ -64,6 +66,19 @@
 
 		$condition = "AND (sv2.lists = '".$cpro."')";
 
+	}
+
+	if($openfrom != ""){
+		
+		$tableDB = '';
+		
+		if($openfrom == 'po'){
+			$tableDB = 's_project_order';
+		}else{
+			$tableDB = 's_first_order';
+		}
+		
+		$condition .= " AND sv.cus_source = '".$openfrom."'";
 	}
 
 	
@@ -224,7 +239,7 @@
 
 	  
 
-		$sql = "SELECT * FROM s_first_order as fr, ".$dbservice." as sv, ".$dbservicesub." as sv2 WHERE sv.cus_id = fr.fo_id AND sv.sr_id = sv2.sr_id ".$condition." ".$daterriod." GROUP by sv.sr_id ORDER BY sv.sr_id DESC";
+		$sql = "SELECT * FROM ".$tableDB." as fr, ".$dbservice." as sv, ".$dbservicesub." as sv2 WHERE sv.cus_id = fr.fo_id AND sv.sr_id = sv2.sr_id ".$condition." ".$daterriod." GROUP by sv.sr_id ORDER BY sv.sr_id DESC";
 
 	  	$qu_fr = @mysqli_query($conn,$sql);
 

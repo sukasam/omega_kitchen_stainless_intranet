@@ -34,6 +34,8 @@
 
 	$date_to=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
 
+	$openfrom = $_REQUEST['openfrom'];
+
 	
 
 	if($_REQUEST['priod'] == 0){
@@ -53,6 +55,18 @@
 	
 
 	$condition = "";
+
+	if($openfrom != ""){
+		$tableDB = '';
+		
+		if($openfrom == 'po'){
+			$tableDB = 's_project_order';
+		}else{
+			$tableDB = 's_first_order';
+		}
+		
+		$condition .= " AND sv.cus_source = '".$openfrom."'";
+	}
 
 
 
@@ -204,7 +218,7 @@
 
 
 
-		$sql = "SELECT * FROM s_first_order as fr, ".$dbservice." as sv, ".$dbservicesub." as sv2 WHERE sv.cus_id = fr.fo_id AND sv.sr_id = sv2.sr_id ".$condition." ".$daterriod." GROUP by sv.sr_id ORDER BY sv.sr_id DESC";
+		$sql = "SELECT * FROM ".$tableDB." as fr, ".$dbservice." as sv, ".$dbservicesub." as sv2 WHERE sv.cus_id = fr.fo_id AND sv.sr_id = sv2.sr_id ".$condition." ".$daterriod." GROUP by sv.sr_id ORDER BY sv.sr_id DESC";
 
 	  	$qu_fr = @mysqli_query($conn,$sql);
 

@@ -1538,6 +1538,18 @@ S/N
                             </select></td>
                           </tr>
                           <tr>
+                            <td nowrap class="name">ข้อมูลจาก</td>
+                            <td>
+<!--
+                             <input name="openfrom" type="radio" id="oradio1" value="" checked>
+                              ไม่กำหนด
+-->
+                              <input name="openfrom" type="radio" id="oradio2" value="fo" checked>
+                              First Order
+                              <input type="radio" name="openfrom" id="oradio3" value="po">
+                              Project Order</td>
+                          </tr>
+                          <tr>
                             <td nowrap class="name">ประเภทเอกสาร</td>
                             <td><input name="opentake" type="radio" id="radio3" value="2" checked>
                               ไม่กำหนด
@@ -1588,6 +1600,9 @@ S/N
                               ผู้เบิก</td>
                           </tr>
                         </table></td>
+                      </tr>
+                      <tr>
+                      	<td></td>
                       </tr>
                     </table>
                     </fieldset>
@@ -1685,6 +1700,18 @@ S/N
                             </select></td>
                           </tr>
                           <tr>
+                            <td nowrap class="name">ข้อมูลจาก</td>
+                            <td>
+<!--
+                             <input name="openfrom" type="radio" id="oradio1" value="" checked>
+                              ไม่กำหนด
+-->
+                              <input name="openfrom" type="radio" id="oradio2" value="fo" checked>
+                              First Order
+                              <input type="radio" name="openfrom" id="oradio3" value="po">
+                              Project Order</td>
+                          </tr>
+                          <tr>
                             <td nowrap class="name">ประเภทเอกสาร</td>
                             <td><input name="opentake" type="radio" id="radio" value="2" checked>
                               ไม่กำหนด
@@ -1735,6 +1762,9 @@ S/N
                           </tr>
 
                         </table></td>
+                      </tr>
+                      <tr>
+                      	<td></td>
                       </tr>
                     </table>
                     </fieldset>
@@ -1833,6 +1863,18 @@ S/N
                               <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search_pod.php?protype=loc_seal');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a></td>
                           </tr>
                           <tr>
+                            <td nowrap class="name">ข้อมูลจาก</td>
+                            <td>
+<!--
+                             <input name="openfrom" type="radio" id="oradio1" value="" checked>
+                              ไม่กำหนด
+-->
+                              <input name="openfrom" type="radio" id="oradio2" value="fo" checked>
+                              First Order
+                              <input type="radio" name="openfrom" id="oradio3" value="po">
+                              Project Order</td>
+                          </tr>
+                          <tr>
                             <td nowrap class="name">&nbsp;</td>
                             <td><span class="name">
                               <input name="priod" type="radio" value="0" checked>
@@ -1873,10 +1915,12 @@ S/N
                           </tr>
                         </table></td>
                       </tr>
+<!--
                       <tr>
                             <td nowrap class="name">&nbsp;</td>
                             <td>&nbsp;</td>
                           </tr>
+-->
                     </table>
                     </fieldset>
                 </div><br>
@@ -1974,6 +2018,18 @@ S/N
                             </select></td>
                           </tr>
                           <tr>
+                            <td nowrap class="name">ข้อมูลจาก</td>
+                            <td>
+<!--
+                             <input name="openfrom" type="radio" id="oradio1" value="" checked>
+                              ไม่กำหนด
+-->
+                              <input name="openfrom" type="radio" id="oradio2" value="fo" checked>
+                              First Order
+                              <input type="radio" name="openfrom" id="oradio3" value="po">
+                              Project Order</td>
+                          </tr>
+                          <tr>
                             <td nowrap class="name">ประเภทเอกสาร</td>
                             <td><input name="opentake" type="radio" id="radio3" value="2" checked>
                               ไม่กำหนด
@@ -2027,6 +2083,9 @@ S/N
                           </tr>
                           
                         </table></td>
+                      </tr>
+                      <tr>
+                      	<td></td>
                       </tr>
                     </table>
                     </fieldset>
