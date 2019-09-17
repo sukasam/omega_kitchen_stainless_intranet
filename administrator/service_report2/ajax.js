@@ -16,7 +16,7 @@ function GetXmlHttpObject(){
    return xmlHttp;
 }
 
-function checkfirstorder(pval,param1,param2,param3,param4,param5,param6,param7,param8,param9,param10,param11,param12,param13,chk){
+function checkfirstorder(pval,param1,param2,param3,param4,param5,param6,param7,param8,param9,param10,param11,param12,param13,param14,param15,chk){
 	var xmlHttp;
    xmlHttp=GetXmlHttpObject(); //Check Support Brownser
    URL = pathLocal+'ajax_return.php?action=getcusfirsh&pid='+pval+'&chk='+chk;
@@ -40,6 +40,8 @@ function checkfirstorder(pval,param1,param2,param3,param4,param5,param6,param7,p
 			document.getElementById(param11).innerHTML=ds[10];
 			document.getElementById(param12).innerHTML=ds[11];
 			document.getElementById(param13).innerHTML=ds[12];
+			document.getElementById(param14).innerHTML=ds[13];
+			document.getElementById(param15).innerHTML=ds[14];
         } else{
           //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
         }

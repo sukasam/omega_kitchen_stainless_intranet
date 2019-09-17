@@ -53,7 +53,7 @@
 		var sCustomerSource = self.opener.document.getElementById("cus_source");
 		
 		sCustomerSource.value = chk;
-		self.opener.checkfirstorder(cid,'cusadd','cusprovince','custel','cusfax','contactid','datef','datet','cscont','cstel','sloc_name','sevlast','prolist','sr_ctype2',chk);
+		self.opener.checkfirstorder(cid,'cusadd','cusprovince','custel','cusfax','contactid','datef','datet','cscont','cstel','sloc_name','sevlast','prolist','sr_ctype2','search_fo','search_po',chk);
 		self.opener.document.getElementById("rsnameid").innerHTML="<input type=\"hidden\" name=\"cus_id\" value=\""+cid+"\">";
 		window.close();
 	}

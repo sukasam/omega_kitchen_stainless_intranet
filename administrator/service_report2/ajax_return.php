@@ -47,7 +47,18 @@
 					
 			}
 		
-		$displ = $rowcus['cd_address']."|".province_name($conn,$rowcus['cd_province'])."|".$rowcus['cd_tel']."|".$rowcus['cd_fax']."|".$rowcus['fs_id']."|".format_date($rowcus['date_quf'])."||".$rowcus['c_contact']."|".$rowcus['c_tel']."|".$rowcus['loc_name']."|".get_lastservice_s($conn,$fpid,"").'|'.$plid.'|'.$ctyp;
+		$foID = '';
+		$poID = '';
+			
+		if($chk == 'po'){
+			$foID = '';
+			$poID = $rowcus['fs_id'];
+		}else{
+			$foID = $rowcus['fs_id'];
+			$poID = '';
+		}
+		
+		$displ = $rowcus['cd_address']."|".province_name($conn,$rowcus['cd_province'])."|".$rowcus['cd_tel']."|".$rowcus['cd_fax']."|".$rowcus['fs_id']."|".format_date($rowcus['date_quf'])."||".$rowcus['c_contact']."|".$rowcus['c_tel']."|".$rowcus['loc_name']."|".get_lastservice_s($conn,$fpid,"").'|'.$plid.'|'.$ctyp.'|'.$foID.'|'.$poID;
 		echo $displ;
 	}
 	

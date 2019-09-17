@@ -517,6 +517,7 @@ function check(frm){
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tb1">
       <tr>
         <td width="50%"><strong>สถานที่ติดตั้ง / ส่งสินค้า : </strong><span id="sloc_name"><?php   echo $finfo['loc_name'];?></span><br />
+<!--
           <br>
           <strong>เลือกสินค้า :</strong>
           <span id="prolist">
@@ -552,16 +553,18 @@ function check(frm){
 							<?php  
 						}
 					?>
-                </select></td>
+                </select>
+-->
+                </td>
                 
-        <td width="50%"><center><strong>รายละเอียดการเปลี่ยนอะไหล่</strong></center><br><br>
+        <td width="50%"><center><strong>รายละเอียดการเบิกอะไหล่เพื่อผลิต</strong></center><br><br>
         <textarea name="detail_recom" class="inpfoder" id="detail_recom" style="width:50%;height:100px;background:#FFFFFF;"><?php   echo strip_tags($detail_recom);?></textarea></td>
       </tr>
     </table>
     
     <center>
       <br>
-      <span style="font-size:18px;font-weight:bold;">รายละเอียดการเปลี่ยนอะไหล่</span></center><br>
+      <span style="font-size:18px;font-weight:bold;">รายละเอียดการเบิกอะไหล่เพื่อผลิต</span></center><br>
     <table width="100%" border="0" cellspacing="0" cellpadding="0" id="dataTable" style="text-align:center;margin-top:5px;">
       <tr>
         <td width="4%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:center;"><strong>ลำดับ</strong></td>
