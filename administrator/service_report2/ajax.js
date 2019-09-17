@@ -90,6 +90,7 @@ function get_cus(pval,chk){
    xmlHttp.send(null);
 }
 
+
 function get_sparpart(pval,resdata){
 	/*alert(pval);*/
 	var xmlHttp;

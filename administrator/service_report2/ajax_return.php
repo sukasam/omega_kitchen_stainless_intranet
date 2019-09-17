@@ -77,6 +77,28 @@
 		}
 		//echo "SELECT cd_name FROM s_first_order ".$consd." ORDER BY cd_name ASC";
 	}
+
+	if($_GET['action'] == 'getcus2'){
+		$cd_name = $_REQUEST['pval'];
+		$chk = $_REQUEST['chk'];
+
+		if($cd_name != ""){
+			$consd = "AND fs_id = '".$cd_name."'";
+		}
+
+		$tableDB = '';
+		if($chk == 'po'){
+			$tableDB = 's_project_order';
+		}else{
+			$tableDB = 's_first_order';
+		}
+
+		$qu_cus = mysqli_query($conn,"SELECT * FROM ".$tableDB." WHERE 1 ".$consd);
+		$row_cusx = @mysqli_fetch_array($qu_cus);
+		
+		echo '|'.$row_cusx['fo_id'].'|'.$row_cusx['cd_name'].'|'.$chk;
+		//echo "SELECT cd_name FROM s_first_order ".$consd." ORDER BY cd_name ASC";
+	}
 	
 	if($_GET['action'] == 'getsparpart'){
 		$cd_name = $_REQUEST['pval'];

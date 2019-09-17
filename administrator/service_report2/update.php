@@ -253,6 +253,58 @@ function check(frm){
          return true;
       }
 </SCRIPT>
+
+<script type="text/javascript">
+	
+	
+	function get_customer(cid,cname,chk){
+		/*alert(cid);
+		alert(cname);*/
+		var sCustomerName = document.getElementById("cd_names");
+		
+		sCustomerName.value = cname;
+		
+		var sCustomerSource = document.getElementById("cus_source");
+		
+		sCustomerSource.value = chk;
+		checkfirstorder(cid,'cusadd','cusprovince','custel','cusfax','contactid','datef','datet','cscont','cstel','sloc_name','sevlast','prolist','sr_ctype2',chk);
+		document.getElementById("rsnameid").innerHTML="<input type=\"hidden\" name=\"cus_id\" value=\""+cid+"\">";
+	}
+	
+	function get_cus2(pval,chk){
+		/*alert(pval);*/
+		var xmlHttp;
+		
+		//alert(chk);
+		if(chk == 'po'){
+			document.getElementById("search_fo").value = '';
+		}else{
+			document.getElementById("search_po").value = '';
+		}
+		
+	   xmlHttp=GetXmlHttpObject(); //Check Support Brownser
+	   URL = pathLocal+'ajax_return.php?action=getcus2&pval='+pval+'&chk='+chk;
+	   if (xmlHttp==null){
+		  alert ("Browser does not support HTTP Request");
+		  return;
+	   }
+		xmlHttp.onreadystatechange=function (){
+			if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
+				//document.getElementById('rscus').innerHTML = xmlHttp.responseText;
+				//alert(xmlHttp.responseText);
+				var ds = xmlHttp.responseText.split("|");
+				//alert(ds[1]);
+				get_customer(ds[1],ds[2],ds[3]);
+				
+			} else{
+			  //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
+			}
+	   };
+	   xmlHttp.open("GET",URL,true);
+	   xmlHttp.send(null);
+	}
+
+</script>
 </HEAD>
 <?php    include ("../../include/function_script.php"); ?>
 <BODY>
@@ -425,11 +477,17 @@ function check(frm){
           </tr>
           <tr>
             <td><strong>ที่อยู่ :</strong> <span id="cusadd"><?php   echo $finfo['cd_address'];?></span></td>
-            <td><strong>เลขที่บริการ</strong> :
+            <td>
+            <strong>เลขที่บริการ</strong> :
 <input type="text" name="sv_id" value="<?php   if($sv_id == ""){echo check_serviceman($conn);}else{echo $sv_id;};?>" id="sv_id" class="inpfoder" style="border:0;">
-&nbsp;&nbsp;<strong>เลขที่ใบงาน</strong> : <!--<input type="text" name="sv_id" value="<?php   if($sv_id == ""){echo "SR";}else{echo $sv_id;};?>" id="sv_id" class="inpfoder" style="border:0;">&nbsp;&nbsp;เลขที่สัญญา  :</strong> <span id="contactid"><?php   echo $finfo['fs_id'];?></span>--><strong>
-<input type="text" name="srid" value="<?php   echo $srid;?>" id="srid" class="inpfoder">
-</strong></td>
+
+<!--&nbsp;&nbsp;<strong>เลขที่ใบงาน</strong> : -->
+<!--<input type="text" name="sv_id" value="<?php   if($sv_id == ""){echo "SR";}else{echo $sv_id;};?>" id="sv_id" class="inpfoder" style="border:0;">&nbsp;&nbsp;เลขที่สัญญา  :</strong> <span id="contactid"><?php   echo $finfo['fs_id'];?></span><strong>
+<input type="text" name="srid" value="<?php   echo $srid;?>" id="srid" class="inpfoder"></strong>-->
+			
+			<strong>เลขที่ FO :</strong> <input type="text" name="search_fo" value="<?php echo $search_fo;?>" id="search_fo" class="inpfoder" onkeyup="get_cus2(this.value,'fo');">&nbsp;&nbsp;
+			<strong>เลขที่ PJ :</strong> <input type="text" name="search_po" value="<?php echo $search_po;?>" id="search_po" class="inpfoder" onkeyup="get_cus2(this.value,'po');">
+			</td>
           </tr>
           <tr>
             <td><strong>จังหวัด :</strong> <span id="cusprovince"><?php   echo province_name($conn,$finfo['cd_province']);?></span></td>
