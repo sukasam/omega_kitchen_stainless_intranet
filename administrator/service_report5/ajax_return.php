@@ -91,7 +91,7 @@
 		   
 		//   $selclist = 'mkung';
 		   
-		$res_spares = "".'|'.$row_spare['group_spar_id'].'|'.$selclist.'|'.$row_spare['group_namecall'].'|'.$row_spare['group_price'].'|'.$row_spare['group_stock'];
+		$res_spares = "".'|'.$row_spare['group_spar_id'].'|'.$selclist.'|'.$row_spare['group_namecall'].'|'.$row_spare['group_unit_price'].'|'.$row_spare['group_stock'];
 		echo $res_spares;
 	}
 	
