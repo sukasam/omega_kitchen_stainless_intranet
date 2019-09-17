@@ -484,6 +484,8 @@ function check(frm){
 <!--&nbsp;&nbsp;<strong>เลขที่ใบงาน</strong> : -->
 <!--<input type="text" name="sv_id" value="<?php   if($sv_id == ""){echo "SR";}else{echo $sv_id;};?>" id="sv_id" class="inpfoder" style="border:0;">&nbsp;&nbsp;เลขที่สัญญา  :</strong> <span id="contactid"><?php   echo $finfo['fs_id'];?></span><strong>
 <input type="text" name="srid" value="<?php   echo $srid;?>" id="srid" class="inpfoder"></strong>-->
+		
+		<span id="contactid" style="display: none;"><?php   echo $finfo['fs_id'];?></span>
 			
 			<strong>เลขที่ FO :</strong> <input type="text" name="search_fo" value="<?php echo $search_fo;?>" id="search_fo" class="inpfoder" onkeyup="get_cus2(this.value,'fo');">&nbsp;&nbsp;
 			<strong>เลขที่ PJ :</strong> <input type="text" name="search_po" value="<?php echo $search_po;?>" id="search_po" class="inpfoder" onkeyup="get_cus2(this.value,'po');">
@@ -496,7 +498,9 @@ function check(frm){
           </tr>
           <tr>
             <td><strong>โทรศัพท์ :</strong> <span id="custel"><?php   echo $finfo['cd_tel'];?></span><strong>&nbsp;&nbsp;&nbsp;&nbsp;แฟกซ์ :</strong> <span id="cusfax"><?php   echo $finfo['cd_fax'];?></span></td>
-            <td><!--<strong>บริการครั้งล่าสุด : </strong> <span id="sevlast"><?php   echo get_lastservice_f($conn,$cus_id,$sv_id);?></span> &nbsp;&nbsp;&nbsp;&nbsp;--><strong>กำหนดคืนอะไหล่ :</strong> <span id="datet"></span>
+            <td><!--<strong>บริการครั้งล่าสุด : </strong> <span id="sevlast"><?php   echo get_lastservice_f($conn,$cus_id,$sv_id);?></span> &nbsp;&nbsp;&nbsp;&nbsp;--><strong>กำหนดคืนอะไหล่ :</strong>
+             <span id="sevlast" style="display: none;"><?php echo get_lastservice_f($conn,$cus_id,$sv_id);?></span>
+               <span id="datet"></span>
               <input type="text" name="job_balance" readonly value="<?php  if($job_balance==""){echo date("d/m/Y");}else{ echo $job_balance;}?>" class="inpfoder"/>
               <script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'job_balance'});</script>
               <input type="hidden" name="job_close" value="<?php  if($job_close==""){echo date("d/m/Y");}else{ echo $job_close;}?>" class="inpfoder"/>&nbsp;&nbsp;<strong>วันที่คืนอะไหล่  :</strong><span style="font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;">
@@ -517,8 +521,8 @@ function check(frm){
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tb1">
       <tr>
         <td width="50%"><strong>สถานที่ติดตั้ง / ส่งสินค้า : </strong><span id="sloc_name"><?php   echo $finfo['loc_name'];?></span><br />
-<!--
-          <br>
+          <div style="display: none;">
+          	<br>
           <strong>เลือกสินค้า :</strong>
           <span id="prolist">
           		<?php   
@@ -554,7 +558,7 @@ function check(frm){
 						}
 					?>
                 </select>
--->
+          </div>
                 </td>
                 
         <td width="50%"><center><strong>รายละเอียดการเบิกอะไหล่เพื่อผลิต</strong></center><br><br>

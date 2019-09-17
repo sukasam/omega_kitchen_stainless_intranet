@@ -40,8 +40,8 @@ function checkfirstorder(pval,param1,param2,param3,param4,param5,param6,param7,p
 			document.getElementById(param11).innerHTML=ds[10];
 			document.getElementById(param12).innerHTML=ds[11];
 			document.getElementById(param13).innerHTML=ds[12];
-			document.getElementById(param14).innerHTML=ds[13];
-			document.getElementById(param15).innerHTML=ds[14];
+			document.getElementById(param14).value=ds[13];
+			document.getElementById(param15).value=ds[14];
         } else{
           //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
         }
