@@ -120,7 +120,7 @@
 		while($row_cusx = @mysqli_fetch_array($qu_cus)){
 			?>
 			 <tr>
-				<td><A href="javascript:void(0);" onclick="get_sparactive('<?php     echo $row_cusx['group_id'];?>','codes<?php     echo $_REQUEST['resdata']?>','listss<?php     echo $_REQUEST['resdata']?>','units<?php     echo $_REQUEST['resdata']?>','prices<?php     echo $_REQUEST['resdata']?>','amounts<?php     echo $_REQUEST['resdata']?>','<?php     echo $_REQUEST['resdata']?>');"><?php     echo $row_cusx['group_spar_id'].'&nbsp;&nbsp;'.$row_cusx['group_name'];?></A></td>
+				<td><A href="javascript:void(0);" onclick="get_sparactive('<?php     echo $row_cusx['group_id'];?>','codes<?php     echo $_REQUEST['resdata']?>','listss<?php     echo $_REQUEST['resdata']?>','units<?php     echo $_REQUEST['resdata']?>','prices<?php echo $_REQUEST['resdata']?>','amounts<?php     echo $_REQUEST['resdata']?>','<?php echo $_REQUEST['resdata']?>','locations<?php echo $_REQUEST['resdata']?>');"><?php     echo $row_cusx['group_spar_id'].'&nbsp;&nbsp;'.$row_cusx['group_name'];?></A></td>
 			  </tr>
 			<?php    	
 		}
@@ -133,7 +133,7 @@
 		$qu_spare = @mysqli_query($conn,"SELECT * FROM s_group_sparpart  WHERE  group_id = '".$sparval."'");
 		$row_spare = @mysqli_fetch_array($qu_spare);
 		
-		$selclist = "<select name=\"lists[]\" id=\"lists".$ressdata."\" class=\"inputselect\" style=\"width:92%\" onchange=\"showspare(this.value,'codes".$ressdata."','units".$ressdata."','prices".$ressdata."','amounts".$ressdata."')\">";
+		$selclist = "<select name=\"lists[]\" id=\"lists".$ressdata."\" class=\"inputselect\" style=\"width:92%\" onchange=\"showspare(this.value,'codes".$ressdata."','units".$ressdata."','prices".$ressdata."','amounts".$ressdata."','".$ressdata."','locations".$ressdata."')\">";
                 	$qucgspare = @mysqli_query($conn,"SELECT * FROM s_group_sparpart WHERE typespar != '2' ORDER BY group_name ASC");
 					$selclist .= "<option value=\"\">กรุณาเลือกรายการอะไหล่</option>";
 
@@ -146,7 +146,7 @@
 		   
 		//   $selclist = 'mkung';
 		   
-		$res_spares = "".'|'.$row_spare['group_spar_id'].'|'.$selclist.'|'.$row_spare['group_namecall'].'|'.$row_spare['group_unit_price'].'|'.$row_spare['group_stock'];
+		$res_spares = "".'|'.$row_spare['group_spar_id'].'|'.$selclist.'|'.$row_spare['group_namecall'].'|'.$row_spare['group_price'].'|'.$row_spare['group_stock'].'|'.$row_spare['group_location'];
 		echo $res_spares;
 	}
 	
@@ -154,7 +154,7 @@
 		$sparval = $_REQUEST['sval'];
 		$qu_spare = @mysqli_query($conn,"SELECT * FROM s_group_sparpart  WHERE  group_id = '".$sparval."'");
 		$row_spare = @mysqli_fetch_array($qu_spare);
-		$res_spare = " ".'|'.$row_spare['group_spar_id'].'|'.$row_spare['group_namecall'].'|'.$row_spare['group_price'].'|'.$row_spare['group_stock'];
+		$res_spare = " ".'|'.$row_spare['group_spar_id'].'|'.$row_spare['group_namecall'].'|'.$row_spare['group_price'].'|'.$row_spare['group_stock'].'|'.$row_spare['group_location'];
 		echo $res_spare;
 	}
 

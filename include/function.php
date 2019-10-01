@@ -1711,6 +1711,11 @@ function get_sparpart_name($conn,$gid) {
 	return $row_dea['group_name'];		
 }
 
+function get_nameStock($conn,$gid) {
+	$row_dea = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_sparpart WHERE group_id = '".$gid."'"));
+	return $row_dea['group_location'];		
+}
+
 
 function get_servreport($conn,$ymd,$loc,$ctype) {
 	

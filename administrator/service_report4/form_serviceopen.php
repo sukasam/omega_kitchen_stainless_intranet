@@ -171,7 +171,8 @@
       <tr>
         <td width="4%"><strong>ลำดับ</strong></td>
         <td width="8%"><strong>Code</strong></td>
-        <td width="44%"><strong>รายการ</strong></td>
+        <td width="35%"><strong>รายการ</strong></td>
+		<td width="9%"><strong>สถานที่จัดเก็บ</strong></td>
 		<td width="9%"><strong>หน่วยนับ</strong></td>
 		<td width="9%"><strong>คงเหลือ Stock</strong></td>
         <td width="9%"><strong>ราคา/หน่วย</strong></td>
@@ -195,6 +196,7 @@
 			<td><center>'.($a+1).'</center></td>
 			<td>'.$codes[$a].'</td>
 			<td>'.get_sparpart_name($conn,$lists[$a]).'</td>
+			<td align="center">'.get_nameStock($conn,$lists[$a]).'</td>
 			<td align="center">'.$units[$a].'</td>
 			<td align="right">'.getStockSpar($conn,$lists[$a]).'</td>
 			<td align="right">'.$prices[$a].'</td>
@@ -204,16 +206,16 @@
 			if($codes[$a] != "" || $lists[$a] != ""){$total += $sumtotal;}
 		}
         $form .= '<tr >
-			<td colspan="4"><center><strong>รวมจำนวนที่เบิก</strong></center></td>
+			<td colspan="5"><center><strong>รวมจำนวนที่เบิก</strong></center></td>
 			<td colspan="3" align="right"><strong>'.$sumlist.'&nbsp;&nbsp;รายการ</strong></td>
 		</tr>
 		
         <tr >
-          <td colspan="4"><center><strong>ใช้จ่ายรวม (รวมมูลค่าอะไหล่ที่เบิก)</strong></center></td>
+          <td colspan="5"><center><strong>ใช้จ่ายรวม (รวมมูลค่าอะไหล่ที่เบิก)</strong></center></td>
           <td colspan="3" align="right"><strong>'.number_format($total,2).'&nbsp;&nbsp;บาท</strong></td>
           </tr>
         <tr >
-          <td colspan="4"><center><strong>ใช้จ่ายรวม (ค่าอะไหล่และอื่นๆ (จากช่างค่าน้ำมัน, ค่าทางด่วน, ที่พัก))</strong></center></td>
+          <td colspan="5"><center><strong>ใช้จ่ายรวม (ค่าอะไหล่และอื่นๆ (จากช่างค่าน้ำมัน, ค่าทางด่วน, ที่พัก))</strong></center></td>
           <td colspan="3" align="right"><strong>'.number_format($_POST['mn_1']+$_POST['mn_2']+$_POST['mn_3']+$_POST['mn_4']+$_POST['mn_5']+$total,2).'&nbsp;&nbsp;บาท</strong></td>
         </tr>
     </table>

@@ -574,6 +574,7 @@ function check(frm){
         <td width="4%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:center;"><strong>ลำดับ</strong></td>
         <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:center;"><strong>Code</strong></td>
         <td width="30%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><strong>รายการ</strong></td>
+        <td width="9%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:center;"><strong>สถานที่จัดเก็บ</strong></td>
         <td width="9%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:center;"><strong>หน่วยนับ</strong></td>
 		<td width="9%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:center;"><strong>คงเหลือ Stock</strong></td>
         <td width="9%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:center;"><strong>ราคา/หน่วย</strong></td>
@@ -601,10 +602,10 @@ function check(frm){
         <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:center;"><?php   echo $i;?></td>
         <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><input type="text" name="codes[]" id="codes<?php   echo $i;?>" value="<?php   echo $bcodes[$i-1];?>" style="width:100%" readonly></td>
         <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;">
-        <span id="listss<?php echo $i;?>"><select name="lists[]" id="lists<?php   echo $i;?>" class="inputselect" style="width:92%" onchange="showspare(this.value,'<?php   echo "codes".$i;?>','<?php   echo "units".$i;?>','<?php   echo "prices".$i;?>','<?php   echo "amounts".$i;?>','<?php echo $i;?>')">
+        <span id="listss<?php echo $i;?>"><select name="lists[]" id="lists<?php   echo $i;?>" class="inputselect" style="width:92%" onchange="showspare(this.value,'<?php   echo "codes".$i;?>','<?php   echo "units".$i;?>','<?php   echo "prices".$i;?>','<?php   echo "amounts".$i;?>','<?php echo $i;?>','<?php echo "locations".$i;?>')">
         <option value="">กรุณาเลือกรายการอะไหล่</option>
                 <?php  
-                	$qucgspare = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+                	$qucgspare = @mysqli_query($conn,"SELECT * FROM s_group_sparpart WHERE typespar != '2' ORDER BY group_spar_id ASC");
 					while($row_spare = @mysqli_fetch_array($qucgspare)){
 					  ?>
 					  	<option value="<?php   echo $row_spare['group_id'];?>" <?php   if($blists[$i-1] == $row_spare['group_id']){echo 'selected';}?>><?php   echo $row_spare['group_name'];?></option>
@@ -613,6 +614,7 @@ function check(frm){
 				?>
             </select></span><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search2.php?resdata=<?php   echo $i;?>');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
         </td>
+        <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><input type="text" name="locations[]" id="locations<?php echo $i;?>" value="<?php   echo get_nameStock($conn,$blists[$i-1]);?>" style="width:100%;text-align:center;" readonly></td>
         <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><input type="hidden" name="r_id[]" value="<?php   echo $brid[$i-1]?>"><input type="text" name="units[]" id="units<?php   echo $i;?>" value="<?php   echo $bunits[$i-1];?>" style="width:100%;text-align:center;" readonly></td>
 		<td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><input type="text" name="amounts[]" id="amounts<?php   echo $i;?>" value="<?php   
 		echo getStockSpar($conn,$blists[$i-1]);
@@ -625,11 +627,11 @@ function check(frm){
 			}
 		?>
         <tr >
-				  <td colspan="5" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:center;"><strong>รวมจำนวนที่เบิก</strong></td>
+				  <td colspan="6" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:center;"><strong>รวมจำนวนที่เบิก</strong></td>
 				  <td colspan="3" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:right;"><strong>รายการ</strong></td>
 				  </tr>
         <tr >
-          <td colspan="5" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:center;"><strong>ใช้จ่ายรวม (รวมมูลค่าอะไหล่ที่เบิก)</strong></td>
+          <td colspan="6" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:center;"><strong>ใช้จ่ายรวม (รวมมูลค่าอะไหล่ที่เบิก)</strong></td>
           <td colspan="3" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;text-align:right;"><strong>บาท</strong></td>
           </tr>
     </table>

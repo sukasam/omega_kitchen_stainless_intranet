@@ -50,7 +50,7 @@
 </script>-->
 <script type="text/javascript" src="ajax.js"></script> 
 <script type="text/javascript">
-   function get_sparactive(spid,param1,param2,param3,param4,param5,resdata){
+  function get_sparactive(spid,param1,param2,param3,param4,param5,resdata,param6){
 	
 	var xmlHttp;
    xmlHttp=GetXmlHttpObject(); //Check Support Brownser
@@ -64,6 +64,7 @@
 			var ds = xmlHttp.responseText.split("|");
 			
 			window.close();
+			//console.log(JSON.stringify(ds));
 			
 			if(ds[5] <= 1){
 				 self.opener.alert(ds[1]+' : อะไหล่สินค้าตัวนี้ไม่เพียงพอสำหรับการเบิกอะไหล่');
@@ -73,6 +74,7 @@
 				 self.opener.document.getElementById(param3).value='';
 				 self.opener.document.getElementById(param4).value='';
 				 self.opener.document.getElementById(param5).value='';
+				 self.opener.document.getElementById(param6).value='';
 				 self.opener.document.getElementById('opens'+resdata).value='';
 			}else{
 				self.opener.document.getElementById(param1).value=ds[1];
@@ -80,6 +82,7 @@
 				self.opener.document.getElementById(param3).value=ds[3];
 				self.opener.document.getElementById(param4).value=ds[4];
 				self.opener.document.getElementById(param5).value=ds[5];
+				self.opener.document.getElementById(param6).value=ds[6];
 			}
 			
         } else{
@@ -111,7 +114,7 @@
 	while($row_sparcus = @mysqli_fetch_array($qu_sparcus)){
 		?>
 		 <tr>
-            <td><A href="javascript:void(0);" onclick="get_sparactive('<?php     echo $row_sparcus['group_id'];?>','codes<?php     echo $_REQUEST['resdata']?>','listss<?php     echo $_REQUEST['resdata']?>','units<?php     echo $_REQUEST['resdata']?>','prices<?php     echo $_REQUEST['resdata']?>','amounts<?php     echo $_REQUEST['resdata']?>','<?php echo $_REQUEST['resdata']?>');"><?php     echo $row_sparcus['group_spar_id'].'&nbsp;&nbsp;'.$row_sparcus['group_name'];?></A></td>
+            <td><A href="javascript:void(0);" onclick="get_sparactive('<?php     echo $row_sparcus['group_id'];?>','codes<?php     echo $_REQUEST['resdata']?>','listss<?php     echo $_REQUEST['resdata']?>','units<?php     echo $_REQUEST['resdata']?>','prices<?php     echo $_REQUEST['resdata']?>','amounts<?php     echo $_REQUEST['resdata']?>','<?php echo $_REQUEST['resdata']?>','locations<?php echo $_REQUEST['resdata']?>');"><?php     echo $row_sparcus['group_spar_id'].'&nbsp;&nbsp;'.$row_sparcus['group_name'];?></A></td>
           </tr>
 		<?php    	
 	}
