@@ -473,7 +473,7 @@ return $ret;
 
 function Check_Permission2($conn,$check_module,$user_id,$action)
 {
-	$sql = "select * from s_user_p where user_id = '$user_id' and s_module like '$check_module' and ";
+	$sql = "select * from s_user_p where user_id = '".$user_id."' and s_module like '".$check_module."' and ";
 	if ($action == "read") $sql .= " read_p like '1'";
 	if ($action == "add") $sql .= " add_p like '1'";
 	if ($action == "update") $sql .= " update_p like '1'";
@@ -816,9 +816,11 @@ function Get_Point($conn,$member_id){
 
 function Check_Permission($conn,$check_module,$user_id,$action)
 {
-	$sql = "select * from s_user_group where user_id = '$user_id'";
+	
+	$sql = "select * from s_user_group where user_id = '".$user_id."'";
   	$query = @mysqli_query($conn,$sql) or die ("1");
 	$groups = "";
+	$code ="";
 
 	while ($rec = @mysqli_fetch_array ($query)) {
 		$groups .= "or group_id = '".$rec['group_id']."'";
@@ -827,32 +829,34 @@ function Check_Permission($conn,$check_module,$user_id,$action)
 		$groups = substr ($groups, 3);
 		$groups = " and (" . $groups . ")";
 	}
-	$sql = "select * from s_module where module_name like '$check_module'";
+	$sql = "select * from s_module where module_name like '".$check_module."'";
 	$query = @mysqli_query($conn,$sql) or die ("2");
 	$module_id = 0;
 	while ($rec = @mysqli_fetch_array ($query)) {
 		$module_id  = $rec["module_id"];
   	}		
-	$sql = "select * from s_user where user_id = '$user_id'";
+	$sql = "select * from s_user where user_id = '".$user_id."'";
 	$query = @mysqli_query($conn,$sql) or die ("3");
 	if ($rec = @mysqli_fetch_array ($query)) {
 		
-		if(isset($_SESSION['s_group_all'])){
+		//if(isset($_SESSION['s_group_all'])){
+		    
 			if ($rec["admin_flag"] == '1' || $_SESSION['s_group_all'] == "ALL") {
 
 			}
 			else
 			{
-	/*
-	if ($action == "read") $sql .= " read_p like '1'";
-	if ($action == "add") $sql .= " add_p like '1'";
-	if ($action == "update") $sql .= " update_p like '1'";
-	if ($action == "delete") $sql .= " delete_p like '1'";
-	*/
+				
+			/*
+			if ($action == "read") $sql .= " read_p like '1'";
+			if ($action == "add") $sql .= " add_p like '1'";
+			if ($action == "update") $sql .= " update_p like '1'";
+			if ($action == "delete") $sql .= " delete_p like '1'";
+			*/
 
-			$sql = "select * from s_user_p where user_id = '$user_id'  and  module_id like '$module_id'";
-
+			$sql = "select * from s_user_p where user_id = '".$user_id."'  and  module_id like '$module_id'";
 			$query = @mysqli_query($conn,$sql) or die ("4");
+				
 			if (@mysqli_num_rows ($query)) {
 
 				while ($rec = @mysqli_fetch_array ($query)) {
@@ -863,6 +867,8 @@ function Check_Permission($conn,$check_module,$user_id,$action)
 						case "delete" : $code = $rec["delete_p"]; break;
 					} 
 				}// end while
+				
+				
 				if ( ($code == "0") || ($code == "") ) {
 					header ("location:../error/permission.php");
 				}
@@ -891,12 +897,13 @@ function Check_Permission($conn,$check_module,$user_id,$action)
 			}	
 		}
 
-   }
-}
-else
-{
-header ("location:../error/permission.php");
-}
+//	   }else{
+//			echo "ERRORS";
+//		}
+	}
+	else{
+		header ("location:../error/permission.php");
+	}
 return $code;
 }	
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -904,7 +911,7 @@ return $code;
 function Check_Permission_menu($conn,$check_module,$user_id,$action)
 {
 	$permission_denine = 0;
-	$sql = "select * from s_user_group where user_id = '$user_id'";
+	$sql = "select * from s_user_group where user_id = '".$user_id."'";
   	$query = @mysqli_query($conn,$sql) or die ("1");
 	$groups = "";
 
@@ -915,13 +922,13 @@ function Check_Permission_menu($conn,$check_module,$user_id,$action)
 		$groups = substr ($groups, 3);
 		$groups = " and (" . $groups . ")";
 	}
-	$sql = "select * from s_module where module_name like '$check_module'";
+	$sql = "select * from s_module where module_name like '".$check_module."'";
 	$query = @mysqli_query($conn,$sql) or die ("2");
 	$module_id = 0;
 	while ($rec = @mysqli_fetch_array ($query)) {
 		$module_id  = $rec["module_id"];
   	}		
-	$sql = "select * from s_user where user_id = '$user_id'";
+	$sql = "select * from s_user where user_id = '".$user_id."'";
 	$query = @mysqli_query($conn,$sql) or die ("3");
 	if ($rec = @mysqli_fetch_array ($query)) {
 		if ($rec["admin_flag"] == '1' or $_SESSION['s_group_all'] == "ALL") {
@@ -936,7 +943,7 @@ if ($action == "update") $sql .= " update_p like '1'";
 if ($action == "delete") $sql .= " delete_p like '1'";
 */
 
-		$sql = "select * from s_user_p where user_id = '$user_id'  and  module_id like '$module_id'";
+		$sql = "select * from s_user_p where user_id = '".$user_id."'  and  module_id like '$module_id'";
 
 		$query = @mysqli_query($conn,$sql) or die ("4");
 		if (@mysqli_num_rows ($query)) {
@@ -1038,6 +1045,7 @@ function check_azAZ09($text){
 }		
 function get_param($a_param,$a_not_exists){
 	$param = $param2 = "";
+	
 	if(count($a_param) > 0) {
 		foreach($a_param as $key => $value){ 
 			if( (!@in_array($value,$a_not_exists)) && ($_REQUEST[$value] <> "") )
@@ -1113,7 +1121,7 @@ function check_username($conn,$name){
 		@mysqli_query($conn,$sql);
 		$user_id = mysqli_insert_id($conn);
 		
-		$sql = "insert into person (name_th , researcher , user_id , create_date , create_by) values ('$name' , '1' , '$user_id' , '".date("Y-m-d H:i:s")."' , '".$_SESSION["login_name"]."')";
+		$sql = "insert into person (name_th , researcher , user_id , create_date , create_by) values ('$name' , '1' , '".$user_id."' , '".date("Y-m-d H:i:s")."' , '".$_SESSION["login_name"]."')";
 		@mysqli_query($conn,$sql);
 		$return_id = mysqli_insert_id($conn);
 	}

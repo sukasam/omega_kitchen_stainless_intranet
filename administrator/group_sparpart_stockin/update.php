@@ -361,13 +361,13 @@ function checkTotal(key){
 				  <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search_spar.php?protype=cpro<?php   echo $rowCal;?>&ccode=ccode<?php   echo $rowCal;?>');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
 				  </td>
 				  <td style="border:1px solid #000000;padding:5;text-align:center;">
-					<input type="text" name="camount[]" value="<?php     echo number_format($rowPro['sparpart_qty']);?>" id="camount<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;" onkeypress="return isNumberKey(event)" onblur="checkTotal('<?php   echo $rowCal;?>')">
+					<input type="text" name="camount[]" value="<?php echo number_format($rowPro['sparpart_qty']);?>" id="camount<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;" onkeypress="return isNumberKey(event)" onblur="checkTotal('<?php   echo $rowCal;?>')">
 				  </td>
 				  <td style="border:1px solid #000000;padding:5;text-align:center;">
-					<input type="text" name="cprice[]" value="<?php     echo number_format($rowPro['sparpart_unit_price']);?>" id="cprice<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;" onkeypress="return isNumberKey(event)" onblur="checkTotal('<?php   echo $rowCal;?>')">
+					<input type="text" name="cprice[]" value="<?php     echo number_format($rowPro['sparpart_unit_price'],2);?>" id="cprice<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;" onkeypress="return isNumberKey(event)" onblur="checkTotal('<?php   echo $rowCal;?>')">
 				  </td>
 				  <td style="border:1px solid #000000;padding:5;text-align:right;" id="ctotal<?php   echo $rowCal;?>">
-					<?php   echo number_format($rowPro['sparpart_qty']*$rowPro['sparpart_unit_price'])?>
+					<?php   echo number_format($rowPro['sparpart_qty']*$rowPro['sparpart_unit_price'],2)?>
 				  </td>
 				</tr>
 				<?php    
@@ -380,7 +380,7 @@ function checkTotal(key){
     <input type="text" hidden="hidden" value="<?php   echo $rowCal;?>" id="countexp" name="countexp"/>
     <tr>
       <td colspan="5" style="text-align: right;border: 1px solid #000000;padding: 5;vertical-align: middle;font-size: 15px;font-weight: bold;">จำนวนเงินรวมทั้งสิ้น</td>
-      <td  style="text-align: left;border: 1px solid #000000;padding: 5;vertical-align: middle;text-align: right;font-size: 15px;font-weight: bold;" id="sumtotal"><?php     echo number_format($sumPrice);?></td>
+      <td  style="text-align: left;border: 1px solid #000000;padding: 5;vertical-align: middle;text-align: right;font-size: 15px;font-weight: bold;" id="sumtotal"><?php echo number_format($sumPrice,2);?></td>
       
     </tr>
    

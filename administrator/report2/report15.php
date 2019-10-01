@@ -71,11 +71,16 @@
 	if($openfrom != ""){
 		
 		$tableDB = '';
-		
+		$fopoID = '';
+		$fopoSearch = '';
 		if($openfrom == 'po'){
 			$tableDB = 's_project_order';
+			$fopoID = 'เลขที่ PJ';
+			$fopoSearch = 'search_po';
 		}else{
 			$tableDB = 's_first_order';
+			$fopoID = 'เลขที่ FO';
+			$fopoSearch = 'search_fo';
 		}
 		
 		$condition .= " AND sv.cus_source = '".$openfrom."'";
@@ -201,7 +206,7 @@
 
         <?php  if($_REQUEST['sh2'] == 1){?><th width="15%">ชื่อร้าน / สถานที่ติดตั้ง</th><?php  }?>
 
-        <?php  if($_REQUEST['sh3'] == 1){?><th width="10%">รายละเอียดการเปลี่ยน</th><?php  }?>
+        <?php  if($_REQUEST['sh3'] == 1){?><th width="10%"><?php echo $fopoID;?></th><?php  }?>
 
         <?php  if($_REQUEST['sh4'] == 1 || $_REQUEST['sh5'] == 1){?><th width="30%"><table width="100%" border="0" cellpadding="0" cellspacing="0" class="tbreport">
 
@@ -239,7 +244,7 @@
 
 	  
 
-		$sql = "SELECT * FROM ".$tableDB." as fr, ".$dbservice." as sv, ".$dbservicesub." as sv2 WHERE sv.cus_id = fr.fo_id AND sv.sr_id = sv2.sr_id ".$condition." ".$daterriod." GROUP by sv.sr_id ORDER BY sv.sr_id DESC";
+		$sql = "SELECT * FROM ".$tableDB." as fr, ".$dbservice." as sv, ".$dbservicesub." as sv2 WHERE sv.cus_id = fr.fo_id AND sv.sr_id = sv2.sr_id ".$condition." ".$daterriod." GROUP by sv.sr_id ORDER BY sv.sv_id DESC";
 
 	  	$qu_fr = @mysqli_query($conn,$sql);
 
@@ -267,7 +272,7 @@
 
               <?php  echo $row_fr['loc_address'];?></td><?php  }?>
 
-              <?php  if($_REQUEST['sh3'] == 1){?><td><?php  echo $row_fr['detail_recom'];?></td><?php  }?>
+              <?php  if($_REQUEST['sh3'] == 1){?><td><?php echo $row_fr[$fopoSearch];?></td><?php  }?>
 
               <?php  if($_REQUEST['sh4'] == 1 || $_REQUEST['sh5'] == 1 || $_REQUEST['sh8'] == 1){?><td style="padding:0;">
 

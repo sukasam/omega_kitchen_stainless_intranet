@@ -17,6 +17,7 @@
 		$_POST['group_price'] = preg_replace("/,/","",$_POST['group_price']);
 
 		$_POST['group_name'] = addslashes($_POST['group_name']);
+		$_POST['group_location'] = addslashes($_POST['group_location']);
 		
 		if ($_POST["mode"] == "add") { 
 			include "../include/m_add.php";
@@ -95,6 +96,7 @@ $( document ).ready(function() {
 						if(obj.status === 'yes'){
 							$("#group_id").val(obj.group_id);
 							$("#group_name").val(obj.group_name);
+							$("#group_location").val(obj.group_location);
 							$("#group_namecall").val(obj.group_namecall);
 							$("#group_type").val(obj.group_type);
 							$("#group_unit_price").val(obj.group_unit_price);
@@ -112,6 +114,7 @@ $( document ).ready(function() {
 						}else{
 							$("#mode").val('add');
 							$("#group_name").val('');
+							$("#group_location").val('');
 							$("#group_namecall").val('');
 							$("#group_spar_id2").val(group_spar_id);
 							$(".editIDPro").addClass('hide');
@@ -167,6 +170,7 @@ $( document ).ready(function() {
 							if(obj.status === 'yes'){
 								$("#group_id").val(obj.group_id);
 								$("#group_name").val(obj.group_name);
+								$("#group_location").val(obj.group_location);
 								$("#group_namecall").val(obj.group_namecall);
 								$("#group_type").val(obj.group_type);
 								$("#group_unit_price").val(obj.group_unit_price);
@@ -184,6 +188,7 @@ $( document ).ready(function() {
 							}else{
 								$("#mode").val('add');
 								$("#group_name").val('');
+								$("#group_location").val('');
 								$("#group_namecall").val('');
 								$("#group_spar_id2").val(group_spar_id);
 								$(".editIDPro").addClass('hide');
@@ -266,6 +271,10 @@ function submitForm(){
                 <td nowrap class="name">ชื่ออะไหล่</td>
                 <td><input name="group_name" type="text" id="group_name"  value="<?php     echo $group_name; ?>" size="60"></td>
               </tr>
+              <tr >
+                <td nowrap class="name">สถานที่จัดเก็บ</td>
+                <td><input name="group_location" type="text" id="group_location"  value="<?php     echo $group_location; ?>" size="60"></td>
+              </tr>
 <!--
               <tr >
                 <td nowrap class="name">จำนวน</td>
@@ -299,10 +308,7 @@ function submitForm(){
                 <td nowrap class="name">ประเภทอะไหล่</td>
                 <td><input type="radio" name="typespar" value="1" id="typespar1">อะไหล่สินค้า&nbsp;&nbsp;&nbsp;<input type="radio" name="typespar" value="2" id="typespar2">สินค้าอื่นๆ</td>
               </tr>
-              
-              <tr>
-              	<td></td><td></td>
-              </tr>
+
               
               <?php     if ($_GET["mode"] == "add") { ?>
               <?php     } ?>

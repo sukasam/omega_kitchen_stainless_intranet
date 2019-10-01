@@ -42,7 +42,7 @@
 		if($cd_name != ""){
 			$consd = "WHERE group_name LIKE '%".$cd_name."%'";
 		}
-		//echo "SELECT group_name FROM s_group_typeproduct ".$consd." ORDER BY group_name ASC";
+		echo "SELECT group_name FROM s_group_typeproduct ".$consd." ORDER BY group_name ASC";
 		$qu_cus = mysqli_query($conn,"SELECT * FROM s_group_project ".$consd." ORDER BY group_name ASC");
 		while($row_cus = @mysqli_fetch_array($qu_cus)){
 			?>
@@ -79,7 +79,7 @@
 		if($cd_name != ""){
 			$consd = "WHERE group_name LIKE '%".$cd_name."%' OR group_spar_id LIKE '%".$cd_name."%'";
 		}
-		//echo "SELECT group_name FROM s_group_typeproduct ".$consd." ORDER BY group_name ASC";
+		echo "SELECT group_name FROM s_group_sparpart ".$consd." ORDER BY group_name ASC";
 		$qu_cus = mysqli_query($conn,"SELECT * FROM s_group_sparpart ".$consd." ORDER BY group_name ASC");
 		while($row_cus = @mysqli_fetch_array($qu_cus)){
 			?>
