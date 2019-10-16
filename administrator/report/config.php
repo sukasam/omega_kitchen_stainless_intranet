@@ -1,7 +1,7 @@
 <?php    
 	$PK_field = "fo_id";
 	//$FR_field = "";
-	$check_module = "จัดการรายงาน";
+	$check_module = "จัดการรายงาน FO";
 	$page_name = "จัดการรายงาน (First Order)";
 	$tbl_name = "s_first_order";
 	$field_confirm_showname= "group_name";

@@ -2,8 +2,8 @@
 <?php    
 	$PK_field = "group_id";
 	//$FR_field = "";
-	$check_module = "รายการสินค้า";
-	$page_name = "รายการสินค้า";
+	$check_module = "รายการสินค้า FO";
+	$page_name = "รายการสินค้า FO";
 	$tbl_name = "s_group_typeproduct";
 	$field_confirm_showname= "group_name";
 	$fieldlist = array('group_spro_id','group_name','group_stock','group_pro_pod','group_pro_sn');

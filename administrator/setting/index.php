@@ -36,10 +36,10 @@
         <td colspan="4"><br /><br /><br /></td>
       </tr>
       <tr>
-        <td><div align="center"><a href="../group_typeproduct?mid=11"><img src="../images/menu/mn_serting05.png" width="62" height="60" border="0" alt=""><br><br><strong>รายการสินค้า</strong></a></div></td>
+        <td><div align="center"><a href="../group_typeproduct?mid=11"><img src="../images/menu/mn_serting05.png" width="62" height="60" border="0" alt=""><br><br><strong>รายการสินค้า FO</strong></a></div></td>
         <td><div align="center"><a href="../group_sparpart/?mid=9"><img src="../images/menu/mn_serting06.png" width="68" height="60" border="0" alt=""><br><br><strong>รายการอะไหล่</strong></a></div></td>
         <td><div align="center"><a href="../group_fix?mid=10"><img src="../images/menu/mn_serting07.png" width="77" height="60" border="0" alt=""><br><br><strong>รายการแจ้งซ่อม</strong></a></div></td>
-        <td><div align="center"><a href="../group_technician/?mid=17"><img src="../images/menu/menu_tec.png" width="77" height="60" border="0" alt=""><br><br><strong>รายการช่าง</strong></a></div></td>
+        <td><div align="center"><a href="../group_technician/?mid=17"><img src="../images/menu/menu_tec.png" width="77" height="60" border="0" alt=""><br><br><strong>รายการพนักงานช่าง</strong></a></div></td>
       </tr>
       <tr>
         <td colspan="4"><br /><br /><br /></td>
@@ -56,7 +56,7 @@
       </tr>
       <tr>
         <td><div align="center"><a href="../backup_database/"><img src="../images/menu/backup-database.png" alt="" width="96" height="58" border="0"><br><br><strong>สำรองฐานข้อมูล</strong></a></div></td>
-        <td><div align="center"><a href="../group_pod/"><img src="../images/menu/serial.png" width="89" height="61" border="0" alt=""><br>s<br>
+        <td><div align="center"><a href="../group_pod/"><img src="../images/menu/serial.png" width="89" height="61" border="0" alt=""><br><br>
         <strong>รายการรุ่นสินค้า</strong></a></div></td>
         <td><div align="center"><a href="../group_project/"><img src="../images/menu/mn_serting10.png" width="65" height="65" border="0" alt=""><br>
               <br>

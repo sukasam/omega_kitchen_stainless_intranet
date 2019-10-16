@@ -163,7 +163,7 @@ function check_select(frm){
     </TABLE>
     <br><br>
     <div>
-    	<center><a href="print.php" target="_blank"><input class=button name="btprint" type="button" value="พิมพ์รายการอะไหล่"></a></center>
+    	<center><a href="print.php?keyword=<?php echo $_GET['keyword'];?>" target="_blank"><input class=button name="btprint" type="button" value="พิมพ์รายการอะไหล่"></a></center>
     </div>
     <DIV class="bulk-actions align-left">
 <!--

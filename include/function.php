@@ -1130,7 +1130,7 @@ function check_username($conn,$name){
 
 function show_menu($menu_id,$menu_name){
 	if(preg_match("/,".$menu_id.",/",$_SESSION[s_menu_id].",")){
-		if($menu_id == $_SESSION[s_now_menu])
+		if($menu_id == $_SESSION['s_now_menu'])
 			echo "<font color=\"#FF0000\">$menu_name</font>"; 
 		else
 			echo "<font color=\"#CC6600\">$menu_name</font>"; 

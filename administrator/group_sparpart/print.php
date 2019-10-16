@@ -72,7 +72,13 @@
 //					if ($sortby <> "") $sql .= " " . $sortby;
 //		  
 //					include ("../include/page_init.php");
-					$sql = 'select *,s_group_sparpart.create_date as c_date from s_group_sparpart where 1 order by s_group_sparpart.group_spar_id ASC';
+		  
+		  			if($_GET['keyword']){
+						$keyWord = " AND (group_name like '%".$_GET['keyword']."%' OR group_type like '%".$_GET['keyword']."%')";
+					}
+
+					$sql = 'select *,s_group_sparpart.create_date as c_date from s_group_sparpart where 1 '.$keyWord.' order by s_group_sparpart.group_spar_id ASC';
+					
 					$query = @mysqli_query($conn,$sql);
 					if($_GET["page"] == "") $_GET["page"] = 1;
 					$counter = ($_GET["page"]-1)*$pagesize;

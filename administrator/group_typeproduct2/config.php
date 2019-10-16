@@ -2,7 +2,7 @@
 <?php 
 	$PK_field = "group_id";
 	//$FR_field = "";
-	$check_module = "รายการสินค้า";
+	$check_module = "รายการสินค้า SV";
 	$page_name = "รายการสินค้า SV";
 	$tbl_name = "s_group_typeproduct2";
 	$field_confirm_showname= "group_name";

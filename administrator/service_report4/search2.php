@@ -66,7 +66,7 @@
 			window.close();
 			//console.log(JSON.stringify(ds));
 			
-			if(ds[5] <= 1){
+			if(ds[5] < 1){
 				 self.opener.alert(ds[1]+' : อะไหล่สินค้าตัวนี้ไม่เพียงพอสำหรับการเบิกอะไหล่');
 				 self.opener.document.getElementById('lists'+resdata).value='';
 				 self.opener.document.getElementById(param1).value='';
