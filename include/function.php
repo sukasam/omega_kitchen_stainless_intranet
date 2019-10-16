@@ -2179,5 +2179,13 @@ function get_username($conn,$user_account) {
 	
 	return $row_user['name'];		
 }
+
+function userGroup($conn,$user_id){
+	$row_user = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_user_group WHERE user_id = '".$user_id."'"));
+	$row_user_group = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group WHERE group_id = '".$row_user['group_id']."'"));
+	
+	return $row_user_group['group_name'];	
+}
+
 ?>
 
