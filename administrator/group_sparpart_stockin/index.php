@@ -119,6 +119,7 @@ function check_select(frm){
           <TH width="12%">เลขที่บิล</TH>
           <TH width="35%">ผู้จำหน่าย / ส่งสินค้า</TH>
           <TH width="18%">วันที่รับเข้า</TH>
+          <TH width="5%">ดาวน์โหลด</TH>
           <TH width="5%"><a>แก้ไข</a></TH>
           <TH width="5%"><a>ลบ</a></TH>
         </TR>
@@ -159,6 +160,7 @@ function check_select(frm){
           <TD><span class="text"><?php   echo $rec["sub_billnum"];?></span></TD>
           <TD><span class="text"><?php     echo $rec["sub_name"] ; ?></span></TD>
           <TD><span class="text"><?php     echo format_date($rec["stock_date"]); ?></span></TD>
+          <TD><center><A title="view" href="../../upload/stockin/<?php echo $rec["sub_id"];?>.pdf" target="_blank"><IMG alt="view" src="../images/icon2/backup.png" width="25"></A></center></TD>
            <TD><!-- Icons -->
             <A title=Edit href="update.php?mode=update&<?php     echo $PK_field; ?>=<?php     echo $rec[$PK_field]; if($param <> "") {?>&<?php     echo $param; }?>"><IMG alt=Edit src="../images/pencil.png"></A> <A title=Delete  href="#"></A></TD>
             
