@@ -110,51 +110,81 @@
 			 
 			include ("../include/m_update.php");
 
+//			if ($_FILES['ufimages']['name'] != "") { 
+//				$mname="";	
+//				$mname=gen_random_num(5);
+//				$a_size = array('600');	
+//				$filename = "";
+//					foreach($a_size as $key => $value) {
+//						$path = "../../upload/install/".$value."/";
+//						$quality = 80;
+//						if($filename == "")	
+//							$name_data=explode(".",$_FILES['ufimages']['name']);
+//							$type=$name_data[1];
+//							$filename =$mname.".".$type;
+//							list($width, $height) = getimagesize($_FILES['ufimages']['name']);
+//							$sizes = $value;
+//							uploadfile($path,$filename,$_FILES['ufimages']['tmp_name'],$sizes, $quality);
+//					} // end foreach				
+//					$sql = "update $tbl_name set u_images = '$filename' where $PK_field = '".$_POST[$PK_field]."' ";
+//					@mysqli_query($conn,$sql);				
+//					
+//					$_POST['filenames'] = '<br /><br />
+//						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+//						  <tr>
+//							<td style="text-align:center;font-size:12px;"><strong>รูปภาพงานติดตั้ง</strong></td>
+//						  </tr>
+//						  <tr>
+//							<td style="text-align:center;font-size:12px;"><img src="'.$path.$filename.'" width="600"></td>
+//						  </tr>
+//						</table>';
+//						
+//				} // end if ($_FILES[file1][name] != "")
+//				else{
+//					if(!empty($_POST['u_images'])){
+//						$_POST['filenames'] = '<br /><br />
+//						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+//						  <tr>
+//							<td style="text-align:center;font-size:12px;"><strong>รูปภาพงานติดตั้ง</strong></td>
+//						  </tr>
+//						  <tr>
+//							<td style="text-align:center;font-size:12px;"><img src="'.$path.$_POST['u_images'].'" width="600"></td>
+//						  </tr>
+//						</table>';
+//					}else{
+//						$_POST['filenames'] = '';
+//					}
+//				}
+			
 			if ($_FILES['ufimages']['name'] != "") { 
-				$mname="";	
-				$mname=gen_random_num(5);
-				$a_size = array('600');	
-				$filename = "";
-					foreach($a_size as $key => $value) {
-						$path = "../../upload/install/".$value."/";
-						$quality = 80;
-						if($filename == "")	
-							$name_data=explode(".",$_FILES['ufimages']['name']);
-							$type=$name_data[1];
-							$filename =$mname.".".$type;
-							list($width, $height) = getimagesize($_FILES['ufimages']['name']);
-							$sizes = $value;
-							uploadfile($path,$filename,$_FILES['ufimages']['tmp_name'],$sizes, $quality);
-					} // end foreach				
-					$sql = "update $tbl_name set u_images = '$filename' where $PK_field = '".$_POST[$PK_field]."' ";
-					@mysqli_query($conn,$sql);				
 					
-					$_POST['filenames'] = '<br /><br />
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-						  <tr>
-							<td style="text-align:center;font-size:12px;"><strong>รูปภาพงานติดตั้ง</strong></td>
-						  </tr>
-						  <tr>
-							<td style="text-align:center;font-size:12px;"><img src="'.$path.$filename.'" width="600"></td>
-						  </tr>
-						</table>';
-						
-				} // end if ($_FILES[file1][name] != "")
-				else{
-					if(!empty($_POST['u_images'])){
-						$_POST['filenames'] = '<br /><br />
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-						  <tr>
-							<td style="text-align:center;font-size:12px;"><strong>รูปภาพงานติดตั้ง</strong></td>
-						  </tr>
-						  <tr>
-							<td style="text-align:center;font-size:12px;"><img src="'.$path.$_POST['u_images'].'" width="600"></td>
-						  </tr>
-						</table>';
-					}else{
-						$_POST['filenames'] = '';
-					}
-				}
+					$mname="";
+					$mname=gen_random_num(5);
+					$filename = "";
+					if($filename == "")
+					$name_data=explode(".",$_FILES['ufimages']['name']);
+					$type = $name_data[1];
+					$filename = $mname.".".$type;
+					
+					$target_dir = "../../upload/install/";
+					$target_file = $target_dir . basename($filename);
+					$uploadOk = 1;
+					$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+					// Check if image file is a actual image or fake image
+					$check = getimagesize($_FILES["ufimages"]["tmp_name"]);
+					
+					@move_uploaded_file($_FILES["ufimages"]["tmp_name"], $target_file);
+					$sql = "update $tbl_name set u_images = '".$filename."' where $PK_field = '".$_POST[$PK_field]."' ";
+					@mysqli_query($conn, $sql);	
+				
+					$_POST['filenames'] = $filename;
+
+					//resize_crop_image(800, 533, $target_file, $target_file);
+	
+			} // end if ($_FILES[fimages][name] != "")
+			else{
+				$_POST['filenames'] = $_POST['u_images'];
+			}
 			
 			
 			
@@ -244,8 +274,8 @@
 	if($_GET['del_id'] <> ""){	
 		$a_size = array('100');	
 		foreach($a_size as $key => $value) {	
-			if(file_exists("../../upload/install/600/".$_GET['del_id']))
-			@unlink("../../upload/install/600/".$_GET['del_id']);		
+			if(file_exists("../../upload/install/".$_GET['del_id']))
+			@unlink("../../upload/install/".$_GET['del_id']);		
 		}	
 			$sql = "update $tbl_name set u_images ='' where $PK_field = '".$_GET[$PK_field]."' ";
 			@mysqli_query($conn,$sql);	
@@ -518,8 +548,8 @@ function check(frm){
               <input name="ufimages" type="file" id="ufimages">
               <br>
               <?php  
-					  if(file_exists("../../upload/install/600/".$u_images)){?>
-              <img src="../../upload/install/600/<?php   echo $u_images?>" width="155">[ <a href="?mode=<?php   echo $_GET["mode"]?>&<?php   echo $PK_field?>=<?php   echo $$PK_field;?>&<?php   echo $FR_field?>=<?php   echo $$FR_field;?>&del_id=<?php   echo $u_images;?>&page=<?php   echo $page;?>">Delete</a>]
+					  if($u_images != ""){?>
+              <img src="../../upload/install/<?php   echo $u_images?>" width="155">[ <a href="?mode=<?php   echo $_GET["mode"]?>&<?php   echo $PK_field?>=<?php   echo $$PK_field;?>&<?php   echo $FR_field?>=<?php   echo $$FR_field;?>&del_id=<?php   echo $u_images;?>&page=<?php   echo $page;?>">Delete</a>]
               <?php  }?>
               <input name="u_images" type="hidden" value="<?php   echo $u_images; ?>"></td>
           </tr>

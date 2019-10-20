@@ -220,7 +220,7 @@
 
 		//$sql = "SELECT * FROM ".$tableDB." as fr, ".$dbservice." as sv, ".$dbservicesub." as sv2 WHERE sv.cus_id = fr.fo_id AND sv.sr_id = sv2.sr_id ".$condition." ".$daterriod." GROUP by sv.sr_id ORDER BY sv.sr_id DESC";
 		
-		$sql = "SELECT fr.cd_name,fr.cd_address,fr.loc_name, sv.* FROM ".$tableDB." as fr, ".$dbservice." as sv, ".$dbservicesub." as sv2 WHERE sv.cus_id = fr.fo_id ".$condition." ".$daterriod." GROUP by sv.sr_id ORDER BY sv.sr_id DESC";
+		$sql = "SELECT fr.cd_name,fr.cd_address,fr.loc_name, sv.*,sv2.r_id,sv2.codes,sv2.lists,sv2.units,sv2.prices,sv2.amounts,sv2.opens,sv2.remains FROM ".$tableDB." as fr, ".$dbservice." as sv, ".$dbservicesub." as sv2 WHERE sv.cus_id = fr.fo_id ".$condition." ".$daterriod." GROUP by sv.sr_id ORDER BY sv.sr_id DESC";
 
 	  	$qu_fr = @mysqli_query($conn,$sql);
 

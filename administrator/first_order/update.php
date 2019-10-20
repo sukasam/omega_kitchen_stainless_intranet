@@ -739,33 +739,6 @@ Vat 7%</strong></td>
         <td width="33%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong >
-                  <!--<select name="cs_company" id="cs_company" class="inputselect" style="width:50%;display: none;">
-                    <option value="">กรุณาเลือกช่างบริการ</option>
-                    <?php    
-						/*$qutechtype = @mysqli_query($conn,"SELECT * FROM s_group_technician ORDER BY group_name ASC");
-						while($row_techtype = @mysqli_fetch_array($qutechtype)){
-						  ?>
-						<option value="<?php     echo $row_techtype['group_id'];?>" <?php     if($cs_company == $row_techtype['group_id']){echo 'selected';}?>><?php     echo $row_techtype['group_name'];?></option>
-						<?php    	
-						}*/
-					?>
-                  </select>-->
-                  
-                  <strong><input type="text" name="cs_company" value="<?php     echo $cs_company;?>" id="cs_company" class="inpfoder" style="width:50%;text-align:center;"></strong></td>
-              </tr>
-              <tr>
-                <td style="padding-top:10px;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>Sale Manager</strong></td>
-              </tr>
-              <tr>
-                <td style="font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่............./.............../..............</strong></td>
-              </tr>
-            </table>
-
-        </td>
-        <td width="33%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
-        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
                 <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong><!--<input type="text" name="cs_sell" value="<?php     echo $cs_sell;?>" id="cs_sell" class="inpfoder" style="width:50%;text-align:center;">-->
                 <select name="cs_sell" id="cs_sell" class="inputselect" style="width:50%;">
                 <?php    
@@ -789,10 +762,37 @@ Vat 7%</strong></td>
         <td width="33%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
+                <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong >
+                  <!--<select name="cs_company" id="cs_company" class="inputselect" style="width:50%;display: none;">
+                    <option value="">กรุณาเลือกช่างบริการ</option>
+                    <?php    
+						/*$qutechtype = @mysqli_query($conn,"SELECT * FROM s_group_technician ORDER BY group_name ASC");
+						while($row_techtype = @mysqli_fetch_array($qutechtype)){
+						  ?>
+						<option value="<?php     echo $row_techtype['group_id'];?>" <?php     if($cs_company == $row_techtype['group_id']){echo 'selected';}?>><?php     echo $row_techtype['group_name'];?></option>
+						<?php    	
+						}*/
+					?>
+                  </select>-->
+                  
+                  <strong><input type="text" name="cs_company" value="<?php     echo $cs_company;?>" id="cs_company" class="inpfoder" style="width:50%;text-align:center;"></strong></td>
+              </tr>
+              <tr>
+                <td style="padding-top:10px;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>Sale Manager / ตรวจสอบการขาย</strong></td>
+              </tr>
+              <tr>
+                <td style="font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่............./.............../..............</strong></td>
+              </tr>
+            </table>
+
+        </td>
+        <td width="33%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
+        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
                 <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong><input type="text" name="cs_aceep" value="<?php     echo $cs_aceep;?>" id="cs_aceep" class="inpfoder" style="width:50%;text-align:center;"></strong></td>
               </tr>
               <tr>
-                <td style="padding-top:10px;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>ผู้อนุมัติการขาย</strong></td>
+                <td style="padding-top:10px;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>GM / ผู้อนุมัติการขาย</strong></td>
               </tr>
               <tr>
                 <td style="font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่............./.............../..............</strong></td>

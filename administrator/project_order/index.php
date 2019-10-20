@@ -155,6 +155,7 @@ function check_select(frm){
           <TH width="5%" nowrap ><div align="center"><a>Setting</a></div></TH>
           <TH width="5%"><div align="center"><a>Download</a></div></TH>
           <TH width="5%"><div align="center"><a>ต้นทุน Project</a></div></TH>
+          <TH width="5%"><div align="center"><a>เอกสาร</a></div></TH>
           <TH width="5%"><a>แก้ไข</a></TH>
           <TH width="5%"><a>ลบ</a></TH>
         </TR>
@@ -228,8 +229,11 @@ function check_select(frm){
             <?php     }?>
           </div></TD>
           <TD><div align="center"><a href="../../upload/project_order/<?php     echo $chaf;?>.pdf" target="_blank"><img src="../images/icon2/download_f2.png" width="25" height="25" border="0" alt=""></a></div></TD>
+          
           <TD><!-- Icons -->
             <a title=Cost href="../project_order_cost/update.php?mode=update&<?php     echo $PK_field; ?>=<?php     echo $rec[$PK_field]; if($param <> "") {?>&<?php     echo $param; }?>"><IMG alt=Edit src="../images/icons/icon-48-stats.png" width="30" height="30" border="0" alt=""></a></TD>
+           <TD style="vertical-align: middle;"><div align="center"><a href="../document3/?fo_id=<?php  echo $rec[$PK_field]; ?>"><img src="../images/document.png" width="30" height="30" border="0" alt=""></a></div></TD>
+           
            <TD><!-- Icons -->
             <A title=Edit href="update.php?mode=update&<?php     echo $PK_field; ?>=<?php     echo $rec[$PK_field]; if($param <> "") {?>&<?php     echo $param; }?>"><IMG alt=Edit src="../images/pencil.png"></A> <A title=Delete  href="#"></A></TD>
             

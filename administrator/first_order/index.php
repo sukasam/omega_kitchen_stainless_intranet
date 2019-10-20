@@ -154,6 +154,7 @@ function check_select(frm){
           <TH width="5%" nowrap ><div align="center"><a> Open / </a><a> Close</a></div></TH>
           <TH width="5%" nowrap ><div align="center"><a>Setting</a></div></TH>
           <TH width="5%"><div align="center"><a>Download</a></div></TH>
+          <TH width="5%"><div align="center"><a>เอกสาร</a></div></TH>
           <TH width="5%"><a>แก้ไข</a></TH>
           <TH width="5%"><a>ลบ</a></TH>
         </TR>
@@ -190,11 +191,11 @@ function check_select(frm){
 					$counter++;
 				   ?>
         <TR>
-          <TD><INPUT type=checkbox name="del[]" value="<?php     echo $rec[$PK_field]; ?>" ></TD>
-          <TD><span class="text"><?php     echo sprintf("%04d",$counter); ?></span></TD>
-          <TD><?php     $chaf = preg_replace("/\//","-",$rec["fs_id"]); ?><span class="text"><a href="../../upload/first_order/<?php     echo $chaf;?>.pdf" target="_blank"><?php     echo $rec["fs_id"] ; ?></a></span></TD>
-          <TD>          <span class="text"><?php     echo $rec["cd_name"] ; ?></span></TD>
-          <TD><span class="text"><?php     echo $rec["loc_name"] ; ?></span></TD>
+          <TD style="vertical-align: middle;"><INPUT type=checkbox name="del[]" value="<?php     echo $rec[$PK_field]; ?>" ></TD>
+          <TD style="vertical-align: middle;"><span class="text"><?php     echo sprintf("%04d",$counter); ?></span></TD>
+          <TD style="vertical-align: middle;"><?php     $chaf = preg_replace("/\//","-",$rec["fs_id"]); ?><span class="text"><a href="../../upload/first_order/<?php     echo $chaf;?>.pdf" target="_blank"><?php     echo $rec["fs_id"] ; ?></a></span></TD>
+          <TD style="vertical-align: middle;">          <span class="text"><?php     echo $rec["cd_name"] ; ?></span></TD>
+          <TD style="vertical-align: middle;"><span class="text"><?php     echo $rec["loc_name"] ; ?></span></TD>
           <TD nowrap style="vertical-align:middle"><div align="center">
             <?php     if($rec["status_use"]==0) {?>
             <img src="../icons/favorites_use.png" width="15" height="15">
@@ -205,7 +206,7 @@ function check_select(frm){
             <?php    }else{?>
             <img src="../icons/favorites_stranby.png" width="15" height="15">
             <?php     }?>
-            <div align="center" style="padding-top:5px;">
+            <div align="center" style="padding-top:5px;vertical-align: middle;">
             <a href="../first_order/?ff=<?php     echo $rec[$PK_field]; ?>&gg=0&page=<?php     echo $_GET['page']; ?>&<?php     echo $FK_field; ?>=<?php     echo $_REQUEST["$FK_field"];?>"><img src="../icons/favorites_use.png" width="15" height="15"> | </a>
             <a href="../first_order/?ff=<?php     echo $rec[$PK_field]; ?>&gg=1&page=<?php     echo $_GET['page']; ?>&<?php     echo $FK_field; ?>=<?php     echo $_REQUEST["$FK_field"];?>"><img src="../icons/favorites_stranby.png" width="15" height="15"> | </a>
             <a href="../first_order/?ff=<?php     echo $rec[$PK_field]; ?>&gg=2&page=<?php     echo $_GET['page']; ?>&<?php     echo $FK_field; ?>=<?php     echo $_REQUEST["$FK_field"];?>"><img src="../icons/favorites_close.png" width="15" height="15"> | </a>
@@ -220,7 +221,7 @@ function check_select(frm){
             <div align="center"><a href="../../upload/service_report_close/<?php     echo get_srreport($conn,$rec["fs_id"]);?>.pdf" target="_blank"><p style="background:#999;color:#FFFFFF;padding:2px;"><?php     echo get_srreport($conn,$rec["fo_id"]);?></p></a></div>
             <?php     }?>
           </div>-->
-          <div align="center"><A href="service_close.php?fo_id=<?php     echo $rec["fo_id"];?>"><IMG  alt=icon src="../images/icons/icon-48-install.png"></A></div>
+          <div align="center" style="vertical-align: middle;"><A href="service_close.php?fo_id=<?php     echo $rec["fo_id"];?>"><IMG  alt=icon src="../images/icons/icon-48-install.png"></A></div>
           </TD>
           <TD nowrap style="vertical-align:middle"><div align="center">
             <?php     if($rec["st_setting"]==0) {?>
@@ -229,10 +230,13 @@ function check_select(frm){
             <a href="../first_order/?b=<?php     echo $rec[$PK_field]; ?>&s=<?php     echo $rec["st_setting"]; ?>&page=<?php     echo $_GET['page']; ?>&<?php     echo $FK_field; ?>=<?php     echo $_REQUEST["$FK_field"];?>"><img src="../icons/status_off.gif" width="10" height="10"></a>
             <?php     }?>
           </div></TD>
-          <TD><div align="center"><a href="../../upload/first_order/<?php     echo $chaf;?>.pdf" target="_blank"><img src="../images/icon2/download_f2.png" width="20" height="20" border="0" alt=""></a></div></TD>
-          <TD><!-- Icons -->
+          <TD style="vertical-align: middle;"><div align="center"><a href="../../upload/first_order/<?php     echo $chaf;?>.pdf" target="_blank"><img src="../images/icon2/download_f2.png" width="20" height="20" border="0" alt=""></a></div></TD>
+          
+          <TD style="vertical-align: middle;"><div align="center"><a href="../document/?fo_id=<?php  echo $rec[$PK_field]; ?>"><img src="../images/document.png" width="30" height="30" border="0" alt=""></a></div></TD>
+          
+          <TD style="vertical-align: middle;"><!-- Icons -->
             <A title=Edit href="update.php?mode=update&<?php     echo $PK_field; ?>=<?php     echo $rec[$PK_field]; if($param <> "") {?>&<?php     echo $param; }?>"><IMG alt=Edit src="../images/pencil.png"></A> <A title=Delete  href="#"></A></TD>
-          <TD><A title=Delete  href="#"><IMG alt=Delete src="../images/cross.png" onClick="confirmDelete('?action=delete&<?php     echo $PK_field; ?>=<?php     echo $rec[$PK_field];?>','Group  <?php     echo $rec[$PK_field];?> : <?php     echo $rec["group_name"];?>')"></A></TD>
+          <TD style="vertical-align: middle;"><A title=Delete  href="#"><IMG alt=Delete src="../images/cross.png" onClick="confirmDelete('?action=delete&<?php     echo $PK_field; ?>=<?php     echo $rec[$PK_field];?>','Group  <?php     echo $rec[$PK_field];?> : <?php     echo $rec["group_name"];?>')"></A></TD>
         </TR>  
 		<?php     }?>
       </TBODY>
