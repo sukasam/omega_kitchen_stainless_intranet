@@ -459,8 +459,8 @@ Vat 7%</strong></td>
       <td width="15%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รุ่น / แบรนด์</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ขนาด</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>จำนวน</strong></td>
-      <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคา / ต่อหน่วย</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ต้นทุนสินค้า 1/ต่อหน่วย</strong></td>
+      <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคา / ต่อหน่วย</strong></td>
       
       
     </tr>
@@ -505,11 +505,11 @@ Vat 7%</strong></td>
 				<input type="hidden" name="camountH[]" value="<?php     echo $rowPro['camount'];?>">
 			  </td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;">
-				<input type="text" name="cprice[]" value="<?php     echo number_format($rowPro['cprice']);?>" id="cprice<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;" onkeypress="return isNumberKey(event)">
-			  </td>
-			  <td style="border:1px solid #000000;padding:5;text-align:center;">
 				<input type="text" name="ccost[]" value="<?php     echo number_format($rowPro['ccost']);?>" id="ccost<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;" onkeypress="return isNumberKey(event)">
 				<input type="hidden" name="ccostH[]" value="<?php     echo $rowPro['ccost'];?>">
+			  </td>
+			  <td style="border:1px solid #000000;padding:5;text-align:center;">
+				<input type="text" name="cprice[]" value="<?php     echo number_format($rowPro['cprice']);?>" id="cprice<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;" onkeypress="return isNumberKey(event)">
 			  </td>
 
 			</tr>
@@ -530,8 +530,8 @@ Vat 7%</strong></td>
               <br><br></div>	
       </td>
       <td colspan="5" style="text-align: right;border: 1px solid #000000;padding: 5;vertical-align: middle;font-size: 15px;font-weight: bold;">รวมยอดขาย / ยอดต้นทุนสินค้า 1</td>
-      <td style="text-align: left;border: 1px solid #000000;padding: 5;vertical-align: middle;text-align: right;font-size: 15px;font-weight: bold;"><?php     echo number_format($sumPrice,2);?></td>
       <td style="text-align: left;border: 1px solid #000000;padding: 5;vertical-align: middle;text-align: right;font-size: 15px;font-weight: bold;"><?php     echo number_format($sumCost,2);?></td>
+      <td style="text-align: left;border: 1px solid #000000;padding: 5;vertical-align: middle;text-align: right;font-size: 15px;font-weight: bold;"><?php     echo number_format($sumPrice,2);?></td>
     </tr>
     
     <tr>

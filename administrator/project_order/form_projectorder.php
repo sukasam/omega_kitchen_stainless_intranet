@@ -54,8 +54,8 @@ for($i=0;$i<=count($_POST['cpro']);$i++){
 		  <td style="border:1px solid #000000;padding:5;width:100px;">'.$_POST["cpod"][$i].'</td>
 		  <td style="border:1px solid #000000;padding:5;">'.get_projectsize($conn,$_POST['cpro'][$i]).'</td>
 		  <td style="border:1px solid #000000;padding:5;">'.$_POST['camount'][$i].'</td>
-		  <td style="border:1px solid #000000;padding:5;text-align:right;">'.number_format($_POST['cprice'][$i]).'&nbsp;&nbsp;</td>
 		  <td style="border:1px solid #000000;padding:5;text-align:right;">'.number_format($_POST['ccost'][$i]).'&nbsp;&nbsp;</td>
+		  <td style="border:1px solid #000000;padding:5;text-align:right;">'.number_format($_POST['cprice'][$i]).'&nbsp;&nbsp;</td>
 		  <td style="border:1px solid #000000;padding:5;text-align:right;">'.number_format($_POST['camount'][$i] * $_POST['cprice'][$i]).'&nbsp;&nbsp;</td>
 		</tr>';
 		
@@ -125,8 +125,8 @@ $form = '
       <td width="10%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รุ่น/แบรนด์</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ขนาด</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>จำนวน</strong></td>
-      <td width="14%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคา / หน่วย</strong></td>
 	  <td width="14%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ต้นทุนสินค้า 1</strong></td>
+      <td width="14%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคา / หน่วย</strong></td>
 	  <td width="14%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคารวม (บาท)</strong></td>
     </tr>
     
@@ -137,8 +137,8 @@ $form = '
       </td>
       <td style="border:1px solid #000000;padding:5;font-size:13px;"><strong>รวมทั้งหมด</strong></td>
       <td style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;"><strong>'.number_format($sumpriceNot,2).'</strong>&nbsp;&nbsp;</td>
-	  <td style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;"><strong>'.number_format($sumCost,2).'</strong>&nbsp;&nbsp;</td>
 	  <td style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;"><strong>'.number_format($sumprice,2).'</strong>&nbsp;&nbsp;</td>
+	  <td style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;"><strong>'.number_format($sumCost,2).'</strong>&nbsp;&nbsp;</td>
     </tr>
 	<tr>
       <td style="border:1px solid #000000;padding:5;font-size:13px;"><strong>ส่วนลด</strong></td>
