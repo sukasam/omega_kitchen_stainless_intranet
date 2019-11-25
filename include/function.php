@@ -1569,6 +1569,16 @@ function get_projectname($conn,$value) {
 	return $row_protype['group_name'];
 }
 
+function get_projectcodepro($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_project WHERE group_id = '".$value."'"));
+	return $row_protype['group_pro_id'];
+}
+
+function get_projectsize($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_project WHERE group_id = '".$value."'"));
+	return $row_protype['group_size'];
+}
+
 function get_servicename($conn,$value) {
 	$row_servtype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_service WHERE group_id = '".$value."'"));
 	return $row_servtype['group_name'];

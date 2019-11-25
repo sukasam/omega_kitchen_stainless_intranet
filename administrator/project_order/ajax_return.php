@@ -39,15 +39,16 @@
 	if($_GET['action'] == 'getprojectL'){
 		$cd_name =  iconv( 'UTF-8', 'TIS-620', $_REQUEST['pval']);
 		$keys = $_REQUEST['keys'];
+		$col = $_REQUEST['col'];
 		if($cd_name != ""){
-			$consd = "WHERE group_name LIKE '%".$cd_name."%'";
+			$consd = "WHERE 1 AND (group_name LIKE '%".$cd_name."%' OR group_pro_id LIKE '%".$cd_name."%')";
 		}
-		//echo "SELECT group_name FROM s_group_typeproduct ".$consd." ORDER BY group_name ASC";
+		//echo "SELECT * FROM s_group_project ".$consd." ORDER BY group_name ASC";
 		$qu_cus = mysqli_query($conn,"SELECT * FROM s_group_project ".$consd." ORDER BY group_name ASC");
 		while($row_cus = @mysqli_fetch_array($qu_cus)){
 			?>
 			 <tr>
-				<td><A href="javascript:void(0);" onclick="get_product('<?php     echo $row_cus['group_id'];?>','<?php     echo $row_cus['group_name'];?>','<?php     echo $keys;?>');"><?php     echo $row_cus['group_name'];?></A></td>
+				<td><A href="javascript:void(0);" onclick="get_product('<?php echo $row_cus['group_id'];?>','<?php echo $row_cus['group_name'];?>','<?php echo $keys;?>','<?php echo $row_cus['group_pro_id'];?>','<?php echo $col;?>','<?php echo $row_cus['group_size'];?>');"><?php echo $row_cus['group_pro_id']." | ".$row_cus['group_name'];?></A></td>
 			  </tr>
 			<?php    	
 		}
@@ -95,7 +96,7 @@
 		$qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_project ORDER BY group_name ASC");
 		while($row_qupro1 = @mysqli_fetch_array($qupro1)){
 		  ?>
-			<option value="<?php     echo $row_qupro1['group_id'];?>" <?php     if($group_id == $row_qupro1['group_id']){echo 'selected';}?>><?php     echo $row_qupro1['group_name'];?></option>
+			<option value="<?php  echo $row_qupro1['group_id'];?>" <?php  if($group_id == $row_qupro1['group_id']){echo 'selected';}?>><?php  echo $row_qupro1['group_name'];?></option>
 		  <?php    	
 		}
 

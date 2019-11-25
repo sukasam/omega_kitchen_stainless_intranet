@@ -104,7 +104,9 @@ function check_select(frm){
           <TH width="17%" <?php     Show_Sort_bg ("group_name", $orderby) ?>>
            <?php      Show_Sort_new ("group_name", "รหัสสินค้า", $orderby, $sortby,$page,$param2);?>
             &nbsp;</TH>
-          <TH width="55%" <?php     Show_Sort_bg ("group_name", $orderby) ?>> <?php      Show_Sort_new ("group_name", "ชื่อสินค้า", $orderby, $sortby,$page,$param2);?>
+          <TH width="35%" <?php     Show_Sort_bg ("group_name", $orderby) ?>> <?php      Show_Sort_new ("group_name", "ชื่อสินค้า", $orderby, $sortby,$page,$param2);?>
+            &nbsp;</TH>
+            <TH width="20%" <?php     Show_Sort_bg ("group_size", $orderby) ?>> <?php      Show_Sort_new ("group_size", "ขนาด", $orderby, $sortby,$page,$param2);?>
             &nbsp;</TH>
           <TH width="6%"><a>แก้ไข</a></TH>
           <TH width="6%"><a>ลบ</a></TH>
@@ -146,6 +148,7 @@ function check_select(frm){
           <TD><span class="text"><?php     echo sprintf("%04d",$counter); ?></span></TD>
           <TD><span class="text"><?php     echo $rec["group_pro_id"] ; ?></span></TD>
           <TD><span class="text"><?php     echo $rec["group_name"] ; ?></span></TD>
+          <TD><span class="text"><?php     echo $rec["group_size"] ; ?></span></TD>
           <TD><!-- Icons -->
             <A title=Edit href="update.php?mode=update&<?php     echo $PK_field; ?>=<?php     echo $rec[$PK_field]; if($param <> "") {?>&<?php     echo $param; }?>"><IMG alt=Edit src="../images/pencil.png"></A> <A title=Delete  href="#"></A></TD>
           <TD><A title=Delete  href="#"><IMG alt=Delete src="../images/cross.png" onClick="confirmDelete('?action=delete&<?php     echo $PK_field; ?>=<?php     echo $rec[$PK_field];?>','Group  <?php     echo $rec[$PK_field];?> : <?php     echo $rec["group_name"];?>')"></A></TD>

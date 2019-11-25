@@ -100,6 +100,14 @@ function check(frm){
                 <td nowrap class="name">ชื่อสินค้า</td>
                 <td><input name="group_name" type="text" id="group_name"  value="<?php     echo $group_name; ?>" size="60"></td>
               </tr>
+              <tr >
+                <td nowrap class="name">ขนาดสินค้า</td>
+                <td><input name="group_size" type="text" id="group_size"  value="<?php     echo $group_size; ?>" size="60"></td>
+              </tr>
+              <tr >
+                <td nowrap class="name">&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
               <?php     if ($_GET["mode"] == "add") { ?>
               <?php     } ?>
               <?php     if ($_GET["mode"] == "update") { ?>

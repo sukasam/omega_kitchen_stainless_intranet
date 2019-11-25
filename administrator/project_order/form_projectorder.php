@@ -49,9 +49,10 @@ for($i=0;$i<=count($_POST['cpro']);$i++){
 		$projectPro .= '<tr>
 		<td style="border:1px solid #000000;padding:5;">'.($i+1).'</td>
 		<td style="border:1px solid #000000;padding:5;">'.$_POST["ccode"][$i].'</td>
+		<td style="border:1px solid #000000;padding:5;">'.get_projectcodepro($conn,$_POST['cpro'][$i]).'</td>
 		<td style="border:1px solid #000000;text-align:left;padding:5;">'.get_projectname($conn,$_POST['cpro'][$i]).'</td>
 		  <td style="border:1px solid #000000;padding:5;width:100px;">'.$_POST["cpod"][$i].'</td>
-		  <td style="border:1px solid #000000;padding:5;">'.$_POST['csn'][$i].'</td>
+		  <td style="border:1px solid #000000;padding:5;">'.get_projectsize($conn,$_POST['cpro'][$i]).'</td>
 		  <td style="border:1px solid #000000;padding:5;">'.$_POST['camount'][$i].'</td>
 		  <td style="border:1px solid #000000;padding:5;text-align:right;">'.number_format($_POST['cprice'][$i]).'&nbsp;&nbsp;</td>
 		  <td style="border:1px solid #000000;padding:5;text-align:right;">'.number_format($_POST['ccost'][$i]).'&nbsp;&nbsp;</td>
@@ -119,19 +120,20 @@ $form = '
     <tr>
       <td width="5%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ลำดับ</strong></td>
 	  <td width="5%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>Code</strong></td>
-      <td width="30%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รายการ</strong></td>
+	  <td width="8%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รหัสสินค้า</strong></td>
+      <td width="25%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รายการ</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รุ่น/แบรนด์</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ขนาด</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>จำนวน</strong></td>
-      <td width="15%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคา / หน่วย</strong></td>
-	  <td width="15%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ต้นทุนสินค้า 1</strong></td>
-	  <td width="15%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคารวม (บาท)</strong></td>
+      <td width="14%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคา / หน่วย</strong></td>
+	  <td width="14%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ต้นทุนสินค้า 1</strong></td>
+	  <td width="14%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคารวม (บาท)</strong></td>
     </tr>
     
 	'.$projectPro.'    
 	
     <tr>
-      <td colspan="5" rowspan="7" style="text-align:left;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;"><strong>หมายเหตุ :</strong> '.nl2br($_POST['ccomment']).'<br>
+      <td colspan="6" rowspan="7" style="text-align:left;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;"><strong>หมายเหตุ :</strong> '.nl2br($_POST['ccomment']).'<br>
       </td>
       <td style="border:1px solid #000000;padding:5;font-size:13px;"><strong>รวมทั้งหมด</strong></td>
       <td style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;"><strong>'.number_format($sumpriceNot,2).'</strong>&nbsp;&nbsp;</td>

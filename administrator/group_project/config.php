@@ -6,7 +6,7 @@
 	$page_name = "รายการสินค้าโปรเจ็ค";
 	$tbl_name = "s_group_project";
 	$field_confirm_showname= "group_name";
-	$fieldlist = array('group_pro_id','group_name');
+	$fieldlist = array('group_pro_id','group_name','group_size');
 	$search_key = array('group_pro_id','group_name');
 	$pagesize = 50;
 	$pages="user";

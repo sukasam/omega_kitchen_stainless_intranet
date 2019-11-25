@@ -152,10 +152,12 @@
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/invalid.css" media=screen>
-<SCRIPT type=text/javascript src="../js/jquery-1.3.2.min.js"></SCRIPT>
+<SCRIPT type=text/javascript src="../js/jquery-1.9.1.min.js"></SCRIPT>
+<!--
 <SCRIPT type=text/javascript src="../js/simpla.jquery.configuration.js"></SCRIPT>
 <SCRIPT type=text/javascript src="../js/facebox.js"></SCRIPT>
 <SCRIPT type=text/javascript src="../js/jquery.wysiwyg.js"></SCRIPT>
+-->
 <SCRIPT type=text/javascript src="../js/popup.js"></SCRIPT>
 <SCRIPT type=text/javascript src="ajax.js"></SCRIPT>
 
@@ -203,6 +205,31 @@ function isNumberKey(e) {
 
 function chksign(vals){
 	//alert(vals);	
+}
+	
+function get_product(cid){
+	
+	var x = document.getElementById("cpro"+cid).value;
+	$.ajax({
+		type: "GET",
+		url: "call_return.php?action=chkProject&group_id="+x,
+		success: function(data){
+			var obj = JSON.parse(data);
+			
+			alert(obj.status+obj.group_pro_id+obj.group_size);
+			if(obj.status === 'yes'){
+//				$("#group_id").val(obj.group_id);
+//				$("#group_name").val(obj.group_name);
+					document.getElementById('ccodepro'+cid).innerHTML = obj.group_pro_id;
+					document.getElementById('cprosize'+cid).innerHTML = obj.group_size;
+			}else{
+				
+			}
+		}
+	});
+	
+	
+    //document.getElementById("demo").innerHTML = "You selected: " + x;
 }
 
 </script>
@@ -427,12 +454,13 @@ Vat 7%</strong></td>
     <tr>
       <td width="3%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ลำดับ</strong></td>
       <td width="5%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>Code</strong></td>
-      <td width="30%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รายการ</strong></td>
-      <td width="19%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รุ่น / แบรนด์</strong></td>
-      <td width="11%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ขนาด</strong></td>
+      <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รหัสสินค้า</strong></td>
+      <td width="27%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รายการ</strong></td>
+      <td width="15%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รุ่น / แบรนด์</strong></td>
+      <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ขนาด</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>จำนวน</strong></td>
-      <td width="11%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคา / ต่อหน่วย</strong></td>
-      <td width="11%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ต้นทุนสินค้า 1/ต่อหน่วย</strong></td>
+      <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคา / ต่อหน่วย</strong></td>
+      <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ต้นทุนสินค้า 1/ต่อหน่วย</strong></td>
       
       
     </tr>
@@ -449,9 +477,11 @@ Vat 7%</strong></td>
 			<tr>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;"><?php     echo $rowCal;?></td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;" >
-			  <input type="text" name="ccode[]" value="<?php     echo $rowPro['ccode'];?>" id="ccode<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;"></td>
+			  <input type="text" name="ccode[]" value="<?php echo $rowPro['ccode'];?>" id="ccode<?php echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;"></td>
+			  <td style="border:1px solid #000000;padding:5;text-align:center;" id="ccodepro<?php echo $rowCal;?>">
+			  <?php echo get_projectcodepro($conn,$rowPro['cpro']);?></td>
 			  <td style="border:1px solid #000000;text-align:left;padding:5;">
-			  <select name="cpro[]" id="cpro<?php     echo $rowCal;?>" class="inputselect" style="width:90%;">
+			  <select name="cpro[]" id="cpro<?php echo $rowCal;?>" class="inputselect" style="width:85%;" onChange="get_product(<?php echo $rowCal;?>);">
 					<option value="">กรุณาเลือกรายการ</option>
 					<?php    
 						$qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_project ORDER BY group_name ASC");
@@ -462,12 +492,14 @@ Vat 7%</strong></td>
 						}
 				  ?>
 			  </select>
-			  <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php?protype=cpro<?php     echo $rowCal;?>');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
+			  <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php?protype=cpro<?php     echo $rowCal;?>&col=<?php echo $rowCal;?>');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
 			  </td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;" >
-			  <input type="text" name="cpod[]" value="<?php     echo $rowPro['cpod'];?>" id="cpod<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;"></td>
-			  <td style="border:1px solid #000000;padding:5;text-align:center;" >
-			  <input type="text" name="csn[]" value="<?php     echo $rowPro['csn'];?>" id="csn<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;"></td>
+			  <input type="text" name="cpod[]" value="<?php echo $rowPro['cpod'];?>" id="cpod<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;"></td>
+			  <td style="border:1px solid #000000;padding:5;text-align:center;" id="cprosize<?php     echo $rowCal;?>">
+			  <input type="hidden" name="csn[]" value="<?php echo $rowPro['csn'];?>" id="csn<?php echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;">
+		  	  <?php echo get_projectsize($conn,$rowPro['cpro']);?>
+			  </td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;">
 				<input type="text" name="camount[]" value="<?php     echo $rowPro['camount'];?>" id="camount<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;">
 				<input type="hidden" name="camountH[]" value="<?php     echo $rowPro['camount'];?>">
@@ -497,21 +529,21 @@ Vat 7%</strong></td>
               <input type="text" name="discount" value="<?php     if($discount != ""){echo $discount;}else{echo '0';}?>" id="discount" class="inpfoder" style="width:50%;">
               <br><br></div>	
       </td>
-      <td colspan="4" style="text-align: right;border: 1px solid #000000;padding: 5;vertical-align: middle;font-size: 15px;font-weight: bold;">รวมยอดขาย / ยอดต้นทุนสินค้า 1</td>
+      <td colspan="5" style="text-align: right;border: 1px solid #000000;padding: 5;vertical-align: middle;font-size: 15px;font-weight: bold;">รวมยอดขาย / ยอดต้นทุนสินค้า 1</td>
       <td style="text-align: left;border: 1px solid #000000;padding: 5;vertical-align: middle;text-align: right;font-size: 15px;font-weight: bold;"><?php     echo number_format($sumPrice,2);?></td>
       <td style="text-align: left;border: 1px solid #000000;padding: 5;vertical-align: middle;text-align: right;font-size: 15px;font-weight: bold;"><?php     echo number_format($sumCost,2);?></td>
     </tr>
     
     <tr>
       <td colspan="2" style="text-align:left;border:1px solid #000000;padding:5;vertical-align:middle;"></td>
-      <td colspan="4" style="text-align: right;border: 1px solid #000000;padding: 5;vertical-align: middle;font-size: 15px;font-weight: bold;">ยอดรวมกำไรขั้นต้น</td>
+      <td colspan="5" style="text-align: right;border: 1px solid #000000;padding: 5;vertical-align: middle;font-size: 15px;font-weight: bold;">ยอดรวมกำไรขั้นต้น</td>
       <td  style="text-align: left;border: 1px solid #000000;padding: 5;vertical-align: middle;text-align: right;font-size: 15px;font-weight: bold;">กำไร <?php     if($sumPrice > 0){echo number_format((($sumPrice-$sumCost)*(100))/$sumPrice,2);}else{echo "0.00";};?>%</td>
       <td  style="text-align: left;border: 1px solid #000000;padding: 5;vertical-align: middle;text-align: right;font-size: 15px;font-weight: bold;"><?php     echo number_format($sumPrice-$sumCost,2);?></td>
       
     </tr>
      
      <tr>
-      <td colspan="8" style="text-align:left;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;"><strong>หมายเหตุ :</strong><br><textarea name="ccomment" id="ccomment" ><?php     echo strip_tags($ccomment);?></textarea><br></td>
+      <td colspan="9" style="text-align:left;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;"><strong>หมายเหตุ :</strong><br><textarea name="ccomment" id="ccomment" ><?php     echo strip_tags($ccomment);?></textarea><br></td>
     </tr>
     
     </table>
@@ -532,17 +564,19 @@ Vat 7%</strong></td>
 		 			filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;">'+countBox+'</td>';
 		 			filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;" >';
       				filedMore += '		<input type="text" name="ccode[]" value="" id="cpod'+countBox+'" class="inpfoder" style="width:100%;text-align:center;"></td>';
+		            filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;" id="ccodepro'+countBox+'">';
+      				filedMore += '	</td>';
 		 			filedMore += '	<td style="border:1px solid #000000;text-align:left;padding:5;">';
-		 			filedMore += '		<select name="cpro[]" id="cpro'+countBox+'" class="inputselect" style="width:90%;">';
+		 			filedMore += '		<select name="cpro[]" id="cpro'+countBox+'" class="inputselect" style="width:85%;">';
 		 			filedMore += '		<option value="">กรุณาเลือกรายการ</option>';
 		 			filedMore += '';
 		 			filedMore += '	</select>';	
-		 			filedMore += '<a href="javascript:void(0);" onClick="windowOpener(\'400\', \'500\', \'\', \'search.php?protype=cpro'+countBox+'\');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>';
+		 			filedMore += '<a href="javascript:void(0);" onClick="windowOpener(\'400\', \'500\', \'\', \'search.php?protype=cpro'+countBox+'&col='+countBox+'\');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>';
 		 			filedMore += '	</td>';
 		 			filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;" >';
       				filedMore += '		<input type="text" name="cpod[]" value="" id="cpod'+countBox+'" class="inpfoder" style="width:100%;text-align:center;"></td>';
-      				filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;" >';
-      				filedMore += '		<input type="text" name="csn[]" value="" id="csn'+countBox+'" class="inpfoder" style="width:100%;text-align:center;"></td>';
+      				filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;" id="cprosize'+countBox+'">';
+      				filedMore += '		<input type="hidden" name="csn[]" value=""  class="inpfoder" style="width:100%;text-align:center;"></td>';
       				filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;">';
       				filedMore += '		<input type="text" name="camount[]" value="" id="camount'+countBox+'" class="inpfoder" style="width:100%;text-align:center;"></td>';
       				filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;">';

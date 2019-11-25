@@ -81,11 +81,11 @@ function get_cus(pval,keys){
    xmlHttp.send(null);
 }
 
-function get_project(pval,keys){
+function get_project(pval,keys,col){
 	//alert(keys);
 	var xmlHttp;
    xmlHttp=GetXmlHttpObject(); //Check Support Brownser
-   URL = pathLocal+'ajax_return.php?action=getprojectL&pval='+pval+'&keys='+keys;
+   URL = pathLocal+'ajax_return.php?action=getprojectL&pval='+pval+'&keys='+keys+'&col='+col;
    if (xmlHttp==null){
       alert ("Browser does not support HTTP Request");
       return;
