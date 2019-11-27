@@ -101,17 +101,17 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     เพิ่ม<br><br></SPAN></A></LI>
 -->
     <LI><A class=shortcut-button href="../service_report2/"><SPAN><IMG  alt=icon src="../images/icons/icon-48-section.png"><BR>
-    ใบเบิกอะไหล่เพื่อการผลิต</SPAN></A></LI>
-    <LI><A class=shortcut-button href="../service_report/"><SPAN><IMG  alt=icon src="../images/icons/icon-48-section.png"><BR>
+    ใบเบิกอะไหล่เพื่อการผลิต<br><br></SPAN></A></LI>
+    <!-- <LI><A class=shortcut-button href="../service_report/"><SPAN><IMG  alt=icon src="../images/icons/icon-48-section.png"><BR>
     เปิด - ปิดใบงาน<br><br></SPAN></A></LI>
     <LI><A class=shortcut-button href="../service_report3/"><SPAN><IMG  alt=icon src="../images/icons/icon-48-section.png"><BR>
     ใบยืมอะไหล่<br><br></SPAN></A></LI>
     <LI><A class=shortcut-button href="../service_report5/"><SPAN><IMG  alt=icon src="../images/icons/icon-48-section.png"><BR>
     ใบคืนอะไหล่<br><br></SPAN></A></LI>
     <LI><A class=shortcut-button href="../service_report4/"><SPAN><IMG  alt=icon src="../images/icons/icon-48-section.png"><BR>
-    ใบรายงานติดตั้ง<br><br></SPAN></A></LI>
+    ใบรายงานติดตั้ง<br><br></SPAN></A></LI> -->
     <LI><A class=shortcut-button href="../service_report_approve/"><SPAN><IMG  alt=icon src="../images/icons/icon-48-user.png"><BR>
-    อนุมัติใบงาน<br><br></SPAN></A></LI>
+    อนุมัติใบเบิกอะไหล่เพื่อการผลิต</SPAN></A></LI>
     <?php  
 	if ($FR_module <> "") { 
 	$param2 = get_return_param();
@@ -207,8 +207,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					if ($orderby <> "") $sql .= " order by " . $orderby;
 					if ($sortby <> "") $sql .= " " . $sortby;
 					include ("../include/page_init.php");
-					/*echo $sql;
-					break;*/
+					// echo $sql;
+					// exit();
 					$query = @mysqli_query($conn,$sql);
 					if($_GET["page"] == "") $_GET["page"] = 1;
 					$counter = ($_GET["page"]-1)*$pagesize;
