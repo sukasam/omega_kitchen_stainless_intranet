@@ -52,15 +52,19 @@
 				for($i=0;$i<=count($_POST['cpro']);$i++){
 					if($_POST['cpro'][$i] != ""){
 						
-						
 						$_POST['cprice'][$i] = preg_replace("/,/","",$_POST['cprice'][$i]);
 						$_POST['ccost'][$i] = preg_replace("/,/","",$_POST['ccost'][$i]);
 						
-						$_POST['ccost'][$i] = $_POST['camount'][$i] * $_POST['ccost'][$i];
+						//$_POST['ccost'][$i] = $_POST['camount'][$i] * $_POST['ccost'][$i];
+						//$_POST['ccost'][$i] = $_POST['ccost'][$i];
+
+						//echo "INSERT INTO `s_project_product` (`id`, `fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`) VALUES (NULL,'".$id."', '".$_POST['ccode'][$i]."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."', '".$_POST['ccost'][$i]."');<br>";
 						
-						@mysqli_query($conn,"INSERT INTO `s_project_product` (`id`, `fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`) VALUES ('NULL','".$id."', '".$_POST['ccode'][$i]."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."', '".$_POST['ccost'][$i]."');");
+						@mysqli_query($conn,"INSERT INTO `s_project_product` (`id`, `fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`) VALUES (NULL,'".$id."', '".$_POST['ccode'][$i]."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."', '".$_POST['ccost'][$i]."');");
 					}
 				}
+
+			//	exit();
 			
 				$_POST['discount'] = preg_replace("/,/","",$_POST['discount']);
 				
@@ -75,6 +79,7 @@
 			header ("location:index.php?" . $param); 
 		}
 		if ($_POST["mode"] == "update" ) { 
+
 				include ("../include/m_update.php");
 				$id = $_REQUEST[$PK_field];	
 			
@@ -88,13 +93,13 @@
 						$_POST['cprice'][$i] = preg_replace("/,/","",$_POST['cprice'][$i]);
 						$_POST['ccost'][$i] = preg_replace("/,/","",$_POST['ccost'][$i]);
 						
-						if($_POST['ccostH'][$i] != $_POST['ccost'][$i]){
-							$_POST['ccost'][$i] = $_POST['camount'][$i] * $_POST['ccost'][$i];
-						}
+						// if($_POST['ccostH'][$i] != $_POST['ccost'][$i]){
+						// 	$_POST['ccost'][$i] = $_POST['camount'][$i] * $_POST['ccost'][$i];
+						// }
 						
-						if($_POST['camountH'][$i] != $_POST['camount'][$i]){
-							$_POST['ccost'][$i] = $_POST['camount'][$i] * ($_POST['ccost'][$i]/$_POST['camountH'][$i]);
-						}					
+						// if($_POST['camountH'][$i] != $_POST['camount'][$i]){
+						// 	$_POST['ccost'][$i] = $_POST['camount'][$i] * ($_POST['ccost'][$i]/$_POST['camountH'][$i]);
+						// }					
 						
 						
 						@mysqli_query($conn,"INSERT INTO `s_project_product` (`fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`) VALUES ('".$id."', '".$_POST['ccode'][$i]."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."', '".$_POST['ccost'][$i]."');");
@@ -505,17 +510,18 @@ Vat 7%</strong></td>
 				<input type="hidden" name="camountH[]" value="<?php     echo $rowPro['camount'];?>">
 			  </td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;">
-				<input type="text" name="ccost[]" value="<?php     echo number_format($rowPro['ccost']);?>" id="ccost<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;" onkeypress="return isNumberKey(event)">
-				<input type="hidden" name="ccostH[]" value="<?php     echo $rowPro['ccost'];?>">
+				<input type="text" name="ccost[]" value="<?php echo number_format($rowPro['ccost']);?>" id="ccost<?php echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;" onkeypress="return isNumberKey(event)">
+				<input type="hidden" name="ccostH[]" value="<?php  echo $rowPro['ccost'];?>">
 			  </td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;">
-				<input type="text" name="cprice[]" value="<?php     echo number_format($rowPro['cprice']);?>" id="cprice<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;" onkeypress="return isNumberKey(event)">
+				<input type="text" name="cprice[]" value="<?php echo number_format($rowPro['cprice']);?>" id="cprice<?php echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;" onkeypress="return isNumberKey(event)">
 			  </td>
 
 			</tr>
 			<?php    
 			$sumPrice = $sumPrice+($rowPro['camount']*$rowPro['cprice']);
-			$sumCost  = $sumCost +$rowPro['ccost'];
+			//$sumPrice = $sumPrice+$rowPro['cprice'];
+			$sumCost  = $sumCost+($rowPro['camount']*$rowPro['ccost']);
 			$rowCal++;
 		}
 	?>
@@ -529,7 +535,7 @@ Vat 7%</strong></td>
               <input type="text" name="discount" value="<?php     if($discount != ""){echo $discount;}else{echo '0';}?>" id="discount" class="inpfoder" style="width:50%;">
               <br><br></div>	
       </td>
-      <td colspan="5" style="text-align: right;border: 1px solid #000000;padding: 5;vertical-align: middle;font-size: 15px;font-weight: bold;">รวมยอดขาย / ยอดต้นทุนสินค้า 1</td>
+      <td colspan="5" style="text-align: right;border: 1px solid #000000;padding: 5;vertical-align: middle;font-size: 15px;font-weight: bold;">ยอดต้นทุนสินค้า 1 / รวมยอดขาย</td>
       <td style="text-align: left;border: 1px solid #000000;padding: 5;vertical-align: middle;text-align: right;font-size: 15px;font-weight: bold;"><?php     echo number_format($sumCost,2);?></td>
       <td style="text-align: left;border: 1px solid #000000;padding: 5;vertical-align: middle;text-align: right;font-size: 15px;font-weight: bold;"><?php     echo number_format($sumPrice,2);?></td>
     </tr>
@@ -579,11 +585,11 @@ Vat 7%</strong></td>
       				filedMore += '		<input type="hidden" name="csn[]" value=""  class="inpfoder" style="width:100%;text-align:center;"></td>';
       				filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;">';
       				filedMore += '		<input type="text" name="camount[]" value="" id="camount'+countBox+'" class="inpfoder" style="width:100%;text-align:center;"></td>';
-      				filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;">';
-      				filedMore += '		<input type="text" name="cprice[]" value="" id="cprice'+countBox+'" class="inpfoder" style="width:100%;text-align:center;" onkeypress="return isNumberKey(event)"></td>';
 		 			filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;">';
       				filedMore += '		<input type="text" name="ccost[]" value="" id="ccost'+countBox+'" class="inpfoder" style="width:100%;text-align:center;" onkeypress="return isNumberKey(event)"></td>';
-     				filedMore += '</tr>';
+					filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;">';
+      				filedMore += '		<input type="text" name="cprice[]" value="" id="cprice'+countBox+'" class="inpfoder" style="width:100%;text-align:center;" onkeypress="return isNumberKey(event)"></td>';
+					filedMore += '</tr>';
 	
 
 				$("#exp").append(filedMore);
