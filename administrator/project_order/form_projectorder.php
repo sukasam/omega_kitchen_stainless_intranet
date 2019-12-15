@@ -139,7 +139,7 @@ $form = '
       </td>
       <td style="border:1px solid #000000;padding:5;font-size:13px;"><strong>รวมทั้งหมด</strong></td>
       <td style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;"><strong>'.number_format($sumCost,2).'</strong>&nbsp;&nbsp;</td>
-	  <td style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;"><strong>'.number_format($sumpriceNot,2).'</strong>&nbsp;&nbsp;</td>
+	  <td style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;background-color: #000000;">&nbsp;&nbsp;</td>
 	  <td style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;"><strong>'.number_format($sumprice,2).'</strong>&nbsp;&nbsp;</td>
     </tr>
 	<tr>
