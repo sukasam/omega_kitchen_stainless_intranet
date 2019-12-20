@@ -17,40 +17,7 @@
 		$_POST['stock_date']=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
 
 		
-		if ($_POST["mode"] == "add") { 
-
-			$_POST['st_setting'] = '0';
-			$_POST['approve'] = '0';
-			$_POST['stock_approve'] = '0';
-
-			$_POST['stock_approve_date'] = '0000-00-00';
-				
-				include "../include/m_add.php";
-				$id = mysqli_insert_id($conn);
-
-				for($i=0;$i<=count($_POST['cpro']);$i++){
-					if($_POST['cpro'][$i] != ""){
-
-						$_POST['cprice'][$i] = preg_replace("/,/","",$_POST['cprice'][$i]);
-						
-						$cost = $_POST['camount'][$i] * $_POST['cprice'][$i];
-					
-						@mysqli_query($conn,"INSERT INTO `s_group_sparpart_bill_pro` (`id`, `id_bill`, `sparpart_id`, `sparpart_qty`, `sparpart_unit_price`, `sparpart_total`) VALUES (NULL,'".$id."','".$_POST['cpro'][$i]."','".$_POST['camount'][$i]."','".$_POST['cprice'][$i]."','".$cost."');");
-						
-						@mysqli_query($conn,"UPDATE `s_group_sparpart` SET `group_stock` = `group_stock`+'".$_POST['camount'][$i]."' WHERE `group_id` = '".$_POST['cpro'][$i]."';");
-					}
-				}
-				
-			include_once("../mpdf54/mpdf.php");
-			include_once("form_stockin.php");
-			$mpdf=new mPDF('UTF-8'); 
-			$mpdf->SetAutoFont();
-			$mpdf->WriteHTML($form);
-			$chaf = preg_replace("/\//","-",$id); 
-			$mpdf->Output('../../upload/stockin/'.$chaf.'.pdf','F');
-				
-			header ("location:index.php?" . $param); 
-		}
+		
 		if ($_POST["mode"] == "update" ) { 
 
 				if($_POST['stock_approve_date'] == ''){
@@ -81,8 +48,11 @@
 					}
 				}
 			
+				$_POST['stock_approve_date'] = date("Y-m-d");
+				@mysqli_query($conn,"UPDATE `s_group_sparpart_bill` SET `stock_approve_date` = '".$dateApprove."' WHERE `sub_id` = $id;");
+
 			include_once("../mpdf54/mpdf.php");
-			include_once("form_stockin.php");
+			include_once("../group_sparpart_stockin/form_stockin.php");
 			$mpdf=new mPDF('UTF-8'); 
 			$mpdf->SetAutoFont();
 			$mpdf->WriteHTML($form);
@@ -226,7 +196,7 @@ function checkTotal(key){
 </script>
 </HEAD>
 <?php     include ("../../include/function_script.php"); ?>
-<BODY>
+<BODY onload="document.form1.submit()">
 <DIV id=body-wrapper>
 <?php     include("../left.php");?>
 <DIV id=main-content>
@@ -247,7 +217,8 @@ function checkTotal(key){
 <DIV class=clear>
   
 </DIV></DIV><!-- End .content-box-header -->
-<DIV class=content-box-content>
+<div><center><img src="../images/waiting.gif" width="450"></center></div>
+<DIV class="content-box-content" style="display:none;">
 <DIV id=tab1 class="tab-content default-tab">
   <form action="update.php" method="post" enctype="multipart/form-data" name="form1" id="form1"  onSubmit="return check(this)">
     <div class="formArea">

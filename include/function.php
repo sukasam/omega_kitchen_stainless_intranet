@@ -2197,5 +2197,12 @@ function userGroup($conn,$user_id){
 	return $row_user_group['group_name'];	
 }
 
+function userTecGroupID($conn,$user_id){
+	$row_user = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_user_group WHERE user_id = '".$user_id."'"));
+	$row_user_group = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_group_technician WHERE user_account = '".$row_user['group_id']."'"));
+	
+	return $row_user_group['group_id'];	
+}
+
 ?>
 

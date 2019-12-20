@@ -64,6 +64,13 @@ $sumremainTotal = $sumprice - $sumdiscount;
 $sumpricevat = ($sumremainTotal * 7) / 100;
 $sumtotal = ($sumprice + $sumpricevat) - $sumdiscount;
 
+$dataApprove = '';
+
+if($_POST['stock_approve_date'] != '0000-00-00' && $_POST['stock_approve_date'] != ''){
+  $dataApprove = format_date($_POST['stock_approve_date']);
+}else{
+  $dataApprove = '';
+}
 
 $form = '
 <p><h3>รายการรับเข้าสต็อค</h3></p>
@@ -105,6 +112,38 @@ $form = '
       <td style="border:1px solid #000000;padding:5;font-size:13px;"><strong>จำนวนเงินรวมทั้งสิ้น</strong></td>
       <td colspan="2" style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;"><strong>'.number_format($sumremainTotal,2).'</strong>&nbsp;&nbsp;</td>
     </tr>
+</table><br><br>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="text-align:center;"  class="tb4">
+<tr>
+<td width="50%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><br>'.get_technician_name($conn,$_POST['stock_admin']).'</td>
+        </tr>
+        <tr>
+          <td style="padding-top:10px;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>ผู้รับเข้าอะไหล่</strong></td>
+        </tr>
+        <tr>
+          <td style="font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่ : </strong>'.format_date($_POST['stock_date']).'</td>
+        </tr>
+      </table>
+  </td>
+
+<td width="50%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><br>'.get_technician_name($conn,$_POST['stock_approve']).'</td>
+        </tr>
+        <tr>
+          <td style="padding-top:10px;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>ผู้อนุมัติ</strong></td>
+        </tr>
+        <tr>
+          <td style="font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่ : </strong>'.$dataApprove.'</td>
+        </tr>
+      </table>
+  </td>
+
+</tr>
 </table>
   ';
 ?>

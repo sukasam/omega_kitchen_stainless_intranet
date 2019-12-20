@@ -27,6 +27,19 @@
 			header ("location:index.php");
 		} 
 	}	
+
+	//-------------------------------------------------------------------------------------
+	if ($_GET["b"] != "" && $_GET["s"] != "") { 
+		if ($_GET["s"] == 0) $status = 1;
+		if ($_GET["s"] == 1) $status = 0;
+		Check_Permission($conn,$check_module,$_SESSION["login_id"],"update");
+		$sql_status = "update $tbl_name set st_setting = '$status' where $PK_field = '".$_GET["b"]."'";
+		@mysqli_query($conn,$sql_status);
+		/*$sql_fostatus = "update s_first_order set status = '$status' where fo_id = '$_GET[cus_id]'";
+		@mysqli_query($conn,$sql_fostatus);*/
+		if($_GET["page"] != ""){$conpage = "page=".$_GET["page"];}
+		header ("location:?".$conpage); 
+	}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
@@ -54,6 +67,10 @@ function check_select(frm){
 			frm.choose_action.focus(); return false;
 		}
 }	
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
 </script>
 </HEAD>
 <?php     include ("../../include/function_script.php"); ?>
@@ -73,6 +90,8 @@ function check_select(frm){
     เพิ่ม/แก้ไข อะไหล่</SPAN></A></LI>
     <LI><A class=shortcut-button href="update.php?mode=add"><SPAN><IMG  alt=icon src="../images/menu/mn_serting22.png"><BR>
     รับเข้าสต๊อค</SPAN></A></LI>
+	<LI><A class=shortcut-button href="../group_sparpart_approve/"><SPAN><IMG  alt=icon src="../images/icons/icon-48-user.png" width="60"><BR>
+    อนุมัติรับเข้าสต็อก</SPAN></A></LI>
     <LI><A class=shortcut-button href="../report2/?mid=16&act=18"><SPAN><IMG  alt=icon src="../images/menu/mn_serting23.png"><BR>
     รายงานสต็อค</SPAN></A></LI>
     
@@ -92,7 +111,8 @@ function check_select(frm){
 <DIV class=content-box-header align="right" style="padding-right:15px;">
 
 <H3 align="left"><?php     echo $page_name; ?></H3>
-<br><form name="form1" method="get" action="index.php">
+<div style="float:right;padding-top:5px;">
+<form name="form1" method="get" action="index.php">
     <input name="keyword" type="text" id="keyword" value="<?php     echo $keyword;?>">
     <input name="Action" type="submit" id="Action" value="ค้นหา">
     <?php    
@@ -105,6 +125,15 @@ function check_select(frm){
 			post_param($a_param,$a_not_exists);*/
 			?>
   </form>
+  </div>
+  <div style="float:right;margin-right:20px;padding-top:5px;">  
+	<label><strong>สถานะการยืนยัน : </strong></label>
+    <select name="catalog_master" id="catalog_master" style="height:24px;" onChange="MM_jumpMenu('parent',this,0)">
+		<option value="index.php?app_id=0" <?php  if($_GET['app_id'] == 0){echo "selected";}?>>รอการอนุมัติ</option>
+		 <option value="index.php?app_id=1" <?php  if($_GET['app_id'] == 1){echo "selected";}?>>อนุมัติ</option>
+         <option value="index.php?app_id=2" <?php  if($_GET['app_id'] == 2){echo "selected";}?>>ไม่อนุมัติ</option>
+  	</select>
+    </div>
 <DIV class=clear>
 
 </DIV></DIV><!-- End .content-box-header -->
@@ -115,10 +144,12 @@ function check_select(frm){
       <THEAD>
         <TR>
          
-          <TH width="5%">ลำดับ</TH>
+		 <TH width="5%">ลำดับ</TH>
           <TH width="12%">เลขที่บิล</TH>
           <TH width="35%">ผู้จำหน่าย / ส่งสินค้า</TH>
           <TH width="18%">วันที่รับเข้า</TH>
+		  <TH width="8%"><div align="center"><a>การยืนยัน</a></div></TH>
+		  <TH width="8%"><div align="center"><a>Open / Close</a></div></TH>
           <TH width="5%">ดาวน์โหลด</TH>
           <TH width="5%"><a>แก้ไข</a></TH>
           <TH width="5%"><a>ลบ</a></TH>
@@ -144,6 +175,15 @@ function check_select(frm){
 						}
 						$sql .=  $subtext . " ) ";
 					} 
+
+					if ($_GET['app_id'] <> "") { 
+						$sql .= " and ( approve = '".$_GET["app_id"]."' ";
+						$sql .=  $subtext . " ) ";
+					}else{
+						$sql .= " and ( approve = '0' ";
+						$sql .=  $subtext . " ) ";
+					}
+
 					if ($orderby <> "") $sql .= " order by " . $orderby;
 					if ($sortby <> "") $sql .= " " . $sortby;
 					include ("../include/page_init.php");
@@ -160,7 +200,21 @@ function check_select(frm){
           <TD><span class="text"><?php   echo $rec["sub_billnum"];?></span></TD>
           <TD><span class="text"><?php     echo $rec["sub_name"] ; ?></span></TD>
           <TD><span class="text"><?php     echo format_date($rec["stock_date"]); ?></span></TD>
-          <TD><center><A title="view" href="../../upload/stockin/<?php echo $rec["sub_id"];?>.pdf" target="_blank"><IMG alt="view" src="../images/icon2/backup.png" width="25"></A></center></TD>
+          <TD style="vertical-align:middle"><?php  if($rec["approve"] == 1){?>
+            <IMG src="../images/icons/yes_approve.png" height="28" title="อนุมัติ">
+            <?php  }else if($rec["approve"] == 2){?>
+            <IMG src="../images/icons/no_approve.png" height="28" title="ไม่อนุมัติ">
+            <?php  }else{?>
+            <IMG src="../images/icons/wait_approve.png" height="28" title="รออนุมัติ">
+            <?php  }?></TD>
+		  <TD style="vertical-align:middle"><div align="center">
+            <?php  if($rec["st_setting"]==0) {?>
+            <a href="../group_sparpart_stockin/?b=<?php  echo $rec[$PK_field]; ?>&s=<?php  echo $rec["st_setting"]; ?>&page=<?php  echo $_GET["page"]; ?>&<?php  echo $FK_field; ?>=<?php  echo $_REQUEST["$FK_field"];?>&cus_id=<?php  echo $rec["cus_id"];?>"><img src="../icons/status_on.gif" width="10" height="10"></a>
+            <?php  } else{?>
+            <a href="../group_sparpart_stockin/?b=<?php  echo $rec[$PK_field]; ?>&s=<?php  echo $rec["st_setting"]; ?>&page=<?php  echo $_GET["page"]; ?>&<?php  echo $FK_field; ?>=<?php  echo $_REQUEST["$FK_field"];?>&cus_id=<?php  echo $rec["cus_id"];?>"><img src="../icons/status_off.gif" width="10" height="10"></a>
+            <?php  }?>
+          </div></TD>
+		  <TD><center><A title="view" href="../../upload/stockin/<?php echo $rec["sub_id"];?>.pdf" target="_blank"><IMG alt="view" src="../images/icon2/backup.png" width="25"></A></center></TD>
            <TD><!-- Icons -->
             <A title=Edit href="update.php?mode=update&<?php     echo $PK_field; ?>=<?php     echo $rec[$PK_field]; if($param <> "") {?>&<?php     echo $param; }?>"><IMG alt=Edit src="../images/pencil.png"></A> <A title=Delete  href="#"></A></TD>
             

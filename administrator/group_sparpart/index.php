@@ -61,6 +61,8 @@ function check_select(frm){
     เพิ่ม/แก้ไข อะไหล่</SPAN></A></LI>
     <LI><A class=shortcut-button href="../group_sparpart_stockin/update.php?mode=add"><SPAN><IMG  alt=icon src="../images/menu/mn_serting22.png"><BR>
     รับเข้าสต๊อค</SPAN></A></LI>
+    <LI><A class=shortcut-button href="../group_sparpart_approve/"><SPAN><IMG  alt=icon src="../images/icons/icon-48-user.png" width="60"><BR>
+    อนุมัติรับเข้าสต็อก</SPAN></A></LI>
     <LI><A class=shortcut-button href="../report2/?mid=16&act=18"><SPAN><IMG  alt=icon src="../images/menu/mn_serting23.png"><BR>
     รายงานสต็อค</SPAN></A></LI>
     <?php     
