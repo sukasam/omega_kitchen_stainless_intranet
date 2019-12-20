@@ -283,6 +283,12 @@ function chksign(vals){
 	//alert(vals);	
 }
 
+function submitForm() {
+	document.getElementById("submitF").disabled = true;
+	document.getElementById("resetF").disabled = true;
+	document.form1.submit()
+}
+
 </script>
 </HEAD>
 <?php     include ("../../include/function_script.php"); ?>
@@ -1008,8 +1014,8 @@ function chksign(vals){
         </fieldset>
     </div>
     <div class="formArea" style="text-align: center;">
-      <input type="submit" name="Submit" value="Submit" class="button">
-      <input type="reset" name="Submit" value="Reset" class="button">
+	<input type="button" value="Submit" id="submitF" class="button" onclick="submitForm()">
+      <input type="reset" name="Reset" id="resetF" value="Reset" class="button">
       <?php     
 		$filename = '../../upload/project_order_cost/PJC '.$_GET['fo_id'].'.pdf';
 
