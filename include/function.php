@@ -2172,6 +2172,17 @@ function findWord($string,$findWord){
 	}
 }
 
+function get_stockProject_id($conn,$gid) {
+	$row_dea = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_stock_project WHERE group_id = '".$gid."'"));
+	return $row_dea['group_spar_id'];		
+}
+
+function get_stockProject_name($conn,$gid) {
+	$row_dea = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_stock_project WHERE group_id = '".$gid."'"));
+	return $row_dea['group_name'];		
+}
+
+
 
 function get_sparpart_id($conn,$gid) {
 	$row_dea = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_sparpart WHERE group_id = '".$gid."'"));
