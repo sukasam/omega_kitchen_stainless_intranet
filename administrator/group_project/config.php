@@ -2,8 +2,8 @@
 <?php    
 	$PK_field = "group_id";
 	//$FR_field = "";
-	$check_module = "รายการสินค้าโปรเจ็ค";
-	$page_name = "รายการสินค้าโปรเจ็ค";
+	$check_module = "รายการสินค้าโปรเจ็ค (เก่า)";
+	$page_name = "รายการสินค้าโปรเจ็ค (เก่า)";
 	$tbl_name = "s_group_project";
 	$field_confirm_showname= "group_name";
 	$fieldlist = array('group_pro_id','group_name','group_size');

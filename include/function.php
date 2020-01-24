@@ -272,6 +272,12 @@ function format_date_th ($value,$type) {
 		case "6" :  // 4 ก.พ. 51
 			$msg =  $s_day . " " .  $month_brief_th[$s_month]   . " " .  substr($s_year,-2)  ;
 			break;
+		case "7" :  // 4 ก.พ. 51
+			$msg =  $s_day . "/" .  $s_month   . "/" .  $s_year  ;
+			break;
+		case "8" :  // 4 ม.ค. 2548 <br /><br />14.11 น. 
+			$msg =  $s_day . " " .  $month_brief_th[$s_month]  . " " .  $s_year . "<br><br>เวลา " . $s_hour . "." . $s_minute . " น." ;
+			break;
 		}
 	return ($msg);
 
@@ -1419,6 +1425,26 @@ function check_serviceorder($conn){
 	
 }
 
+function check_work_noti($conn){
+	
+	$thdate = substr(date("Y")+543,2);
+	$concheck = $thdate.date("/m/");
+	
+	$qu_forder = @mysqli_query($conn,"SELECT * FROM s_work_noti WHERE fs_id like '%".$concheck."%' ORDER BY fs_id DESC");
+	$num_oder = @mysqli_num_rows($qu_forder);
+	$row_forder = @mysqli_fetch_array($qu_forder);
+	
+	if($row_forder['fs_id'] == ""){
+		return "WN ".$thdate.date("/m/")."001";
+	}else{
+		$num_odersum = $num_oder+1;
+		return "WN ".$thdate.date("/m/").sprintf("%03d",$num_odersum);
+	}
+	
+}
+
+
+
 function check_contactfo($conn){
 	
 	$thdate = substr(date("Y")+543,2);
@@ -1524,9 +1550,14 @@ function check_serviceman2($conn){
 }
 
 function format_date($value) {
-	list ($s_year, $s_month, $s_day) = explode("-", $value);
-	$year=$s_year+543;
-	return $s_day.'-'.$s_month.'-'.$year;
+	if($value != "0000-00-00"){
+		list ($s_year, $s_month, $s_day) = explode("-", $value);
+		$year=$s_year+543;
+		return $s_day.'-'.$s_month.'-'.$year;
+	}else{
+		return "-";
+	}
+	
 }
 
 function get_groupcusname($conn,$value) {
@@ -2215,5 +2246,23 @@ function userTecGroupID($conn,$user_id){
 	return $row_user_group['group_id'];	
 }
 
+function getWorkNotiInfo($conn,$val) {
+	$row_dea = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_work_noti WHERE fo_id = '".$val."'"));
+	return $row_dea;		
+}
+
+
+function getTrackJObs($conn,$tab,$fo_id){
+
+	$tableDB = '';
+
+	if($tab == 'WN' ){
+		$tableDB = 's_work_noti';
+	}
+	$quFO = @mysqli_query($conn,"SELECT * FROM ".$tableDB." WHERE fo_id = '".$fo_id."' ORDER BY fo_id DESC");
+	$rowFO = mysqli_fetch_array($quFO);
+
+	return $rowFO['fs_id'];
+}
 ?>
 

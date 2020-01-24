@@ -28,8 +28,8 @@
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbmainindex">
       <tr>
         <td width="33%"><a href="../first_order/?mid=12"><img src="../images/menu/frish_order_01.png" width="136" height="139" border="0" alt="" /></a></td>
-        <td  width="33%"><a href="../service_report/?mid=13"><img src="../images/menu/service-form_01.png" width="151" height="130" border="0" alt="" /></a></td>
-        <td  width="33%"><a href="../schedule/?mid=14"><img src="../images/menu/service-schedule_01.png" width="198" height="124" border="0" alt="" /></a></td>
+        <td  width="33%"><a href="../service_report2/?mid=13"><img src="../images/menu/service-form_01.png" width="151" height="130" border="0" alt="" /></a></td>
+        <td  width="33%"><a href="../group_sparpart/?mid=14"><img src="../images/menu/service-schedule_01.png" width="198" height="135" border="0" alt="" /></a></td>
       </tr>
       <tr>
         <td colspan="3"><br /><br /><br /></td>

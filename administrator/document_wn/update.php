@@ -12,6 +12,10 @@
 		 $_POST['doc_name']=addslashes($_POST['doc_name']);
 		 //$_POST['doc_name_native']=addslashes($_POST['doc_name_native']);
 
+		 $post_foid = $_POST['fo_id'];
+		 $post_foid2 = $_POST['fo_id2'];
+
+		 $_POST['fo_id'] = $post_foid2;
 
 		//-------------------------------------------------------------------------------------
 		if ($_POST['mode'] == "add") {
@@ -36,7 +40,7 @@
 					$type = $name_data[1];
 					$filename = $mname.".".$type;
 					
-					$target_dir = "../../upload/document/";
+					$target_dir = "../../upload/document_tracking/";
 					$target_file = $target_dir . basename($filename);
 					$uploadOk = 1;
 					$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -53,7 +57,7 @@
 
 			
 				echo '<script type="text/javascript">
-                    	window.location="index.php?mid=8&fo_id='.$_POST['fo_id'].'";
+                    	window.location="index.php?tab='.$_POST['tab'].'&fo_id='.$post_foid.'&fo_id2='.$post_foid2.'";
                     </script>';
 		}
 
@@ -70,7 +74,7 @@
 
 			
 			if ($_FILES['fimages']['name'] != "") { 
-				@unlink("../../upload/document/".$_REQUEST['images']);
+				@unlink("../../upload/document_tracking/".$_REQUEST['images']);
 				
 				$mname="";
 				$mname=gen_random_num(5);
@@ -80,7 +84,7 @@
 				$type = $name_data[1];
 				$filename = $mname.".".$type;
 				
-				$target_dir = "../../upload/document/";
+				$target_dir = "../../upload/document_tracking/";
 				$target_file = $target_dir . basename($filename);
 				$uploadOk = 1;
 				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -101,12 +105,12 @@
 //					//echo "File is not an image.";
 //					$uploadOk = 0;
 //				}
-//							
+							
 			} // end if ($_FILES[fimages][name] != "")
 
 			
 			echo '<script type="text/javascript">
-                    	window.location="index.php?mid=8&fo_id='.$_POST['fo_id'].'";
+			window.location="index.php?tab='.$_POST['tab'].'&fo_id='.$post_foid.'&fo_id2='.$post_foid2.'";
                     </script>';
 		}
 	}
@@ -117,7 +121,7 @@
 	}
 	//--------------------------------------------------------------------------------
 	if ($_GET['mode'] == "update") { 
-		 Check_Permission ($conn,$check_module,$_SESSION['login_id'],"update");
+		Check_Permission ($conn,$check_module,$_SESSION['login_id'],"update");
 		$sql = "select * from $tbl_name where $PK_field = '" . $_GET[$PK_field] ."'";
 		$query = mysqli_query ($conn,$sql);
 		while ($rec = mysqli_fetch_array ($query)) { 
@@ -210,6 +214,7 @@ function submitForm() {
 	document.getElementById("resetF").disabled = true;
 	document.form1.submit()
 }
+
 </script>
 
 <SCRIPT type=text/javascript src="ajax.js"></SCRIPT>
@@ -253,8 +258,9 @@ function submitForm() {
                   <br>
                   <?php  
 				  if($_GET['mode'] != 'add'){
-					   if($images != ""){?><br>
-					[<a href="../../upload/document/<?php  echo $images;?>" target="_blank">เปิดเอกสาร</a>]
+					  if($images != ""){?><br>
+					[<a href="../../upload/document_tracking/<?php  echo $images;?>" target="_blank">เปิดเอกสาร</a>]
+					
                   <?php  }?>
                   <input name="images" type="hidden" value="<?php echo  $images; ?>">
                   <?php }?></td>
@@ -275,17 +281,19 @@ function submitForm() {
         </table>
    <br>
  
-   <input type="button" value="Submit" id="submitF" class="button" onclick="submitForm()">
+     <input type="button" value="Submit" id="submitF" class="button" onclick="submitForm()">
       <input type="reset" name="Reset" id="resetF" value="Reset" class="button">
       <?php  
 			$a_not_exists = array();
 			post_param($a_param,$a_not_exists); 
 		?>
       <input name="mode" type="hidden" id="mode" value="<?php  echo $_GET['mode'];?>">
-			<input name="fo_id" type="hidden" id="fo_id" value="<?php  echo $_GET['fo_id'];?>">
+	  <input name="fo_id" type="hidden" id="fo_id" value="<?php  echo $_GET['fo_id'];?>">
+	  <input name="fo_id2" type="hidden" id="fo_id2" value="<?php  echo $_GET['fo_id2'];?>">
+	  <input name="tab" type="hidden" id="tab" value="<?php  echo $_GET['tab'];?>">
       <input name="mid" type="hidden" id="mid" value="<?php  echo $_GET['mid'];?>">
       <input type="hidden" name="sorts" value="<?php  echo $sorts;?>">
-	  <input type="hidden" name="target" value="PJ">
+	  <input type="hidden" name="target" value="WN">
       <input name="<?php  echo $PK_field;?>" type="hidden" id="<?php  echo $PK_field;?>" value="<?php  echo $_GET[$PK_field];?>">
 
   </form>

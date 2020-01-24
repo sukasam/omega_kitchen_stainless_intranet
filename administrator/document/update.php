@@ -286,6 +286,7 @@ function submitForm() {
 			<input name="fo_id" type="hidden" id="fo_id" value="<?php  echo $_GET['fo_id'];?>">
       <input name="mid" type="hidden" id="mid" value="<?php  echo $_GET['mid'];?>">
       <input type="hidden" name="sorts" value="<?php  echo $sorts;?>">
+      <input type="hidden" name="target" value="FO">
       <input name="<?php  echo $PK_field;?>" type="hidden" id="<?php  echo $PK_field;?>" value="<?php  echo $_GET[$PK_field];?>">
 
   </form>

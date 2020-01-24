@@ -84,6 +84,8 @@ $( document ).ready(function() {
 				$("#group_spar_id")[0].disabled = true;
 				$("#group_name")[0].disabled = true;
 				$("#group_category")[0].disabled = true;
+				$("#group_namecall")[0].disabled = true;
+				
 
 
 				$.ajax({
@@ -98,6 +100,7 @@ $( document ).ready(function() {
 							$("#group_name").val(obj.group_name);
 							$("#group_sn").val(obj.group_sn);
 							$("#group_category").val(obj.group_category);
+							$("#group_namecall").val(obj.group_namecall);
 							$("#group_size").val(obj.group_size);
 							$("#group_unit_price").val(obj.group_unit_price);
 							$("#group_price").val(obj.group_price);
@@ -116,6 +119,7 @@ $( document ).ready(function() {
 							$("#group_name").val('');
 							$("#group_sn").val('');
 							$("#group_category").val('');
+							$("#group_namecall").val('');
 							$("#group_spar_id2").val(group_spar_id);
 							$(".editIDPro").addClass('hide');
 						}
@@ -123,6 +127,7 @@ $( document ).ready(function() {
 						$("#group_spar_id")[0].disabled = true;
 						$("#group_name")[0].disabled = false;
 						$("#group_category")[0].disabled = false;
+						$("#group_namecall")[0].disabled = false;
 						$("#edit_spar_id")[0].disabled = false;
 						//$("#group_name").focus();
 					}
@@ -172,6 +177,7 @@ $( document ).ready(function() {
 								$("#group_name").val(obj.group_name);
 								$("#group_sn").val(obj.group_sn);
 								$("#group_category").val(obj.group_category);
+								$("#group_namecall").val(obj.group_namecall);
 								$("#group_size").val(obj.group_size);
 								$("#group_unit_price").val(obj.group_unit_price);
 								$("#group_price").val(obj.group_price);
@@ -190,6 +196,7 @@ $( document ).ready(function() {
 								$("#group_name").val('');
 								$("#group_sn").val('');
 								$("#group_category").val('');
+								$("#group_namecall").val('');
 								$("#group_spar_id2").val(group_spar_id);
 								$(".editIDPro").addClass('hide');
 							}
@@ -197,6 +204,7 @@ $( document ).ready(function() {
 							$("#group_spar_id")[0].disabled = true;
 							$("#group_name")[0].disabled = false;
 							$("#group_category")[0].disabled = false;
+							$("#group_namecall")[0].disabled = false;
 							$("#edit_spar_id")[0].disabled = false;
 							//$("#group_name").focus();
 						}
@@ -294,6 +302,11 @@ function submitForm(){
                 <td><input name="group_price" type="text" id="group_price"  value="<?php     echo $group_price; ?>" size="60"></td>
               </tr>
 -->
+
+			<tr>
+                <td nowrap class="name">หน่วย</td>
+                <td><input name="group_namecall" type="text" id="group_namecall"  value="<?php     echo $group_namecall; ?>" size="60"></td>
+              </tr>
              
               <tr>
                 <td nowrap class="name">ราคาต้นทุนสินค้าโรงงาน/หน่วย</td>
@@ -309,6 +322,11 @@ function submitForm(){
               <tr style="display: none;">
                 <td nowrap class="name">ประเภทสินค้า</td>
                 <td><input type="radio" name="typespar" value="1" id="typespar1">สินค้าสินค้า&nbsp;&nbsp;&nbsp;<input type="radio" name="typespar" value="2" id="typespar2">สินค้าอื่นๆ</td>
+              </tr>
+
+			  <tr>
+                <td nowrap class="name"></td>
+                <td></td>
               </tr>
 
               
