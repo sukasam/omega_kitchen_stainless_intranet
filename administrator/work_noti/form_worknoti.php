@@ -15,6 +15,23 @@ if(in_array('9',$work_list)){$workList9 = 'aroow_ch.png';}else{$workList9 = 'aro
 if(in_array('10',$work_list)){$workList10 = 'aroow_ch.png';}else{$workList10 = 'aroow_nch.png';}
 if(in_array('11',$work_list)){$workList11 = 'aroow_ch.png';}else{$workList11 = 'aroow_nch.png';}
 
+for($i=0;$i<=count($_POST['cpro']);$i++){
+
+	if($_POST['cpro'][$i] != ""){
+
+		$projectPro .= '<tr>
+		<td style="border:1px solid #000000;padding:5;">'.($i+1).'</td>
+		<td style="border:1px solid #000000;padding:5;">'.$_POST["ccode"][$i].'</td>
+		<td style="border:1px solid #000000;padding:5;">'.get_stock_project_code($conn,$_POST['cpro'][$i]).'</td>
+		<td style="border:1px solid #000000;text-align:left;padding:5;">'.get_stock_project_name($conn,$_POST['cpro'][$i]).'</td>
+	  <td style="border:1px solid #000000;padding:5;width:100px;">'.get_stock_project_sn($conn,$_POST['cpro'][$i]).'</td>
+		<td style="border:1px solid #000000;padding:5;">'.get_stock_project_size($conn,$_POST['cpro'][$i]).'</td>
+		<td style="border:1px solid #000000;padding:5;">'.$_POST['camount'][$i].'</td>
+		</tr>';
+		
+	}
+}
+
 $form = '
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -85,8 +102,22 @@ $form = '
   <td>วันที่ : '.format_date($_POST["date_work6"]).'</td>
 </tr>
 </table>
-  <br>
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #000000;line-height: 20px;">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:10px;text-align:center;margin-top:10px;">
+  <tr>
+    <td width="8%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ลำดับ</strong></td>
+  <td width="10%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>Code</strong></td>
+  <td width="10%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รหัสสินค้า</strong></td>
+    <td width="27%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รายการ</strong></td>
+    <td width="15%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รุ่น/แบรนด์</strong></td>
+    <td width="15%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ขนาด</strong></td>
+    <td width="15%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>จำนวน</strong></td>
+  </tr>
+  
+'.$projectPro.'    
+
+</table>
+
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #000000;line-height: 20px;margin-top:10px;">
     <tr>
       <td style="text-align:center;padding:5px;">
         <u style="font-family:Verdana, Geneva, sans-serif;font-size:12px;font-weight: bold;">รายละเอียด การแจ้งงาน</u>

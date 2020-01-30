@@ -99,6 +99,8 @@ function check_select(frm){
     First Order</SPAN></A></LI>
     <LI><A class=shortcut-button href="../project_order/index.php"><SPAN><IMG  alt=icon src="../images/icons/icon-48-module.png"><BR>
     Project Order</SPAN></A></LI>
+    <LI><A class=shortcut-button href="../fo-pj/index.php"><SPAN><IMG  alt=icon src="../images/icons/icon-48-module.png"><BR>
+    FO/PJ</SPAN></A></LI>
     <LI><A class=shortcut-button href="../work_noti/index.php"><SPAN><IMG  alt=icon src="../images/icons/icon-48-section.png"><BR>
     ใบแจ้งงาน</SPAN></A></LI>
     
@@ -147,7 +149,7 @@ function check_select(frm){
 	?>
             <?php      Show_Sort_new ("user_id", "ลำดับ.", $orderby, $sortby,$page,$param2);?>
             &nbsp;</TH>
-          <TH width="12%">First Order ID</TH>
+          <TH width="12%">Project Order ID</TH>
           <TH width="35%">ชื่อลูกค้า</TH>
           <TH width="18%"><strong>สถานที่ติดตั้ง</strong></TH>
           <TH width="5%" nowrap ><div align="center"><img src="../icons/favorites_use.png" width="15" height="15"> ใช้งาน / <img src="../icons/favorites_stranby.png" width="15" height="15"> Standby / <img src="../icons/favorites_close.png" width="15" height="15"> ยกเลิก</div></TH>

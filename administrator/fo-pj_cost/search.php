@@ -50,22 +50,18 @@
 </script>-->
 <script type="text/javascript" src="ajax.js"></script> 
 <script type="text/javascript">
-   function get_product(group_id,group_name,protype,col){
+   function get_product(group_id,group_name,protype,chk){
 	//alert(group_id);
 	var xmlHttp;
    xmlHttp=GetXmlHttpObject(); //Check Support Brownser
-   URL = pathLocal+'ajax_return.php?action=getprotype&group_id='+group_id+'&group_name='+group_name+'&protype='+protype;
+   URL = pathLocal+'ajax_return.php?action=getproject&group_id='+group_id+'&group_name='+group_name+'&protype='+protype;
    if (xmlHttp==null){
       alert ("Browser does not support HTTP Request");
       return;
    }
     xmlHttp.onreadystatechange=function (){
         if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
-			var ds = xmlHttp.responseText.split("|");
-			self.opener.document.getElementById(protype).innerHTML = ds[1];
-			self.opener.document.getElementById('ccodepro'+col).innerHTML = ds[2];
-			self.opener.document.getElementById('cpropod'+col).innerHTML = ds[3];
-			self.opener.document.getElementById('cprosize'+col).innerHTML = ds[4];
+            self.opener.document.getElementById(protype).innerHTML = xmlHttp.responseText;
 			window.close();
         } else{
           //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
@@ -81,13 +77,13 @@
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search">
   <tr>
     <td colspan="2"><strong>ค้นหา&nbsp;&nbsp;:&nbsp;&nbsp;</strong>
-        <input type="text" name="textfield" id="textfield" style="width:85%;" onkeyup="get_cus(this.value,'<?php echo $_GET['protype']?>','<?php echo $_GET['col']?>');"/>
+        <input type="text" name="textfield" id="textfield" style="width:85%;" onkeyup="get_cus(this.value,'<?php     echo $_GET['protype']?>');"/>
     </td>
   </tr>
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search">
 <tr>
-    <th width="50%">รายการอะไหล่</th>
+    <th width="50%">รายการสินค้า</th>
   </tr>
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search" id="rscus">
@@ -96,7 +92,7 @@
 	while($row_cus = @mysqli_fetch_array($qu_cus)){
 		?>
 		 <tr>
-            <td><A href="javascript:void(0);" onclick="get_product('<?php echo $row_cus['group_id'];?>','<?php echo $row_cus['group_name'];?>','<?php echo $_GET['protype']?>','<?php echo $_GET['col'];?>');"><?php echo $row_cus['group_name'];?></A></td>
+            <td><A href="javascript:void(0);" onclick="get_product('<?php     echo $row_cus['group_id'];?>','<?php     echo $row_cus['group_name'];?>','<?php     echo $_GET['protype']?>');"><?php     echo $row_cus['group_name'];?></A></td>
           </tr>
 		<?php    	
 	}

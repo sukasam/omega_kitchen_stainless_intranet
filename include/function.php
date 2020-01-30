@@ -2264,5 +2264,26 @@ function getTrackJObs($conn,$tab,$fo_id){
 
 	return $rowFO['fs_id'];
 }
+
+
+function get_stock_project_name($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_stock_project WHERE group_id = '".$value."'"));
+	return $row_protype['group_name'];
+}
+
+function get_stock_project_code($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_stock_project WHERE group_id = '".$value."'"));
+	return $row_protype['group_spar_id'];
+}
+
+function get_stock_project_sn($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_stock_project WHERE group_id = '".$value."'"));
+	return $row_protype['group_sn'];
+}
+
+function get_stock_project_size($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_stock_project WHERE group_id = '".$value."'"));
+	return $row_protype['group_size'];
+}
 ?>
 

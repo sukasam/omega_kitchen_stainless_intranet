@@ -45,6 +45,8 @@
 		
 				$_POST['fs_id'] = get_snprojectorders($conn,$_POST['fs_id']);
 				$_POST['status_use'] = 1;
+				$_POST['st_setting'] = 0;
+				
 				
 				include "../include/m_add.php";
 				$id = mysqli_insert_id($conn);
@@ -58,9 +60,9 @@
 						//$_POST['ccost'][$i] = $_POST['camount'][$i] * $_POST['ccost'][$i];
 						//$_POST['ccost'][$i] = $_POST['ccost'][$i];
 
-						//echo "INSERT INTO `s_project_product` (`id`, `fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`) VALUES (NULL,'".$id."', '".$_POST['ccode'][$i]."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."', '".$_POST['ccost'][$i]."');<br>";
+						//echo "INSERT INTO `s_fopj_product` (`id`, `fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`) VALUES (NULL,'".$id."', '".$_POST['ccode'][$i]."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."', '".$_POST['ccost'][$i]."');<br>";
 						
-						@mysqli_query($conn,"INSERT INTO `s_project_product` (`id`, `fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`) VALUES (NULL,'".$id."', '".$_POST['ccode'][$i]."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."', '".$_POST['ccost'][$i]."');");
+						@mysqli_query($conn,"INSERT INTO `s_fopj_product` (`id`, `fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`) VALUES (NULL,'".$id."', '".$_POST['ccode'][$i]."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."', '".$_POST['ccost'][$i]."');");
 					}
 				}
 
@@ -69,12 +71,12 @@
 				$_POST['discount'] = preg_replace("/,/","",$_POST['discount']);
 				
 				include_once("../mpdf54/mpdf.php");
-				include_once("form_projectorder.php");
+				include_once("form_fopj.php");
 				$mpdf=new mPDF('UTF-8'); 
 				$mpdf->SetAutoFont();
 				$mpdf->WriteHTML($form);
 				$chaf = preg_replace("/\//","-",$_POST['fs_id']); 
-				$mpdf->Output('../../upload/project_order/'.$chaf.'.pdf','F');
+				$mpdf->Output('../../upload/fopj/'.$chaf.'.pdf','F');
 				
 			header ("location:index.php?" . $param); 
 		}
@@ -83,7 +85,7 @@
 				include ("../include/m_update.php");
 				$id = $_REQUEST[$PK_field];	
 			
-				@mysqli_query($conn,"DELETE FROM `s_project_product` WHERE `fo_id` = '".$id."'");
+				@mysqli_query($conn,"DELETE FROM `s_fopj_product` WHERE `fo_id` = '".$id."'");
 			
 			
 				for($i=0;$i<=count($_POST['cpro']);$i++){
@@ -102,19 +104,19 @@
 						// }					
 						
 						
-						@mysqli_query($conn,"INSERT INTO `s_project_product` (`fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`) VALUES ('".$id."', '".$_POST['ccode'][$i]."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."', '".$_POST['ccost'][$i]."');");
+						@mysqli_query($conn,"INSERT INTO `s_fopj_product` (`fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`) VALUES ('".$id."', '".$_POST['ccode'][$i]."', '".$_POST['cpro'][$i]."', '".$_POST['cpod'][$i]."', '".$_POST['csn'][$i]."', '".$_POST['camount'][$i]."', '".$_POST['cprice'][$i]."', '".$_POST['ccost'][$i]."');");
 					}
 				}
 			
 				$_POST['discount'] = preg_replace("/,/","",$_POST['discount']);
 				
 				include_once("../mpdf54/mpdf.php");
-				include_once("form_projectorder.php");
+				include_once("form_fopj.php");
 				$mpdf=new mPDF('UTF-8'); 
 				$mpdf->SetAutoFont();
 				$mpdf->WriteHTML($form);
 				$chaf = preg_replace("/\//","-",$_POST['fs_id']); 
-				$mpdf->Output('../../upload/project_order/'.$chaf.'.pdf','F');
+				$mpdf->Output('../../upload/fopj/'.$chaf.'.pdf','F');
 			
 			header ("location:index.php?" . $param); 
 		}
@@ -221,12 +223,13 @@ function get_product(cid){
 		success: function(data){
 			var obj = JSON.parse(data);
 			
-			//alert(obj.status+obj.group_pro_id+obj.group_size);
+			//alert(obj.status+obj.group_spar_id+obj.group_size);
 			if(obj.status === 'yes'){
 //				$("#group_id").val(obj.group_id);
 //				$("#group_name").val(obj.group_name);
-					document.getElementById('ccodepro'+cid).innerHTML = obj.group_pro_id;
+					document.getElementById('ccodepro'+cid).innerHTML = obj.group_spar_id;
 					document.getElementById('cprosize'+cid).innerHTML = obj.group_size;
+					document.getElementById('cpropod'+cid).innerHTML = obj.group_sn;
 			}else{
 				
 			}
@@ -468,18 +471,18 @@ Vat 7%</strong></td>
       <td width="5%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>Code</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รหัสสินค้า</strong></td>
       <td width="27%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รายการ</strong></td>
+	  <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ขนาด</strong></td>
       <td width="15%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รุ่น / แบรนด์</strong></td>
-      <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ขนาด</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>จำนวน</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ต้นทุนสินค้า 1/ต่อหน่วย</strong></td>
-      <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคา / ต่อหน่วย</strong></td>
+      <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคาขาย / ต่อหน่วย</strong></td>
       
       
     </tr>
     <tbody id="exp" name="exp">
     <?php    
 		$fo_id = $_GET['fo_id'];
-		$quQry = mysqli_query($conn,"SELECT * FROM `s_project_product` WHERE fo_id = '".$fo_id."' ORDER BY id ASC");
+		$quQry = mysqli_query($conn,"SELECT * FROM `s_fopj_product` WHERE fo_id = '".$fo_id."' ORDER BY id ASC");
 		$numRowPro = mysqli_num_rows($quQry);
 		$rowCal = 1;
 		$sumPrice = 0;
@@ -496,7 +499,7 @@ Vat 7%</strong></td>
 			  <select name="cpro[]" id="cpro<?php echo $rowCal;?>" class="inputselect" style="width:85%;" onChange="get_product(<?php echo $rowCal;?>);">
 					<option value="">กรุณาเลือกรายการ</option>
 					<?php    
-						$qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_project ORDER BY group_name ASC");
+						$qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_stock_project ORDER BY group_name ASC");
 						while($row_qupro1 = @mysqli_fetch_array($qupro1)){
 						  ?>
 							<option value="<?php     echo $row_qupro1['group_id'];?>" <?php     if($rowPro['cpro'] == $row_qupro1['group_id']){echo 'selected';}?>><?php     echo $row_qupro1['group_name'];?></option>
@@ -506,11 +509,13 @@ Vat 7%</strong></td>
 			  </select>
 			  <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php?protype=cpro<?php     echo $rowCal;?>&col=<?php echo $rowCal;?>');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
 			  </td>
-			  <td style="border:1px solid #000000;padding:5;text-align:center;" >
-			  <input type="text" name="cpod[]" value="<?php echo $rowPro['cpod'];?>" id="cpod<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;"></td>
-			  <td style="border:1px solid #000000;padding:5;text-align:center;" id="cprosize<?php     echo $rowCal;?>">
+			  <td style="border:1px solid #000000;padding:5;text-align:center;" id="cprosize<?php echo $rowCal;?>">
 			  <input type="hidden" name="csn[]" value="<?php echo $rowPro['csn'];?>" id="csn<?php echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;">
-		  	  <?php echo get_projectsize($conn,$rowPro['cpro']);?>
+		  	  <?php echo get_stock_project_size($conn,$rowPro['cpro']);?>
+			  </td>
+			  <td style="border:1px solid #000000;padding:5;text-align:center;" id="cpropod<?php echo $rowCal;?>">
+			  <input type="hidden" name="cpod[]" value="<?php echo $rowPro['cpod'];?>" id="cpod<?php echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;">
+			  <?php echo get_stock_project_sn($conn,$rowPro['cpro']);?>
 			  </td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;">
 				<input type="text" name="camount[]" value="<?php     echo $rowPro['camount'];?>" id="camount<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;">
@@ -586,10 +591,10 @@ Vat 7%</strong></td>
 		 			filedMore += '	</select>';	
 		 			filedMore += '<a href="javascript:void(0);" onClick="windowOpener(\'400\', \'500\', \'\', \'search.php?protype=cpro'+countBox+'&col='+countBox+'\');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>';
 		 			filedMore += '	</td>';
-		 			filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;" >';
-      				filedMore += '		<input type="text" name="cpod[]" value="" id="cpod'+countBox+'" class="inpfoder" style="width:100%;text-align:center;"></td>';
       				filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;" id="cprosize'+countBox+'">';
       				filedMore += '		<input type="hidden" name="csn[]" value=""  class="inpfoder" style="width:100%;text-align:center;"></td>';
+					filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;" id="cpropod'+countBox+'">';
+      				filedMore += '		<input type="hidden" name="cpod[]" value="" class="inpfoder" style="width:100%;text-align:center;"></td>';
       				filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;">';
       				filedMore += '		<input type="text" name="camount[]" value="" id="camount'+countBox+'" class="inpfoder" style="width:100%;text-align:center;"></td>';
 		 			filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;">';

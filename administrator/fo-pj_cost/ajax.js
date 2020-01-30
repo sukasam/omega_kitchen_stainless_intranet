@@ -61,11 +61,11 @@ function calprice(prval,pid,param1){
    xmlHttp.send(null);
 }
 
-function get_cus(pval,keys,cols){
+function get_cus(pval,keys){
 	//alert(keys);
 	var xmlHttp;
    xmlHttp=GetXmlHttpObject(); //Check Support Brownser
-   URL = pathLocal+'ajax_return.php?action=getcus&pval='+pval+'&keys='+keys+'&cols='+cols;
+   URL = pathLocal+'ajax_return.php?action=getcus&pval='+pval+'&keys='+keys;
    if (xmlHttp==null){
       alert ("Browser does not support HTTP Request");
       return;
