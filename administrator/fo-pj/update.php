@@ -230,6 +230,7 @@ function get_product(cid){
 					document.getElementById('ccodepro'+cid).innerHTML = obj.group_spar_id;
 					document.getElementById('cprosize'+cid).innerHTML = obj.group_size;
 					document.getElementById('cpropod'+cid).innerHTML = obj.group_sn;
+					document.getElementById('ccost'+cid).value = obj.group_price;
 			}else{
 				
 			}
@@ -474,7 +475,7 @@ Vat 7%</strong></td>
 	  <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ขนาด</strong></td>
       <td width="15%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รุ่น / แบรนด์</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>จำนวน</strong></td>
-      <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ต้นทุนสินค้า 1/ต่อหน่วย</strong></td>
+      <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคาต้นทุนสินค้า/ต่อหน่วย</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคาขาย / ต่อหน่วย</strong></td>
       
       
@@ -494,7 +495,7 @@ Vat 7%</strong></td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;" >
 			  <input type="text" name="ccode[]" value="<?php echo $rowPro['ccode'];?>" id="ccode<?php echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;"></td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;" id="ccodepro<?php echo $rowCal;?>">
-			  <?php echo get_projectcodepro($conn,$rowPro['cpro']);?></td>
+			  <?php echo get_stock_project_code($conn,$rowPro['cpro']);?></td>
 			  <td style="border:1px solid #000000;text-align:left;padding:5;">
 			  <select name="cpro[]" id="cpro<?php echo $rowCal;?>" class="inputselect" style="width:85%;" onChange="get_product(<?php echo $rowCal;?>);">
 					<option value="">กรุณาเลือกรายการ</option>
@@ -521,7 +522,7 @@ Vat 7%</strong></td>
 				<input type="text" name="camount[]" value="<?php     echo $rowPro['camount'];?>" id="camount<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;">
 				<input type="hidden" name="camountH[]" value="<?php     echo $rowPro['camount'];?>">
 			  </td>
-			  <td style="border:1px solid #000000;padding:5;text-align:center;">
+			  <td style="border:1px solid #000000;padding:5;text-align:center;" id="cprocost<?php echo $rowCal;?>">
 				<input type="text" name="ccost[]" value="<?php echo number_format($rowPro['ccost']);?>" id="ccost<?php echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;" onkeypress="return isNumberKey(event)">
 				<input type="hidden" name="ccostH[]" value="<?php  echo $rowPro['ccost'];?>">
 			  </td>
@@ -547,7 +548,7 @@ Vat 7%</strong></td>
               <input type="text" name="discount" value="<?php     if($discount != ""){echo $discount;}else{echo '0';}?>" id="discount" class="inpfoder" style="width:50%;">
               <br><br></div>	
       </td>
-      <td colspan="5" style="text-align: right;border: 1px solid #000000;padding: 5;vertical-align: middle;font-size: 15px;font-weight: bold;">ยอดต้นทุนสินค้า 1 / รวมยอดขาย</td>
+      <td colspan="5" style="text-align: right;border: 1px solid #000000;padding: 5;vertical-align: middle;font-size: 15px;font-weight: bold;">ยอดราคาต้นทุนสินค้า / รวมยอดขาย</td>
       <td style="text-align: left;border: 1px solid #000000;padding: 5;vertical-align: middle;text-align: right;font-size: 15px;font-weight: bold;"><?php     echo number_format($sumCost,2);?></td>
       <td style="text-align: left;border: 1px solid #000000;padding: 5;vertical-align: middle;text-align: right;font-size: 15px;font-weight: bold;"><?php     echo number_format($sumPrice,2);?></td>
     </tr>
@@ -597,7 +598,7 @@ Vat 7%</strong></td>
       				filedMore += '		<input type="hidden" name="cpod[]" value="" class="inpfoder" style="width:100%;text-align:center;"></td>';
       				filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;">';
       				filedMore += '		<input type="text" name="camount[]" value="" id="camount'+countBox+'" class="inpfoder" style="width:100%;text-align:center;"></td>';
-		 			filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;">';
+		 			filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;" id="cprocost'+countBox+'">';
       				filedMore += '		<input type="text" name="ccost[]" value="" id="ccost'+countBox+'" class="inpfoder" style="width:100%;text-align:center;" onkeypress="return isNumberKey(event)"></td>';
 					filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;">';
       				filedMore += '		<input type="text" name="cprice[]" value="" id="cprice'+countBox+'" class="inpfoder" style="width:100%;text-align:center;" onkeypress="return isNumberKey(event)"></td>';

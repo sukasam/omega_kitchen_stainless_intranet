@@ -50,7 +50,7 @@
 </script>-->
 <script type="text/javascript" src="ajax.js?v=2"></script> 
 <script type="text/javascript">
-   function get_product(group_id,group_name,protype,group_spar_id,col,group_size,group_sn){
+   function get_product(group_id,group_name,protype,group_spar_id,col,group_size,group_sn,group_price){
 	//alert(group_size);
 	var xmlHttp;
    xmlHttp=GetXmlHttpObject(); //Check Support Brownser
@@ -65,6 +65,7 @@
 			self.opener.document.getElementById('ccodepro'+col).innerHTML = group_spar_id;
 			self.opener.document.getElementById('cprosize'+col).innerHTML = group_size;
 			self.opener.document.getElementById('cpropod'+col).innerHTML = group_sn;
+			self.opener.document.getElementById('ccost'+col).value = group_price;
 			window.close();
         } else{
           //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
@@ -95,7 +96,7 @@
 	while($row_cus = @mysqli_fetch_array($qu_cus)){
 		?>
 		 <tr>
-            <td><A href="javascript:void(0);" onclick="get_product('<?php echo $row_cus['group_id'];?>','<?php echo $row_cus['group_name'];?>','<?php echo $_GET['protype']?>','<?php echo $row_cus['group_spar_id'];?>','<?php echo $_GET['col']?>','<?php echo $row_cus['group_size'];?>','<?php echo $row_cus['group_sn'];?>');"><?php echo $row_cus['group_spar_id']." | ".$row_cus['group_name'];?></A></td>
+            <td><A href="javascript:void(0);" onclick="get_product('<?php echo $row_cus['group_id'];?>','<?php echo $row_cus['group_name'];?>','<?php echo $_GET['protype']?>','<?php echo $row_cus['group_spar_id'];?>','<?php echo $_GET['col']?>','<?php echo $row_cus['group_size'];?>','<?php echo $row_cus['group_sn'];?>','<?php echo $row_cus['group_price'];?>');"><?php echo $row_cus['group_spar_id']." | ".$row_cus['group_name'];?></A></td>
           </tr>
 		<?php    	
 	}

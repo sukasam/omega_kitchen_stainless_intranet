@@ -48,7 +48,7 @@
 		while($row_cus = @mysqli_fetch_array($qu_cus)){
 			?>
 			 <tr>
-				<td><A href="javascript:void(0);" onclick="get_product('<?php echo $row_cus['group_id'];?>','<?php echo $row_cus['group_name'];?>','<?php echo $keys;?>','<?php echo $row_cus['group_spar_id'];?>','<?php echo $col;?>','<?php echo $row_cus['group_size'];?>','<?php echo $row_cus['group_sn'];?>');"><?php echo $row_cus['group_spar_id']." | ".$row_cus['group_name'];?></A></td>
+				<td><A href="javascript:void(0);" onclick="get_product('<?php echo $row_cus['group_id'];?>','<?php echo $row_cus['group_name'];?>','<?php echo $keys;?>','<?php echo $row_cus['group_spar_id'];?>','<?php echo $col;?>','<?php echo $row_cus['group_size'];?>','<?php echo $row_cus['group_sn'];?>','<?php echo $row_cus['group_price'];?>');"><?php echo $row_cus['group_spar_id']." | ".$row_cus['group_name'];?></A></td>
 			  </tr>
 			<?php    	
 		}
