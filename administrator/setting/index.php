@@ -29,8 +29,10 @@
       <tr>
         <td width="25%"><div align="center"><a href="../group_type/?mid=5"><img src="../images/menu/mn_serting01.png" width="71" height="60" border="0" alt=""><br><br><strong>กลุ่มลูกค้า</strong></a></div></td>
         <td  width="25%"><div align="center"><a href="../group_custommer/?mid=6"><img src="../images/menu/mn_serting02.png" width="89" height="61" border="0" alt=""><br><br><strong>ประเภทลูกค้า</strong></a></div></td>
-        <td  width="25%"><div align="center"><a href="../group_service/?mid=7"><img src="../images/menu/mn_serting03.png" width="77" height="61" border="0" alt=""><br><br><strong>ประเภทบริการลูกค้า</strong></a></div></td>
+        <!-- <td  width="25%"><div align="center"><a href="../group_service/?mid=7"><img src="../images/menu/mn_serting03.png" width="77" height="61" border="0" alt=""><br><br><strong>ประเภทบริการลูกค้า</strong></a></div></td> -->
         <td width="25%"><div align="center"><a href="../group_product/?mid=8"><img src="../images/menu/mn_serting04.png" width="62" height="60" border="0" alt=""><br><br><strong>ประเภทสินค้า</strong></a></div></td>
+        <td width="25%"><div align="center"><a href="../group_pod/"><img src="../images/menu/serial.png" width="89" height="61" border="0" alt=""><br><br>
+        <strong>รายการรุ่นสินค้า</strong></a></div></td>
       </tr>
       <tr>
         <td colspan="4"><br /><br /><br /></td>
@@ -49,7 +51,8 @@
         <td colspan="4"><br /><br /><br /></td>
       </tr>
       <tr>
-        <td><div align="center"><a href="../group_typeproduct2/"><img src="../images/menu/mn_serting05.png" width="62" height="60" border="0" alt=""><br><br><strong>รายการสินค้า SV</strong></a></div></td>
+        <!-- <td><div align="center"><a href="../group_typeproduct2/"><img src="../images/menu/mn_serting05.png" width="62" height="60" border="0" alt=""><br><br><strong>รายการสินค้า SV</strong></a></div></td> -->
+        <td><div align="center"><a href="../backup_database/"><img src="../images/menu/backup-database.png" alt="" width="96" height="58" border="0"><br><br><strong>สำรองฐานข้อมูล</strong></a></div></td>
         <td><div align="center"><a href="../group_sale/"><img src="../images/menu/mn_serting02.png" width="89" height="61" border="0" alt=""><br><br>
         </a><a href="../group_sale/"><strong>รายการพนักงานขาย</strong></a></div></td>
         <td><div align="center"><a href="../user/?smid=3&mid=9999"><img src="../images/menu/mn_serting08.png" width="100" height="60" border="0" alt=""><br><br><strong>ผู้ใช้งาน / การอนุญาต</strong></a></div></td>
@@ -59,9 +62,8 @@
         <td colspan="4"><br /><br /></td>
       </tr>
       <tr>
-        <td><div align="center"><a href="../backup_database/"><img src="../images/menu/backup-database.png" alt="" width="96" height="58" border="0"><br><br><strong>สำรองฐานข้อมูล</strong></a></div></td>
-        <td><div align="center"><a href="../group_pod/"><img src="../images/menu/serial.png" width="89" height="61" border="0" alt=""><br><br>
-        <strong>รายการรุ่นสินค้า</strong></a></div></td>
+        <td><div align="center"></div></td>
+        <td><div align="center"></div></td>
         <td></td>
         <td>
         

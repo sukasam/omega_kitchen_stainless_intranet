@@ -2285,5 +2285,10 @@ function get_stock_project_size($conn,$value) {
 	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_stock_project WHERE group_id = '".$value."'"));
 	return $row_protype['group_size'];
 }
+
+function get_stock_project_unit_price($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_stock_project WHERE group_id = '".$value."'"));
+	return $row_protype['group_unit_price'];
+}
 ?>
 

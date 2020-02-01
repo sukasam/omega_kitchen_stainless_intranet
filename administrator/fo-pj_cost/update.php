@@ -658,7 +658,7 @@ function submitForm() {
       <td width="8%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>จำนวน</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคาขาย / ต่อหน่วย</strong></td>
       <td width="13%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคาต้นทุนสินค้า/ต่อหน่วย</strong></td>
-      <td width="13%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ต้นทุนสินค้า 2/ต่อหน่วย</strong></td>
+      <td width="13%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคาต้นทุนสินค้าโรงงาน/ต่อหน่วย</strong></td>
       
       
     </tr>
@@ -732,20 +732,31 @@ function submitForm() {
 				<?php    
 				if($rowPro['ccost'] == 0 && $rowPro['cprice'] != 0){
 					?>
-					<input type="text" name="ccost[]" value="<?php     echo number_format($arrPJ[$runPJ]);?>" id="ccost<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;">
+					<input type="text" name="ccost[]" value="<?php echo number_format($arrPJ[$runPJ]);?>" id="ccost<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;" readonly>
 					<input type="hidden" name="ccostH[]" value="<?php     echo $rowPro['ccost']?>">
 					<?php    
 				}else{
 					?>
-					<input type="text" name="ccost[]" value="<?php     echo number_format($rowPro['ccost']);?>" id="ccost<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;">
-					<input type="hidden" name="ccostH[]" value="<?php     echo $rowPro['ccost']?>">
+					<input type="text" name="ccost[]" value="<?php echo number_format($rowPro['ccost']);?>" id="ccost<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;" readonly>
+					<input type="hidden" name="ccostH[]" value="<?php echo $rowPro['ccost']?>">
 					<?php    
 				}
 				?>
 			  </td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;">
-				<input type="text" name="costpros[]" value="<?php     echo number_format($rowPro['costpros']);?>" id="costpros<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;">
-				<input type="hidden" name="costprosH[]" value="<?php     echo $rowPro['costpros']?>">
+			  <?php
+				if($rowPro['costpros'] == ""){
+					?>
+					<input type="text" name="costpros[]" value="<?php echo number_format(get_stock_project_unit_price($conn,$rowPro['cpro']));?>" id="costpros<?php echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;" readonly>
+					<input type="hidden" name="costprosH[]" value="<?php echo get_stock_project_unit_price($conn,$rowPro['cpro']);?>">
+					<?php
+				}else{
+					?>
+					<input type="text" name="costpros[]" value="<?php  echo number_format($rowPro['costpros']);?>" id="costpros<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;" readonly>
+					<input type="hidden" name="costprosH[]" value="<?php     echo $rowPro['costpros']?>">
+					<?php
+				} 
+			  ?>
 			  </td>
 
 			</tr>
