@@ -8,12 +8,19 @@ if(in_array('2',$work_list)){$workList2 = 'aroow_ch.png';}else{$workList2 = 'aro
 if(in_array('3',$work_list)){$workList3 = 'aroow_ch.png';}else{$workList3 = 'aroow_nch.png';}
 if(in_array('4',$work_list)){$workList4 = 'aroow_ch.png';}else{$workList4 = 'aroow_nch.png';}
 if(in_array('5',$work_list)){$workList5 = 'aroow_ch.png';}else{$workList5 = 'aroow_nch.png';}
-if(in_array('6',$work_list)){$workList1 = 'aroow_ch.png';}else{$workList6 = 'aroow_nch.png';}
+if(in_array('6',$work_list)){$workList6 = 'aroow_ch.png';}else{$workList6 = 'aroow_nch.png';}
 if(in_array('7',$work_list)){$workList7 = 'aroow_ch.png';}else{$workList7 = 'aroow_nch.png';}
 if(in_array('8',$work_list)){$workList8 = 'aroow_ch.png';}else{$workList8 = 'aroow_nch.png';}
 if(in_array('9',$work_list)){$workList9 = 'aroow_ch.png';}else{$workList9 = 'aroow_nch.png';}
 if(in_array('10',$work_list)){$workList10 = 'aroow_ch.png';}else{$workList10 = 'aroow_nch.png';}
 if(in_array('11',$work_list)){$workList11 = 'aroow_ch.png';}else{$workList11 = 'aroow_nch.png';}
+
+$dateW1 = ($_POST["date_work1"] != '0000-00-00') ? format_date($_POST["date_work1"]) : "-";
+$dateW2 = ($_POST["date_work2"] != '0000-00-00') ? format_date($_POST["date_work2"]) : "-";
+$dateW3 = ($_POST["date_work3"] != '0000-00-00') ? format_date($_POST["date_work3"]) : "-";
+$dateW4 = ($_POST["date_work4"] != '0000-00-00') ? format_date($_POST["date_work4"]) : "-";
+$dateW5 = ($_POST["date_work5"] != '0000-00-00') ? format_date($_POST["date_work5"]) : "-";
+$dateW6 = ($_POST["date_work6"] != '0000-00-00') ? format_date($_POST["date_work6"]) : "-";
 
 for($i=0;$i<=count($_POST['cpro']);$i++){
 
@@ -74,32 +81,32 @@ $form = '
 <tr>
   <td ><img src="../images/'.$workList1.'" width="10" height="10" border="0" alt="" style="vertical-align: middle"/>&nbsp;แบบร่างและรายะเอียดประกอบแบบ</td>
   <td><img src="../images/'.$workList2.'" width="10" height="10" border="0" alt="" style="vertical-align: middle"/>&nbsp;เพิ่อเขียนแบบ : '.$_POST['work_detail1'].'</td>
-  <td>วันที่ : '.format_date($_POST["date_work1"]).'</td>
+  <td>วันที่ : '.$dateW1.'</td>
 </tr>
 <tr>
   <td><img src="../images/'.$workList3.'" width="10" height="10" border="0" alt="" style="vertical-align: middle"/>&nbsp;ไฟล์ CAD</td>
   <td><img src="../images/'.$workList4.'" width="10" height="10" border="0" alt="" style="vertical-align: middle"/>&nbsp;ตรวจสอบพื้นที่ / ดูหน้างาน / วัดพื้นที่</td>
-  <td>วันที่ : '.format_date($_POST["date_work2"]).'</td>
+  <td>วันที่ : '.$dateW2.'</td>
 </tr>
 <tr>
   <td><img src="../images/'.$workList5.'" width="10" height="10" border="0" alt="" style="vertical-align: middle"/>&nbsp;แค็ตตาล็อคสินค้า</td>
   <td><img src="../images/'.$workList6.'" width="10" height="10" border="0" alt="" style="vertical-align: middle"/>&nbsp;เพื่อผลิตสินค้า (อ้างอิงเอกสาร) : '.$_POST['work_detail2'].'</td>
-  <td>วันที่ : '.format_date($_POST["date_work3"]).'</td>
+  <td>วันที่ : '.$dateW3.'</td>
 </tr>
 <tr>
   <td><img src="../images/'.$workList7.'" width="10" height="10" border="0" alt="" style="vertical-align: middle"/>&nbsp;แบบแปลน ที่ลูกค้าอนุมัติ</td>
   <td><img src="../images/'.$workList8.'" width="10" height="10" border="0" alt="" style="vertical-align: middle"/>&nbsp;เพื่อแจ้งซ่อม / บริการ : '.$_POST['work_detail3'].'</td>
-  <td>วันที่ : '.format_date($_POST["date_work4"]).'</td>
+  <td>วันที่ : '.$dateW4.'</td>
 </tr>
 <tr>
   <td><img src="../images/'.$workList9.'" width="10" height="10" border="0" alt="" style="vertical-align: middle"/>&nbsp;แบบ Shop Drawing</td>
   <td><img src="../images/'.$workList10.'" width="10" height="10" border="0" alt="" style="vertical-align: middle"/>&nbsp;อื่นๆ ระบุ : '.$_POST['work_detail5'].'</td>
-  <td>วันที่ : '.format_date($_POST["date_work5"]).'</td>
+  <td>วันที่ : '.$dateW5.'</td>
 </tr>
 <tr>
   <td><img src="../images/'.$workList11.'" width="10" height="10" border="0" alt="" style="vertical-align: middle"/>&nbsp;อื่นๆ : '.$_POST['work_detail4'].'</td>
   <td></td>
-  <td>วันที่ : '.format_date($_POST["date_work6"]).'</td>
+  <td>วันที่ : '.$dateW6.'</td>
 </tr>
 </table>
   <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:10px;text-align:center;margin-top:10px;">

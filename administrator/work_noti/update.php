@@ -451,6 +451,7 @@ function checkMobileSale(){
             <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;">
               <strong>ชื่อลูกค้า :</strong>
               <input type="text" name="cd_name" value="<?php echo $cd_name;?>" id="cd_name" class="inpfoder" style="width:70%;">
+              <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
             </td>
             <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;">
               <strong>เลขที่ใบแจ้งงาน :</strong> 
@@ -730,7 +731,7 @@ function checkMobileSale(){
 		            filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;" id="ccodepro'+countBox+'">';
       				filedMore += '	</td>';
 		 			filedMore += '	<td style="border:1px solid #000000;text-align:left;padding:5;">';
-		 			filedMore += '		<select name="cpro[]" id="cpro'+countBox+'" class="inputselect" style="width:85%;">';
+		 			filedMore += '		<select name="cpro[]" id="cpro'+countBox+'" class="inputselect" style="width:85%;" onChange="get_product('+countBox+');">';
 		 			filedMore += '		<option value="">กรุณาเลือกรายการ</option>';
 		 			filedMore += '';
 		 			filedMore += '	</select>';	
