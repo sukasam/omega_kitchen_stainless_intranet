@@ -273,7 +273,7 @@ function format_date_th ($value,$type) {
 			$msg =  $s_day . " " .  $month_brief_th[$s_month]   . " " .  substr($s_year,-2)  ;
 			break;
 		case "7" :  // 4 ก.พ. 51
-			$msg =  $s_day . "/" .  $s_month   . "/" .  $s_year  ;
+			$msg =  sprintf('%02d',$s_day) . "/" .  sprintf('%02d',$s_month)   . "/" .  $s_year  ;
 			break;
 		case "8" :  // 4 ม.ค. 2548 <br /><br />14.11 น. 
 			$msg =  $s_day . " " .  $month_brief_th[$s_month]  . " " .  $s_year . "<br><br>เวลา " . $s_hour . "." . $s_minute . " น." ;
@@ -1549,6 +1549,23 @@ function check_serviceman2($conn){
 	}	
 }
 
+function check_product_order($conn){
+	
+	$thdate = substr(date("Y")+543,2);
+	$concheck = "OP ".$thdate.date("/m/");
+	
+	$qu_forder = @mysqli_query($conn,"SELECT * FROM s_order_product WHERE sv_id like '%".$concheck."%' ORDER BY sv_id DESC");
+	$num_oder = @mysqli_num_rows($qu_forder);
+	$row_forder = @mysqli_fetch_array($qu_forder);
+	
+	if($row_forder['sv_id'] == ""){
+		return "OP ".$thdate.date("/m/")."001";
+	}else{
+		$num_odersum = $num_oder+1;
+		return "OP ".$thdate.date("/m/").sprintf("%03d",$num_odersum);
+	}	
+}
+
 function format_date($value) {
 	if($value != "0000-00-00"){
 		list ($s_year, $s_month, $s_day) = explode("-", $value);
@@ -2289,6 +2306,120 @@ function get_stock_project_size($conn,$value) {
 function get_stock_project_unit_price($conn,$value) {
 	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_stock_project WHERE group_id = '".$value."'"));
 	return $row_protype['group_unit_price'];
+}
+
+function get_cname_fopj($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_fopj WHERE fo_id = '".$value."'"));
+	return $row_protype['cd_name'];
+}
+
+function get_csetup_fopj($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_fopj WHERE fo_id = '".$value."'"));
+	return $row_protype['loc_name'];
+}
+
+function get_csale_fopj($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_fopj WHERE fo_id = '".$value."'"));
+	return getsalename($conn,$row_protype['cs_sell']);
+}
+
+function get_fopj($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_fopj WHERE fo_id = '".$value."'"));
+	return $row_protype;
+}
+
+function get_fopj_pro($conn,$value){
+	$quQry = mysqli_query($conn,"SELECT * FROM `s_fopj_product` WHERE fo_id = '".$value."' ORDER BY id ASC");
+	return $quQry;
+}
+
+function get_checkOP($conn,$value,$sr_id){
+
+	if($sr_id != ""){
+		$quPro = @mysqli_query($conn,"SELECT * FROM s_order_product WHERE cus_id = '".$value."' AND sr_id != ".$sr_id."  ORDER BY sr_id ASC");
+	}else{
+		$quPro = @mysqli_query($conn,"SELECT * FROM s_order_product WHERE cus_id = '".$value."'  ORDER BY sr_id ASC");
+	}
+ 	
+	$rowPro = '';
+	while($row = @mysqli_fetch_array($quPro)){
+		$rowPro .= $row['pro_list'].',';
+	}
+
+	return rtrim($rowPro, ",");
+}
+
+function get_orderproduct($conn,$ymd,$loc,$ctype) {
+
+	$qqu_srv = @mysqli_query($conn,"SELECT * FROM s_order_product WHERE job_open = '".$ymd."' AND st_setting = 0 LIMIT 4");
+	$numsrv = @mysqli_num_rows($qqu_srv);
+	$res = "";
+	if($numsrv > 0){
+		$numR = 1;
+		//blue , #f68cfd, red, green
+		while($row_dea = @mysqli_fetch_array($qqu_srv)){
+			$chaf = preg_replace("/\//","-",$row_dea["sv_id"]);
+
+			if($row_dea['job_opentime'] != ""){
+				$jobOpen = " เวลา ".$row_dea['job_opentime'];
+			}else{
+				$jobOpen = "";
+			}
+			
+
+			// if($row_dea['sr_ctype'] == '107'){
+			// 	$scstatus = "<span style=\"color:blue;\">".$numR.".".get_csetup_fopj($conn,$row_dea['cus_id']).$jobOpen."</span>";
+			// }else{
+			// 	$scstatus = "<span style=\"color:green;\">".$numR.".".get_csetup_fopj($conn,$row_dea['cus_id']).$jobOpen."</span>";
+			// }
+
+			$scstatus = "<span style=\"color:blue;\">".$numR.".".get_csetup_fopj($conn,$row_dea['cus_id']).$jobOpen."</span>";
+			
+
+			//$res .= "&nbsp;<a href=\"../../upload/service_report_open/".$chaf.".pdf\" target=\"_blank\"><strong>".$scstatus."</strong></a>\n<br>\n";
+			$res .= "&nbsp;<a href=\"../../upload/order_product/".$chaf.".pdf\" target=\"_blank\"><strong>".$scstatus."</strong></a>\n<br>\n";
+			$numR++;
+		}
+		
+	}
+	
+	return $res;		
+}
+
+function get_orderproduct_closed($conn,$ymd,$loc,$ctype) {
+
+	
+	$qqu_srv = @mysqli_query($conn,"SELECT * FROM s_order_product WHERE job_close = '".$ymd."' AND st_setting = 1 LIMIT 4");
+	$numsrv = @mysqli_num_rows($qqu_srv);
+	$res = "";
+	if($numsrv > 0){
+		$numR = 1;
+		//blue , #f68cfd, red, green
+		while($row_dea = @mysqli_fetch_array($qqu_srv)){
+			$chaf = preg_replace("/\//","-",$row_dea["sv_id"]);
+			// if($row_dea['st_setting'] == 0){
+			// 	$scstatus = "<span style=\"color:green;\">".$row_dea['sv_id']."</span>";
+			// }else{
+			// 	$scstatus = "<span style=\"color:red;\">".$row_dea['sv_id']."</span>";
+			// }
+
+			if($row_dea['job_opentime'] != ""){
+				$jobOpen = " เวลา ".$row_dea['job_closetime'];
+			}else{
+				$jobOpen = "";
+			}
+
+
+			$scstatus = "<span style=\"color:blue;\">".$numR.".".get_csetup_fopj($conn,$row_dea['cus_id']).$jobOpen."</span>";
+			
+
+			$res .= "&nbsp;<a href=\"../../upload/order_product/".$chaf.".pdf\" target=\"_blank\"><strong>".$scstatus."</strong></a>\n<br>\n";
+			$numR++;
+		}
+		
+	}
+	
+	return $res;		
 }
 ?>
 

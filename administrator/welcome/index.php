@@ -27,17 +27,20 @@
 <div class="bbmainmenu">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbmainindex">
       <tr>
-        <td width="33%"><a href="../first_order/?mid=12"><img src="../images/menu/frish_order_01.png" width="136" height="139" border="0" alt="" /></a></td>
-        <td  width="33%"><a href="../service_report2/?mid=13"><img src="../images/menu/service-form_01.png" width="151" height="130" border="0" alt="" /></a></td>
-        <td  width="33%"><a href="../group_sparpart/?mid=14"><img src="../images/menu/service-schedule_01.png" width="198" height="135" border="0" alt="" /></a></td>
+        <td width="25%"><a href="../first_order/?mid=12"><img src="../images/menu/frish_order_01.png" width="136" height="139" border="0" alt="" /></a></td>
+        <td width="25%"><a href="../service_report2/?mid=13"><img src="../images/menu/service-form_01.png" width="151" height="130" border="0" alt="" /></a></td>
+        <td width="25%"><a href="../group_sparpart/?mid=14"><img src="../images/menu/service-schedule_01.png" width="198" height="135" border="0" alt="" /></a></td>
+        <td width="25%"><a href="../report/?mid=16"><img src="../images/menu/report_01.png" width="111" height="158" border="0" alt="" /></a></td>
       </tr>
       <tr>
         <td colspan="3"><br /><br /><br /></td>
       </tr>
       <tr>
-        <td><a href="../report/?mid=16"><img src="../images/menu/report_01.png" width="111" height="158" border="0" alt="" /></a></td>
         <td><a href="../setting"><img src="../images/menu/setting_01.png" width="97" height="134" border="0" alt="" /></a></td>
+        <td><a href="../order_product/"><img src="../images/menu/order_product_01.png" width="151" height="130" border="0" alt="" /></a></td>
+        <td><a href="../schedule_order/"><img src="../images/menu/work_schedule_01.png" width="151" height="130" border="0" alt="" /></a></td>
         <td><a href="../logout.php"><img src="../images/menu/logout_01.png" width="108" height="126" border="0" alt=""></a></td>
+
       </tr>
       <tr>
         <td colspan="3"><br /><br /></td>

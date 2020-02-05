@@ -279,15 +279,14 @@ function submitForm(){
                 <td nowrap class="name">ชื่อสินค้า</td>
                 <td><input name="group_name" type="text" id="group_name"  value="<?php     echo $group_name; ?>" size="60"></td>
               </tr>
+			  <tr >
+                <td nowrap class="name">รุ่น/แบรนด์</td>
+                <td><input name="group_sn" type="text" id="group_sn"  value="<?php     echo $group_sn; ?>" size="60"></td>
+              </tr>
 			  <tr>
                 <td nowrap class="name">ขนาดสินค้า</td>
                 <td><input name="group_size" type="text" id="group_size"  value="<?php     echo $group_size; ?>" size="60"></td>
               </tr>
-              <tr >
-                <td nowrap class="name">รุ่น/แบรนด์</td>
-                <td><input name="group_sn" type="text" id="group_sn"  value="<?php     echo $group_sn; ?>" size="60"></td>
-              </tr>
-
 			  <tr>
                 <td nowrap class="name">หมวดสินค้า</td>
                 <td><input name="group_category" type="text" id="group_category"  value="<?php     echo $group_category; ?>" size="60"></td>

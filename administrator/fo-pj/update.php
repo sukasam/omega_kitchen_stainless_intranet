@@ -472,8 +472,8 @@ Vat 7%</strong></td>
       <td width="5%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>Code</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รหัสสินค้า</strong></td>
       <td width="27%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รายการ</strong></td>
-	  <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ขนาด</strong></td>
       <td width="15%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รุ่น / แบรนด์</strong></td>
+	  <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ขนาด</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>จำนวน</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคาต้นทุนสินค้า/ต่อหน่วย</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคาขาย / ต่อหน่วย</strong></td>
@@ -510,13 +510,13 @@ Vat 7%</strong></td>
 			  </select>
 			  <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php?protype=cpro<?php     echo $rowCal;?>&col=<?php echo $rowCal;?>');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
 			  </td>
-			  <td style="border:1px solid #000000;padding:5;text-align:center;" id="cprosize<?php echo $rowCal;?>">
-			  <input type="hidden" name="csn[]" value="<?php echo $rowPro['csn'];?>" id="csn<?php echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;">
-		  	  <?php echo get_stock_project_size($conn,$rowPro['cpro']);?>
-			  </td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;" id="cpropod<?php echo $rowCal;?>">
 			  <input type="hidden" name="cpod[]" value="<?php echo $rowPro['cpod'];?>" id="cpod<?php echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;">
 			  <?php echo get_stock_project_sn($conn,$rowPro['cpro']);?>
+			  </td>
+			  <td style="border:1px solid #000000;padding:5;text-align:center;" id="cprosize<?php echo $rowCal;?>">
+			  <input type="hidden" name="csn[]" value="<?php echo $rowPro['csn'];?>" id="csn<?php echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;">
+		  	  <?php echo get_stock_project_size($conn,$rowPro['cpro']);?>
 			  </td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;">
 				<input type="text" name="camount[]" value="<?php     echo $rowPro['camount'];?>" id="camount<?php     echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;">
