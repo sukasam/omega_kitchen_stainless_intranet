@@ -39,7 +39,8 @@
         <td><a href="../setting"><img src="../images/menu/setting_01.png" width="97" height="134" border="0" alt="" /></a></td>
         <td><a href="../order_product/"><img src="../images/menu/order_product_01.png" width="151" height="130" border="0" alt="" /></a></td>
         <td><a href="../schedule_order/"><img src="../images/menu/work_schedule_01.png" width="151" height="130" border="0" alt="" /></a></td>
-        <td><a href="../logout.php"><img src="../images/menu/logout_01.png" width="108" height="126" border="0" alt=""></a></td>
+        <td><a href="../group_stock_order/"><img src="../images/menu/product_rady_made_01.png" width="170" height="130" border="0" alt=""></a></td>
+        <!-- <td><a href="../logout.php"><img src="../images/menu/logout_01.png" width="108" height="126" border="0" alt=""></a></td> -->
 
       </tr>
       <tr>

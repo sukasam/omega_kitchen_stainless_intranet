@@ -132,10 +132,10 @@ function check9(frm){
       <strong>ตามชื่่อผู้ขาย</strong></SPAN></A></LI>
       <LI><A class=shortcut-button href="../report/?mid=16&act=10"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
       <strong>ตารางคุมสัญญา</strong></SPAN></A></LI>
-      <LI><A class=shortcut-button href="../report/?mid=16&act=12"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
-      <strong>เงินประกันลูกค้าเช่า</strong></SPAN></A></LI>
       <LI><A class=shortcut-button href="../report/?mid=16&act=11"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
       <strong>รายงานสรุป</strong></SPAN></A></LI>
+      <LI><A class=shortcut-button href="../report/?mid=16&act=12"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
+      <strong>เงินประกันลูกค้าเช่า</strong></SPAN></A></LI>
       <LI><A class=shortcut-button href="../report/?mid=16&act=13"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
       <strong>รายงานใบแจ้งงาน</strong></SPAN></A></LI>
       <LI><A class=shortcut-button href="../report/?mid=16&act=16"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
