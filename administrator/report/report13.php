@@ -64,7 +64,7 @@
         <?php     if($_REQUEST['sh1'] == 1){?><th width="15%">ชื่อลูกค้า / บริษัท + เบอร์โทร</th><?php     }?>
         <?php     if($_REQUEST['sh2'] == 1){?><th width="15%">ชื่อร้าน / สถานที่ติดตั้ง</th><?php     }?>
         <?php     if($_REQUEST['sh3'] == 1){?><th width="10%">จังหวัด</th><?php     }?>
-		<?php     if($_REQUEST['sh6'] == 1 || $_REQUEST['sh7'] == 1 || $_REQUEST['sh8'] == 1){?><th width="40%">
+		<?php     if($_REQUEST['sh6'] == 1 || $_REQUEST['sh7'] == 1 || $_REQUEST['sh8'] == 1){?><th width="30%">
 		<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tbreport">
           <tr>
             <?php     if($_REQUEST['sh6'] == 1){?><th style="border:0;text-align:left;" >สินค้า</th><?php     }?>
@@ -72,6 +72,7 @@
 			<?php     if($_REQUEST['sh6'] == 1){?><th style="border:0;text-align:left;padding-left:70px;;">จำนวน</th><?php     }?>
           </tr>
         </table></th><?php     }?>
+		<th width="10%">รายละเอียดงาน</th>
         <?php     if($_REQUEST['sh11'] == 1){?><th width="15%">สถานะติดตามการแจ้งงาน</th><?php     }?>
         <?php     if($_REQUEST['sh10'] == 1){?><th width="10%">พนักงานขาย</th><?php     }?>
       </tr>
@@ -104,6 +105,7 @@
 					}
 				?>
               </table></td><?php     }?>
+			  <td><?php echo stripslashes($row_fr['remark']);?></td>
               <?php     if($_REQUEST['sh11'] == 1){?>
 			  	<td>
 				  <table border="0" cellpadding="0" cellspacing="0" class="tbreport" style="width: 100%;">
