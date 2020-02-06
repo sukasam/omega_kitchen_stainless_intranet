@@ -687,7 +687,7 @@ function checkMobileSale(){
 						}
 				  ?>
 			  </select>
-			  <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php?protype=cpro<?php     echo $rowCal;?>&col=<?php echo $rowCal;?>');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
+			  <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search_pro.php?protype=<?php echo $rowCal;?>&col=<?php echo $rowCal;?>');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
 			  </td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;" id="cpropod<?php echo $rowCal;?>">
 			  <input type="hidden" name="cpod[]" value="<?php echo $rowPro['cpod'];?>" class="inpfoder" style="width:100%;text-align:center;">
@@ -727,7 +727,7 @@ function checkMobileSale(){
 		 		var filedMore  = '<tr>';
 		 			filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;">'+countBox+'</td>';
 		 			filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;" >';
-      				filedMore += '		<input type="text" name="ccode[]" value="" id="cpod'+countBox+'" class="inpfoder" style="width:100%;text-align:center;"></td>';
+      				filedMore += '		<input type="text" name="ccode[]" value="" id="ccode'+countBox+'" class="inpfoder" style="width:100%;text-align:center;"></td>';
 		            filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;" id="ccodepro'+countBox+'">';
       				filedMore += '	</td>';
 		 			filedMore += '	<td style="border:1px solid #000000;text-align:left;padding:5;">';
@@ -735,7 +735,7 @@ function checkMobileSale(){
 		 			filedMore += '		<option value="">กรุณาเลือกรายการ</option>';
 		 			filedMore += '';
 		 			filedMore += '	</select>';	
-		 			filedMore += '<a href="javascript:void(0);" onClick="windowOpener(\'400\', \'500\', \'\', \'search.php?protype=cpro'+countBox+'&col='+countBox+'\');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>';
+		 			filedMore += '<a href="javascript:void(0);" onClick="windowOpener(\'400\', \'500\', \'\', \'search_pro.php?protype='+countBox+'\');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>';
 		 			filedMore += '	</td>';
 		 			filedMore += '	<td style="border:1px solid #000000;padding:5;text-align:center;" id="cpropod'+countBox+'">';
       				filedMore += '		<input type="hidden" name="cpod[]" value="" class="inpfoder" style="width:100%;text-align:center;"></td>';

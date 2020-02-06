@@ -16,6 +16,27 @@ function GetXmlHttpObject(){
    return xmlHttp;
 }
 
+function get_pros(pval,col){
+	//alert(keys);
+	var xmlHttp;
+   xmlHttp=GetXmlHttpObject(); //Check Support Brownser
+   URL = pathLocal+'ajax_return.php?action=get_pros&pval='+pval+'&col='+col;
+   if (xmlHttp==null){
+      alert ("Browser does not support HTTP Request");
+      return;
+   }
+    xmlHttp.onreadystatechange=function (){
+        if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
+            document.getElementById('rscus').innerHTML = xmlHttp.responseText;
+        } else{
+          //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
+        }
+   };
+   xmlHttp.open("GET",URL,true);
+   xmlHttp.send(null);
+}
+
+
 function get_pro(pval,param1,param2,param3,param4){
 	var xmlHttp;
    xmlHttp=GetXmlHttpObject(); //Check Support Brownser

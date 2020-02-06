@@ -152,7 +152,8 @@ function check_select(frm){
           <TH width="12%">First Order ID</TH>
           <TH width="35%">ชื่อลูกค้า</TH>
           <TH width="18%"><strong>สถานที่ติดตั้ง</strong></TH>
-          <TH width="5%" ><div align="center"><img src="../icons/favorites_use.png" width="15" height="15"> ใช้งาน <br><img src="../icons/favorites_stranby.png" width="15" height="15"> Standby <br> <img src="../icons/favorites_close.png" width="15" height="15"> ยกเลิก  <br><img src="../icons/favorites_service.png" width="15" height="15"> Service</div></TH>
+          <TH width="5%" ><div align="center"><img src="../icons/favorites_use.png" width="15" height="15"> ใช้งาน <br><img src="../icons/favorites_stranby.png" width="15" height="15"> Standby <br> <img src="../icons/favorites_close.png" width="15" height="15"> ยกเลิก</div></TH>
+          <!--  <br><img src="../icons/favorites_service.png" width="15" height="15"> Service -->
           <TH width="5%" nowrap ><div align="center"><a> Open / </a><a> Close</a></div></TH>
           <TH width="5%" nowrap ><div align="center"><a>Setting</a></div></TH>
           <TH width="5%"><div align="center"><a>Download</a></div></TH>
@@ -211,8 +212,8 @@ function check_select(frm){
             <div align="center" style="padding-top:5px;vertical-align: middle;">
             <a href="../first_order/?ff=<?php     echo $rec[$PK_field]; ?>&gg=0&page=<?php     echo $_GET['page']; ?>&<?php     echo $FK_field; ?>=<?php     echo $_REQUEST["$FK_field"];?>"><img src="../icons/favorites_use.png" width="15" height="15"> | </a>
             <a href="../first_order/?ff=<?php     echo $rec[$PK_field]; ?>&gg=1&page=<?php     echo $_GET['page']; ?>&<?php     echo $FK_field; ?>=<?php     echo $_REQUEST["$FK_field"];?>"><img src="../icons/favorites_stranby.png" width="15" height="15"> | </a>
-            <a href="../first_order/?ff=<?php     echo $rec[$PK_field]; ?>&gg=2&page=<?php     echo $_GET['page']; ?>&<?php     echo $FK_field; ?>=<?php     echo $_REQUEST["$FK_field"];?>"><img src="../icons/favorites_close.png" width="15" height="15"> | </a>
-             <a href="../first_order/?ff=<?php    echo $rec[$PK_field]; ?>&gg=3&page=<?php    echo $_GET['page']; ?>&<?php    echo $FK_field; ?>=<?php    echo $_REQUEST["$FK_field"];?>"><img src="../icons/favorites_service.png" width="15" height="15"></a>
+            <a href="../first_order/?ff=<?php     echo $rec[$PK_field]; ?>&gg=2&page=<?php     echo $_GET['page']; ?>&<?php     echo $FK_field; ?>=<?php     echo $_REQUEST["$FK_field"];?>"><img src="../icons/favorites_close.png" width="15" height="15"></a>
+            <!-- <a href="../first_order/?ff=<?php    echo $rec[$PK_field]; ?>&gg=3&page=<?php    echo $_GET['page']; ?>&<?php    echo $FK_field; ?>=<?php    echo $_REQUEST["$FK_field"];?>"><img src="../icons/favorites_service.png" width="15" height="15"></a> -->
             </div>
           </div></TD>
           <TD nowrap style="vertical-align:middle"><!--<div align="center">

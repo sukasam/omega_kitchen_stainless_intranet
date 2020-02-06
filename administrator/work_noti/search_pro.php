@@ -42,11 +42,11 @@
 </style>
 
 <script type="text/javascript">
-	function get_customer(cid){
+	function get_products(cid,col){
 
 		var xmlHttp;
    xmlHttp=GetXmlHttpObject(); //Check Support Brownser
-   URL = pathLocal+'ajax_return.php?action=getcusDetail&cus_id='+cid;
+   URL = pathLocal+'ajax_return.php?action=getproDetail&pro_id='+cid;
    if (xmlHttp==null){
       alert ("Browser does not support HTTP Request");
       return;
@@ -54,19 +54,12 @@
     xmlHttp.onreadystatechange=function (){
         if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
 			var ds = xmlHttp.responseText.split("|");
-			self.opener.document.getElementById('cd_name').value = ds[1];
-			self.opener.document.getElementById('cd_address').value = ds[2];
-			self.opener.document.getElementById('cd_province').innerHTML = ds[3];
-			self.opener.document.getElementById('cd_contact').value = ds[4];
-			self.opener.document.getElementById('cd_mobile').value = ds[5];
-			self.opener.document.getElementById('loc_name').value = ds[6];
-			self.opener.document.getElementById('loc_address').value = ds[7];
-			self.opener.document.getElementById('sale_contact').innerHTML = ds[8];
-			self.opener.document.getElementById('sale_tel').value = ds[9];
-			self.opener.document.getElementById('cd_position').value = '';
-			self.opener.document.getElementById('cd_line').value = '';
-			self.opener.document.getElementById('cd_tel').value = '';
-			self.opener.document.getElementById('cd_email').value = '';
+			self.opener.document.getElementById('ccode'+col).value = '';
+			self.opener.document.getElementById('ccodepro'+col).innerHTML = ds[1];
+			self.opener.document.getElementById('cpro'+col).innerHTML = ds[2];
+			self.opener.document.getElementById('cpropod'+col).innerHTML = ds[3];
+			self.opener.document.getElementById('cprosize'+col).innerHTML = ds[4];
+			self.opener.document.getElementById('camount'+col).value = ds[5];
 			window.close();
         } else{
           //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
@@ -89,23 +82,22 @@
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search">
   <tr>
     <td colspan="2"><strong>ค้นหา&nbsp;&nbsp;:&nbsp;&nbsp;</strong>
-        <input type="text" name="textfield" id="textfield" style="width:85%;" onkeyup="get_cus(this.value);"/>
+        <input type="text" name="textfield" id="textfield" style="width:85%;" onkeyup="get_pros(this.value,'<?php  echo $_REQUEST['protype'];?>');"/>
     </td>
   </tr>
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search">
 <tr>
-    <th width="50%">ชื่อร้าน-ชื่อบริษัท</th>
+    <th width="50%">ชื่อรายการสินค้า</th>
   </tr>
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search" id="rscus">
 <?php  
-	//echo "SELECT fo_id,cd_name,loc_name FROM s_fopj WHERE 1 AND (status_use = '1') ORDER BY cd_name ASC";
-  	$qu_cus = @mysqli_query($conn,"SELECT fo_id,cd_name,loc_name FROM s_fopj WHERE 1 AND (status_use = '0') ORDER BY cd_name ASC");
-	while($row_cus = @mysqli_fetch_array($qu_cus)){
+  	$qu_cus = @mysqli_query($conn,"SELECT * FROM s_group_stock_project WHERE 1 ORDER BY group_name ASC");
+	while($row_pros = @mysqli_fetch_array($qu_cus)){
 		?>
 		 <tr>
-            <td><A href="javascript:void(0);" onclick="get_customer('<?php  echo $row_cus['fo_id'];?>')"><?php  echo $row_cus['cd_name'];?> (<?php  echo $row_cus['loc_name']?>)</A></td>
+            <td><A href="javascript:void(0);" onclick="get_products('<?php  echo $row_pros['group_id'];?>','<?php  echo $_REQUEST['protype'];?>')"><?php  echo $row_pros['group_spar_id']." | ".$row_pros['group_name']. " | ".$row_pros['group_size'];?></A></td>
           </tr>
 		<?php 	
 	}

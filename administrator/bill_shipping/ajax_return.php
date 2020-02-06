@@ -68,7 +68,7 @@
 		if($cd_name != ""){
 			$consd = "AND cd_name LIKE '%".$cd_name."%'";
 		}
-		$qu_cus = mysqli_query($conn,"SELECT fo_id,cd_name,loc_name FROM s_fopj WHERE 1 ".$consd." AND `fs_id` NOT LIKE 'SV' ORDER BY cd_name ASC");
+		$qu_cus = mysqli_query($conn,"SELECT fo_id,cd_name,loc_name FROM s_fopj WHERE 1 ".$consd." AND (status_use = '0') AND `fs_id` NOT LIKE 'SV' ORDER BY cd_name ASC");
 		while($row_cusx = @mysqli_fetch_array($qu_cus)){
 			?>
 			 <tr>

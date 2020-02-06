@@ -24,7 +24,7 @@
 			$consd = "WHERE cd_name LIKE '%".$cd_name."%'";
 		}
 		//echo "SELECT * FROM s_first_order ".$consd." ORDER BY cd_name ASC";
-		$qu_cus = mysqli_query($conn,"SELECT * FROM s_fopj ".$consd." ORDER BY cd_name ASC");
+		$qu_cus = mysqli_query($conn,"SELECT * FROM s_fopj ".$consd." AND (status_use = '0') ORDER BY cd_name ASC");
 		while($row_cus = @mysqli_fetch_array($qu_cus)){
 			?>
 			 <tr>
@@ -63,6 +63,43 @@
 		echo "|".$row_cus['cd_name']."|".$row_cus['cd_address']."|".$cProvince."|".$row_cus['c_contact']."|".$row_cus['c_tel']."|".$row_cus['loc_name']."|".$row_cus['loc_address']."|".$cSale.'|'.$CsTel.'|'.$row_cus['cd_tel'];
 
 	}
+
+	if($_GET['action'] == 'getproDetail'){
+		$pid = $_GET['pro_id'];
+		$rowpro  = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_group_stock_project WHERE group_id = '".$pid."'"));
+
+		$amount = '0';
+		$listPRo = '';
+		$qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_stock_project ORDER BY group_name ASC");
+		while($row_qupro1 = @mysqli_fetch_array($qupro1)){
+
+			$chkL = ($pid == $row_qupro1['group_id']) ? 'selected' : '';
+			$listPRo .='<option value="'.$row_qupro1['group_id'].'" '.$chkL.'>'.$row_qupro1['group_name'].'</option>';
+		    	
+		}
+
+		echo "|".$rowpro['group_spar_id']."|".$listPRo."|".$rowpro['group_sn']."|".$rowpro['group_size']."|".$amount;
+	}
+
+
+	if($_GET['action'] == 'get_pros'){
+		$cd_name =  iconv( 'UTF-8', 'TIS-620', $_REQUEST['pval']);
+		if($cd_name != ""){
+			$consd = "WHERE 1 AND (group_name LIKE '%".$cd_name."%' OR group_spar_id LIKE '%".$cd_name."%')";
+		}
+		$col = $_REQUEST['col'];
+		//echo "SELECT * FROM s_group_typeproduct ".$consd." ORDER BY group_name ASC";
+		$qu_cus = mysqli_query($conn,"SELECT * FROM s_group_stock_project ".$consd." ORDER BY group_name ASC");
+		while($row_pros = @mysqli_fetch_array($qu_cus)){
+			?>
+			 <tr>
+				<td><A href="javascript:void(0);" onclick="get_products('<?php echo $row_pros['group_id'];?>','<?php echo $col;?>');"><?php  echo $row_pros['group_spar_id']." | ".$row_pros['group_name']. " | ".$row_pros['group_size'];?></A></td>
+			  </tr>
+			<?php    	
+		}
+		//echo "SELECT cd_name FROM s_work_noti ".$consd." ORDER BY cd_name ASC";
+	}
+
 
 	
 	
