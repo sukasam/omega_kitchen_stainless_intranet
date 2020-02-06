@@ -1389,6 +1389,24 @@ function check_firstorder($conn){
 	
 }
 
+function check_billshipping($conn){
+	
+	$thdate = substr(date("Y")+543,2);
+	$concheck = "SS ".$thdate.date("/m/");
+	
+	$qu_forder = @mysqli_query($conn,"SELECT * FROM s_bill_shipping WHERE sv_id like '%".$concheck."%' ORDER BY sv_id DESC");
+	$num_oder = @mysqli_num_rows($qu_forder);
+	$row_forder = @mysqli_fetch_array($qu_forder);
+	
+	if($row_forder['sv_id'] == ""){
+		return "SS ".$thdate.date("/m/")."001";
+	}else{
+		$num_odersum = $num_oder+1;
+		return "SS ".$thdate.date("/m/").sprintf("%03d",$num_odersum);
+	}
+	
+}
+
 function check_projectorder($conn){
 	
 	$thdate = substr(date("Y")+543,2);
@@ -2242,6 +2260,12 @@ function getStockSpar($conn,$gid){
 	return $row_dea['group_stock'];	
 }
 
+function getStockOrder($conn,$gid){
+	$row_dea = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_stock_order WHERE group_id = '".$gid."'"));
+	return $row_dea['group_stock'];	
+}
+
+
 function get_username($conn,$user_account) {
 	
 	$row_user = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_user WHERE username = '".$user_account."'"));
@@ -2305,6 +2329,37 @@ function get_stock_project_size($conn,$value) {
 
 function get_stock_project_unit_price($conn,$value) {
 	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_stock_project WHERE group_id = '".$value."'"));
+	return $row_protype['group_unit_price'];
+}
+
+
+function get_stock_order_name($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_stock_order WHERE group_id = '".$value."'"));
+	return $row_protype['group_name'];
+}
+
+function get_stock_order_code($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_stock_order WHERE group_id = '".$value."'"));
+	return $row_protype['group_spar_id'];
+}
+
+function get_stock_order_sn($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_stock_order WHERE group_id = '".$value."'"));
+	return $row_protype['group_sn'];
+}
+
+function get_stock_order_size($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_stock_order WHERE group_id = '".$value."'"));
+	return $row_protype['group_size'];
+}
+
+function get_stock_order_stock($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_stock_order WHERE group_id = '".$value."'"));
+	return $row_protype['group_stock'];
+}
+
+function get_stock_order_unit_price($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM  s_group_stock_order WHERE group_id = '".$value."'"));
 	return $row_protype['group_unit_price'];
 }
 
