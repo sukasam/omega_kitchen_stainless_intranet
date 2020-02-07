@@ -5,6 +5,15 @@
 	$fopj_info = get_fopj($conn,$_POST['cus_id']);
 	$proList = get_fopj_pro($conn,$_POST['cus_id']);
 
+	$dateW1 = ($_POST["date_chk1"] != '0000-00-00') ? format_date($_POST["date_chk1"]) : "-";
+	$dateW2 = ($_POST["date_chk2"] != '0000-00-00') ? format_date($_POST["date_chk2"]) : "-";
+	$dateW3 = ($_POST["date_chk3"] != '0000-00-00') ? format_date($_POST["date_chk3"]) : "-";
+	$dateW4 = ($_POST["date_chk4"] != '0000-00-00') ? format_date($_POST["date_chk4"]) : "-";
+	$dateW5 = ($_POST["date_chk5"] != '0000-00-00') ? format_date($_POST["date_chk5"]) : "-";
+	$dateW6 = ($_POST["date_chk6"] != '0000-00-00') ? format_date($_POST["date_chk6"]) : "-";
+	$dateW7 = ($_POST["date_chk7"] != '0000-00-00') ? format_date($_POST["date_chk7"]) : "-";
+	$dateW8 = ($_POST["date_chk8"] != '0000-00-00') ? format_date($_POST["date_chk8"]) : "-";
+
 	$form = '<style>
 	.bgheader{
 		font-size:10px;
@@ -121,14 +130,42 @@
 			<br />
 			<strong>วันที่สั่งผลิตสินค้า  :</strong> '.format_date($_POST['job_open']).' &nbsp;&nbsp;
 			<strong>กำหนดผลิตเสร็จ :</strong> '.format_date($_POST['job_balance']).'<br /><br />
-			<strong>กำหนดส่งสินค้า :</strong> '.format_date($_POST['sr_stime']).'
+			<strong>กำหนดส่งสินค้า :</strong> '.format_date($_POST['sr_stime']).' &nbsp;&nbsp; <strong>พนักงานขาย :</strong> '.getsalename($conn,$fopj_info['cs_sell']).' 
             </td>
           </tr>
     </table>
 	<br>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tb2">
       <tr>
-        <td width="53%"><strong>สถานที่ติดตั้ง / ส่งสินค้า : </strong>'.$fopj_info['loc_name'].'<br /><br /><br /><br />
+		<td width="53%" style="padding:5;"><strong>สถานที่ติดตั้ง / ส่งสินค้า : </strong>'.$fopj_info['loc_name'].'
+		<br><br>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td width="30%" style="border: 0px;border-bottom: 1px solid;"><strong>รายละเอียดงาน</strong></td>
+				<td width="30%" style="border: 0px;border-bottom: 1px solid;"><strong>วันที่รับงาน</strong></td>
+				<td width="30%" style="border: 0px;border-bottom: 1px solid;"><strong>วันที่แล้วเสร็จ</strong></td>
+			</tr>
+			<tr>
+				<td style="border: 0px;padding:5;"><strong>แผนกตัด/พับ</strong></td>
+				<td style="border: 0px;padding:5;"><strong>วันที่ : </strong>'.$dateW1.'</td>
+				<td style="border: 0px;padding:5;"><strong>วันที่ : </strong>'.$dateW2.'</td>
+			</tr>
+			<tr>
+				<td style="border: 0px;padding:5;"><strong>แผนกเชื่อม/ประกอบ</strong></td>
+				<td style="border: 0px;padding:5;"><strong>วันที่ : </strong>'.$dateW3.'</td>
+				<td style="border: 0px;padding:5;"><strong>วันที่ : </strong>'.$dateW4.'</td>
+			</tr>
+			<tr>
+				<td style="border: 0px;padding:5;"><strong>แผนกขัด/แต่ง</strong></td>
+				<td style="border: 0px;padding:5;"><strong>วันที่ : </strong>'.$dateW5.'</td>
+				<td style="border: 0px;padding:5;"><strong>วันที่ : </strong>'.$dateW6.'</td>
+			</tr>
+			<tr>
+				<td style="border: 0px;padding:5;"><strong>แผนกล้าง/แพ็ค</strong></td>
+				<td style="border: 0px;padding:5;"><strong>วันที่ : </strong>'.$dateW7.'</td>
+				<td style="border: 0px;padding:5;"><strong>วันที่ : </strong>'.$dateW8.'</td>
+			</tr>
+		</table>
            </td>
         <td width="47%" valign="top"><strong>รายละเอียดสินค้าสั่งผลิต</strong><br><br>'.$_POST['detail_recom'].'</td>
       </tr>

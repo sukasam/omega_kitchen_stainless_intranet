@@ -52,7 +52,7 @@
 		  <TH width="5%"><a>ลำดับ</a></TH>
           <TH width="11%"><a>รหัสสินค้า</a></TH>
           <TH width="18%"><a>ชื่อสินค้า</a></TH>
-          <TH width="11%"><a>คงเหลือ</a></TH>
+          <!-- <TH width="11%"><a>คงเหลือ</a></TH> -->
           <TH width="11%"><a>ขนาดสินค้า</a></TH>
           <TH width="11%"><a>รุ่น/แบรนด์</a></TH>
           <TH width="11%"><a>หมวดสินค้า</a></TH>
@@ -103,7 +103,7 @@
           <TD  style="text-align: center;"><span class="text" ><?php     echo sprintf("%04d",$counter); ?></span></TD>
           <TD style="text-align: center;"><span class="text"><?php     echo $rec["group_spar_id"] ; ?></span></TD>
           <TD><span class="text"><?php echo $rec["group_name"] ; ?></span></TD>
-          <TD style="text-align: center;"><span class="text"><?php     echo number_format($rec["group_stock"]); ?></span></TD>
+          <!-- <TD style="text-align: center;"><span class="text"><?php     echo number_format($rec["group_stock"]); ?></span></TD> -->
 		  <TD style="text-align: center;"><span class="text"><?php     echo $rec["group_sn"] ; ?></span></TD>
 		  <TD style="text-align: center;"><span class="text"><?php     echo $rec["group_size"] ; ?></span></TD>
           <TD style="text-align: center;"><span class="text"><?php     echo $rec["group_category"] ; ?></span></TD>

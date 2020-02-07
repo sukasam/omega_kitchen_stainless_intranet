@@ -472,7 +472,7 @@ function check(frm){
             	  <?php   
 						$qu_cusftype2 = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
 						while($row_cusftype2 = @mysqli_fetch_array($qu_cusftype2)){
-							if(substr($row_cusftype2['group_name'],0,2) == "SR"){
+							if(substr($row_cusftype2['group_name'],0,2) !== "SR"){
 							?>
             	  <option value="<?php   echo $row_cusftype2['group_id'];?>" <?php   if($row_cusftype2['group_id'] == $sr_ctype2){echo 'selected';}?>><?php   echo $row_cusftype2['group_name'];?></option>
             	  <?php  

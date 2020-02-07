@@ -37,6 +37,63 @@
 		
 		$_POST['pro_list'] = rtrim($pro_list, ",");
 
+
+		if($_POST['date_chk1'] != ""){
+			$a_sdate=explode("/",$_POST['date_chk1']);
+			$_POST['date_chk1']=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
+		}else{
+			$_POST['date_chk1']= '0000-00-00';
+		}
+
+		if($_POST['date_chk2'] != ""){
+			$a_sdate=explode("/",$_POST['date_chk2']);
+			$_POST['date_chk2']=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
+		}else{
+			$_POST['date_chk2']= '0000-00-00';
+		}
+
+		if($_POST['date_chk3'] != ""){
+			$a_sdate=explode("/",$_POST['date_chk3']);
+			$_POST['date_chk3']=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
+		}else{
+			$_POST['date_chk3']= '0000-00-00';
+		}
+
+		if($_POST['date_chk4'] != ""){
+			$a_sdate=explode("/",$_POST['date_chk4']);
+			$_POST['date_chk4']=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
+		}else{
+			$_POST['date_chk4']= '0000-00-00';
+		}
+
+		if($_POST['date_chk5'] != ""){
+			$a_sdate=explode("/",$_POST['date_chk5']);
+			$_POST['date_chk5']=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
+		}else{
+			$_POST['date_chk5']= '0000-00-00';
+		}
+
+		if($_POST['date_chk6'] != ""){
+			$a_sdate=explode("/",$_POST['date_chk6']);
+			$_POST['date_chk6']=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
+		}else{
+			$_POST['date_chk6']= '0000-00-00';
+		}
+
+		if($_POST['date_chk7'] != ""){
+			$a_sdate=explode("/",$_POST['date_chk7']);
+			$_POST['date_chk7']=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
+		}else{
+			$_POST['date_chk7']= '0000-00-00';
+		}
+
+		if($_POST['date_chk8'] != ""){
+			$a_sdate=explode("/",$_POST['date_chk8']);
+			$_POST['date_chk8']=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
+		}else{
+			$_POST['date_chk8']= '0000-00-00';
+		}
+
 		if ($_POST["mode"] == "add") { 
 			
 			$_POST['approve'] = 0;
@@ -120,6 +177,62 @@
 		$pro_list = explode(',',$pro_list);
 
 		$fopj_info = get_fopj($conn,$cus_id);
+
+		if($date_chk1 != "0000-00-00"){
+			$a_sdate=explode("-",$date_chk1);
+			$date_chk1=$a_sdate[2]."/".$a_sdate[1]."/".$a_sdate[0];
+		}else{
+			$date_chk1= '';
+		}
+
+		if($date_chk2 != "0000-00-00"){
+			$a_sdate=explode("-",$date_chk2);
+			$date_chk2=$a_sdate[2]."/".$a_sdate[1]."/".$a_sdate[0];
+		}else{
+			$date_chk2= '';
+		}
+
+		if($date_chk3 != "0000-00-00"){
+			$a_sdate=explode("-",$date_chk3);
+			$date_chk3=$a_sdate[2]."/".$a_sdate[1]."/".$a_sdate[0];
+		}else{
+			$date_chk3= '';
+		}
+
+		if($date_chk4 != "0000-00-00"){
+			$a_sdate=explode("-",$date_chk4);
+			$date_chk4=$a_sdate[2]."/".$a_sdate[1]."/".$a_sdate[0];
+		}else{
+			$date_chk4= '';
+		}
+
+		if($date_chk5 != "0000-00-00"){
+			$a_sdate=explode("-",$date_chk5);
+			$date_chk5=$a_sdate[2]."/".$a_sdate[1]."/".$a_sdate[0];
+		}else{
+			$date_chk5= '';
+		}
+
+		if($date_chk6 != "0000-00-00"){
+			$a_sdate=explode("-",$date_chk6);
+			$date_chk6=$a_sdate[2]."/".$a_sdate[1]."/".$a_sdate[0];
+		}else{
+			$date_chk6= '';
+		}
+
+		if($date_chk7 != "0000-00-00"){
+			$a_sdate=explode("-",$date_chk7);
+			$date_chk7=$a_sdate[2]."/".$a_sdate[1]."/".$a_sdate[0];
+		}else{
+			$date_chk7= '';
+		}
+
+		if($date_chk8 != "0000-00-00"){
+			$a_sdate=explode("-",$date_chk8);
+			$date_chk8=$a_sdate[2]."/".$a_sdate[1]."/".$a_sdate[0];
+		}else{
+			$date_chk8= '';
+		}
 
 	}
 	
@@ -433,7 +546,9 @@ function check(frm){
 			  <strong>กำหนดส่งสินค้า  :</strong>
 			  <span style="font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;">
               <input type="text" name="sr_stime" readonly value="<?php  if($sr_stime==""){echo date("d/m/Y");}else{ echo $sr_stime;}?>" class="inpfoder"/>
-              <script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'sr_stime'});</script>
+			  <script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'sr_stime'});</script>
+			  &nbsp;&nbsp; 
+			  <strong>พนักงานขาย  :</strong> <span id="cssale"><?php   echo getsalename($conn,$fopj_info['cs_sell']);?></span>
             </span></td>
           </tr>
           <tr>
@@ -443,7 +558,61 @@ function check(frm){
 	</table>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tb1">
       <tr>
-        <td width="50%"><strong>สถานที่ติดตั้ง / ส่งสินค้า : </strong><span id="sloc_name"><?php   echo $fopj_info['loc_name'];?></span><br /></td>
+        <td width="50%">
+			<strong>สถานที่ติดตั้ง / ส่งสินค้า : </strong><span id="sloc_name"><?php   echo $fopj_info['loc_name'];?></span><br />
+			<br>
+			<table>
+				<tr>
+					<td style="border: 0px;border-bottom: 1px solid;"><strong>รายละเอียดงาน</strong></td>
+					<td style="border: 0px;border-bottom: 1px solid;"><strong>วันที่รับงาน</strong></td>
+					<td style="border: 0px;border-bottom: 1px solid;"><strong>วันที่แล้วเสร็จ</strong></td>
+				</tr>
+				<tr>
+					<td style="border: 0px;"><strong>แผนกตัด/พับ</strong></td>
+					<td style="border: 0px;"><strong>วันที่ : 
+						<input type="text" name="date_chk1" value="<?php  if($date_chk1==""){}else{ echo $date_chk1;}?>" class="inpfoder"/>
+						<script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_chk1'});</script>
+					</td>
+					<td style="border: 0px;"><strong>วันที่ :</strong>
+						<input type="text" name="date_chk2" value="<?php  if($date_chk2==""){}else{ echo $date_chk2;}?>" class="inpfoder"/>
+						<script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_chk2'});</script>
+					</td>
+				</tr>
+				<tr>
+					<td style="border: 0px;"><strong>แผนกเชื่อม/ประกอบ</strong></td>
+					<td style="border: 0px;"><strong>วันที่ :</strong>
+						<input type="text" name="date_chk3" value="<?php  if($date_chk3==""){}else{ echo $date_chk3;}?>" class="inpfoder"/>
+						<script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_chk3'});</script>
+					</td>
+					<td style="border: 0px;"><strong>วันที่ :</strong>
+						<input type="text" name="date_chk4" value="<?php  if($date_chk4==""){}else{ echo $date_chk4;}?>" class="inpfoder"/>
+						<script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_chk4'});</script>	
+					</td>
+				</tr>
+				<tr>
+					<td style="border: 0px;"><strong>แผนกขัด/แต่ง</strong></td>
+					<td style="border: 0px;"><strong>วันที่ :</strong>
+						<input type="text" name="date_chk5" value="<?php  if($date_chk5 ==""){echo '';}else{ echo $date_chk5;}?>" class="inpfoder"/>
+						<script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_chk5'});</script>	
+					</td>
+					<td style="border: 0px;"><strong>วันที่ :</strong>
+						<input type="text" name="date_chk6" value="<?php  if($date_chk6==""){}else{ echo $date_chk6;}?>" class="inpfoder"/>
+						<script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_chk6'});</script>	
+					</td>
+				</tr>
+				<tr>
+					<td style="border: 0px;"><strong>แผนกล้าง/แพ็ค</strong></td>
+					<td style="border: 0px;"><strong>วันที่ :</strong>
+						<input type="text" name="date_chk7" value="<?php  if($date_chk7==""){}else{ echo $date_chk7;}?>" class="inpfoder"/>
+						<script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_chk7'});</script>	
+					</td>
+					<td style="border: 0px;"><strong>วันที่ :</strong>
+						<input type="text" name="date_chk8" value="<?php  if($date_chk8==""){}else{ echo $date_chk8;}?>" class="inpfoder"/>
+						<script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_chk8'});</script>
+					</td>
+				</tr>
+			</table>
+		</td>
                 
         <td width="50%"><center><strong>รายละเอียดสินค้าสั่งผลิต</strong></center><br><br>
         <textarea name="detail_recom" class="inpfoder" id="detail_recom" style="width:50%;height:100px;background:#FFFFFF;"><?php   echo strip_tags($detail_recom);?></textarea></td>

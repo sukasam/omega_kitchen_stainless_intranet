@@ -140,8 +140,8 @@ function check9(frm){
       <strong>รายงานใบแจ้งงาน</strong></SPAN></A></LI>
       <LI><A class=shortcut-button href="../report/?mid=16&act=16"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
       <strong>การรับอะไหล่<br>เข้าสต๊อค<br></strong></SPAN></A></LI>
-      <LI><A class=shortcut-button href="../report/?mid=16&act=14"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
-      <strong>การรับสินค้า<br>โปรเจ็คเข้าสต๊อค<br></strong></SPAN></A></LI>
+      <!-- <LI><A class=shortcut-button href="../report/?mid=16&act=14"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
+      <strong>การรับสินค้า<br>โปรเจ็คเข้าสต๊อค<br></strong></SPAN></A></LI> -->
       <LI><A class=shortcut-button href="../report/?mid=16&act=15"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
       <strong>การรับสินค้า<br>สำเร็จรูปเข้าสต๊อค<br></strong></SPAN></A></LI>
       

@@ -17,12 +17,15 @@
 	}
 	
 		if($_GET['action'] == 'getcusfirsh'){
+		
 		$fpid = $_GET['pid'];
 		$chk = $_GET['chk'];
 		
 		$tableDB = '';
 		if($chk == 'po'){
 			$tableDB = 's_project_order';
+		}else if($chk == 'fopj'){
+			$tableDB = 's_fopj';
 		}else{
 			$tableDB = 's_first_order';
 		}
@@ -51,6 +54,9 @@
 		$poID = '';
 			
 		if($chk == 'po'){
+			$foID = '';
+			$poID = $rowcus['fs_id'];
+		}else if($chk == 'fopj'){
 			$foID = '';
 			$poID = $rowcus['fs_id'];
 		}else{

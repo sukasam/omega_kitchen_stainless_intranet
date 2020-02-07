@@ -71,6 +71,8 @@
 				self.opener.document.getElementById('sr_ctype').innerHTML = ds[10];
 				self.opener.document.getElementById('sr_ctype2').innerHTML = ds[11];
 				self.opener.document.getElementById('expPro').innerHTML = ds[12];
+				self.opener.document.getElementById('cssale').innerHTML = ds[13];
+				
 				window.close();
 			} else{
 			//document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;

@@ -85,6 +85,7 @@ function checkVal(c){
       <input type="hidden" name="tmp" value="<?php echo $_GET['chk'];?>">
       <input type="radio" name="cusSource" value="fo" <?php if($_GET['chk'] == "fo" || !isset($_GET['chk'])){echo 'checked';}?> Onclick="checkVal(this)"> First Order&nbsp;&nbsp;&nbsp;
 	  <input type="radio" name="cusSource" value="po" <?php if($_GET['chk'] == "po"){echo 'checked';}?> Onclick="checkVal(this)"> Project Order
+	  <input type="radio" name="cusSource" value="fopj" <?php if($_GET['chk'] == "fopj"){echo 'checked';}?> Onclick="checkVal(this)"> FO/PJ
 	  </form>
     </td>
   </tr>
@@ -104,10 +105,13 @@ function checkVal(c){
 	$tableDB = '';
 	if($_GET['chk'] == "po"){
 		$tableDB = 's_project_order';
+	}else if($_GET['chk'] == "fopj"){
+		$tableDB = 's_fopj';
 	}else{
 		$tableDB = 's_first_order';
-		
 	}
+
+	//echo "SELECT fo_id,cd_name,loc_name FROM ".$tableDB." WHERE 1 AND (status_use = '0') ORDER BY cd_name ASC";
   	$qu_cus = mysqli_query($conn,"SELECT fo_id,cd_name,loc_name FROM ".$tableDB." WHERE 1 AND (status_use = '0') ORDER BY cd_name ASC");
 	
 	while($row_cus = @mysqli_fetch_array($qu_cus)){

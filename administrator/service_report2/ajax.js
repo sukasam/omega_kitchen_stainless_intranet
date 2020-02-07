@@ -27,7 +27,7 @@ function checkfirstorder(pval,param1,param2,param3,param4,param5,param6,param7,p
     xmlHttp.onreadystatechange=function (){
         if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
 			var ds = xmlHttp.responseText.split("|");
-            document.getElementById(param1).innerHTML=ds[0];
+         document.getElementById(param1).innerHTML=ds[0];
 			document.getElementById(param2).innerHTML=ds[1];
 			document.getElementById(param3).innerHTML=ds[2];
 			document.getElementById(param4).innerHTML=ds[3];

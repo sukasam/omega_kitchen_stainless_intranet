@@ -135,7 +135,7 @@
 			$rowCal++;
 		}
 
-		echo "|".$row_cus['cd_name']."|".$row_cus['cd_address']."|".province_name($conn,$row_cus['cd_province'])."|".$row_cus['cd_tel']."|".$row_cus['cd_fax']."|".$row_cus['c_contact']."|".$row_cus['c_tel']."|".$row_cus['loc_name']."|".$row_cus['fs_id']."|".$ctype."|".$ctype2."|".$proExp;
+		echo "|".$row_cus['cd_name']."|".$row_cus['cd_address']."|".province_name($conn,$row_cus['cd_province'])."|".$row_cus['cd_tel']."|".$row_cus['cd_fax']."|".$row_cus['c_contact']."|".$row_cus['c_tel']."|".$row_cus['loc_name']."|".$row_cus['fs_id']."|".$ctype."|".$ctype2."|".$proExp."|".getsalename($conn,$row_cus['cs_sell']);
 
 	}
 

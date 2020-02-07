@@ -40,7 +40,8 @@
     <th width="10%">Report ID</th>
     <th width="26%">ชื่อร้านค้า</th>
     <th width="10%">เบอร์โทร</th>
-    <th width="10%">วันที่เปิด</th>
+	<th width="10%">วันที่สั่งผลิต</th>
+	<th width="10%">กำหนดเสร็จ</th>
   </tr>
   <?php  
   
@@ -92,6 +93,8 @@
     <td style="padding-left:10px;padding-right:10px;color:<?php echo $rowColor;?>"><?php  echo $finfo['loc_name'];?></td>
     <td style="text-align:center;color:<?php echo $rowColor;?>"><?php  echo $finfo['c_contact'].'/'.$finfo['c_tel'];?></td>
     <td style="text-align:center;color:<?php echo $rowColor;?>"><?php  echo format_date_th ($row_serv['job_open'],7);?></td>
+	<td style="text-align:center;color:<?php echo $rowColor;?>"><?php  echo format_date_th ($row_serv['job_balance'],7);?></td>
+	
   </tr>
   <?php  $romn++;}?>
 </table>
