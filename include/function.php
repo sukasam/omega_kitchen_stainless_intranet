@@ -1425,6 +1425,24 @@ function check_projectorder($conn){
 	
 }
 
+function check_fopj($conn){
+	
+	$thdate = substr(date("Y")+543,2);
+	$concheck = "PJ ".$thdate.date("/m/");
+	
+	$qu_forder = @mysqli_query($conn,"SELECT * FROM s_fopj WHERE fs_id like '%".$concheck."%' ORDER BY fs_id DESC");
+	$num_oder = @mysqli_num_rows($qu_forder);
+	$row_forder = @mysqli_fetch_array($qu_forder);
+	
+	if($row_forder['fs_id'] == ""){
+		return "PJ ".$thdate.date("/m/")."001";
+	}else{
+		$num_odersum = $num_oder+1;
+		return "PJ ".$thdate.date("/m/").sprintf("%03d",$num_odersum);
+	}
+	
+}
+
 function check_serviceorder($conn){
 	
 	$thdate = substr(date("Y")+543,2);
