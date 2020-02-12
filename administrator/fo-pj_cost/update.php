@@ -762,8 +762,8 @@ function submitForm() {
 			</tr>
 			<?php    
 			$sumPrice += $rowPro['camount'] * $rowPro['cprice'];
-			$sumTotalCost += $rowPro['ccost'];
-			$sumTotalCost2 += $rowPro['costpros'];
+			$sumTotalCost += $rowPro['camount'] * $rowPro['ccost'];
+			$sumTotalCost2 += $rowPro['camount'] * $rowPro['costpros'];
 			$rowCal++;
 			$runPJ++;
 		}

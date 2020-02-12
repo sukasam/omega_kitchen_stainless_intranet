@@ -50,8 +50,8 @@ for($i=0;$i<=count($_POST['cproH']);$i++){
 		$_POST['costpros'][$i] = preg_replace("/,/","",$_POST['costpros'][$i]);
 		
 		$sumprice += $_POST['camountH'][$i]*$_POST['cpriceH'][$i];
-		$sumTotalCost += $_POST['ccost'][$i];
-		$sumTotalCost2 += $_POST['costpros'][$i];
+		$sumTotalCost += $_POST['camountH'][$i]*$_POST['ccost'][$i];
+		$sumTotalCost2 += $_POST['camountH'][$i]*$_POST['costpros'][$i];
 		
 		$projectPro .= '<tr>
 		<td style="border:1px solid #000000;padding:5;">'.($i+1).'</td>
