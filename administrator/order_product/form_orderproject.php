@@ -4,6 +4,7 @@
 	
 	$fopj_info = get_fopj($conn,$_POST['cus_id']);
 	$proList = get_fopj_pro($conn,$_POST['cus_id']);
+	$order_pro_info = get_order_product($conn,$id); 
 
 	$dateW1 = ($_POST["date_chk1"] != '0000-00-00') ? format_date($_POST["date_chk1"]) : "-";
 	$dateW2 = ($_POST["date_chk2"] != '0000-00-00') ? format_date($_POST["date_chk2"]) : "-";
@@ -265,7 +266,24 @@
         </td>
 
       </tr>
-    </table>';
+	</table>
+	<br><br><br>
+  ';
+  if($order_pro_info['images1'] != ''){
+    $form .= '<div style="font-family:Verdana, Geneva, sans-serif;text-align:center;font-size:14px;font-weight: bold;"><u>รูปภาพประกอบ</u>
+    <br><br>
+    <img src="../../upload/order_product/images/'.$order_pro_info['images1'].'" style="max-height: 470px;"><br><br>';
+
+    if($order_pro_info['images2'] != ''){
+      $form .= '<img src="../../upload/order_product/images/'.$order_pro_info['images2'].'" style="max-height: 470px;"><br><br>';
+    }
+
+    if($order_pro_info['images3'] != ''){
+      $form .= '<img src="../../upload/order_product/images/'.$order_pro_info['images3'].'" style="max-height: 470px;"><br><br>';
+    }
+
+    $form .= '</div>';
+  }
 ?>
 
 

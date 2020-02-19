@@ -107,6 +107,75 @@
 			include "../include/m_add.php";
 			
 			$id = mysqli_insert_id($conn);
+
+			if ($_FILES['fimages1']['name'] != "") { 
+					
+				$mname="";
+				$mname=gen_random_num(5);
+				$filename = "";
+				if($filename == "")
+				$name_data = explode(".",$_FILES['fimages1']['name']);
+				$type = $name_data[1];
+				$filename = $mname.".".$type;
+				
+				$target_dir = "../../upload/order_product/images/";
+				$target_file = $target_dir . basename($filename);
+				$uploadOk = 1;
+				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+				// Check if image file is a actual image or fake image
+				$check = getimagesize($_FILES["fimages1"]["tmp_name"]);
+				
+				@move_uploaded_file($_FILES["fimages1"]["tmp_name"], $target_file);
+				$sql = "update $tbl_name set images1 = '".$filename."' where $PK_field = '".$id."' ";
+				@mysqli_query($conn, $sql);	
+
+	} // end if ($_FILES[fimages][name] != "")	
+	
+	if ($_FILES['fimages2']['name'] != "") { 
+				
+				$mname="";
+				$mname=gen_random_num(5);
+				$filename = "";
+				if($filename == "")
+				$name_data = explode(".",$_FILES['fimages2']['name']);
+				$type = $name_data[1];
+				$filename = $mname.".".$type;
+				
+				$target_dir = "../../upload/order_product/images/";
+				$target_file = $target_dir . basename($filename);
+				$uploadOk = 1;
+				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+				// Check if image file is a actual image or fake image
+				$check = getimagesize($_FILES["fimages2"]["tmp_name"]);
+				
+				@move_uploaded_file($_FILES["fimages2"]["tmp_name"], $target_file);
+				$sql = "update $tbl_name set images2 = '".$filename."' where $PK_field = '".$id."' ";
+				@mysqli_query($conn, $sql);	
+
+	} // end if ($_FILES[fimages][name] != "")	
+	
+	if ($_FILES['fimages3']['name'] != "") { 
+				
+				$mname="";
+				$mname=gen_random_num(5);
+				$filename = "";
+				if($filename == "")
+				$name_data = explode(".",$_FILES['fimages3']['name']);
+				$type = $name_data[1];
+				$filename = $mname.".".$type;
+				
+				$target_dir = "../../upload/order_product/images/";
+				$target_file = $target_dir . basename($filename);
+				$uploadOk = 1;
+				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+				// Check if image file is a actual image or fake image
+				$check = getimagesize($_FILES["fimages3"]["tmp_name"]);
+				
+				@move_uploaded_file($_FILES["fimages3"]["tmp_name"], $target_file);
+				$sql = "update $tbl_name set images3 = '".$filename."' where $PK_field = '".$id."' ";
+				@mysqli_query($conn, $sql);	
+
+	} // end if ($_FILES[fimages][name] != "")	
 	
 			include_once("../mpdf54/mpdf.php");
 			include_once("form_orderproject.php");
@@ -125,6 +194,78 @@
 			include ("../include/m_update.php");
 			
 			$id = $_REQUEST[$PK_field];		
+
+			if ($_FILES['fimages1']['name'] != "") { 
+				@unlink("../../upload/order_product/images/".$_REQUEST['images1']);
+				
+				$mname="";
+				$mname=gen_random_num(5);
+				$filename = "";
+				if($filename == "")
+				$name_data=explode(".",$_FILES['fimages1']['name']);
+				$type = $name_data[1];
+				$filename = $mname.".".$type;
+				
+				$target_dir = "../../upload/order_product/images/";
+				$target_file = $target_dir . basename($filename);
+				$uploadOk = 1;
+				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+				// Check if image file is a actual image or fake image
+				$check = getimagesize($_FILES["fimages1"]["tmp_name"]);
+	  
+				move_uploaded_file($_FILES["fimages1"]["tmp_name"], $target_file);
+				$sql = "update $tbl_name set images1 = '".$filename."' where $PK_field = '".$id."' ";
+				mysqli_query($conn, $sql);	
+	  
+			  } // end if ($_FILES[fimages][name] != "")
+	  
+			  if ($_FILES['fimages2']['name'] != "") { 
+				@unlink("../../upload/order_product/images/".$_REQUEST['images2']);
+				
+				$mname="";
+				$mname=gen_random_num(5);
+				$filename = "";
+				if($filename == "")
+				$name_data=explode(".",$_FILES['fimages2']['name']);
+				$type = $name_data[1];
+				$filename = $mname.".".$type;
+				
+				$target_dir = "../../upload/order_product/images/";
+				$target_file = $target_dir . basename($filename);
+				$uploadOk = 1;
+				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+				// Check if image file is a actual image or fake image
+				$check = getimagesize($_FILES["fimages2"]["tmp_name"]);
+	  
+				move_uploaded_file($_FILES["fimages2"]["tmp_name"], $target_file);
+				$sql = "update $tbl_name set images2 = '".$filename."' where $PK_field = '".$id."' ";
+				mysqli_query($conn, $sql);	
+	  
+			  } // end if ($_FILES[fimages][name] != "")
+	  
+			  if ($_FILES['fimages3']['name'] != "") { 
+				@unlink("../../upload/order_product/images/".$_REQUEST['images3']);
+				
+				$mname="";
+				$mname=gen_random_num(5);
+				$filename = "";
+				if($filename == "")
+				$name_data=explode(".",$_FILES['fimages3']['name']);
+				$type = $name_data[1];
+				$filename = $mname.".".$type;
+				
+				$target_dir = "../../upload/order_product/images/";
+				$target_file = $target_dir . basename($filename);
+				$uploadOk = 1;
+				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+				// Check if image file is a actual image or fake image
+				$check = getimagesize($_FILES["fimages3"]["tmp_name"]);
+	  
+				move_uploaded_file($_FILES["fimages3"]["tmp_name"], $target_file);
+				$sql = "update $tbl_name set images3 = '".$filename."' where $PK_field = '".$id."' ";
+				mysqli_query($conn, $sql);	
+	  
+			  } // end if ($_FILES[fimages][name] != "")
 			
 			include_once("../mpdf54/mpdf.php");
 			include_once("form_orderproject.php");
@@ -618,6 +759,60 @@ function check(frm){
         <textarea name="detail_recom" class="inpfoder" id="detail_recom" style="width:50%;height:100px;background:#FFFFFF;"><?php   echo strip_tags($detail_recom);?></textarea></td>
       </tr>
     </table>
+
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="text-align:center;">
+      <tr>
+        <td width="33%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:left;padding-top:10px;padding-bottom:10px;">
+          <table>
+              <tr>
+                  <td>
+                    <strong>รูปภาพประกอบ ที่ 1</strong><br/><br>
+                    <input name="fimages1" type="file" id="fimages1">
+                    <br>
+                    <?php  
+                    if($_GET['mode'] != 'add'){
+                      if($images1 != ""){?><br>
+                    <a href="../../upload/order_product/images/<?php  echo $images1;?>" target="_blank">
+                      <img src="../../upload/order_product/images/<?php  echo $images1;?>" height="100">
+                    </a>
+                    
+                    <?php  }?>
+                    <input name="images1" type="hidden" value="<?php echo  $images1; ?>">
+                    <?php }?>
+                  </td>
+                  <td>
+                    <strong>รูปภาพประกอบ ที่ 2</strong><br/><br/>
+                    <input name="fimages2" type="file" id="fimages2">
+                    <br>
+                    <?php  
+                    if($_GET['mode'] != 'add'){
+                      if($images2 != ""){?><br>
+                    <a href="../../upload/order_product/images/<?php  echo $images2;?>" target="_blank">
+                      <img src="../../upload/order_product/images/<?php  echo $images2;?>" height="100">
+                    </a>
+                    
+                    <?php  }?>
+                    <input name="images2" type="hidden" value="<?php echo  $images2; ?>">
+                    <?php }?>
+                  </td>
+                  <td>
+                    <strong>รูปภาพประกอบ ที่ 3</strong><br/><br/>
+                    <input name="fimages3" type="file" id="fimages3">
+                    <br>
+                    <?php  
+                    if($_GET['mode'] != 'add'){
+                      if($images3 != ""){?><br>
+                    <a href="../../upload/order_product/images/<?php  echo $images3;?>" target="_blank">
+                      <img src="../../upload/order_product/images/<?php  echo $images3;?>" height="100">
+                    </a>
+                    
+                    <?php  }?>
+                    <input name="images3" type="hidden" value="<?php echo  $images3; ?>">
+                    <?php }?>
+                  </td>
+              </tr>
+          </table>
+        <hr>
     
     <center>
       <br>
