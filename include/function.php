@@ -1428,6 +1428,25 @@ function check_projectorder($conn){
 	
 }
 
+function check_qcorder($conn){
+	
+	$thdate = substr(date("Y")+543,2);
+	$concheck = "FG ".$thdate.date("/m/");
+	
+	$qu_forder = @mysqli_query($conn,"SELECT * FROM s_qc_product WHERE sv_id like '%".$concheck."%' ORDER BY sv_id DESC");
+	$num_oder = @mysqli_num_rows($qu_forder);
+	$row_forder = @mysqli_fetch_array($qu_forder);
+	
+	if($row_forder['sv_id'] == ""){
+		return "FG ".$thdate.date("/m/")."001";
+	}else{
+		//$num_odersum = $num_oder+1;
+		$num_odersum = substr($row_forder['sv_id'],-3)+1;
+		return "FG ".$thdate.date("/m/").sprintf("%03d",$num_odersum);
+	}
+	
+}
+
 function check_fopj($conn){
 	
 	$thdate = substr(date("Y")+543,2);
@@ -2437,6 +2456,11 @@ function get_checkOP($conn,$value,$sr_id){
 
 function get_order_product($conn,$value) {
 	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_order_product WHERE sr_id = '".$value."'"));
+	return $row_protype;
+}
+
+function get_qc_product($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_qc_product WHERE sr_id = '".$value."'"));
 	return $row_protype;
 }
 
