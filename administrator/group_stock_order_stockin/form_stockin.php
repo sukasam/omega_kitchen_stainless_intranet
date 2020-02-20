@@ -74,13 +74,13 @@ $form = '
 <p><h3>รายการรับเข้าสต็อคสินค้าสำเร็จรูป</p>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #000000;">
           <tr>
-            <td width="57%" valign="top" style="font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>ผู้จำหน่าย / ส่งสินค้า :</strong> '.$_POST["sub_name"].'<strong><br />
+            <td width="57%" valign="top" style="font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>ชื่อโปรเจ็คลูกค้า :</strong> '.$_POST["sub_name"].'<strong><br />
               <br />
             ที่อยู่ :</strong> '.$_POST["sub_address"].'<br />
             <br />
             <strong>เบอร์โทร :</strong> '.$_POST["sub_tel"].'<br /><br />
             <strong>วันที่รับเข้า : </strong>'.format_date($_POST["stock_date"]).'<strong></td>
-            <td width="43%" valign="top" style="font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>เลขที่บิล : </strong> '.$_POST['sub_billnum'].'&nbsp;&nbsp;&nbsp;&nbsp;<strong>วันที่บิล : </strong>'.format_date($_POST["sub_billdate"]).'<strong><br />
+            <td width="43%" valign="top" style="font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>เลขที่ FO/PJ : </strong> '.$_POST['sub_billnum'].'&nbsp;&nbsp;&nbsp;&nbsp;<strong>วันที่บิล : </strong>'.format_date($_POST["sub_billdate"]).'<strong><br />
               <br />
             หมายเหตุ :</strong> '.$_POST["sub_comment"].'<br />
             <br />
@@ -120,7 +120,7 @@ $form = '
           <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><br>'.get_technician_name($conn,$_POST['stock_approve']).'</td>
         </tr>
         <tr>
-          <td style="padding-top:10px;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>ผู้อนุมัติ</strong></td>
+          <td style="padding-top:10px;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>ผู้อนุมัติ/รับเข้าสินค้า</strong></td>
         </tr>
         <tr>
           <td style="font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่ : </strong>'.$dataApprove.'</td>

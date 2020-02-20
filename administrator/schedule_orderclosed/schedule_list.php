@@ -39,7 +39,8 @@
     <th width="9%">ลำดับ</th>
     <th width="10%">Report ID</th>
     <th width="26%">ชื่อร้านค้า</th>
-    <th width="10%">เบอร์โทร</th>
+    <!-- <th width="10%">เบอร์โทร</th> -->
+	<th width="10%">จำนวน (ชิ้น)</th>
     <th width="10%">วันที่สั่งผลิต</th>
 	<th width="10%">กำหนดเสร็จ</th>
   </tr>
@@ -52,6 +53,7 @@
 	while($row_serv = @mysqli_fetch_array($qu_service)){
 	$chaf = preg_replace("/\//","-",$row_serv["sv_id"]);
 	$finfo = get_fopj($conn,$row_serv['cus_id']);
+	$amountPro = get_order_pro_amount($conn,$row_serv['cus_id'],$row_serv['pro_list']);
 	
 	// if($row_serv['st_setting'] == 0){
 	// 	$scstatus = "<a href=\"../../upload/service_report_open/".$chaf.".pdf\" target=\"_blank\" style=\"text-decoration: none;\"><span style=\"color:green;\">".$row_serv['sv_id']."</span></a>";
@@ -79,7 +81,8 @@
   <td style="text-align:center;color:<?php echo $rowColor;?>"><?php  echo sprintf("%03d",$romn);?></td>
     <td style="text-align:center;color:<?php echo $rowColor;?>"><?php  echo $scstatus;?></td>
     <td style="padding-left:10px;padding-right:10px;color:<?php echo $rowColor;?>"><?php  echo $finfo['loc_name'];?></td>
-    <td style="text-align:center;color:<?php echo $rowColor;?>"><?php  echo $finfo['c_contact'].'/'.$finfo['c_tel'];?></td>
+    <!-- <td style="text-align:center;color:<?php echo $rowColor;?>"><?php  echo $finfo['c_contact'].'/'.$finfo['c_tel'];?></td> -->
+	<td style="text-align:center;color:<?php echo $rowColor;?>"><?php echo number_format($amountPro);?></td>
     <td style="text-align:center;color:<?php echo $rowColor;?>"><?php  echo format_date_th ($row_serv['job_open'],7);?></td>
 	<td style="text-align:center;color:<?php echo $rowColor;?>"><?php  echo format_date_th ($row_serv['job_balance'],7);?></td>
   </tr>

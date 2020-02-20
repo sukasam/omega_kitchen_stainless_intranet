@@ -22,14 +22,14 @@
 		$cd_name =  iconv( 'UTF-8', 'TIS-620', $_REQUEST['pval']);
 		$keys = $_REQUEST['keys'];
 		if($cd_name != ""){
-			$consd = "WHERE group_name LIKE '%".$cd_name."%'";
+			$consd = " AND cd_name LIKE '%".$cd_name."%'";
 		}
 		//echo "SELECT group_name FROM s_group_typeproduct ".$consd." ORDER BY group_name ASC";
-		$qu_cus = mysqli_query($conn,"SELECT * FROM s_group_typeproduct ".$consd." ORDER BY group_name ASC");
+		$qu_cus = mysqli_query($conn,"SELECT * FROM s_fopj WHERE 1 AND (status_use = '0') ".$consd." ORDER BY cd_name ASC");
 		while($row_cus = @mysqli_fetch_array($qu_cus)){
 			?>
 			 <tr>
-				<td><A href="javascript:void(0);" onclick="get_product('<?php     echo $row_cus['group_id'];?>','<?php     echo $row_cus['group_name'];?>','<?php     echo $keys;?>');"><?php     echo $row_cus['group_name'];?></A></td>
+				<td><A href="javascript:void(0);" onclick="get_customer('<?php echo $row_cus['fo_id'];?>','<?php echo $row_cus['cd_name'];?>','<?php echo $row_cus['cd_address'];?>','<?php echo $row_cus['cd_tel'];?>','<?php echo $row_cus['fs_id'];?>');"><?php echo $row_cus['cd_name'];?> (<?php echo $row_cus['loc_name']?>)</A></td>
 			  </tr>
 			<?php    	
 		}

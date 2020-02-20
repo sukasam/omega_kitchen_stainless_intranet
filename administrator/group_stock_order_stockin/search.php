@@ -50,26 +50,15 @@
 </script>-->
 <script type="text/javascript" src="ajax.js?v=2"></script> 
 <script type="text/javascript">
-   function get_product(group_id,group_name,protype,chk){
-	//alert(group_id);
-	var xmlHttp;
-   xmlHttp=GetXmlHttpObject(); //Check Support Brownser
-   URL = pathLocal+'ajax_return.php?action=getproject&group_id='+group_id+'&group_name='+group_name+'&protype='+protype;
-   if (xmlHttp==null){
-      alert ("Browser does not support HTTP Request");
-      return;
-   }
-    xmlHttp.onreadystatechange=function (){
-        if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
-            self.opener.document.getElementById(protype).innerHTML = xmlHttp.responseText;
-			window.close();
-        } else{
-          //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
-        }
-   };
-   xmlHttp.open("GET",URL,true);
-   xmlHttp.send(null);
-}
+   function get_customer(cid,cname,caddress,ctel,cfopj){
+
+
+		self.opener.document.getElementById("sub_name").value = cname;
+		self.opener.document.getElementById("sub_address").value = caddress;
+		self.opener.document.getElementById("sub_tel").value = ctel;
+		self.opener.document.getElementById("sub_billnum").value = cfopj;
+		window.close();
+	}
 </script> 
 </head>
 
@@ -77,22 +66,21 @@
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search">
   <tr>
     <td colspan="2"><strong>ค้นหา&nbsp;&nbsp;:&nbsp;&nbsp;</strong>
-        <input type="text" name="textfield" id="textfield" style="width:85%;" onkeyup="get_project(this.value,'<?php     echo $_GET['protype']?>');"/>
+        <input type="text" name="textfield" id="textfield" style="width:85%;" onkeyup="get_cus(this.value,'<?php echo $_GET['protype']?>');"/>
     </td>
-  </tr>
-</table>
-<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search">
-<tr>
-    <th width="50%">รายการสินค้า</th>
   </tr>
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search" id="rscus">
 <?php     
-  	$qu_cus = mysqli_query($conn,"SELECT * FROM s_group_project ORDER BY group_name ASC");
+
+	$tableDB = 's_fopj';
+	//echo "SELECT fo_id,cd_name,loc_name FROM ".$tableDB." WHERE 1 AND (status_use = '0') ORDER BY cd_name ASC";
+  	$qu_cus = mysqli_query($conn,"SELECT * FROM ".$tableDB." WHERE 1 AND (status_use = '0') ORDER BY cd_name ASC");
+	
 	while($row_cus = @mysqli_fetch_array($qu_cus)){
 		?>
 		 <tr>
-            <td><A href="javascript:void(0);" onclick="get_product('<?php     echo $row_cus['group_id'];?>','<?php     echo $row_cus['group_name'];?>','<?php     echo $_GET['protype']?>');"><?php     echo $row_cus['group_name'];?></A></td>
+            <td><A href="javascript:void(0);" onclick="get_customer('<?php echo $row_cus['fo_id'];?>','<?php echo $row_cus['cd_name'];?>','<?php echo $row_cus['cd_address'];?>','<?php echo $row_cus['cd_tel'];?>','<?php echo $row_cus['fs_id'];?>');"><?php echo $row_cus['cd_name'];?> (<?php echo $row_cus['loc_name']?>)</A></td>
           </tr>
 		<?php    	
 	}

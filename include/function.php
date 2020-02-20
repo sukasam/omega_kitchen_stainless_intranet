@@ -2440,6 +2440,21 @@ function get_order_product($conn,$value) {
 	return $row_protype;
 }
 
+function get_order_pro_amount($conn,$value,$pro_list){
+	
+	$pro_listA = explode(",",$pro_list);
+	$amount = 0;
+	$quPro = @mysqli_query($conn,"SELECT * FROM s_fopj_product WHERE fo_id = '".$value."' ORDER BY `id` ASC");
+	$rowCount = 1;
+	while($row = @mysqli_fetch_array($quPro)){
+		if(in_array($rowCount,$pro_listA)){
+			$amount += $row['camount'];
+		}
+		$rowCount++;
+	}
+	return $amount;
+}
+
 function get_orderproduct($conn,$ymd,$loc,$ctype) {
 
 	$qqu_srv = @mysqli_query($conn,"SELECT * FROM s_order_product WHERE job_open = '".$ymd."' AND st_setting = 0 LIMIT 4");

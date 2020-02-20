@@ -266,8 +266,9 @@ function submitForm() {
 				<td>
 					<table class="formFields" cellspacing="0" width="100%">
 					  <tr >
-						<td nowrap class="name">ผู้จำหน่าย / ส่งสินค้า</td>
-						  <td><input name="sub_name" type="text" id="sub_name"  value="<?php     echo $sub_name; ?>" size="60"> 
+						<td nowrap class="name">ชื่อโปรเจ็คลูกค้า</td>
+						  <td>
+						  <input name="sub_name" type="text" id="sub_name"  value="<?php     echo $sub_name; ?>" size="50"> <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php?chk=fo');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
 						</td>
 					  </tr>
 					  <tr >
@@ -288,7 +289,7 @@ function submitForm() {
 				<td>
 					<table class="formFields" cellspacing="0" width="100%">
 					  <tr >
-						<td nowrap class="name">เลขที่บิล</td>
+						<td nowrap class="name">เลขที่ FO/PJ</td>
 						  <td><input name="sub_billnum" type="text" id="sub_billnum"  value="<?php     echo $sub_billnum; ?>" size="20%">&nbsp;&nbsp;วันที่บิล <input type="text" name="sub_billdate" readonly value="<?php     if($sub_billdate==""){echo date("d/m/Y");}else{ echo $sub_billdate;}?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'sub_billdate'});</script>
 						</td>
 					  </tr>
@@ -303,9 +304,9 @@ function submitForm() {
 						</td>
 					  </tr>
 					  <tr >
-						<td nowrap class="name">ผู้รับเข้าสินค้า</td>
+						<td nowrap class="name"><br></td>
 						<td nowrap class="name">
-						<select name="stock_admin" id="stock_admin" class="inputselect" style="width:50%;">
+						<!-- <select name="stock_admin" id="stock_admin" class="inputselect" style="width:50%;">
 							<?php   
 								$qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_technician WHERE 1 AND (group_id = 3 OR group_id = 7 OR group_id = 8)  ORDER BY group_name ASC");
 								while($row_custec = @mysqli_fetch_array($qu_custec)){
@@ -314,7 +315,7 @@ function submitForm() {
 							<?php  
 								}
 							?>
-						</select>
+						</select> -->
 						</td>
 					  </tr>
 				  	</table>
@@ -479,6 +480,47 @@ function submitForm() {
 		}
 		
 	</script>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="text-align:center;margin-top:5px;">
+	  <tr>
+        <td width="50%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
+        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong >
+				<select name="stock_admin" id="stock_admin" class="inputselect" style="width:50%;">
+							<?php   
+								$qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_technician WHERE 1 AND (group_id = 3 OR group_id = 7 OR group_id = 8)  ORDER BY group_name ASC");
+								while($row_custec = @mysqli_fetch_array($qu_custec)){
+									?>
+							<option value="<?php   echo $row_custec['group_id'];?>" <?php   if($row_custec['group_id'] == $stock_admin){echo 'selected';}?>><?php   echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
+							<?php  
+								}
+							?>
+						</select>
+                </strong></td>
+              </tr>
+              <tr>
+                <td style="padding-top:10px;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>ผู้รับเข้าสินค้า</strong></td>
+              </tr>
+             
+            </table>
+
+        </td>
+        <td width="50%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
+        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>
+				<br/>
+			</td>
+              </tr>
+              <tr>
+                <td style="padding-top:10px;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>ผู้อนุมัติ/รับเข้าสินค้า</strong></td>
+              </tr>
+            
+            </table>
+        </td>
+      </tr>
+</table>
 	
     
         </fieldset>
