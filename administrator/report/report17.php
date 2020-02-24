@@ -24,6 +24,7 @@
 	$date_to=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
 	
 	$gspar = $_POST['pro_pod'];
+	$cus_id = $_POST['cus_id'];
 
 	$condi = '';
 
@@ -41,9 +42,13 @@
 
 	}
 
-	// if($gspar != ""){
-	// 	$condi .= " AND stp.sparpart_id = '".$gspar."'";
-	// }
+	if($cus_id != ""){
+		$condi .= " AND st.cus_id = '".$cus_id."'";
+	}
+
+	if($gspar != ""){
+		$condi .= " AND stp.lists = '".$gspar."'";
+	}
 
 
 ?>
