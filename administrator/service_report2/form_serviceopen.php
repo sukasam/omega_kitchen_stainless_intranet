@@ -118,9 +118,13 @@
             เบอร์โทร :</strong> '.$finfos['c_tel'].'</td>
             <td width="43%"><strong>ประเภทบริการลูกค้า :</strong> '.get_servicename($conn,$_POST['sr_ctype']).' <strong><br>
             <br>
-            ประเภทลูกค้า :</strong> '.custype_name($conn,$_POST['sr_ctype2']).' <strong><br />
+			ประเภทลูกค้า :</strong> '.custype_name($conn,$_POST['sr_ctype2']).'  &nbsp;&nbsp;
+			<strong>ใบสั่งผลิต :</strong> '.$_POST['search_op'].' </strong>
+			<br />
               <br />
-            </strong><strong>วันที่เบิกอะไหล่  :</strong> '.format_date($_POST['job_open']).' <strong>&nbsp;&nbsp;';
+			</strong><strong>วันที่เบิกอะไหล่  :</strong> '.format_date($_POST['job_open']).' <strong>&nbsp;&nbsp;
+			
+			';
 			
 			$poFoID = '';
 			if($_POST['search_po'] != ""){

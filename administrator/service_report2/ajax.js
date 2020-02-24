@@ -112,6 +112,26 @@ function get_cus(pval,chk){
    xmlHttp.send(null);
 }
 
+function get_cusorprod(pval,chk){
+	/*alert(pval);*/
+	var xmlHttp;
+   xmlHttp=GetXmlHttpObject(); //Check Support Brownser
+   URL = pathLocal+'ajax_return.php?action=get_cusorprod&pval='+pval+'&chk='+chk;
+   if (xmlHttp==null){
+      alert ("Browser does not support HTTP Request");
+      return;
+   }
+    xmlHttp.onreadystatechange=function (){
+        if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
+            document.getElementById('rscus').innerHTML = xmlHttp.responseText;
+        } else{
+          //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
+        }
+   };
+   xmlHttp.open("GET",URL,true);
+   xmlHttp.send(null);
+}
+
 
 function get_sparpart(pval,resdata){
 	/*alert(pval);*/

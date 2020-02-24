@@ -454,7 +454,8 @@ function check(frm){
 						}
 					?>
                 </select>-->
-                <input name="cd_names" type="text" id="cd_names"  value="<?php    echo get_customername2($conn,$cus_id,$cus_source);?>" style="width:50%;" readonly>
+				<!-- <input name="cd_names" type="text" id="cd_names" value="<?php    echo get_customername2($conn,$cus_id,$cus_source);?>" style="width:50%;" readonly> -->
+				<span id="cd_names"><?php    echo get_customername2($conn,$cus_id,$cus_source);?></span>
                 <input type="hidden" name="cus_source" id="cus_source" value="<?php echo $cus_source;?>">
                 <span id="rsnameid"><input type="hidden" name="cus_id" value="<?php   echo $cus_id;?>"></span><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php?chk=fo');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
             </td>
@@ -498,14 +499,19 @@ function check(frm){
 		
 		<span id="contactid" style="display: none;"><?php   echo $finfo['fs_id'];?></span>
 			
-			<strong>เลขที่ FO :</strong> <input type="text" name="search_fo" value="<?php echo $search_fo;?>" id="search_fo" class="inpfoder" onkeyup="get_cus2(this.value,'fo');">&nbsp;&nbsp;
-			<strong>เลขที่ PJ :</strong> <input type="text" name="search_po" value="<?php echo $search_po;?>" id="search_po" class="inpfoder" onkeyup="get_cus2(this.value,'fopj');">
+			<!-- <strong>เลขที่ FO :</strong> <input type="text" name="search_fo" value="<?php echo $search_fo;?>" id="search_fo" class="inpfoder" onkeyup="get_cus2(this.value,'fo');">&nbsp;&nbsp;
+			<strong>เลขที่ PJ :</strong> <input type="text" name="search_po" value="<?php echo $search_po;?>" id="search_po" class="inpfoder" onkeyup="get_cus2(this.value,'fopj');"> -->
+			<strong>เลขที่ FO :</strong> <input type="text" name="search_fo" value="<?php echo $search_fo;?>" id="search_fo" class="inpfoder" style="border:0;">&nbsp;&nbsp;
+			<strong>เลขที่ PJ :</strong> <input type="text" name="search_po" value="<?php echo $search_po;?>" id="search_po" class="inpfoder" style="border:0;">
 			</td>
           </tr>
           <tr>
             <td><strong>จังหวัด :</strong> <span id="cusprovince"><?php   echo province_name($conn,$finfo['cd_province']);?></span></td>
             <td><strong>วันที่เบิกอะไหล่  :</strong> <span id="datef"></span>
-              <input type="text" name="job_open" readonly value="<?php  if($job_open==""){echo date("d/m/Y");}else{ echo $job_open;}?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'job_open'});</script></td>
+			  <input type="text" name="job_open" readonly value="<?php  if($job_open==""){echo date("d/m/Y");}else{ echo $job_open;}?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'job_open'});</script>
+			  &nbsp;&nbsp;
+			  <strong>เลขที่ OP :</strong> <input type="text" name="search_op" value="<?php echo $search_op;?>" id="search_op" class="inpfoder" style="border:0;">
+			</td>
           </tr>
           <tr>
             <td><strong>โทรศัพท์ :</strong> <span id="custel"><?php   echo $finfo['cd_tel'];?></span><strong>&nbsp;&nbsp;&nbsp;&nbsp;แฟกซ์ :</strong> <span id="cusfax"><?php   echo $finfo['cd_fax'];?></span></td>

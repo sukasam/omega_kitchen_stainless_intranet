@@ -69,6 +69,33 @@
 		$displ = "|".$rowcus['cd_address']."|".province_name($conn,$rowcus['cd_province'])."|".$rowcus['cd_tel']."|".$rowcus['cd_fax']."|".$rowcus['fs_id']."|".format_date($rowcus['date_quf'])."||".$rowcus['c_contact']."|".$rowcus['c_tel']."|".$rowcus['loc_name']."|".get_lastservice_s($conn,$fpid,"").'|'.$plid.'|'.$ctyp.'|'.$foID.'|'.$poID;
 		echo $displ;
 	}
+
+	if($_GET['action'] === 'getCusDetail'){
+
+
+		$fo_id = $_REQUEST['fo_id'];
+		$sr_id = $_REQUEST['sr_id'];
+
+		//echo "SELECT * FROM s_fopj WHERE fo_id  = '".$foid."'";
+		$rowcus  = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_fopj WHERE fo_id  = '".$fo_id."'"));
+
+		$roworpro  = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_order_product WHERE sr_id  = '".$sr_id."'"));
+
+		$ctyp = "";
+
+		//echo "SELECT * FROM s_group_custommer ORDER BY group_name ASC";
+		$qu_cusftype2 = @mysqli_query($conn,"SELECT * FROM s_group_custommer ORDER BY group_name ASC");
+			while($row_cusftype2 = @mysqli_fetch_array($qu_cusftype2)){
+					$ctyp .= "<option value=".$row_cusftype2['group_id']." ";
+					if($row_cusftype2['group_id'] == $roworpro['sr_ctype2']){$ctyp .= "selected=selected";}
+					$ctyp .= ">".$row_cusftype2['group_name']."</option>";
+			}
+
+		$displ = "|".$rowcus['cd_name']."|".$rowcus['cd_address']."|".province_name($conn,$rowcus['cd_province'])."|".$rowcus['cd_tel']."|".$rowcus['cd_fax']."|".$rowcus['c_contact']."|".$rowcus['c_tel']."|".$rowcus['loc_name']."|".$rowcus['fs_id']."|".$ctyp."|".$roworpro['sv_id'];
+
+		echo $displ;
+
+	}
 	
 	if($_GET['action'] == 'getcus'){
 		$cd_name = $_REQUEST['pval'];
@@ -93,6 +120,30 @@
 			?>
 			 <tr>
 				<td><A href="javascript:void(0);" onclick="get_customer('<?php     echo $row_cusx['fo_id'];?>','<?php     echo $row_cusx['cd_name'];?>','<?php echo $chk;?>');"><?php     echo $row_cusx['cd_name'];?> (<?php     echo $row_cusx['loc_name']?>)</A></td>
+			  </tr>
+			<?php    	
+		}
+		//echo "SELECT cd_name FROM s_first_order ".$consd." ORDER BY cd_name ASC";
+	}
+
+	if($_GET['action'] == 'get_cusorprod'){
+		$cd_name = $_REQUEST['pval'];
+		$chk = $_REQUEST['chk'];
+		
+		if($cd_name != ""){
+			$consd = "AND (fopj.cd_name LIKE '%".$cd_name."%' OR fopj.loc_name LIKE '%".$cd_name."%' OR op.sv_id LIKE '%".$cd_name."%')";
+		}
+		
+		$tableDB = 's_fopj';
+
+		//echo "SELECT fopj.cd_name,fopj.loc_name,op.* FROM s_fopj as fopj, s_order_product as op  WHERE op.cus_id = fopj.fo_id ".$consd."";
+		
+		$qu_cus = mysqli_query($conn,"SELECT fopj.cd_name,fopj.loc_name,op.* FROM s_fopj as fopj, s_order_product as op  WHERE op.cus_id = fopj.fo_id ".$consd." ORDER BY op.sv_id DESC");
+		
+		while($row_cusx = @mysqli_fetch_array($qu_cus)){
+			?>
+			 <tr>
+				<td><A href="javascript:void(0);" onclick="get_customer('<?php echo $row_cusx['fo_id'];?>','<?php echo $row_cusx['cd_name'];?>','<?php echo 'fopj';?>','<?php echo $row_cusx['sr_id'];?>');"><?php echo $row_cusx['sv_id']." | ".$row_cusx['cd_name'];?> (<?php     echo $row_cusx['loc_name']?>)</A></td>
 			  </tr>
 			<?php    	
 		}
