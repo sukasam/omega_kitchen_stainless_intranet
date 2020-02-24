@@ -29,6 +29,8 @@
 		}else{
 			$tableDB = 's_first_order';
 		}
+
+		//echo "SELECT * FROM ".$tableDB." WHERE fo_id  = '".$fpid."'";
 			
 		$rowcus  = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM ".$tableDB." WHERE fo_id  = '".$fpid."'"));
 		
@@ -64,7 +66,7 @@
 			$poID = '';
 		}
 		
-		$displ = $rowcus['cd_address']."|".province_name($conn,$rowcus['cd_province'])."|".$rowcus['cd_tel']."|".$rowcus['cd_fax']."|".$rowcus['fs_id']."|".format_date($rowcus['date_quf'])."||".$rowcus['c_contact']."|".$rowcus['c_tel']."|".$rowcus['loc_name']."|".get_lastservice_s($conn,$fpid,"").'|'.$plid.'|'.$ctyp.'|'.$foID.'|'.$poID;
+		$displ = "|".$rowcus['cd_address']."|".province_name($conn,$rowcus['cd_province'])."|".$rowcus['cd_tel']."|".$rowcus['cd_fax']."|".$rowcus['fs_id']."|".format_date($rowcus['date_quf'])."||".$rowcus['c_contact']."|".$rowcus['c_tel']."|".$rowcus['loc_name']."|".get_lastservice_s($conn,$fpid,"").'|'.$plid.'|'.$ctyp.'|'.$foID.'|'.$poID;
 		echo $displ;
 	}
 	
@@ -79,6 +81,8 @@
 		$tableDB = '';
 		if($chk == 'po'){
 			$tableDB = 's_project_order';
+		}else if($chk == 'fopj'){
+			$tableDB = 's_fopj';
 		}else{
 			$tableDB = 's_first_order';
 		}
@@ -106,6 +110,8 @@
 		$tableDB = '';
 		if($chk == 'po'){
 			$tableDB = 's_project_order';
+		}else if($chk == 'fopj'){
+			$tableDB = 's_fopj';
 		}else{
 			$tableDB = 's_first_order';
 		}

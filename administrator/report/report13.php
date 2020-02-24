@@ -10,6 +10,7 @@
 	if(isset($_GET['priod'])){$_REQUEST['sh1'] = 1;$_REQUEST['sh2'] = 1;$_REQUEST['sh3'] = 1;$_REQUEST['sh4'] = 1;$_REQUEST['sh5'] = 1;$_REQUEST['sh6'] = 1;$_REQUEST['sh7'] = 1;$_REQUEST['sh8'] = 1;$_REQUEST['sh9'] = 1;$_REQUEST['sh10'] = 1;}
 	
 	$cd_name = $_REQUEST['cd_name'];
+	$sale_contact = $_REQUEST['sale_contact'];
 	$a_sdate=explode("/",$_REQUEST['date_fm']);
 	$date_fm=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
 	$a_sdate=explode("/",$_REQUEST['date_to']);
@@ -28,6 +29,12 @@
 	if($cd_name != ""){
 		$codi .= " AND `cd_name` LIKE '%".$cd_name."%'";
 	}
+
+	if($sale_contact != ""){
+		$codi .= " AND `sale_contact` = '".$sale_contact."'";
+	}
+
+	
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

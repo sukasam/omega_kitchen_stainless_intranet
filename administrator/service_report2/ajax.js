@@ -16,7 +16,27 @@ function GetXmlHttpObject(){
    return xmlHttp;
 }
 
-function checkfirstorder(pval,param1,param2,param3,param4,param5,param6,param7,param8,param9,param10,param11,param12,param13,param14,param15,chk){
+function checkfirstorder(pval,cusadd,cusprovince,custel,cusfax,contactid,datef,datet,cscont,cstel,sloc_name,sevlast,prolist,sr_ctype2,chk){
+
+
+   //checkfirstorder(cid,'cusadd','cusprovince','custel','cusfax','contactid','datef','datet','cscont','cstel','sloc_name','sevlast','prolist','sr_ctype2',chk);
+   // alert(pval);
+   // alert(cusadd);
+   // alert(cusprovince);
+   // alert(custel);
+   // alert(cusfax);
+   // alert(contactid);
+   // alert(date_quf);
+   // alert(datet);
+   // alert(cscont);
+   // alert(cstel);
+   // alert(sloc_name);
+   // alert(sevlast);
+   // alert(prolist);
+   // alert(sr_ctype2);
+   // alert(chk);
+   
+
 	var xmlHttp;
    xmlHttp=GetXmlHttpObject(); //Check Support Brownser
    URL = pathLocal+'ajax_return.php?action=getcusfirsh&pid='+pval+'&chk='+chk;
@@ -27,21 +47,21 @@ function checkfirstorder(pval,param1,param2,param3,param4,param5,param6,param7,p
     xmlHttp.onreadystatechange=function (){
         if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
 			var ds = xmlHttp.responseText.split("|");
-         document.getElementById(param1).innerHTML=ds[0];
-			document.getElementById(param2).innerHTML=ds[1];
-			document.getElementById(param3).innerHTML=ds[2];
-			document.getElementById(param4).innerHTML=ds[3];
-			document.getElementById(param5).innerHTML=ds[4];
-			//document.getElementById(param6).innerHTML=ds[5];
-			document.getElementById(param7).innerHTML=ds[6];
-			document.getElementById(param8).innerHTML=ds[7];
-			document.getElementById(param9).innerHTML=ds[8];
-			document.getElementById(param10).innerHTML=ds[9];
-			document.getElementById(param11).innerHTML=ds[10];
-			document.getElementById(param12).innerHTML=ds[11];
-			document.getElementById(param13).innerHTML=ds[12];
-			document.getElementById(param14).value=ds[13];
-			document.getElementById(param15).value=ds[14];
+          document.getElementById(cusadd).innerHTML=ds[1];
+			 document.getElementById(cusprovince).innerHTML=ds[2];
+			 document.getElementById(custel).innerHTML=ds[3];
+			 document.getElementById(cusfax).innerHTML=ds[4];
+			 document.getElementById(contactid).innerHTML=ds[5];
+			 //document.getElementById(datef).innerHTML=ds[6];
+			// document.getElementById(datet).innerHTML=ds[7];
+			 document.getElementById(cscont).innerHTML=ds[8];
+          document.getElementById(cstel).innerHTML=ds[9];
+          document.getElementById(sloc_name).innerHTML=ds[10];
+			// document.getElementById(sevlast).innerHTML=ds[11];
+			// document.getElementById(prolist).innerHTML=ds[12];
+			// document.getElementById(sr_ctype2).innerHTML=ds[13];
+			 document.getElementById("search_fo").value=ds[14];
+			 document.getElementById("search_po").value=ds[15];
         } else{
           //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
         }

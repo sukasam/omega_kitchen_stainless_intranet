@@ -144,12 +144,12 @@ function checkVal(c){
 	// 	$tableDB = 's_first_order';
 		
 	// }
-  	$qu_cus = mysqli_query($conn,"SELECT fo_id,cd_name,loc_name FROM ".$tableDB." WHERE 1 AND (status_use = '0') ORDER BY cd_name ASC");
+  	$qu_cus = mysqli_query($conn,"SELECT fo_id,fs_id,cd_name,loc_name FROM ".$tableDB." WHERE 1 AND (status_use = '0') ORDER BY cd_name ASC");
 	
 	while($row_cus = @mysqli_fetch_array($qu_cus)){
 		?>
 		 <tr>
-            <td><A href="javascript:void(0);" onclick="get_customer('<?php echo $row_cus['fo_id'];?>');"><?php echo $row_cus['cd_name'];?> (<?php echo $row_cus['loc_name']?>)</A></td>
+            <td><A href="javascript:void(0);" onclick="get_customer('<?php echo $row_cus['fo_id'];?>');"><?php echo $row_cus['fs_id'];?> | <?php echo $row_cus['cd_name'];?> (<?php echo $row_cus['loc_name']?>)</A></td>
           </tr>
 		<?php    	
 	}

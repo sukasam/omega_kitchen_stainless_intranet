@@ -45,6 +45,9 @@
 	function get_customer(cid,cname){
 		var sCustomerName = self.opener.document.getElementById("cd_name");
 		sCustomerName.value = cname;
+		//alert(cid);
+		var sCustomerID = self.opener.document.getElementById("cus_id");
+		sCustomerID.value = cid;
 		window.close();
 	}
 </script>
@@ -66,11 +69,17 @@
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search" id="rscus">
 <?php     
-  	$qu_cus = mysqli_query($conn,"SELECT cd_name,loc_name FROM s_first_order GROUP BY cd_name ORDER BY cd_name ASC");
+	$tableDB = '';
+	if($_GET['cus_source'] === 'fopj'){
+		$tableDB = 's_fopj';
+	}else{
+		$tableDB = 's_first_order';
+	}
+  	$qu_cus = mysqli_query($conn,"SELECT fo_id,cd_name,loc_name FROM ".$tableDB." GROUP BY cd_name ORDER BY cd_name ASC");
 	while($row_cus = @mysqli_fetch_array($qu_cus)){
 		?>
 		 <tr>
-            <td><A href="javascript:void(0);" onclick="get_customer('<?php     echo $row_cus['fo_id'];?>','<?php     echo $row_cus['cd_name'];?>');"><?php     echo $row_cus['cd_name'];?> (<?php     echo $row_cus['loc_name'];?>)</A></td>
+            <td><A href="javascript:void(0);" onclick="get_customer('<?php echo $row_cus['fo_id'];?>','<?php echo $row_cus['cd_name'];?>');"><?php     echo $row_cus['cd_name'];?> (<?php     echo $row_cus['loc_name'];?>)</A></td>
           </tr>
 		<?php    	
 	}

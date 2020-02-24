@@ -1768,6 +1768,8 @@ function get_firstorder2($conn,$fo_id,$chk) {
 	$tableDB = '';
 	if($chk == 'po'){
 		$tableDB = 's_project_order';
+	}else if($chk == 'fopj'){
+		$tableDB = 's_fopj';
 	}else{
 		$tableDB = 's_first_order';
 	}
@@ -1788,10 +1790,14 @@ function get_customername($conn,$fo_id) {
 }
 
 
+
+
 function get_customername2($conn,$fo_id,$chk) {
 	$tableDB = '';
 	if($chk == 'po'){
 		$tableDB = 's_project_order';
+	}else if($chk == 'fopj'){
+		$tableDB = 's_fopj';
 	}else{
 		$tableDB = 's_first_order';
 	}
@@ -1807,6 +1813,8 @@ function get_localsettingname($conn,$fo_id) {
 function get_localsettingname2($conn,$fo_id,$chk) {
 	if($chk == 'po'){
 		$tableDB = 's_project_order';
+	}if($chk == 'fopj'){
+		$tableDB = 's_fopj';
 	}else{
 		$tableDB = 's_first_order';
 	}
@@ -2080,6 +2088,8 @@ function get_profirstorder2($conn,$val,$chk) {
 	$tableDB = '';
 	if($chk == 'po'){
 		$tableDB = 's_project_order';
+	}else if($chk == 'fopj'){
+		$tableDB = 's_fopj';
 	}else{
 		$tableDB = 's_first_order';
 	}

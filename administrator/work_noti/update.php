@@ -525,7 +525,15 @@ function checkMobileSale(){
               <input type="text" name="cd_email" value="<?php echo $cd_email;?>" id="cd_email" class="inpfoder">
             </td>
             <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;">
-              
+              <strong>ฝ่ายที่รับแจ้ง :</strong> <input type="radio" name="cnoti" value="1" <?php if($cnoti === '1'){echo 'checked';}?>> ฝ่ายขาย&nbsp&nbsp
+              <input type="radio" name="cnoti" value="2" <?php if($cnoti === '2'){echo 'checked';}?>> ฝ่ายบัญชี&nbsp&nbsp
+              <input type="radio" name="cnoti" value="3" <?php if($cnoti === '3'){echo 'checked';}?>> ฝ่ายโรงงาน&nbsp&nbsp
+              <input type="radio" name="cnoti" value="4" <?php if($cnoti === '4'){echo 'checked';}?>> ฝ่ายเขียนแบบ&nbsp&nbsp<br>
+              <input type="radio" name="cnoti" value="5" <?php if($cnoti === '5'){echo 'checked';}?>> ฝ่ายโฟร์แมน&nbsp&nbsp
+              <input type="radio" name="cnoti" value="6" <?php if($cnoti === '6'){echo 'checked';}?>> ฝ่ายขนส่งสินค้า&nbsp&nbsp
+              <input type="radio" name="cnoti" value="7" <?php if($cnoti === '7'){echo 'checked';}?>> แผนกช่าง&nbsp&nbsp
+              <input type="radio" name="cnoti" value="8" <?php if($cnoti === '8'){echo 'checked';}?>> ติดตั้ง / โปรเจ็ค&nbsp&nbsp
+              <input type="radio" name="cnoti" value="9" <?php if($cnoti === '9'){echo 'checked';}?>> บริการ&nbsp&nbsp
             </td>
           </tr>
 </table>

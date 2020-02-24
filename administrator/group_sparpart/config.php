@@ -2,8 +2,8 @@
 <?php    
 	$PK_field = "group_id";
 	//$FR_field = "";
-	$check_module = "รายการอะไหล่";
-	$page_name = "รายการอะไหล่";
+	$check_module = "รายการอะไหล่เพิ่อผลิต";
+	$page_name = "รายการอะไหล่เพิ่อผลิต";
 	$tbl_name = "s_group_sparpart";
 	$field_confirm_showname= "group_name";
 	$fieldlist = array('group_spar_id','group_name','group_location','group_namecall','group_type','group_unit_price','group_price','typespar');

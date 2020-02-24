@@ -61,9 +61,7 @@
    }
     xmlHttp.onreadystatechange=function (){
         if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
-			var subD = xmlHttp.responseText.split('|');
-            self.opener.document.getElementById(protype).innerHTML = subD;
-			self.opener.document.getElementById(ccode).innerHTML = sparID;
+            self.opener.document.getElementById(protype).innerHTML = xmlHttp.responseText;
 			window.close();
         } else{
           //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
@@ -96,7 +94,7 @@
 		$row_cus['group_name'] = str_replace('"', "", $row_cus['group_name']);
 		?>
 		 <tr>
-            <td><A href="javascript:void(0);" onclick="get_spar('<?php     echo $row_cus['group_id'];?>','<?php echo $row_cus['group_name'];?>','<?php     echo $_GET['protype']?>','<?php     echo $_GET['ccode']?>','<?php   echo $row_cus['group_spar_id'];?>');"><?php     echo $row_cus['group_spar_id']." | ".$row_cus['group_name'];?></A></td>
+            <td><A href="javascript:void(0);" onclick="get_spar('<?php echo $row_cus['group_id'];?>','<?php echo $row_cus['group_name'];?>','<?php     echo $_GET['protype']?>','<?php     echo $_GET['ccode']?>','<?php   echo $row_cus['group_spar_id'];?>');"><?php     echo $row_cus['group_spar_id']." | ".$row_cus['group_name'];?></A></td>
           </tr>
 		<?php    	
 	}

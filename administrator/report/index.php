@@ -140,6 +140,8 @@ function check9(frm){
       <strong>รายงานใบแจ้งงาน</strong></SPAN></A></LI>
       <LI><A class=shortcut-button href="../report/?mid=16&act=16"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
       <strong>การรับอะไหล่<br>เข้าสต๊อค<br></strong></SPAN></A></LI>
+      <LI><A class=shortcut-button href="../report/?mid=16&act=17"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
+      <strong>ใบเบิกวัตถุดิบ<br>เพื่อผลิต<br></strong></SPAN></A></LI>
       <!-- <LI><A class=shortcut-button href="../report/?mid=16&act=14"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
       <strong>การรับสินค้า<br>โปรเจ็คเข้าสต๊อค<br></strong></SPAN></A></LI> -->
       <LI><A class=shortcut-button href="../report/?mid=16&act=15"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
@@ -173,7 +175,9 @@ function check9(frm){
                         <td><table class="formFields" cellspacing="0" width="100%">
                           <tr >
                             <td width="10%" nowrap class="name">ชื่อร้าน-ชื่อบริษัท</td>
-                            <td width="90%"><input name="cd_name" type="text" id="cd_name"  value="" style="width:40%;"><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a></td>
+                            <td width="90%"><input name="cd_name" type="text" id="cd_name"  value="" style="width:40%;"><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
+                            <input name="cus_id" type="hidden" id="cus_id"  value="">
+                          </td>
                           </tr>
                           <tr>
                             <td nowrap class="name">&nbsp;</td>
@@ -964,7 +968,9 @@ function check9(frm){
                           </tr>
                           <tr >
                             <td width="10%" nowrap class="name">ชื่อร้าน-ชื่อบริษัท</td>
-                            <td width="90%"><input name="cd_name" type="text" id="cd_name"  value="" style="width:40%;"><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a></td>
+                            <td width="90%"><input name="cd_name" type="text" id="cd_name"  value="" style="width:40%;"><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
+                            <input name="cus_id" type="hidden" id="cus_id"  value="" style="width:40%;">
+                          </td>
                           </tr>
                            <tr >
                             <td width="10%" nowrap class="name">กลุ่มลูกค้า</td>
@@ -1491,7 +1497,25 @@ function check9(frm){
                       <td><table class="formFields" cellspacing="0" width="100%">
                         <tr >
                           <td width="10%" nowrap class="name">ชื่อร้าน-ชื่อบริษัท</td>
-                          <td width="90%"><input name="cd_name" type="text" id="cd_name"  value="" style="width:40%;"><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search3.php');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a></td>
+                          <td width="90%"><input name="cd_name" type="text" id="cd_name"  value="" style="width:40%;"><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search3.php');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
+                          <input name="cus_id" type="hidden" id="cus_id"  value="">
+                        </td>
+                        </tr>
+                        <tr >
+                            <td width="10%" nowrap class="name">พนักงานขาย</td>
+                            <td width="90%">
+                            <select name="sale_contact" id="sale_contact" class="inputselect" style="width:250px;">
+                            <option value="">กรุณาเลือกพนักงานขาย</option>
+                            <?php    
+                              $qusaletype = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
+                              while($row_saletype = @@mysqli_fetch_array($qusaletype)){
+                                ?>
+                                  <option value="<?php     echo $row_saletype['group_id'];?>"><?php     echo $row_saletype['group_name'];?></option>
+                                <?php    	
+                                }
+                              ?>
+                            </select>
+                            </td>
                         </tr>
                         <tr>
                           <td nowrap class="name">&nbsp;</td>
@@ -1528,10 +1552,10 @@ function check9(frm){
                             พนักงานขาย
                           </td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                           <td width="10%" nowrap class="name"></td>
                           <td width="90%"></td>
-                        </tr>
+                        </tr> -->
                       </table></td>
                     </tr>
                   </table>
@@ -1843,6 +1867,22 @@ if($_GET['act'] == 14){
                           <tr>
     
                             <td><table class="formFields" cellspacing="0" width="100%">
+
+                            <tr >
+                              <td width="10%" nowrap class="name">รหัสอะไหล่ | ชื่ออะไหล่</td>
+                              <td width="90%">
+                                <select name="pro_pod" id="pro_pod" class="inputselect">
+                                      <option value="">กรุณาเลือกรายการอะไหล่</option>
+                                    <?php    
+                                        $qupros1 = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+                                        while($row_qupros1 = @@mysqli_fetch_array($qupros1)){
+                                          ?>
+                                            <option value="<?php echo $row_qupros1['group_id'];?>"><?php echo $row_qupros1['group_spar_id']." | ".$row_qupros1['group_name'];?></option>
+                                          <?php    	
+                                        }
+                                    ?>
+                                </select><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search_spar.php?protype=pro_pod');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a></td>
+                            </tr>
     
                               <tr>
     
@@ -1920,7 +1960,9 @@ if($_GET['act'] == 14){
     
                               </tr>
     
-    
+                              <tr>
+                                <td></td>
+                              </tr>
     
                             </table></td>
     
@@ -1953,6 +1995,162 @@ if($_GET['act'] == 14){
                 <?php 
     
       }
+
+      if($_GET['act'] == 17){
+
+        ?>
+      
+          <DIV class=content-box><!-- Start Content Box -->
+      
+                  <DIV class=content-box-header align="right" style="padding-right:15px;">
+      
+                  <H3 align="left">เลือกตามใบเบิกวัตถุดิบเพื่อผลิต</H3>
+      
+                  <DIV class=clear>
+                  
+                  </DIV></DIV><!-- End .content-box-header -->
+      
+                  <DIV class=content-box-content>
+      
+                  <DIV id=tab1 class="tab-content default-tab"><!-- This is the target div. id must match the href of this div's tab -->
+                    <form action="report17.php" method="post" name="form1" id="form1" target="_blank" onSubmit="return check3(this)">
+                      <div class="formArea">
+                        <fieldset>
+                          <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+      
+                              <td><table class="formFields" cellspacing="0" width="100%">
+
+                              <tr >
+                                <td width="10%" nowrap class="name">ชื่อร้าน-ชื่อบริษัท</td>
+                                <td width="90%"><input name="cd_name" type="text" id="cd_name"  value="" style="width:40%;" readonly><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search.php?cus_source=fopj');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
+                                <input name="cus_id" type="hidden" id="cus_id"  value="" style="width:40%;">
+                              </td>
+                              </tr>
+  
+                              <tr >
+                                <td width="10%" nowrap class="name">รหัสอะไหล่ | ชื่ออะไหล่</td>
+                                <td width="90%">
+                                  <select name="pro_pod" id="pro_pod" class="inputselect">
+                                        <option value="">กรุณาเลือกรายการอะไหล่</option>
+                                      <?php    
+                                          $qupros1 = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+                                          while($row_qupros1 = @@mysqli_fetch_array($qupros1)){
+                                            ?>
+                                              <option value="<?php echo $row_qupros1['group_id'];?>"><?php echo $row_qupros1['group_spar_id']." | ".$row_qupros1['group_name'];?></option>
+                                            <?php    	
+                                          }
+                                      ?>
+                                  </select><a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search_spar.php?protype=pro_pod');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a></td>
+                              </tr>
+      
+                                <tr>
+      
+                                  <td nowrap class="name">&nbsp;</td>
+      
+                                  <td><span class="name">
+      
+                                    <input name="priod" type="radio" value="0" checked>
+      
+                                    กำหนดช่วงเวลา&nbsp;
+      
+                                    <input name="priod" type="radio" value="1">
+      
+                                    ไม่กำหนดช่วงเวลา</span></td>
+      
+                                </tr>
+      
+                                <tr>
+      
+                                  <td width="10%" nowrap class="name">เริ่มวันที่</td>
+      
+                                  <td width="90%"><input type="text" name="date_fm" readonly value="<?php  echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_fm'});</script></td>
+      
+                                </tr>
+      
+                                <tr>
+      
+                                  <td width="10%" nowrap class="name">ถึงวันที่</td>
+      
+                                  <td width="90%"><input type="text" name="date_to" readonly value="<?php  echo date("d/m/Y");?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'date_to'});</script></td>
+      
+                                </tr>
+      
+                                <tr>
+      
+                                  <td nowrap class="name">รายการแสดง</td>
+      
+                                  <td><input name="sh9" type="checkbox" id="sh9" value="1" checked>
+      
+                                    เลขที่ใบเบิก
+      
+                                    <input name="sh1" type="checkbox" id="sh1" value="1" checked>
+      
+                                    ชื่อลูกค้า / บริษัท + เบอร์โทร
+      
+                                    <input name="sh2" type="checkbox" id="sh2" value="1" checked>
+      
+                                    ชื่อร้าน / สถานที่ติดตั้ง
+      
+                                    <input name="sh3" type="checkbox" id="sh3" value="1" checked>
+      
+                                    จังหวัด
+      
+                                    <input name="sh4" type="checkbox" id="sh4" value="1" checked>
+      
+                                    รหัสอะไหล่<br>
+      
+      
+                                    <input name="sh5" type="checkbox" id="sh5" value="1" checked>
+      
+                                    รายการอะไหล่
+                      
+                                    <input name="sh6" type="checkbox" id="sh6" value="1" checked>
+      
+                                    จำนวนเบิก
+      
+                                   <!--  <input name="sh7" type="checkbox" id="sh7" value="1" checked>
+      
+                                    รวมราคาซื้ิอ-->
+      
+                                    <input name="sh8" type="checkbox" id="sh8" value="1" checked> 
+      
+                                    ผู้เบิก
+                                    </td>
+      
+                                </tr>
+      
+                              </table></td>
+      
+                            </tr>
+      
+                          </table>
+      
+                          </fieldset>
+      
+                      </div><br>
+      
+                      <div class="formArea">
+      
+                        <input type="submit" name="Submit" value="Submit" class="button">
+      
+                      </div>
+      
+                    </form>
+      
+                  </DIV><!-- End #tab1 -->
+      
+                  
+      
+                  
+      
+                  </DIV><!-- End .content-box-content -->
+      
+                  </DIV>	
+      
+                  <?php 
+      
+        }
 ?>
 
 <!-- End .content-box -->

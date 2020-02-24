@@ -9,11 +9,11 @@
 		if($cd_name != ""){
 			$consd = "WHERE cd_name LIKE '%".$cd_name."%'";
 		}
-		$qu_cus = mysqli_query($conn,"SELECT cd_name,loc_name FROM s_first_order ".$consd." GROUP BY cd_name ORDER BY cd_name ASC");
+		$qu_cus = mysqli_query($conn,"SELECT fo_id,cd_name,loc_name FROM s_first_order ".$consd." GROUP BY cd_name ORDER BY cd_name ASC");
 		while($row_cus = @mysqli_fetch_array($qu_cus)){
 			?>
 			 <tr>
-				<td><A href="javascript:void(0);" onclick="get_customer('<?php     echo $row_cus['fo_id'];?>','<?php     echo $row_cus['cd_name'];?>');"><?php     echo $row_cus['cd_name'];?></A></td>
+				<td><A href="javascript:void(0);" onclick="get_customer('<?php echo $row_cus['fo_id'];?>','<?php echo $row_cus['cd_name'];?>');"><?php     echo $row_cus['cd_name'];?></A></td>
 			  </tr>
 			<?php    	
 		}
@@ -23,13 +23,13 @@
 	if($_GET['action'] == 'getcus2'){
 		$cd_name = $_REQUEST['pval'];
 		if($cd_name != ""){
-			$consd = "WHERE cd_name LIKE '%".$cd_name."%'";
+			$consd = "WHERE 1 AND (cd_name LIKE '%".$cd_name."%' OR fs_id LIKE '%".$cd_name."%')";
 		}
-		$qu_cus = mysqli_query($conn,"SELECT cd_name,loc_name FROM s_work_noti ".$consd." GROUP BY cd_name ORDER BY cd_name ASC");
+		$qu_cus = mysqli_query($conn,"SELECT fo_id,fs_id,cd_name,loc_name FROM s_fopj ".$consd." GROUP BY cd_name ORDER BY cd_name ASC");
 		while($row_cus = @mysqli_fetch_array($qu_cus)){
 			?>
 			 <tr>
-				<td><A href="javascript:void(0);" onclick="get_customer('<?php echo $row_cus['fo_id'];?>','<?php echo $row_cus['cd_name'];?>');"><?php echo $row_cus['cd_name'];?> (<?php echo $row_cus['loc_name'];?>)</A></td>
+				<td><A href="javascript:void(0);" onclick="get_customer('<?php echo $row_cus['fo_id'];?>','<?php echo $row_cus['cd_name'];?>');"><?php echo $row_cus['fs_id'];?> | <?php echo $row_cus['cd_name'];?> (<?php echo $row_cus['loc_name'];?>)</A></td>
 			  </tr>
 			<?php    	
 		}
@@ -110,6 +110,47 @@
 			?>
 			 <tr>
 				<td><A href="javascript:void(0);" onclick="get_customer('<?php     echo $row_cus['cusid'];?>','<?php     echo $row_cus['cusid'];?>');"><?php     echo "<strong>".$row_cus['cusid']."</strong> ".$row_cus['cd_name'];?></A></td>
+			  </tr>
+			<?php    	
+		}
+		//echo "SELECT cd_name FROM s_first_order ".$consd." ORDER BY cd_name ASC";
+	}
+
+	if($_GET['action'] == 'getspar'){
+		$group_id = $_REQUEST['group_id'];
+		$group_name = $_REQUEST['group_name'];
+		$protype = $_REQUEST['protype'];
+		$ccode = $_REQUEST['ccode'];
+		
+		$qupros1 = @mysqli_query($conn,"SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+		?>
+		<option value="">กรุณาเลือกรายการอะไหล่</option>
+		<?php
+		while($row_qupros1 = @mysqli_fetch_array($qupros1)){
+		  ?>
+			<option value="<?php echo $row_qupros1['group_id'];?>" <?php if($group_id == $row_qupros1['group_id']){echo 'selected';}?>><?php   echo $row_qupros1['group_spar_id']." | ".$row_qupros1['group_name'];?></option>
+		  <?php    	
+		}
+		
+		//echo "|".$row_qupros1['group_spar_id'];
+		//echo "SELECT * FROM s_group_typeproduct ORDER BY group_name ASC";
+	}
+	
+	if($_GET['action'] == 'getsparkey'){
+		$cd_name =  iconv( 'UTF-8', 'TIS-620', $_REQUEST['pval']);
+		$keys = $_REQUEST['keys'];
+		$ccode = $_REQUEST['ccode'];
+		if($cd_name != ""){
+			$consd = "WHERE group_name LIKE '%".$cd_name."%' OR group_spar_id LIKE '%".$cd_name."%'";
+		}
+		//echo "SELECT group_name FROM s_group_sparpart ".$consd." ORDER BY group_name ASC";
+		$qu_cus = mysqli_query($conn,"SELECT * FROM s_group_sparpart ".$consd." ORDER BY group_name ASC");
+		while($row_cus = @mysqli_fetch_array($qu_cus)){
+			$row_cus['group_name'] = str_replace("'", "", $row_cus['group_name']);
+			$row_cus['group_name'] = str_replace('"', "", $row_cus['group_name']);
+			?>
+			 <tr>
+				<td><A href="javascript:void(0);" onclick="get_spar('<?php echo $row_cus['group_id'];?>','<?php echo $row_cus['group_name'];?>','<?php   echo $keys;?>','<?php   echo $ccode;?>','<?php   echo $row_cus['group_spar_id'];?>');"><?php   echo $row_cus['group_spar_id']." | ".$row_cus['group_name'];?></A></td>
 			  </tr>
 			<?php    	
 		}

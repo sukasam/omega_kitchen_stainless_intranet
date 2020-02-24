@@ -258,8 +258,8 @@ function check(frm){
 	
 	
 	function get_customer(cid,cname,chk){
-		/*alert(cid);
-		alert(cname);*/
+		// alert(chk);
+		// alert(cname);
 		var sCustomerName = document.getElementById("cd_names");
 		
 		sCustomerName.value = cname;
@@ -278,6 +278,8 @@ function check(frm){
 		//alert(chk);
 		if(chk == 'po'){
 			document.getElementById("search_fo").value = '';
+		}else if(chk == 'fopj'){
+			document.getElementById("search_po").value = '';
 		}else{
 			document.getElementById("search_po").value = '';
 		}
@@ -293,7 +295,7 @@ function check(frm){
 				//document.getElementById('rscus').innerHTML = xmlHttp.responseText;
 				//alert(xmlHttp.responseText);
 				var ds = xmlHttp.responseText.split("|");
-				//alert(ds[1]);
+				//alert(ds[3]);
 				get_customer(ds[1],ds[2],ds[3]);
 				
 			} else{
@@ -439,6 +441,8 @@ function check(frm){
 						$tableDB = '';
 						if($cus_source === 'po'){
 							$tableDB = 's_project_order';
+						}else if($cus_source === 'fopj'){
+							$tableDB = 's_fopj';
 						}else{
 							$tableDB = 's_first_order';
 						}
@@ -495,7 +499,7 @@ function check(frm){
 		<span id="contactid" style="display: none;"><?php   echo $finfo['fs_id'];?></span>
 			
 			<strong>เลขที่ FO :</strong> <input type="text" name="search_fo" value="<?php echo $search_fo;?>" id="search_fo" class="inpfoder" onkeyup="get_cus2(this.value,'fo');">&nbsp;&nbsp;
-			<strong>เลขที่ PJ :</strong> <input type="text" name="search_po" value="<?php echo $search_po;?>" id="search_po" class="inpfoder" onkeyup="get_cus2(this.value,'po');">
+			<strong>เลขที่ PJ :</strong> <input type="text" name="search_po" value="<?php echo $search_po;?>" id="search_po" class="inpfoder" onkeyup="get_cus2(this.value,'fopj');">
 			</td>
           </tr>
           <tr>
@@ -677,7 +681,7 @@ function check(frm){
                 <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>
                   <select name="cs_sell" id="cs_sell" class="inputselect" style="width:50%;">
                     <?php   
-						$qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_technician WHERE 1 AND (group_id = 12 OR group_id = 13)  ORDER BY group_name ASC");
+						$qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_technician WHERE 1 ORDER BY group_name ASC");
 						while($row_custec = @mysqli_fetch_array($qu_custec)){
 							?>
                     <option value="<?php   echo $row_custec['group_id'];?>" <?php   if($row_custec['group_id'] == $cs_sell){echo 'selected';}?>><?php   echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>

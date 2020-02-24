@@ -79,12 +79,14 @@
 		if($cd_name != ""){
 			$consd = "WHERE group_name LIKE '%".$cd_name."%' OR group_spar_id LIKE '%".$cd_name."%'";
 		}
-		echo "SELECT group_name FROM s_group_sparpart ".$consd." ORDER BY group_name ASC";
+		//echo "SELECT group_name FROM s_group_sparpart ".$consd." ORDER BY group_name ASC";
 		$qu_cus = mysqli_query($conn,"SELECT * FROM s_group_sparpart ".$consd." ORDER BY group_name ASC");
 		while($row_cus = @mysqli_fetch_array($qu_cus)){
+			$row_cus['group_name'] = str_replace("'", "", $row_cus['group_name']);
+			$row_cus['group_name'] = str_replace('"', "", $row_cus['group_name']);
 			?>
 			 <tr>
-				<td><A href="javascript:void(0);" onclick="get_spar('<?php     echo $row_cus['group_id'];?>','<?php     echo $row_cus['group_name'];?>','<?php   echo $keys;?>','<?php   echo $ccode;?>','<?php   echo $row_cus['group_spar_id'];?>');"><?php   echo $row_cus['group_spar_id']." | ".$row_cus['group_name'];?></A></td>
+				<td><A href="javascript:void(0);" onclick="get_spar('<?php echo $row_cus['group_id'];?>','<?php echo $row_cus['group_name'];?>','<?php   echo $keys;?>','<?php   echo $ccode;?>','<?php   echo $row_cus['group_spar_id'];?>');"><?php   echo $row_cus['group_spar_id']." | ".$row_cus['group_name'];?></A></td>
 			  </tr>
 			<?php    	
 		}

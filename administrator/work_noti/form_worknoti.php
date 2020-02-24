@@ -22,6 +22,37 @@ $dateW4 = ($_POST["date_work4"] != '0000-00-00') ? format_date($_POST["date_work
 $dateW5 = ($_POST["date_work5"] != '0000-00-00') ? format_date($_POST["date_work5"]) : "-";
 $dateW6 = ($_POST["date_work6"] != '0000-00-00') ? format_date($_POST["date_work6"]) : "-";
 
+$cNoti = '';
+switch ($_POST['cnoti']) {
+  case "1":
+    $cNoti = "ฝ่ายขาย";
+  break;
+  case "2":
+    $cNoti = "ฝ่ายบัญชี";
+  break;
+  case "3":
+    $cNoti = "ฝ่ายโรงงาน";
+  break;
+  case "4":
+    $cNoti = "ฝ่ายเขียนแบบ";
+  break;
+  case "5":
+    $cNoti = "ฝ่ายโฟร์แมน";
+  break;
+  case "6":
+    $cNoti = "ฝ่ายขนส่งสินค้า";
+  break;
+  case "7":
+    $cNoti = "แผนกช่าง";
+  break;
+  case "8":
+    $cNoti = "ติดตั้ง / โปรเจ็ค";
+  break;
+  case "9":
+    $cNoti = "บริการ";
+  break;
+}
+
 for($i=0;$i<=count($_POST['cpro']);$i++){
 
 	if($_POST['cpro'][$i] != ""){
@@ -60,6 +91,7 @@ $form = '
             <strong>วันที่ :</strong> '.format_date($_POST["date_open"]).'<br /><br />            
             <strong>พนักงานขาย :</strong> '.getsalename($conn,$_POST["sale_contact"]).'<br /><br />
             <strong>มือถือ :</strong> '.$_POST["sale_tel"].'<br /><br />   
+            <strong>ฝ่ายที่รับแจ้ง :</strong> '.$cNoti.'<br /><br />   
 			</td>
           </tr>
 </table>

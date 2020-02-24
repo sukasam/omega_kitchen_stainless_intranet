@@ -77,3 +77,24 @@ function get_cussID(pval){
    xmlHttp.send(null);
 }
 
+
+function get_sparkey(pval,keys,ccode){
+	//alert(keys);
+	var xmlHttp;
+   xmlHttp=GetXmlHttpObject(); //Check Support Brownser
+   URL = pathLocal+'ajax_return.php?action=getsparkey&pval='+pval+'&keys='+keys+'&ccode='+ccode;
+   if (xmlHttp==null){
+      alert ("Browser does not support HTTP Request");
+      return;
+   }
+    xmlHttp.onreadystatechange=function (){
+        if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
+            document.getElementById('rscus').innerHTML = xmlHttp.responseText;
+        } else{
+          //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
+        }
+   };
+   xmlHttp.open("GET",URL,true);
+   xmlHttp.send(null);
+}
+
