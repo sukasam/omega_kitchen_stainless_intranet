@@ -19,7 +19,7 @@
 			if (@mysqli_num_rows($query) == 0) { //====> Username Avalible 
 					$rec = @mysqli_fetch_array ($query);		
 										
-					if($_POST[new_p]<>""){$_POST[password]=$_POST[new_p];}
+					if($_POST['new_p']<>""){$_POST['password']=$_POST['new_p'];}
 					
 					include "../include/m_update.php";
 					
@@ -161,13 +161,13 @@ function check(frm){
                 <td class="name">ชื่อเข้าใช้งาน <span class="required">*</span></td>
                 <td><input name="username" type="text" id="username"  value="<?php     echo $username; ?>"  style="width:200px;"></td>
               </tr>
-              <?php     if ($_REQUEST[mode] == "add") { ?>
+              <?php     if ($_REQUEST['mode'] == "add") { ?>
               <tr >
                 <td class="name">รหัสผ่าน <span class="required">*</span></td>
                 <td><input name="password" type="password" id="password" value="<?php     echo $password;?>"  style="width:200px;"></td>
               </tr>
               <?php     } ?>
-              <?php     if ($_REQUEST[mode] == "update") { ?>
+              <?php     if ($_REQUEST['mode'] == "update") { ?>
               <tr >
                 <td class="name">รหัสผ่านเดิม</td>
                 <td>*****
@@ -189,7 +189,33 @@ function check(frm){
                   <?php     }?>
                   <input name="u_images" type="hidden" value="<?php     echo $u_images; ?>">
                   </td>
-              </tr>
+			  </tr>
+			  <tr>
+              	<td>
+              		ลายเซ็นดิจิทัล
+              	</td>
+              	<td>
+              		<?php 
+					if(file_exists('../../upload/user/signature/'.base64_encode($_SESSION['login_id']).'.png')){
+						//echo "Have";
+						?>
+					<img src="../../upload/user/signature/<?php echo base64_encode($_SESSION['login_id']).".png";?>" width="250" style="border: 1px solid;"><br><br>
+					<a href="signature.php" target="_blank">[เปลี่ยนลายเซ็น]</a>
+						<?php
+					}else{
+						//echo "Not Have";
+						?>
+						<a href="signature.php" target="_blank"><u>เพิ่มลายเซ็น</u></a>
+						<?php
+					}
+					?>
+              		
+              	</td>
+			  </tr>
+			  <tr>
+				<td></td>
+				<td></td>
+			  </tr>
               <!--
               <tr >
                 <td class="name">Super admin</td>
@@ -204,7 +230,7 @@ function check(frm){
 			$a_not_exists = array();
 			post_param($a_param,$a_not_exists); 
 			?>
-                  <input name="mode" type="hidden" id="mode" value="<?php     echo $_REQUEST[mode];?>">
+                  <input name="mode" type="hidden" id="mode" value="<?php     echo $_REQUEST['mode'];?>">
                   <input name="<?php     echo $PK_field;?>" type="hidden" id="<?php     echo $PK_field;?>" value="<?php     echo $_REQUEST[$PK_field];?>"></td>
               </tr>
             </table></td>
