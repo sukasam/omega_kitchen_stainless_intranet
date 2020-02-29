@@ -171,8 +171,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           <TH width="25%"><a>ชื่อลูกค้า</a></TH>
           <TH width="24%"><a>สถานที่ติดตั้ง</a></TH>
           <TH width="8%"><div align="center"><a>การยืนยัน</a></div></TH>
-          <TH width="9%"><div align="center"><a>(Open)</a></div></TH>
-          <TH width="10%"><div align="center"><a>(Close)</a></div></TH>
+          <TH width="9%"><div align="center"><a>Download</a></div></TH>
+          <!-- <TH width="10%"><div align="center"><a>(Close)</a></div></TH> -->
           </TR>
       </THEAD>
       <TFOOT>
@@ -197,17 +197,17 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 					} 
 					
 					if ($_GET['app_id'] <> "") { 
-						$sql .= " and ( approve = '$_GET[app_id]' ";
+						$sql .= " and ( sr.approve = '$_GET[app_id]' ";
 						$sql .=  $subtext . " ) ";
 					}else{
-						$sql .= " and ( approve = '0' ";
+						$sql .= " and ( sr.approve = '0' ";
 						$sql .=  $subtext . " ) ";
 					}
 					
 					if ($orderby <> "") $sql .= " order by " . $orderby;
 					if ($sortby <> "") $sql .= " " . $sortby;
 					include ("../include/page_init.php");
-					// echo $sql;
+					//echo $sql;
 					// exit();
 					$query = @mysqli_query($conn,$sql);
 					if($_GET["page"] == "") $_GET["page"] = 1;
@@ -230,8 +230,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
               <!--<option value="index.php?action=apps&cc=3&sr_id=<?php   echo $rec["sr_id"];?>&page=<?php   echo $_GET['page'];?>" <?php   if($rec["approve"] == "3"){echo 'selected="selected"';}?> style="background:#FFF;color:#000;">จ่ายแล้ว</option>-->
             </select></TD>
           <TD style="vertical-align:middle;"><div align="center"><!-- Icons --><a href="../../upload/service_report_open/<?php   echo $chaf;?>.pdf" target="_blank"><img src="../images/icon2/backup.png" alt="" width="25" height="25" style="margin-left:10px;" title="ดาวน์โหลดรายงานช่างซ่ิอม"></a></div></TD>
-          <TD style="vertical-align:middle;"><!-- Icons -->
-            <div align="center"><a href="../../upload/service_report_close/<?php   echo $chaf;?>.pdf" target="_blank"><img src="../images/icon2/backup.png" width="25" height="25" title="ดาวน์โหลดรายงานช่างซ่ิอม" style="margin-left:10px;"></a></div></TD>
+          <!-- <TD style="vertical-align:middle;">
+            <div align="center"><a href="../../upload/service_report_close/<?php   echo $chaf;?>.pdf" target="_blank"><img src="../images/icon2/backup.png" width="25" height="25" title="ดาวน์โหลดรายงานช่างซ่ิอม" style="margin-left:10px;"></a></div></TD> -->
           </TR>  
 		<?php  }?>
       </TBODY>

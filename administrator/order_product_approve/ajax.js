@@ -16,10 +16,10 @@ function GetXmlHttpObject(){
    return xmlHttp;
 }
 
-function checkfirstorder(pval,param1,param2,param3,param4,param5,param6,param7,param8,param9,param10,param11,param12,param13){
+function checkfirstorder(pval,param1,param2,param3,param4,param5,param6,param7,param8,param9,param10,param11,param12,param13,param14,param15,chk){
 	var xmlHttp;
    xmlHttp=GetXmlHttpObject(); //Check Support Brownser
-   URL = pathLocal+'ajax_return.php?action=getcusfirsh&pid='+pval;
+   URL = pathLocal+'ajax_return.php?action=getcusfirsh&pid='+pval+'&chk='+chk;
    if (xmlHttp==null){
       alert ("Browser does not support HTTP Request");
       return;
@@ -40,6 +40,8 @@ function checkfirstorder(pval,param1,param2,param3,param4,param5,param6,param7,p
 			document.getElementById(param11).innerHTML=ds[10];
 			document.getElementById(param12).innerHTML=ds[11];
 			document.getElementById(param13).innerHTML=ds[12];
+			document.getElementById(param14).value=ds[13];
+			document.getElementById(param15).value=ds[14];
         } else{
           //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
         }
@@ -70,11 +72,11 @@ function get_podsn(pval,param1,param2,param3,fid){
    xmlHttp.send(null);
 }
 
-function get_cus(pval){
+function get_cus(pval,chk){
 	/*alert(pval);*/
 	var xmlHttp;
    xmlHttp=GetXmlHttpObject(); //Check Support Brownser
-   URL = pathLocal+'ajax_return.php?action=getcus&pval='+pval;
+   URL = pathLocal+'ajax_return.php?action=getcus&pval='+pval+'&chk='+chk;
    if (xmlHttp==null){
       alert ("Browser does not support HTTP Request");
       return;
@@ -82,6 +84,63 @@ function get_cus(pval){
     xmlHttp.onreadystatechange=function (){
         if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
             document.getElementById('rscus').innerHTML = xmlHttp.responseText;
+        } else{
+          //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
+        }
+   };
+   xmlHttp.open("GET",URL,true);
+   xmlHttp.send(null);
+}
+
+
+function get_sparpart(pval,resdata){
+	/*alert(pval);*/
+	var xmlHttp;
+   xmlHttp=GetXmlHttpObject(); //Check Support Brownser
+   URL = pathLocal+'ajax_return.php?action=getsparpart&pval='+pval+'&resdata='+resdata;
+   if (xmlHttp==null){
+      alert ("Browser does not support HTTP Request");
+      return;
+   }
+    xmlHttp.onreadystatechange=function (){
+        if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
+            document.getElementById('rscus').innerHTML = xmlHttp.responseText;
+        } else{
+          //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
+        }
+   };
+   xmlHttp.open("GET",URL,true);
+   xmlHttp.send(null);
+}
+
+function showspare(sval,param1,param2,param3,param4,idList,param5){
+	var xmlHttp;
+   xmlHttp=GetXmlHttpObject(); //Check Support Brownser
+   URL = pathLocal+'ajax_return.php?action=getspare&sval='+sval;
+   if (xmlHttp==null){
+      alert ("Browser does not support HTTP Request");
+      return;
+   }
+    xmlHttp.onreadystatechange=function (){
+        if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
+			var ds = xmlHttp.responseText.split("|");
+			//console.log(JSON.stringify(ds));
+			if(ds[4] <= 0){
+				 alert(ds[1]+' : อะไหล่สินค้าตัวนี้ไม่เพียงพอสำหรับการเบิกอะไหล่');
+				 document.getElementById('lists'+idList).value='';
+				 document.getElementById(param1).value='';
+				 document.getElementById(param2).value='';
+				 document.getElementById(param3).value='';
+				 document.getElementById(param4).value='';
+				 document.getElementById(param5).value='';
+				 document.getElementById('opens'+idList).value='';
+			}else{
+				document.getElementById(param1).value=ds[1];
+				document.getElementById(param2).value=ds[2];
+				document.getElementById(param3).value=ds[3];
+				document.getElementById(param4).value=ds[4];
+				document.getElementById(param5).value=ds[5];
+			}
         } else{
           //document.getElementById(ElementId).innerHTML="<div class='loading'> Loading..</div>" ;
         }

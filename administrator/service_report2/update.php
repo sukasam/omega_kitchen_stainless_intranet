@@ -711,18 +711,17 @@ function check(frm){
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong >
-                  <select name="loc_contact3" id="loc_contact3" style="width:50%;">
-                    <?php   
-						$qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_technician ORDER BY group_name ASC");
-						while($row_custec = @mysqli_fetch_array($qu_custec)){
-							if($loc_contact3 != ""){$loc_contact3 = $loc_contact3;}
-							else{$loc_contact3 = 9;}
-							?>
-                    <option value="<?php   echo $row_custec['group_id'];?>" <?php   if($row_custec['group_id'] == $loc_contact3){echo 'selected';}?>><?php   echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
-                    <?php  
-						}
-					?>
-                  </select>
+                 
+				  <?php 
+                    if($loc_contact3 != ''){
+                    ?>
+                    <?php echo getsalename($conn,$loc_contact3);?>
+                    <?php
+                    }else{
+                      echo "<br>";
+                    }
+                    ?>
+                    <input type="hidden" name="loc_contact3" value="<?php echo $loc_contact3;?>">  
                 </strong></td>
               </tr>
               <tr>

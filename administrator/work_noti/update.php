@@ -68,11 +68,22 @@
 
     $work_list = explode(',',$_POST['work_list']);
 
+    $itemIds2 = "";
+    foreach ($_POST['cnoti1'] as $itemId2) {
+		  $itemIds2 = $itemIds2 . $itemId2 . ",";
+    }
+
+    $_POST['cnoti'] = rtrim($itemIds2, ",");
+
+    $cnoti = explode(',',$_POST['cnoti']);
+
     $_POST['remark'] = nl2br(addslashes($_POST['remark']));
 		
 		if ($_POST["mode"] == "add") { 
 
-				$_POST['status'] = 1;
+        $_POST['status'] = 1;
+        $_POST['approve'] = 0;
+        $_POST['approve2'] = 0;
 				$_POST['fs_id'] = get_snfirstorders($conn,$_POST['fs_id']);
 				
 				include "../include/m_add.php";
@@ -324,6 +335,8 @@
     
     $work_list = explode(',',$work_list);
 
+    $cnoti= explode(',',$cnoti);
+
 	}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -525,7 +538,18 @@ function checkMobileSale(){
               <input type="text" name="cd_email" value="<?php echo $cd_email;?>" id="cd_email" class="inpfoder">
             </td>
             <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;">
-              <strong>ฝ่ายที่รับแจ้ง :</strong> <input type="radio" name="cnoti" value="1" <?php if($cnoti === '1'){echo 'checked';}?>> ฝ่ายขาย&nbsp&nbsp
+              <strong>ฝ่ายที่รับแจ้ง :</strong>
+              <input type="checkbox" name="cnoti1[]" value="1" <?php if(in_array(1,$cnoti)){echo 'checked';}?>>ฝ่ายขาย&nbsp&nbsp
+              <input type="checkbox" name="cnoti1[]" value="2" <?php if(in_array(2,$cnoti)){echo 'checked';}?>>ฝ่ายบัญชี&nbsp&nbsp
+              <input type="checkbox" name="cnoti1[]" value="3" <?php if(in_array(3,$cnoti)){echo 'checked';}?>>ฝ่ายโรงงาน&nbsp&nbsp
+              <input type="checkbox" name="cnoti1[]" value="4" <?php if(in_array(4,$cnoti)){echo 'checked';}?>>ฝ่ายเขียนแบบ&nbsp&nbsp<br>
+              <input type="checkbox" name="cnoti1[]" value="5" <?php if(in_array(5,$cnoti)){echo 'checked';}?>>ฝ่ายโฟร์แมน&nbsp&nbsp
+              <input type="checkbox" name="cnoti1[]" value="6" <?php if(in_array(6,$cnoti)){echo 'checked';}?>>ฝ่ายขนส่งสินค้า&nbsp&nbsp
+              <input type="checkbox" name="cnoti1[]" value="7" <?php if(in_array(7,$cnoti)){echo 'checked';}?>>แผนกช่าง&nbsp&nbsp
+              <input type="checkbox" name="cnoti1[]" value="8" <?php if(in_array(8,$cnoti)){echo 'checked';}?>>ติดตั้ง / โปรเจ็ค&nbsp&nbsp
+              <input type="checkbox" name="cnoti1[]" value="9" <?php if(in_array(9,$cnoti)){echo 'checked';}?>>บริการ&nbsp&nbsp
+
+              <!-- <strong>ฝ่ายที่รับแจ้ง :</strong> <input type="radio" name="cnoti" value="1" <?php if($cnoti === '1'){echo 'checked';}?>> 
               <input type="radio" name="cnoti" value="2" <?php if($cnoti === '2'){echo 'checked';}?>> ฝ่ายบัญชี&nbsp&nbsp
               <input type="radio" name="cnoti" value="3" <?php if($cnoti === '3'){echo 'checked';}?>> ฝ่ายโรงงาน&nbsp&nbsp
               <input type="radio" name="cnoti" value="4" <?php if($cnoti === '4'){echo 'checked';}?>> ฝ่ายเขียนแบบ&nbsp&nbsp<br>
@@ -533,7 +557,7 @@ function checkMobileSale(){
               <input type="radio" name="cnoti" value="6" <?php if($cnoti === '6'){echo 'checked';}?>> ฝ่ายขนส่งสินค้า&nbsp&nbsp
               <input type="radio" name="cnoti" value="7" <?php if($cnoti === '7'){echo 'checked';}?>> แผนกช่าง&nbsp&nbsp
               <input type="radio" name="cnoti" value="8" <?php if($cnoti === '8'){echo 'checked';}?>> ติดตั้ง / โปรเจ็ค&nbsp&nbsp
-              <input type="radio" name="cnoti" value="9" <?php if($cnoti === '9'){echo 'checked';}?>> บริการ&nbsp&nbsp
+              <input type="radio" name="cnoti" value="9" <?php if($cnoti === '9'){echo 'checked';}?>> บริการ&nbsp&nbsp -->
             </td>
           </tr>
 </table>
@@ -793,7 +817,17 @@ function checkMobileSale(){
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;">
-                  <strong ><input type="text" name="sign_work1" value="<?php echo $sign_work1;?>" id="sign_work1" class="inpfoder" style="width:50%;text-align:center;"></strong>
+                  <!-- <strong ><input type="text" name="sign_work1" value="<?php echo $sign_work1;?>" id="sign_work1" class="inpfoder" style="width:50%;text-align:center;"></strong> -->
+                  <select name="sign_work1" id="sign_work1" style="width:50%;">
+                      <?php   
+                    $qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
+                    while($row_custec = @mysqli_fetch_array($qu_custec)){
+                      ?>
+                              <option value="<?php   echo $row_custec['group_id'];?>" <?php   if($row_custec['group_id'] == $sign_work1){echo 'selected';}?>><?php   echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
+                              <?php  
+                    }
+                  ?>
+                  </select>
                 </td>
               </tr>
               <tr>
@@ -811,7 +845,17 @@ function checkMobileSale(){
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;">
-                  <strong ><input type="text" name="sign_work2" value="<?php echo $sign_work2;?>" id="sign_work2" class="inpfoder" style="width:50%;text-align:center;"></strong>
+                <?php 
+                    if($sign_work2 != 0){
+                    ?>
+                    <?php echo getsalename($conn,$sign_work2);?>
+                    <?php
+                    }else{
+                      echo "<br>";
+                    }
+                    ?>
+                    <input type="hidden" name="sign_work2" value="<?php echo $sign_work2;?>">
+                <!-- <strong ><input type="text" name="sign_work2" value="<?php echo $sign_work2;?>" id="sign_work2" class="inpfoder" style="width:50%;text-align:center;"></strong> -->
                 </td>
               </tr>
               <tr>
@@ -829,13 +873,23 @@ function checkMobileSale(){
         <td width="33%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>
-                  <input type="text" name="sign_work3" value="<?php echo $sign_work3;?>" id="sign_work3" class="inpfoder" style="width:50%;text-align:center;"></strong>
+                <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;">
+                <?php 
+                    if($sign_work3 != 0){
+                    ?>
+                    <?php echo getsalename($conn,$sign_work3);?>
+                    <?php
+                    }else{
+                      echo "<br>";
+                    }
+                    ?>
+                    <input type="hidden" name="sign_work3" value="<?php echo $sign_work3;?>">
+                <!-- <strong><input type="text" name="sign_work3" value="<?php echo $sign_work3;?>" id="sign_work3" class="inpfoder" style="width:50%;text-align:center;"></strong> -->
                 </td>
               </tr>
               <tr>
                 <td style="padding-top:10px;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;">
-                  <strong>ผู้รับแจ้งงาน</strong>
+                  <strong>GM / ผู้อนุมัติ</strong>
                 </td>
               </tr>
               <tr>
@@ -858,6 +912,8 @@ function checkMobileSale(){
 			?>
       <input name="mode" type="hidden" id="mode" value="<?php echo $_GET["mode"];?>">
       <input name="status" type="hidden" id="status" value="<?php echo $status;?>">
+      <input name="approve" type="hidden" id="approve" value="<?php echo $approve;?>">
+      <input name="approve2" type="hidden" id="approve2" value="<?php echo $approve2;?>">
       <input name="<?php  echo $PK_field;?>" type="hidden" id="<?php echo $PK_field;?>" value="<?php     echo $_GET[$PK_field];?>">
     </div>
   </form>

@@ -675,8 +675,19 @@ function check(frm){
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong >
-                  
-				  <input type="text" name="loc_contact3" id="loc_contact3" value="<?php echo $loc_contact3;?>" style="text-align: center;">
+				  
+				<?php 
+                    if($loc_contact3 != ''){
+                    ?>
+                    <?php echo getsalename($conn,$loc_contact3);?>
+                    <?php
+                    }else{
+                      echo "<br>";
+                    }
+                    ?>
+					<input type="hidden" name="loc_contact3" value="<?php echo $loc_contact3;?>">  
+					
+				  <!-- <input type="text" name="loc_contact3" id="loc_contact3" value="<?php echo $loc_contact3;?>" style="text-align: center;"> -->
                 </strong></td>
               </tr>
               <tr>

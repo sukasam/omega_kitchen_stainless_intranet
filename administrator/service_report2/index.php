@@ -108,7 +108,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     ใบคืนอะไหล่<br><br></SPAN></A></LI>
     <LI><A class=shortcut-button href="../service_report4/"><SPAN><IMG  alt=icon src="../images/icons/icon-48-section.png"><BR>
     ใบรายงานติดตั้ง<br><br></SPAN></A></LI>-->
-    <LI><A class=shortcut-button href="../service_report_approve/"><SPAN><IMG  alt=icon src="../images/icons/icon-48-user.png"><BR>
+    <LI><A class=shortcut-button href="../service_report2_approve/"><SPAN><IMG  alt=icon src="../images/icons/icon-48-user.png"><BR>
     อนุมัติใบเบิกอะไหล่เพื่อการผลิต</SPAN></A></LI> 
     <?php     
 	if ($FR_module <> "") { 

@@ -98,7 +98,11 @@ function check_select(frm){
     <LI><A class=shortcut-button href="../first_order/index.php"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
     First Order</SPAN></A></LI>
     <LI><A class=shortcut-button href="../project_order/index.php"><SPAN><IMG  alt=icon src="../images/icons/icon-48-module.png"><BR>
-    Project Order</SPAN></A></LI>
+    Project Order<br><br></SPAN></A></LI>
+    <LI><A class=shortcut-button href="../project_order_approve/index.php"><SPAN><IMG  alt=icon src="../images/icons/icon-48-user.png"><BR>
+    อนุมัติใบ PJ (Superviser)</SPAN></A></LI>
+    <LI><A class=shortcut-button href="../project_order_approve2/index.php"><SPAN><IMG  alt=icon src="../images/icons/icon-48-user.png"><BR>
+    อนุมัติใบ PJ (GM)</SPAN></A></LI>
     <LI><A class=shortcut-button href="../fo-pj/index.php"><SPAN><IMG  alt=icon src="../images/icons/icon-48-module.png"><BR>
     FO/PJ</SPAN></A></LI>
     <LI><A class=shortcut-button href="../work_noti/index.php"><SPAN><IMG  alt=icon src="../images/icons/icon-48-section.png"><BR>

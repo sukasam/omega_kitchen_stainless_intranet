@@ -2561,5 +2561,31 @@ function get_orderproduct_closed($conn,$ymd,$loc,$ctype) {
 	
 	return $res;		
 }
+
+function get_sale_signature($conn,$sale_id) {
+	
+	$rowSale = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM `s_group_sale` WHERE group_id = '".$sale_id."'"));
+	
+	$rowAccount = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM `s_user` WHERE user_id = '".$rowSale['user_account']."'"));
+	
+	$signature = '';
+	
+	if($rowAccount['signature'] != ''){
+		$signature = $rowAccount['signature'];
+	}else{
+		$signature = 'none.png';
+	}
+	
+	return $signature;
+	
+}
+
+function userSaleGroupID($conn,$user_id){
+	//echo "SELECT * FROM  s_user WHERE user_id = '".$user_id."'";
+	$row_user = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_user WHERE user_id = '".$user_id."'"));
+	$row_user_group = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_group_sale WHERE user_account = '".$row_user['user_id']."'"));
+	
+	return $row_user_group['group_id'];	
+}
 ?>
 

@@ -24,6 +24,15 @@
 		
 		$a_sdate=explode("/",$_POST['date_qut']);
 		$_POST['date_qut']=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
+
+		$a_sdate=explode("/",$_POST['sign_date1']);
+		$_POST['sign_date1']=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
+		
+		$a_sdate=explode("/",$_POST['sign_date2']);
+		$_POST['sign_date2']=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
+		
+		$a_sdate=explode("/",$_POST['sign_date3']);
+		$_POST['sign_date3']=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
 		
 		$_POST['ccomment'] = nl2br($_POST['ccomment']);
 		$_POST['qucomment'] = nl2br($_POST['qucomment']);
@@ -46,8 +55,9 @@
 				$_POST['fs_id'] = get_snprojectorders($conn,$_POST['fs_id']);
 				$_POST['status_use'] = 1;
 				$_POST['st_setting'] = 0;
-				
-				
+				$_POST['approve'] = 0;
+				$_POST['approve2'] = 0;
+
 				include "../include/m_add.php";
 				$id = mysqli_insert_id($conn);
 			
@@ -149,6 +159,15 @@
 		
 		$a_sdate=explode("-",$date_qut);
 		$date_qut=$a_sdate[2]."/".$a_sdate[1]."/".$a_sdate[0];
+
+		$a_sdate=explode("-",$sign_date1);
+		$sign_date1=$a_sdate[2]."/".$a_sdate[1]."/".$a_sdate[0];
+	
+		$a_sdate=explode("-",$sign_date2);
+		$sign_date2=$a_sdate[2]."/".$a_sdate[1]."/".$a_sdate[0];
+	
+		$a_sdate=explode("-",$sign_date3);
+		$sign_date3=$a_sdate[2]."/".$a_sdate[1]."/".$a_sdate[0];
 	}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -714,34 +733,7 @@ Vat 7%</strong></td>
   <br>
   	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="text-align:center;">
       <tr>
-        <td width="33%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
-        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong >
-                  <!--<select name="cs_company" id="cs_company" class="inputselect" style="width:50%;display: none;">
-                    <option value="">กรุณาเลือกช่างบริการ</option>
-                    <?php    
-						/*$qutechtype = @mysqli_query($conn,"SELECT * FROM s_group_technician ORDER BY group_name ASC");
-						while($row_techtype = @mysqli_fetch_array($qutechtype)){
-						  ?>
-						<option value="<?php     echo $row_techtype['group_id'];?>" <?php     if($cs_company == $row_techtype['group_id']){echo 'selected';}?>><?php     echo $row_techtype['group_name'];?></option>
-						<?php    	
-						}*/
-					?>
-                  </select>-->
-                  
-                  <strong><input type="text" name="cs_company" value="<?php     echo $cs_company;?>" id="cs_company" class="inpfoder" style="width:50%;text-align:center;"></strong>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding-top:10px;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>Sale Manager</strong></td>
-              </tr>
-              <tr>
-                <td style="font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่............./.............../..............</strong></td>
-              </tr>
-            </table>
-
-        </td>
+        
         <td width="33%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
@@ -761,20 +753,64 @@ Vat 7%</strong></td>
                 <td style="padding-top:10px;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>พนักงานขาย</strong></td>
               </tr>
               <tr>
-                <td style="font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่............./.............../..............</strong></td>
+                <td style="font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;">
+                <strong>วันที่: <input type="text" name="sign_date1" value="<?php if($sign_date1 == ""){echo date("d/m/Y");}else{ echo $sign_date1;}?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'sign_date1'});</script></strong>
+                </td>
               </tr>
             </table>
+		</td>
+		<td width="33%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
+        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong >
+				<?php 
+                    if($cs_company != 0){
+                    ?>
+                    <?php echo getsalename($conn,$cs_company);?>
+                    <?php
+                    }else{
+                      echo "<br>";
+                    }
+                    ?>
+                    <input type="hidden" name="cs_company" value="<?php echo $cs_company;?>">
+                  <!-- <strong><input type="text" name="cs_company" value="<?php     echo $cs_company;?>" id="cs_company" class="inpfoder" style="width:50%;text-align:center;"></strong> -->
+                </td>
+              </tr>
+              <tr>
+                <td style="padding-top:10px;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>Sale Manager</strong></td>
+              </tr>
+			  <tr>
+                <td style="font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;">
+                <strong>วันที่: <input type="text" name="sign_date2" value="<?php if($sign_date2 == ""){echo date("d/m/Y");}else{ echo $sign_date2;}?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'sign_date2'});</script></strong>
+                </td>
+              </tr>
+            </table>
+
         </td>
         <td width="33%" style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong><input type="text" name="cs_aceep" value="<?php     echo $cs_aceep;?>" id="cs_aceep" class="inpfoder" style="width:50%;text-align:center;"></strong></td>
+			<tr>
+                <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;">
+                <?php 
+                    if($cs_aceep != 0){
+                    ?>
+                    <?php echo getsalename($conn,$cs_aceep);?>
+                    <?php
+                    }else{
+                      echo "<br>";
+                    }
+                    ?>
+                    <input type="hidden" name="cs_aceep" value="<?php echo $cs_aceep;?>"> 
+                <!-- <strong><input type="text" name="cs_aceep" value="<?php  echo $cs_aceep;?>" id="cs_aceep" class="inpfoder" style="width:50%;text-align:center;"></strong> -->
+              </td>
               </tr>
               <tr>
-                <td style="padding-top:10px;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>ผู้อนุมัติการขาย</strong></td>
+                <td style="padding-top:10px;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>GM / ผู้อนุมัติการขาย</strong></td>
               </tr>
-              <tr>
-                <td style="font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่............./.............../..............</strong></td>
+			  <tr>
+                <td style="font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;">
+                <strong>วันที่: <input type="text" name="sign_date3" value="<?php if($sign_date3 == ""){echo date("d/m/Y");}else{ echo $sign_date3;}?>" class="inpfoder"/><script language="JavaScript">new tcal ({'formname': 'form1','controlname': 'sign_date3'});</script></strong>
+                </td>
               </tr>
             </table>
         </td>
@@ -800,7 +836,9 @@ Vat 7%</strong></td>
 			?>
       <input name="mode" type="hidden" id="mode" value="<?php     echo $_GET["mode"];?>">
       <input name="status_use" type="hidden" id="status_use" value="<?php     echo $status_use;?>">
-      <input name="st_setting" type="hidden" id="st_setting" value="<?php     echo $st_setting;?>">
+	  <input name="st_setting" type="hidden" id="st_setting" value="<?php     echo $st_setting;?>">
+	  <input name="approve" type="hidden" id="approve" value="<?php  echo $approve;?>">
+      <input name="approve2" type="hidden" id="approve2" value="<?php  echo $approve2;?>">
       <input name="<?php     echo $PK_field;?>" type="hidden" id="<?php     echo $PK_field;?>" value="<?php     echo $_GET[$PK_field];?>">
     </div>
   </form>
