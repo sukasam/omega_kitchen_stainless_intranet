@@ -504,7 +504,7 @@ function checkMobileSale(){
             <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;">
              <strong>พนักงานขาย :</strong>
               <!-- <input type="text" name="sale_contact" value="<?php echo $sale_contact;?>" id="sale_contact" class="inpfoder"> -->
-              <select name="sale_contact" id="sale_contact" class="inputselect" style="width:50%;" onchange="checkMobileSale()">
+              <select name="sale_contact" id="sale_contact" class="inputselect" style="width:40%;" onchange="checkMobileSale()">
                 <option value="">กรุณาเลือกพนักงานขาย</option>
                 <?php    
                 	$qusaletype = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
@@ -514,7 +514,9 @@ function checkMobileSale(){
                     <?php    	
                   }
                 ?>
-            </select>
+            </select>&nbsp;&nbsp;
+            <strong>มือถือ :</strong>
+              <input type="text" name="sale_tel" value="<?php echo $sale_tel;?>" id="sale_tel" class="inpfoder">
             </td>
           </tr>
           <tr>
@@ -526,8 +528,17 @@ function checkMobileSale(){
               <input type="text" name="cd_line" value="<?php echo $cd_line;?>" id="cd_line" class="inpfoder">
             </td>
             <td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;">
-            <strong>มือถือ :</strong>
-              <input type="text" name="sale_tel" value="<?php echo $sale_tel;?>" id="sale_tel" class="inpfoder">
+              <strong>ชื่อผู้รับแจ้ง : </strong><select name="getnoti" id="getnoti" class="inputselect" style="width:40%;">
+                <option value="">กรุณาเลือกชื่อผู้รับแจ้ง</option>
+                <?php    
+                	$qusaletype = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
+                  while($row_saletype = @mysqli_fetch_array($qusaletype)){
+                    ?>
+                      <option value="<?php  echo $row_saletype['group_id'];?>" <?php if($getnoti == $row_saletype['group_id']){echo 'selected';}?>><?php     echo $row_saletype['group_name'];?></option>
+                    <?php    	
+                  }
+                ?>
+            </select>
             </td>
           </tr>
           <tr>

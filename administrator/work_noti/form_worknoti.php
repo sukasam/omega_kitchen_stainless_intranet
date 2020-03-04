@@ -130,8 +130,8 @@ $form = '
             <td width="43%" valign="top" style="font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;">
             <strong>เลขที่ใบแจ้งงาน :</strong><strong> </strong>'.$_POST["fs_id"].'<br><br>
             <strong>วันที่ :</strong> '.format_date($_POST["date_open"]).'<br /><br />            
-            <strong>พนักงานขาย :</strong> '.getsalename($conn,$_POST["sale_contact"]).'<br /><br />
-            <strong>มือถือ :</strong> '.$_POST["sale_tel"].'<br /><br />   
+            <strong>พนักงานขาย :</strong> '.getsalename($conn,$_POST["sale_contact"]).'&nbsp;&nbsp;<strong>มือถือ :</strong> '.$_POST["sale_tel"].'<br /><br />
+            <strong>ชื่อผู้รับแจ้ง :</strong> '.getsalename($conn,$_POST["getnoti"]).'<br /><br />   
             <strong>ฝ่ายที่รับแจ้ง :</strong> '.$cNoti.'<br /><br />   
 			</td>
           </tr>

@@ -46,12 +46,21 @@
 		if ($_GET["gg"] == 1) $status_use = 1;
 		if ($_GET["gg"] == 2) $status_use = 2;
 		if ($_GET["gg"] == 3) $status_use = 3;
-		Check_Permission($conn,$check_module,$_SESSION["login_id"],"update");
-		$sql_status = "update $tbl_name set status_use = '".$status_use."' where $PK_field = '".$_GET["ff"]."'";
-		@mysqli_query($conn,$sql_status);
+		// Check_Permission($conn,$check_module,$_SESSION["login_id"],"update");
+		// $sql_status = "update $tbl_name set status_use = '".$status_use."' where $PK_field = '".$_GET["ff"]."'";
+		// @mysqli_query($conn,$sql_status);
 		
-		if($_GET['page'] != ""){$conpage = "page=".$_GET['page'];}
-		header ("location:?".$conpage); 
+		// if($_GET['page'] != ""){$conpage = "page=".$_GET['page'];}
+    // header ("location:?".$conpage); 
+    
+    $code = Check_Permission($conn,'กำหนดดาว FO',$_SESSION["login_id"],"update");
+    if ($code == "1") {
+      $sql_status = "update $tbl_name set status_use = '$status_use' where $PK_field = '".$_GET["ff"]."'";
+      @mysqli_query($conn,$sql_status);
+      
+      if($_GET["page"] != ""){$conpage = "page=".$_GET["page"];}
+      header ("location:?".$conpage); 
+    }
 	}
 	
 ?>
