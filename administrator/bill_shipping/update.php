@@ -496,6 +496,7 @@ function check(frm){
 		<tbody id="exp" name="exp">
 		
 		<?php    
+		//echo "SELECT * FROM `s_bill_shippingsub` WHERE sr_id = '".$_GET['sr_id']."' ORDER BY r_id ASC";
 		$quQry = mysqli_query($conn,"SELECT * FROM `s_bill_shippingsub` WHERE sr_id = '".$_GET['sr_id']."' ORDER BY r_id ASC");
 		$numRowPro = mysqli_num_rows($quQry);
 		$rowCal = 1;
@@ -503,33 +504,24 @@ function check(frm){
 		$sumCost = 0;
 
 		while($rowPro = mysqli_fetch_array($quQry)){
+
 			?>
 			<tr>
-			  <td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;"><?php     echo $rowCal;?></td>
+			  <td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;"><?php echo $rowCal;?></td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;" id="ccodepro<?php echo $rowCal;?>">
-			  <?php echo get_stock_order_code($conn,$rowPro['lists']);?></td>
+			  <?php echo get_stock_project_code($conn,$rowPro['lists']);?></td>
 			  <td style="border:1px solid #000000;text-align:left;padding:5;vertical-align: middle;">
-			  <select name="cpro[]" id="cpro<?php echo $rowCal;?>" class="inputselect" style="width:85%;" onChange="get_product(<?php echo $rowCal;?>);">
-					<option value="">กรุณาเลือกรายการ</option>
-					<?php    
-						$qupro1 = @mysqli_query($conn,"SELECT * FROM s_group_stock_order ORDER BY group_name ASC");
-						while($row_qupro1 = @mysqli_fetch_array($qupro1)){
-						  ?>
-							<option value="<?php echo $row_qupro1['group_id'];?>" <?php if($rowPro['lists'] == $row_qupro1['group_id']){echo 'selected';}?>><?php     echo $row_qupro1['group_name'];?></option>
-						  <?php    	
-						}
-				  ?>
-			  </select>
-			  <a href="javascript:void(0);" onClick="windowOpener('400', '500', '', 'search2.php?protype=<?php     echo $rowCal;?>&col=<?php echo $rowCal;?>');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>
+			  <input type="hidden" name="cpro[]" value="<?php echo $rowPro['lists'];?>">
+			  <?php echo get_stock_project_name($conn,$rowPro['lists']);?>
 			  </td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;" id="cpropod<?php echo $rowCal;?>">
-			  <?php echo get_stock_order_sn($conn,$rowPro['lists']);?>
+			  <?php echo get_stock_project_sn($conn,$rowPro['lists']);?>
 			  </td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;" id="cprosize<?php echo $rowCal;?>">
-		  	  <?php echo get_stock_order_size($conn,$rowPro['lists']);?>
+		  	  <?php echo get_stock_project_size($conn,$rowPro['lists']);?>
 			  </td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;" id="cprostock<?php echo $rowCal;?>">
-			  <?php echo get_stock_order_stock($conn,$rowPro['lists']);?>
+			  <?php echo get_stock_project_stock($conn,$rowPro['lists']);?>
 			  </td>
 			  <td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;">
 				<input type="text" name="camount[]" value="<?php echo $rowPro['amounts'];?>" id="camount<?php echo $rowCal;?>" class="inpfoder" style="width:100%;text-align:center;">
@@ -546,7 +538,7 @@ function check(frm){
 
     </table>
 
-	<p style="margin-top: 10px;"><span><input  type="button" id="2" value="+ เพิ่มรายการสินค้า"  onclick="addExp()"/></span><span style="padding-left: 10px;"><input  type="button" id="2" value="+ ลบรายการสินค้า"  onclick="delExp()"/></span></p>
+	<!-- <p style="margin-top: 10px;"><span><input  type="button" id="2" value="+ เพิ่มรายการสินค้า"  onclick="addExp()"/></span><span style="padding-left: 10px;"><input  type="button" id="2" value="+ ลบรายการสินค้า"  onclick="delExp()"/></span></p> -->
     
 	<script>
 		

@@ -58,8 +58,40 @@
 				$sprovince .= '<option value="'.$row_province['province_id'].'" >'.$row_province['province_name'].'</option>';
 			}
 		}
+
+  
+		$proListfopj = '';
+		//$proListfopj .= "SELECT * FROM `s_fopj_product` WHERE fo_id = '".$fpid."' ORDER BY id ASC";
+		$quQry = mysqli_query($conn,"SELECT * FROM `s_fopj_product` WHERE fo_id = '".$fpid."' ORDER BY id ASC");
+		$numRowPro = mysqli_num_rows($quQry);
+		$rowCal = 1;
+		$sumPrice = 0;
+		$sumCost = 0;
+
+		while($rowPro = mysqli_fetch_array($quQry)){
+			
+			$proListfopj .= '<tr>
+			  <td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;">'.$rowCal.'</td>
+			  <td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;" id="ccodepro'.$rowCal.'">'.get_stock_project_code($conn,$rowPro['cpro']).'</td>
+			  <td style="border:1px solid #000000;text-align:left;padding:5;vertical-align: middle;">
+			  <input type="hidden" name="cpro[]" value="'.$rowPro['cpro'].'">
+			 '.get_stock_project_name($conn,$rowPro['cpro']).' 
+			  </td>
+			  <td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;" id="cpropod'.$rowCal.'">'.get_stock_project_sn($conn,$rowPro['cpro']).'</td>
+			  <td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;" id="cprosize'.$rowCal.'">'.get_stock_project_size($conn,$rowPro['cpro']).'</td>
+			  <td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;" id="cprostock'.$rowCal.'">'.get_stock_project_stock($conn,$rowPro['cpro']).'</td>
+			  <td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;">
+				<input type="text" name="camount[]" value="'.$rowPro['camount'].'" id="camount'.$rowCal.'" class="inpfoder" style="width:100%;text-align:center;">
+			  </td>
+			</tr>';
+			
+
+			$rowCal++;
+		}
+
+		//$proListfopj = '<tr><td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;">1</td>	<td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;" id="ccodepro1">	</td>	<td style="border:1px solid #000000;text-align:left;padding:5;vertical-align: middle;">		<select name="cpro[]" id="cpro1" class="inputselect" style="width:85%;">		<option value="">กรุณาเลือกรายการสินค้า</option>	</select><a href="javascript:void(0);" onclick="windowOpener(\'400\', \'500\', \'\', \'search2.php?protype=1&amp;col=1\');"><img src="../images/icon2/mark_f2.png" width="25" height="25" border="0" alt="" style="vertical-align:middle;padding-left:5px;"></a>	</td>	<td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;" id="cpropod1"></td>	<td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;" id="cprosize1"></td>	<td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;" id="cprostock1"></td>	<td style="border:1px solid #000000;padding:5;text-align:center;vertical-align: middle;">		<input type="text" name="camount[]" value="" id="camount1" class="inpfoder" style="width:100%;text-align:center;"></td></tr>';
 		
-		$displ = "|".$rowcus['cd_address']."|".$sprovince."|".$rowcus['cd_tel']."|".$rowcus['cd_fax']."|".$rowcus['c_contact']."|".$rowcus['c_tel']."|".$rowcus['loc_name']."|".$rowcus['loc_address']."|".$rowcus['loc_tel']."|".$rowcus['loc_fax']."|".$rowcus['loc_cname']."|".$rowcus['loc_ctel'].'|'.$sr_ctype2.'|'.$sr_ctype.'|'.$rowcus['fs_id'];
+		$displ = "|".$rowcus['cd_address']."|".$sprovince."|".$rowcus['cd_tel']."|".$rowcus['cd_fax']."|".$rowcus['c_contact']."|".$rowcus['c_tel']."|".$rowcus['loc_name']."|".$rowcus['loc_address']."|".$rowcus['loc_tel']."|".$rowcus['loc_fax']."|".$rowcus['loc_cname']."|".$rowcus['loc_ctel'].'|'.$sr_ctype2.'|'.$sr_ctype.'|'.$rowcus['fs_id'].'|'.$proListfopj;
 		echo $displ;
 	}
 	

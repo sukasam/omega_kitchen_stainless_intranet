@@ -156,11 +156,11 @@
 			if($v != ''){
 				$form .= '<tr>
 					<td style="border:1px solid #000000;font-size:12px;padding:5;text-align:center;vertical-align: middle;">'.($a+1).'</td>
-					<td style="border:1px solid #000000;font-size:12px;padding:5;text-align:center;vertical-align: middle;">'.get_stock_order_code($conn,$v).'</td>
-					<td style="border:1px solid #000000;font-size:12px;text-align:left;padding:5;vertical-align: middle;">'.get_stock_order_name($conn,$v).'</td>
-					<td style="border:1px solid #000000;font-size:12px;padding:5;text-align:center;vertical-align: middle;">'.get_stock_order_sn($conn,$v).'</td>
-					<td style="border:1px solid #000000;font-size:12px;padding:5;text-align:center;vertical-align: middle;">'.get_stock_order_size($conn,$v).'</td>
-					<td style="border:1px solid #000000;font-size:12px;padding:5;text-align:center;vertical-align: middle;">'.get_stock_order_stock($conn,$v).'</td>
+					<td style="border:1px solid #000000;font-size:12px;padding:5;text-align:center;vertical-align: middle;">'.get_stock_project_code($conn,$v).'</td>
+					<td style="border:1px solid #000000;font-size:12px;text-align:left;padding:5;vertical-align: middle;">'.get_stock_project_name($conn,$v).'</td>
+					<td style="border:1px solid #000000;font-size:12px;padding:5;text-align:center;vertical-align: middle;">'.get_stock_project_sn($conn,$v).'</td>
+					<td style="border:1px solid #000000;font-size:12px;padding:5;text-align:center;vertical-align: middle;">'.get_stock_project_size($conn,$v).'</td>
+					<td style="border:1px solid #000000;font-size:12px;padding:5;text-align:center;vertical-align: middle;">'.get_stock_project_stock($conn,$v).'</td>
 					<td style="border:1px solid #000000;font-size:12px;padding:5;text-align:center;vertical-align: middle;">'.$_POST['camount'][$a].'</td>
 					</tr>';
 					$sumlist++;
