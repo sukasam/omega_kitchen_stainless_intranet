@@ -5,7 +5,7 @@ include_once("../../include/connect.php");
 
 if($_GET['action'] === "chkSparID"){
 	
-	$rowSpar = @mysqli_fetch_assoc(@mysqli_query($conn,"SELECT * FROM s_group_stock_order WHERE group_id ='".$_GET['group_id']."'"));
+	$rowSpar = @mysqli_fetch_assoc(@mysqli_query($conn,"SELECT * FROM s_group_stock_project WHERE group_id ='".$_GET['group_id']."'"));
 	
 	if($rowSpar['group_id']){
 		echo json_encode(array('status' => 'yes','group_spar_id'=> $rowSpar['group_spar_id']));

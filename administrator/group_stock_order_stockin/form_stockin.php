@@ -33,26 +33,46 @@ if($_POST["shipS3"] == 1){$shipS3 = 'aroow_ch.png';}else{$shipS3 = 'aroow_nch.pn
 if($_POST["shipS4"] == 1){$shipS4 = 'aroow_ch.png';}else{$shipS4 = 'aroow_nch.png';}
 if($_POST["shipS5"] == 1){$shipS5 = 'aroow_ch.png';}else{$shipS5 = 'aroow_nch.png';}
 
-$projectPro = '';
-$sumprice = 0;
-$sumCost = 0;
+// $projectPro = '';
+// $sumprice = 0;
+// $sumCost = 0;
 
-for($i=0;$i<=count($_POST['cpro']);$i++){
-	if($_POST['cpro'][$i] != ""){
+// for($i=0;$i<=count($_POST['cpro']);$i++){
+// 	if($_POST['cpro'][$i] != ""){
 		
-		$_POST['cprice'][$i] = preg_replace("/,/","",$_POST['cprice'][$i]);
+// 		$_POST['cprice'][$i] = preg_replace("/,/","",$_POST['cprice'][$i]);
 		
-		$sumprice += $_POST['camount'][$i]*$_POST['cprice'][$i];
-		$sumpriceNot += $_POST['cprice'][$i];
+// 		$sumprice += $_POST['camount'][$i]*$_POST['cprice'][$i];
+// 		$sumpriceNot += $_POST['cprice'][$i];
 		
-		$projectPro .= '<tr>
-		<td style="border:1px solid #000000;padding:5;">'.($i+1).'</td>
-		<td style="border:1px solid #000000;padding:5;">'.get_sparpart_id($conn,$_POST['cpro'][$i]).'</td>
-		<td style="border:1px solid #000000;text-align:left;padding:5;">'.get_sparpart_name($conn,$_POST['cpro'][$i]).'</td>
-		  <td style="border:1px solid #000000;padding:5;">'.$_POST['camount'][$i].'</td>
-		</tr>';
+// 		$projectPro .= '<tr>
+// 		<td style="border:1px solid #000000;padding:5;">'.($i+1).'</td>
+// 		<td style="border:1px solid #000000;padding:5;">'.get_sparpart_id($conn,$_POST['cpro'][$i]).'</td>
+// 		<td style="border:1px solid #000000;text-align:left;padding:5;">'.get_sparpart_name($conn,$_POST['cpro'][$i]).'</td>
+// 		  <td style="border:1px solid #000000;padding:5;">'.$_POST['camount'][$i].'</td>
+// 		</tr>';
 		
-	}
+// 	}
+// }
+
+$projectPro = '';
+$qcInfo = get_qc_product($conn,$_POST['qc_id']);
+$pro_listS = explode(',',$qcInfo['pro_list']);
+$proList = get_fopj_pro($conn, $qcInfo['cus_id']);
+$rowCal = 1;
+$rowCalnum = 1;
+while ($rowPro = mysqli_fetch_array($proList)) {
+  if (in_array($rowCal, $pro_listS)) {
+    $projectPro .= '<tr>
+    <td style="border:1px solid #000000;padding:5;text-align:center;">'.$rowCalnum.'</td>
+    <td style="border:1px solid #000000;padding:5;text-align:center;">'.get_stock_project_code($conn, $rowPro['cpro']).'</td>
+    <td style="border:1px solid #000000;text-align:left;padding:5;">'.get_stock_project_name($conn, $rowPro['cpro']).'</td>
+    <td style="border:1px solid #000000;padding:5;text-align:center;">'.get_stock_project_sn($conn, $rowPro['cpro']).'</td>
+    <td style="border:1px solid #000000;padding:5;text-align:center;">'.get_stock_project_size($conn, $rowPro['cpro']).'</td>
+    <td style="border:1px solid #000000;padding:5;text-align:center;">'.$rowPro['camount'].'</td>
+  </tr>';
+  }
+  $rowCal++;
 }
 
 $sumdiscount = $_POST['discount'];
@@ -65,10 +85,13 @@ $sumtotal = ($sumprice + $sumpricevat) - $sumdiscount;
 $dataApprove = '';
 
 if($_POST['stock_approve_date'] != '0000-00-00' && $_POST['stock_approve_date'] != ''){
-  $dataApprove = format_date($_POST['stock_approve_date']);
+  $dataApprove = $_POST['stock_approve_date'];
 }else{
   $dataApprove = '';
 }
+
+$hGMSaleName = getsalename($conn,$_POST['stock_approve']);
+$GMSaleSignature = '<img src="../../upload/user/signature/'.get_sale_signature($conn,$_POST['stock_approve']).'" height="50" border="0" />';
 
 $form = '
 <p><h3>รายการรับเข้าสต็อคสินค้าสำเร็จรูป</p>
@@ -80,20 +103,25 @@ $form = '
             <br />
             <strong>เบอร์โทร :</strong> '.$_POST["sub_tel"].'<br /><br />
             <strong>วันที่รับเข้า : </strong>'.format_date($_POST["stock_date"]).'<strong></td>
-            <td width="43%" valign="top" style="font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>เลขที่ FO/PJ : </strong> '.$_POST['sub_billnum'].'&nbsp;&nbsp;&nbsp;&nbsp;<strong>วันที่บิล : </strong>'.format_date($_POST["sub_billdate"]).'<strong><br />
+            <td width="43%" valign="top" style="font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;"><strong>เลขที่ FO/PJ : </strong> '.$_POST['sub_billnum'].'&nbsp;&nbsp;&nbsp;&nbsp;<strong>วันที่บิล : </strong>'.format_date($_POST["sub_billdate"]).'<br />
               <br />
-            หมายเหตุ :</strong> '.$_POST["sub_comment"].'<br />
+              <strong>เลขที่ใบตรวจสินค้า</strong> : '.get_qc_product_number($conn,$_POST["qc_id"]).'
+              <br /><br />
+              <strong> หมายเหตุ :</strong> '.$_POST["sub_comment"].'<br />
             <br />
 			</td>
           </tr>
 </table>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:10px;text-align:center;margin-top:10px;">
-    <tr>
-      <td width="5%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ลำดับ</strong></td>
-	  <td width="5%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>Code</strong></td>
-      <td width="30%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รายการ</strong></td>
-      <td width="10%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>จำนวน</strong></td>
-    </tr>
+  <tr>
+  <td width="3%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ลำดับ</strong></td>
+  <td width="10%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รหัสสินค้า</strong></td>
+  <td width="24%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รายการ</strong></td>
+  <td width="15%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รุ่น / แบรนด์</strong></td>
+  <td width="10%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ขนาด</strong></td>
+  <td width="10%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>จำนวน</strong></td>
+
+  </tr>
     
 	'.$projectPro.'    
 	
@@ -103,7 +131,7 @@ $form = '
 <td width="50%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><br>'.get_technician_name($conn,$_POST['stock_admin']).'</td>
+          <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><br>'.getsalename($conn,$_POST['stock_admin']).'</td>
         </tr>
         <tr>
           <td style="padding-top:10px;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>ผู้รับเข้าสินค้า</strong></td>
@@ -115,17 +143,20 @@ $form = '
   </td>
 
 <td width="50%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><br>'.get_technician_name($conn,$_POST['stock_approve']).'</td>
-        </tr>
-        <tr>
-          <td style="padding-top:10px;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>ผู้อนุมัติ/รับเข้าสินค้า</strong></td>
-        </tr>
-        <tr>
-          <td style="font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่ : </strong>'.$dataApprove.'</td>
-        </tr>
-      </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td style="font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>'.$GMSaleSignature.'</strong></td>
+  </tr>
+  <tr>
+    <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>'.$hGMSaleName.'</strong></td>
+  </tr>
+  <tr>
+    <td style="padding-top:10px;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>ผู้อนุมัติ/รับเข้าสินค้า</strong></td>
+  </tr>
+  <tr>
+    <td style="font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่ '.$dataApprove.'</strong></td>
+  </tr>
+  </table>
   </td>
 
 </tr>

@@ -2,8 +2,8 @@
 <?php    
 	$PK_field = "group_id";
 	//$FR_field = "";
-	$check_module = "รายการพนักงานขาย";
-	$page_name = "รายการพนักงานขาย";
+	$check_module = "รายการพนักงาน";
+	$page_name = "รายการพนักงาน";
 	$tbl_name = "s_group_sale";
 	$field_confirm_showname= "group_name";
 	$fieldlist = array('group_cus_id','group_name','group_tel','user_account');

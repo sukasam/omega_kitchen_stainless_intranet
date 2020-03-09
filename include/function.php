@@ -2474,6 +2474,11 @@ function get_qc_product($conn,$value) {
 	return $row_protype;
 }
 
+function get_qc_product_number($conn,$value) {
+	$row_protype = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM s_qc_product WHERE sr_id = '".$value."'"));
+	return $row_protype['sv_id'];
+}
+
 function get_order_pro_amount($conn,$value,$pro_list){
 	
 	$pro_listA = explode(",",$pro_list);

@@ -89,7 +89,7 @@
 						$keyWord = " AND (group_name like '%".$_GET['keyword']."%' OR group_size like '%".$_GET['keyword']."%')";
 					}
 
-					$sql = 'select *,s_group_stock_order.create_date as c_date from s_group_stock_order where 1 '.$keyWord.' order by s_group_stock_order.group_spar_id ASC';
+					$sql = 'select *,s_group_stock_project.create_date as c_date from s_group_stock_project where 1 '.$keyWord.' order by s_group_stock_project.group_spar_id ASC';
 					
 					$query = @mysqli_query($conn,$sql);
 					if($_GET["page"] == "") $_GET["page"] = 1;

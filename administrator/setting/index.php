@@ -54,7 +54,7 @@
         <!-- <td><div align="center"><a href="../group_typeproduct2/"><img src="../images/menu/mn_serting05.png" width="62" height="60" border="0" alt=""><br><br><strong>รายการสินค้า SV</strong></a></div></td> -->
         <td><div align="center"><a href="../backup_database/"><img src="../images/menu/backup-database.png" alt="" width="96" height="58" border="0"><br><br><strong>สำรองฐานข้อมูล</strong></a></div></td>
         <td><div align="center"><a href="../group_sale/"><img src="../images/menu/mn_serting02.png" width="89" height="61" border="0" alt=""><br><br>
-        </a><a href="../group_sale/"><strong>รายการพนักงานขาย</strong></a></div></td>
+        </a><a href="../group_sale/"><strong>รายการพนักงาน</strong></a></div></td>
         <td><div align="center"><a href="../user/?smid=3&mid=9999"><img src="../images/menu/mn_serting08.png" width="100" height="60" border="0" alt=""><br><br><strong>ผู้ใช้งาน / การอนุญาต</strong></a></div></td>
         <td><div align="center"><a href="../group/?smid=4&mid=9999"><img src="../images/menu/mn_serting09.png" width="106" height="60" border="0" alt=""><br><br><strong>กลุ่มผู้ใช้งาน / การอนุญาต</strong></a></div></td>
       </tr>

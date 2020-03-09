@@ -661,7 +661,7 @@ function check(frm){
                 <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong >
                   <select name="loc_contact2" id="loc_contact2" style="width:50%;">
                       <?php   
-						$qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_technician ORDER BY group_name ASC");
+						$qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_sale ORDER BY group_name ASC");
 						while($row_custec = @mysqli_fetch_array($qu_custec)){
 							?>
                       <option value="<?php   echo $row_custec['group_id'];?>" <?php   if($row_custec['group_id'] == $loc_contact2){echo 'selected';}?>><?php   echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
@@ -687,7 +687,7 @@ function check(frm){
                 <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:12px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>
                   <select name="cs_sell" id="cs_sell" class="inputselect" style="width:50%;">
                     <?php   
-						$qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_technician WHERE 1 ORDER BY group_name ASC");
+						$qu_custec = @mysqli_query($conn,"SELECT * FROM s_group_sale WHERE 1 ORDER BY group_name ASC");
 						while($row_custec = @mysqli_fetch_array($qu_custec)){
 							?>
                     <option value="<?php   echo $row_custec['group_id'];?>" <?php   if($row_custec['group_id'] == $cs_sell){echo 'selected';}?>><?php   echo $row_custec['group_name']. " (Tel : ".$row_custec['group_tel'].")";?></option>
