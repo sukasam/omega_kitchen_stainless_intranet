@@ -103,11 +103,13 @@ $param = get_param($a_param, $a_not_exists);
 		$qu_cus = mysqli_query($conn, "SELECT fo.fo_id,fo.cd_name,fo.cd_address,fo.cd_tel,fo.fs_id,fo.loc_name,qc.* FROM " . $tableDB . " WHERE fo.fo_id = qc.cus_id AND (qc.approve = '1') ORDER BY qc.sr_id DESC");
 
 		while ($row_cus = @mysqli_fetch_array($qu_cus)) {
+			if(checkQC($conn,$row_cus['sr_id'])){
 		?>
 			<tr>
 				<td><A href="javascript:void(0);" onclick="get_customer('<?php echo $row_cus['fo_id']; ?>','<?php echo $row_cus['cd_name']; ?>','<?php echo $row_cus['cd_address']; ?>','<?php echo $row_cus['cd_tel']; ?>','<?php echo $row_cus['fs_id']; ?>','<?php echo $row_cus['sr_id']; ?>','<?php echo $row_cus['sv_id']; ?>');"><?php echo $row_cus['sv_id'] . " | " . $row_cus['cd_name']; ?> (<?php echo $row_cus['loc_name'] ?>)</A></td>
 			</tr>
 		<?php
+			}
 		}
 		?>
 	</table>

@@ -2592,5 +2592,18 @@ function userSaleGroupID($conn,$user_id){
 	
 	return $row_user_group['group_id'];	
 }
+
+function checkQC($conn,$val){
+
+	//echo "SELECT * FROM `s_group_stock_order_bill` WHERE qc_id = '".$val."'";
+	$row = @mysqli_fetch_array(@mysqli_query($conn,"SELECT * FROM `s_group_stock_order_bill` WHERE qc_id = '".$val."'"));
+
+	if($row['sub_id'] != ""){
+		return false;
+	}else{
+		return true;
+	}
+
+}
 ?>
 
