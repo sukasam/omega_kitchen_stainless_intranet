@@ -102,6 +102,8 @@ function check9(frm){
   
   <!-- End .shortcut-buttons-set -->
 <DIV class=clear></DIV><!-- End .clear -->
+
+
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right" style="padding-right:15px;">
 
@@ -138,7 +140,21 @@ function check9(frm){
       <strong>เงินประกันลูกค้าเช่า</strong></SPAN></A></LI>
       <LI><A class=shortcut-button href="../report/?mid=16&act=13"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
       <strong>รายงานใบแจ้งงาน</strong></SPAN></A></LI>
-      <LI><A class=shortcut-button href="../report/?mid=16&act=16"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
+  </UL>
+  <div class="clear"></div>
+</DIV><!-- End #tab1 -->
+</DIV><!-- End .content-box-content -->
+
+<DIV class=content-box-header align="right" style="padding-right:15px;">
+
+<H3 align="left">จัดการรายงาน (รับเข้าสต็อค / วัตถุดิบ / สินค้าสำเร็จรูป)</H3>
+<DIV class=clear>
+
+</DIV></DIV><!-- End .content-box-header -->
+<DIV class=content-box-content>
+<DIV id=tab1 class="tab-content default-tab"><!-- This is the target div. id must match the href of this div's tab -->
+  <UL class=shortcut-buttons-set>
+  <LI><A class=shortcut-button href="../report/?mid=16&act=16"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
       <strong>การรับอะไหล่<br>เข้าสต๊อค<br></strong></SPAN></A></LI>
       <LI><A class=shortcut-button href="../report/?mid=16&act=17"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
       <strong>ใบเบิกวัตถุดิบ<br>เพื่อผลิต<br></strong></SPAN></A></LI>
@@ -146,13 +162,13 @@ function check9(frm){
       <strong>การรับสินค้า<br>โปรเจ็คเข้าสต๊อค<br></strong></SPAN></A></LI> -->
       <LI><A class=shortcut-button href="../report/?mid=16&act=15"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
       <strong>การรับสินค้า<br>สำเร็จรูปเข้าสต๊อค<br></strong></SPAN></A></LI>
-      
   </UL>
   <div class="clear"></div>
 </DIV><!-- End #tab1 -->
-
-
 </DIV><!-- End .content-box-content -->
+
+
+
 </DIV>
 
 <?php     
