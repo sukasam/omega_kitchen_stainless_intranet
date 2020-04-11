@@ -14,23 +14,6 @@
 
 	$param = get_param($a_param,$a_not_exists);
 
-	
-
-	$cpro = $_REQUEST['cpro'];
-
-	$sr_ctype = $_REQUEST['sr_ctype'];		
-
-	$ctype = $_REQUEST['ctype'];
-
-	$cd_name = $_REQUEST['cd_name'];
-
-	$loc_contact = $_REQUEST['loc_contact'];
-
-	$opentake = $_REQUEST['opentake'];
-
-	$openfrom = $_REQUEST['openfrom'];
-
-	
 
 	$a_sdate=explode("/",$_REQUEST['date_fm']);
 
@@ -39,12 +22,14 @@
 	$a_sdate=explode("/",$_REQUEST['date_to']);
 
 	$date_to=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
-
 	
+	$gspar = $_POST['pro_pod'];
+
+	$condi = '';
 
 	if($_REQUEST['priod'] == 0){
 
-		$daterriod = " AND `sr_stime`  between '".$date_fm."' and '".$date_to."'"; 
+		$daterriod = " AND `stock_date` between '".$date_fm."' and '".$date_to."'"; 
 
 		$dateshow = "เริ่มวันที่ : ".format_date($date_fm)."&nbsp;&nbsp;ถึงวันที่ : ".format_date($date_to); 
 
@@ -56,77 +41,10 @@
 
 	}
 
-	
-
-	$condition = "";
-
-
-
-	if($cpro != ""){
-
-		$condition = "AND (sv2.lists = '".$cpro."')";
-
+	if($gspar != ""){
+		$condi .= " AND stp.sparpart_id = '".$gspar."'";
 	}
 
-	if($openfrom != ""){
-		$tableDB = '';
-		
-		if($openfrom == 'po'){
-			$tableDB = 's_project_order';
-		}else{
-			$tableDB = 's_first_order';
-		}
-		
-		$condition .= " AND sv.cus_source = '".$openfrom."'";
-	}
-
-	
-
-	if($opentake == 0){
-
-		$condition .= " AND sv.st_setting = '".$opentake."'";
-
-	}else if($opentake == 1){
-
-		$condition .= " AND sv.st_setting = '".$opentake."'";
-
-	}else{
-
-		$condition .= " ";
-
-	}
-
-	
-
-	if($sr_ctype != ""){
-
-		$condition .= " AND sv.sr_ctype = '".$sr_ctype."'";
-
-	}
-
-	
-
-	if($ctype != ""){
-
-		$condition .= " AND sv.sr_ctype2 = '".$ctype."'";
-
-	}
-
-	
-
-	if($cd_name != ""){
-
-		$condition .= " AND fr.cd_name LIKE '%".$cd_name."%'";
-
-	}
-
-	if($loc_contact != ""){
-
-		$condition .= " AND sv.loc_contact2 LIKE '%".$loc_contact."%'";
-
-	}
-
-	
 
 ?>
 
@@ -138,7 +56,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<title>เลือกตามใบคืน</title>
+<title>เลือกตามการรับอะไหล่เพื่อผลิตเข้าสต๊อค</title>
 
 <style type="text/css">
 
@@ -184,47 +102,40 @@
 
 	    <th colspan="4" style="text-align:left;font-size:12px;">บริษัท โอเมก้า แมชชีนเนอรี่ (1999) จำกัด<br />
 
-รายงานใบคืน<br />
+รายงานการรับอะไหล่เพื่อผลิตเข้าสต๊อค</th>
 
-ประเภทใบบริการ  : ใบคืน</th>
-
-	    <th colspan="5" style="text-align:right;font-size:11px;"><?php  echo $dateshow;?></th>
+	    <th colspan="4" style="text-align:right;font-size:11px;"><?php  echo $dateshow;?></th>
 
       </tr>
 
       <tr>
 
-       <?php  if($_REQUEST['sh10'] == 1){?><th width="5%">เลขที่ใบยืม</th><?php  }?>
+        <?php  if($_REQUEST['sh9'] == 1){?><th width="5%">วันที่รับเข้า</th><?php  }?>
 
-        <?php  if($_REQUEST['sh1'] == 1){?><th width="15%">ชื่อลูกค้า / บริษัท + เบอร์โทร</th><?php  }?>
+        <?php  if($_REQUEST['sh1'] == 1){?><th width="16%">ผู้จำหน่าย / ส่งสินค้า</th><?php  }?>
 
-        <?php  if($_REQUEST['sh2'] == 1){?><th width="15%">ชื่อร้าน / สถานที่ติดตั้ง</th><?php  }?>
+        <?php  if($_REQUEST['sh2'] == 1){?><th width="15%">ที่อยู่ /ผู้จำหน่าย / เบอร์โทร</th><?php  }?>
 
-        <?php  if($_REQUEST['sh3'] == 1){?><th width="15%">รายละเอียดการเปลี่ยน</th><?php  }?>
+        <?php  if($_REQUEST['sh3'] == 1){?><th width="10%">เลขที่บิล</th><?php  }?>
 
-        <?php  if($_REQUEST['sh4'] == 1 || $_REQUEST['sh5'] == 1){?><th width="30%"><table width="100%" border="0" cellpadding="0" cellspacing="0" class="tbreport">
+        <?php  if($_REQUEST['sh4'] == 1 || $_REQUEST['sh5'] == 1 || $_REQUEST['sh6'] == 1){?><th width="30%"><table width="100%" border="0" cellpadding="0" cellspacing="0" class="tbreport">
 
           <tr>
 
-            <?php  if($_REQUEST['sh4'] == 1){?><td style="border-bottom:none;" width="62%"><strong>รายการอะไหล่</strong></td><?php  }?>
+            <?php  if($_REQUEST['sh4'] == 1){?><td style="border-bottom:none;" width="25%"><strong>รหัสอะไหล่</strong></td><?php  }?>
 
-            <?php  if($_REQUEST['sh5'] == 1){?><td style="border-bottom:none;" width="20%"><strong>จำนวนยืม</strong></td><?php  }?>
+            <?php  if($_REQUEST['sh5'] == 1){?><td style="border-bottom:none;" width="50%"><center><strong>รายการอะไหล่</strong></center></td><?php  }?>
 
-			<?php  if($_REQUEST['sh31'] == 1){?><td style="border-bottom:none;" width="18%"><strong>จำนวนคืน</strong></td><?php  }?>
-
-            <!-- <?php  if($_REQUEST['sh8'] == 1){?><td style="border-bottom:none;" width="22%"><strong>รวมมูลค่า</strong></td><?php  }?> -->
+           <?php  if($_REQUEST['sh6'] == 1){?><td style="border-bottom:none;" width="25%"><strong>ราคาซื้อ</strong></td><?php  }?>
 
           </tr>
 
         </table></th><?php  }?>
 
-		<?php  if($_REQUEST['sh8'] == 1){?><th width="6%"><strong>รวมมูลค่า</strong></th><?php  }?>
+        <?php  if($_REQUEST['sh7'] == 1){?><th width="6%"><strong>รวมราคาซื้ิอ</strong></th><?php  }?>
 
-        <?php  if($_REQUEST['sh6'] == 1){?><th width="5%"><strong>วันที่ยืม</strong></th><?php  }?>
+        <?php  if($_REQUEST['sh8'] == 1){?><th width="6%"><strong>ผู้รับสินค้าเข้า</strong></th><?php  }?>
 
-        <?php  if($_REQUEST['sh7'] == 1){?><th width="5%"><strong>วันที่คืน</strong></th><?php  }?>
-
-        <?php  if($_REQUEST['sh9'] == 1){?><th width="10%"><strong>ผู้เบิก</strong></th><?php  }?>
 
       </tr>
 
@@ -234,13 +145,13 @@
 
 		
 
-		$dbservice = "s_service_report5";
+		$dbservice = "s_group_sparpart_bill";
 
-		$dbservicesub = "s_service_report5sub";
+		$dbservicesub = "s_group_sparpart_bill_pro";
 
 	  
 
-		$sql = "SELECT * FROM ".$tableDB." as fr, ".$dbservice." as sv, ".$dbservicesub." as sv2 WHERE sv.cus_id = fr.fo_id AND sv.sr_id = sv2.sr_id ".$condition." ".$daterriod." GROUP by sv.sr_id ORDER BY sv.sr_id DESC";
+		$sql = "SELECT * FROM ".$dbservice." as st, ".$dbservicesub." as stp WHERE st.sub_id = stp.id_bill ".$condi." ".$daterriod." GROUP BY st.sub_id ORDER BY st.sub_id DESC";
 
 	  	$qu_fr = @mysqli_query($conn,$sql);
 
@@ -250,35 +161,34 @@
 
 		$sumTotalAll = 0;
 
-		while($row_fr = @mysqli_fetch_array($qu_fr)){
+		$moneyTCTota = 0;
 
-						
+		while($row_bill = @mysqli_fetch_array($qu_fr)){
+			
 
 			?>
 
 			<tr>
 
-              <?php  if($_REQUEST['sh10'] == 1){?><td><?php  echo $row_fr['sv_id'];?></td><?php  }?>
+              <?php  if($_REQUEST['sh9'] == 1){?><td><?php  echo format_date($row_bill['stock_date']);?></td><?php  }?>
 
-              <?php  if($_REQUEST['sh1'] == 1){?><td><?php  echo $row_fr['cd_name'];?><br />
+              <?php  if($_REQUEST['sh1'] == 1){?><td><?php  echo $row_bill['sub_name'];?></td><?php  }?>
 
-              <?php  echo $row_fr['cd_tel'];?></td><?php  }?>
-
-              <?php  if($_REQUEST['sh2'] == 1){?><td><?php  echo $row_fr['loc_name'];?><br />
-
-              <?php  echo $row_fr['loc_address'];?></td><?php  }?>
-
-              <?php  if($_REQUEST['sh3'] == 1){?><td><?php  echo $row_fr['detail_recom'];?></td><?php  }?>
+              <?php  if($_REQUEST['sh2'] == 1){?><td><?php  echo $row_bill['sub_address'].' / '.$row_bill['sub_tel'];?></td><?php  }?>
+              
+                <?php  if($_REQUEST['sh3'] == 1){?><td><?php  echo $row_bill['sub_billnum'];?></td><?php  }?>
+              
+              
 
               <?php  if($_REQUEST['sh4'] == 1 || $_REQUEST['sh5'] == 1 || $_REQUEST['sh8'] == 1){?><td style="padding:0;">
 
               	<?php  
 
-				$qu_pfirst = @mysqli_query($conn,"SELECT * FROM ".$dbservicesub." WHERE sr_id = '".$row_fr['sr_id']."'");
+				$qu_pfirst = @mysqli_query($conn,"SELECT * FROM ".$dbservicesub." WHERE id_bill = '".$row_bill['sub_id']."'");
 
 				?>
 
-				<table border="0" width="95%" cellspacing="0" cellpadding="0" class="tbreport">
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" class="tbreport">
 
 				<?php 
 
@@ -288,25 +198,21 @@
 
 				while($row = @mysqli_fetch_array($qu_pfirst)){
 
-					if($row['codes 	'] != "" || $row['lists'] != ""){
+					//if($row['sparpart_id'] != ""){
 
-						$total = $row['prices']*$row['opens'];
+					  $total = $row['sparpart_unit_price']*$row['sparpart_qty'];
 
-						$totalamount += $row['remains'];
-
-						$totalTA +=	$total;
+					  $totalamount += $row['sparpart_qty'];
 
 					?>
 
 					<tr>
 
-					  <?php  if($_REQUEST['sh4'] == 1){?><td style="border-bottom:none;" width="40%"><?php  echo get_sparpart_id($conn,$row['lists']).' | '.get_sparpart_name($conn,$row['lists']);?></td><?php  }?>
+					  <?php  if($_REQUEST['sh4'] == 1){?><td style="border-bottom:none;" width="25%"><?php  echo get_sparpart_id($conn,$row['sparpart_id']);?></td><?php  }?>
 
-					  <?php  if($_REQUEST['sh5'] == 1){?><td align="center" style="border-bottom:none;" width="17%"><?php  echo $row['opens'];?></td><?php  }?>
+					  <?php  if($_REQUEST['sh5'] == 1){?><td align="left" style="border-bottom:none;" width="50%"><?php  echo get_sparpart_name($conn,$row['sparpart_id']);?></td><?php  }?>
 
-                      <?php  if($_REQUEST['sh31'] == 1){?><td align="center" style="border-bottom:none;" width="19%"><?php  echo $row['remains'];?></td><?php  }?>
-
-					  <!-- <?php  if($_REQUEST['sh8'] == 1){?><td align="center" style="border-bottom:none;" width="24%"><?php  echo number_format($total,2);?></td><?php  }?> -->
+					  <?php  if($_REQUEST['sh6'] == 1){?><td align="right" style="border-bottom:none;" width="25%"><?php  echo number_format($row['sparpart_unit_price'],2);?></td><?php  }?>
 
 					</tr>
 
@@ -314,7 +220,11 @@
 
 					$sumTotalAll += $total;
 
-					}	
+					$totalTA +=	$total;
+
+					
+
+					//}	
 
 				}
 
@@ -328,13 +238,9 @@
 
               </td><?php  }?>
 
-			  <?php  if($_REQUEST['sh8'] == 1){?><td style="padding:0;"><?php  echo number_format($totalTA,2);?></td><?php  }?>
+              <?php  if($_REQUEST['sh7'] == 1){?><td style="padding:0;"><?php  echo number_format($totalTA+$moneyTC,2);?></td><?php  }?>
 
-              <?php  if($_REQUEST['sh6'] == 1){?><td style="padding:0;"><?php  echo format_date($row_fr['job_open']);?></td><?php  }?>
-
-              <?php  if($_REQUEST['sh7'] == 1){?><td style="padding:0;"><?php  echo format_date($row_fr['sr_stime']);?></td><?php  }?>
-
-              <?php  if($_REQUEST['sh9'] == 1){?><td style="padding:0;"><?php  echo get_technician_name($conn,$row_fr['loc_contact2']);?></td><?php  }?>
+              <?php  if($_REQUEST['sh8'] == 1){?><td style="padding:0;"><?php echo get_username($conn,$row_bill['create_by']);?></td><?php  }?>
 
             </tr>
 
@@ -342,25 +248,29 @@
 
 			$sum += 1;
 
+			$moneyTCTota += $moneyTC; 
+
 		}
 
 	  ?>
 
       <tr>
 
-			  <td colspan="9" style="text-align:right;"> <strong>จำนวน<?php  if($_POST['sr_stock'] == "s_service_report2"){echo 'ใบคืน';}else{echo "ใบคืน";}?>ทั้งหมด&nbsp;&nbsp;<?php  echo $sum;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
+			  <td colspan="9" style="text-align:right;"> <strong>จำนวนการรับเข้าสต็อคทั้งหมด&nbsp;&nbsp;<?php  echo $sum;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
 
 	  </tr>
 
+<!--
       <tr>
 
-			  <td colspan="9" style="text-align:right;"> <strong>รวมอะไหล่ที่คืน&nbsp;&nbsp;<?php  echo $totals;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
+			  <td colspan="9" style="text-align:right;"> <strong>รวมอะไหล่ที่เบิก&nbsp;&nbsp;<?php  echo $totals;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
 
 	  </tr>
+-->
 
 	  <tr>
 
-			  <td colspan="9" style="text-align:right;"> <strong>คิดเป็นมูลค่ารวมทั้งสิ้น&nbsp;&nbsp;<?php  echo number_format($sumTotalAll,2);?>&nbsp;&nbsp;บาท&nbsp;&nbsp;</strong></td>
+			  <td colspan="8" style="text-align:right;"> <strong>คิดเป็นมูลค่ารวมทั้งสิ้น&nbsp;&nbsp;<?php  echo number_format($sumTotalAll+$moneyTCTota,2);?>&nbsp;&nbsp;บาท&nbsp;&nbsp;</strong></td>
 
 	  </tr>
 
