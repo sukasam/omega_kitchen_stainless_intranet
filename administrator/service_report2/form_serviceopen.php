@@ -1,37 +1,37 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php   
-	
-	
-	$finfos = get_firstorder2($conn,$_POST['cus_id'],$_POST['cus_source']);
-	
-	$chk = get_fixlist($_POST['ckf_list']);
-	
-	$tecinfos = get_technician($conn,$_POST['loc_contact']);
-	
-	foreach($chk as $vals){
-		$sfix .= '
+<?php
+
+
+$finfos = get_firstorder2($conn, $_POST['cus_id'], $_POST['cus_source']);
+
+$chk = get_fixlist($_POST['ckf_list']);
+
+$tecinfos = get_technician($conn, $_POST['loc_contact']);
+
+foreach ($chk as $vals) {
+	$sfix .= '
 		  <tr>
-			<td ><img src="../images/aroow_ch.png" width="10" height="10" border="0" alt="" />&nbsp;'.get_fixname($conn,$vals).'</td>
+			<td ><img src="../images/aroow_ch.png" width="10" height="10" border="0" alt="" />&nbsp;' . get_fixname($conn, $vals) . '</td>
 		  </tr>
-		';	
-	}
+		';
+}
 
-	$dataApprove = '';
+$dataApprove = '';
 
-	if($_POST['loc_contact3'] != '0' && $_POST['loc_contact3'] != ''){
-		if($_POST['loc_date3'] != '0000-00-00' && $_POST['loc_date3'] != ''){
-			$dataApprove = format_date($_POST['loc_date3']);
-		}else{
-			$dataApprove = '';
-		}
-	}else{
+if ($_POST['loc_contact3'] != '0' && $_POST['loc_contact3'] != '') {
+	if ($_POST['loc_date3'] != '0000-00-00' && $_POST['loc_date3'] != '') {
+		$dataApprove = format_date($_POST['loc_date3']);
+	} else {
 		$dataApprove = '';
-  }
-  
-  $hSaleName = getsalename($conn,$_POST['loc_contact3']);
-  $hSaleSignature = '<img src="../../upload/user/signature/'.get_sale_signature($conn,$_POST['loc_contact3']).'" height="50" border="0" />';
+	}
+} else {
+	$dataApprove = '';
+}
 
-	$form = '<style>
+$hSaleName = getsalename($conn, $_POST['loc_contact3']);
+$hSaleSignature = '<img src="../../upload/user/signature/' . get_sale_signature($conn, $_POST['loc_contact3']) . '" height="50" border="0" />';
+
+$form = '<style>
 	.bgheader{
 		font-size:10px;
 		position:absolute;
@@ -117,49 +117,49 @@
 	  <tr>
 		<td style="text-align:right;font-size:12px;">
 			<img src="../images/form/header_service_report2.png" width="100%" border="0" />
-			<div class="bgheader">'.$_POST['sv_id'].'</div>
+			<div class="bgheader">' . $_POST['sv_id'] . '</div>
 		</td>
 	  </tr>
 	</table>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tb1">
           <tr>
-            <td width="57%" valign="top"><strong>ชื่อลูกค้า :</strong> '.$finfos['cd_name'].' <br />              <strong><br />
-            ที่อยู่ :</strong> '.$finfos['cd_address'].'&nbsp;'.province_name($conn,$finfos['cd_province']).'<strong><br />
+            <td width="57%" valign="top"><strong>ชื่อลูกค้า :</strong> ' . $finfos['cd_name'] . ' <br />              <strong><br />
+            ที่อยู่ :</strong> ' . $finfos['cd_address'] . '&nbsp;' . province_name($conn, $finfos['cd_province']) . '<strong><br />
             <br />
-            โทรศัพท์ :</strong> '.$finfos['cd_tel'].'&nbsp;&nbsp;&nbsp;&nbsp;<strong>แฟกซ์ :</strong> '.$finfos['cd_fax'].'<br />
+            โทรศัพท์ :</strong> ' . $finfos['cd_tel'] . '&nbsp;&nbsp;&nbsp;&nbsp;<strong>แฟกซ์ :</strong> ' . $finfos['cd_fax'] . '<br />
             <br />
-            <strong>ชื่อผู้ติดต่อ :</strong> '.$finfos['c_contact'].' <strong>&nbsp;&nbsp;&nbsp;&nbsp;<br>
+            <strong>ชื่อผู้ติดต่อ :</strong> ' . $finfos['c_contact'] . ' <strong>&nbsp;&nbsp;&nbsp;&nbsp;<br>
             <br>
-            เบอร์โทร :</strong> '.$finfos['c_tel'].'</td>
-            <td width="43%"><strong>ประเภทบริการลูกค้า :</strong> '.get_servicename($conn,$_POST['sr_ctype']).' <strong><br>
+            เบอร์โทร :</strong> ' . $finfos['c_tel'] . '</td>
+            <td width="43%"><strong>ประเภทบริการลูกค้า :</strong> ' . get_servicename($conn, $_POST['sr_ctype']) . ' <strong><br>
             <br>
-			ประเภทลูกค้า :</strong> '.custype_name($conn,$_POST['sr_ctype2']).'  &nbsp;&nbsp;
-			<strong>ใบสั่งผลิต :</strong> '.$_POST['search_op'].' </strong>
+			ประเภทลูกค้า :</strong> ' . custype_name($conn, $_POST['sr_ctype2']) . '  &nbsp;&nbsp;
+			<strong>ใบสั่งผลิต :</strong> ' . $_POST['search_op'] . ' </strong>
 			<br />
               <br />
-			</strong><strong>วันที่เบิกอะไหล่  :</strong> '.format_date($_POST['job_open']).' <strong>&nbsp;&nbsp;
+			</strong><strong>วันที่เบิกอะไหล่  :</strong> ' . format_date($_POST['job_open']) . ' <strong>&nbsp;&nbsp;
 			
 			';
-			
-			$poFoID = '';
-			if($_POST['search_po'] != ""){
-				$poFoID = '<strong>เลขที่ </strong> '.$_POST['search_po'];
-			}else{
-				$poFoID = '<strong>เลขที่ </strong> '.$_POST['search_fo'];
-			}
-			
-			$form .= $poFoID.'<br />
+
+$poFoID = '';
+if ($_POST['search_po'] != "") {
+	$poFoID = '<strong>เลขที่ </strong> ' . $_POST['search_po'];
+} else {
+	$poFoID = '<strong>เลขที่ </strong> ' . $_POST['search_fo'];
+}
+
+$form .= $poFoID . '<br />
             <br />
-            กำหนดคืนอะไหล่ :</strong> '.format_date($_POST['job_balance']).' &nbsp;<strong>วันที่คืนอะไหล่ :</strong> '.format_date($_POST['sr_stime']).'<br /><br />
-            <strong>อ้างอิงใบยืม :</strong> '.$_POST['srid2'].'&nbsp;&nbsp;<strong>วันที่ :</strong> '.format_date($_POST['ref_date']).'</td>
+            กำหนดคืนอะไหล่ :</strong> ' . format_date($_POST['job_balance']) . ' &nbsp;<strong>วันที่คืนอะไหล่ :</strong> ' . format_date($_POST['sr_stime']) . '<br /><br />
+            <strong>อ้างอิงใบยืม :</strong> ' . $_POST['srid2'] . '&nbsp;&nbsp;<strong>วันที่ :</strong> ' . format_date($_POST['ref_date']) . '</td>
           </tr>
     </table>
 	<br>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tb2">
       <tr>
-        <td width="53%"><strong>สถานที่ติดตั้ง / ส่งสินค้า : </strong>'.$finfos['loc_name'].'<br /><br /><br /><br />
+        <td width="53%"><strong>สถานที่ติดตั้ง / ส่งสินค้า : </strong>' . $finfos['loc_name'] . '<br /><br /><br /><br />
            </td>
-        <td width="47%" valign="top"><strong>รายละเอียดการเปลี่ยนอะไหล่</strong><br><br>'.$_POST['detail_recom'].'</td>
+        <td width="47%" valign="top"><strong>รายละเอียดการเปลี่ยนอะไหล่</strong><br><br>' . $_POST['detail_recom'] . '</td>
       </tr>
 </table>
 
@@ -175,41 +175,55 @@
         <td width="9%"><strong>ราคา/หน่วย</strong></td>
         <td width="9%"><strong>จำนวนเบิก</strong></td>
         </tr>';
-		
-		$sumtotal = 0;
-		$total = 0;
 
-		foreach($codes as $a => $b){
-			//if($units[$a] != 0){$bunits = $units[$a];$units[$a] = number_format($units[$a]);}
-			if($prices[$a] != 0){$bprices = $prices[$a];$prices[$a] = number_format($prices[$a]);}
-			if($amounts[$a] != 0){$amounts[$a] = number_format($amounts[$a]);}
-			if($opens[$a] != 0){$bopens = $opens[$a];$opens[$a] = number_format($opens[$a]);}
-			if($remains[$a] != 0){$remains[$a] = number_format($remains[$a]);}
-			if($codes[$a] != "" || $lists[$a] != ""){$sumlist = $sumlist+1;}
-			
-			$sumtotal = $bopens * $bprices;
-			
-		 $form .='<tr >
-			<td><center>'.($a+1).'</center></td>
-			<td>'.$codes[$a].'</td>
-			<td>'.get_sparpart_name($conn,$lists[$a]).'</td>
-			<td align="center">'.get_nameStock($conn,$lists[$a]).'</td>
-			<td align="center">'.$units[$a].'</td>
-			<td align="right">'.getStockSpar($conn,$lists[$a]).'</td>
-			<td align="right">'.$prices[$a].'</td>			
-			<td align="right">'.$opens[$a].'</td>
+$sumtotal = 0;
+$total = 0;
+
+foreach ($codes as $a => $b) {
+	//if($units[$a] != 0){$bunits = $units[$a];$units[$a] = number_format($units[$a]);}
+	if ($prices[$a] != 0) {
+		$bprices = $prices[$a];
+		$prices[$a] = number_format($prices[$a], 2);
+	}
+	if ($amounts[$a] != 0) {
+		$amounts[$a] = number_format($amounts[$a]);
+	}
+	if ($opens[$a] != 0) {
+		$bopens = $opens[$a];
+		$opens[$a] = number_format($opens[$a]);
+	}
+	if ($remains[$a] != 0) {
+		$remains[$a] = number_format($remains[$a]);
+	}
+	if ($codes[$a] != "" || $lists[$a] != "") {
+		$sumlist = $sumlist + 1;
+	}
+
+	$sumtotal = $bopens * $bprices;
+
+	$form .= '<tr >
+			<td><center>' . ($a + 1) . '</center></td>
+			<td>' . $codes[$a] . '</td>
+			<td>' . get_sparpart_name($conn, $lists[$a]) . '</td>
+			<td align="center">' . get_nameStock($conn, $lists[$a]) . '</td>
+			<td align="center">' . $units[$a] . '</td>
+			<td align="right">' . getStockSpar($conn, $lists[$a]) . '</td>
+			<td align="right">' . $prices[$a] . '</td>			
+			<td align="right">' . $opens[$a] . '</td>
 			</tr>';
-			
-			if($codes[$a] != "" || $lists[$a] != ""){$total += $sumtotal;}
-		}
-        $form .= '<tr >
+
+	if ($codes[$a] != "" || $lists[$a] != "") {
+		$total += $sumtotal;
+	}
+}
+$form .= '<tr >
 			<td colspan="5"><center><strong>รวมจำนวนที่เบิก</strong></center></td>
-			<td colspan="3" align="right"><strong>'.$sumlist.'&nbsp;&nbsp;รายการ</strong></td>
+			<td colspan="3" align="right"><strong>' . $sumlist . '&nbsp;&nbsp;รายการ</strong></td>
 		</tr>
 		
         <tr >
           <td colspan="5"><center><strong>ใช้จ่ายรวม (รวมมูลค่าอะไหล่ที่เบิก)</strong></center></td>
-          <td colspan="3" align="right"><strong>'.number_format($total,2).'&nbsp;&nbsp;บาท</strong></td>
+          <td colspan="3" align="right"><strong>' . number_format($total, 2) . '&nbsp;&nbsp;บาท</strong></td>
           </tr>
     </table>
 
@@ -220,13 +234,13 @@
 		<td width="33%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td style="border-bottom:1px solid #000000;padding-bottom:23px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;">'.getsalename($conn,$_POST['loc_contact2']).'</td>
+                <td style="border-bottom:1px solid #000000;padding-bottom:23px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;">' . getsalename($conn, $_POST['loc_contact2']) . '</td>
               </tr>
               <tr>
                 <td style="padding-top:10px;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>ช่างเบิก</strong></td>
               </tr>
               <tr>
-                <td style="font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่ : </strong>'.format_date($_POST['loc_date2']).'</td>
+                <td style="font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่ : </strong>' . format_date($_POST['loc_date2']) . '</td>
               </tr>
             </table>
         </td>	
@@ -234,13 +248,13 @@
 		<td width="33%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;">'.getsalename($conn,$_POST['cs_sell']).'</td>
+                <td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;">' . getsalename($conn, $_POST['cs_sell']) . '</td>
               </tr>
               <tr>
                 <td style="padding-top:10px;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>ผู้จ่ายอะไหล่</strong></td>
               </tr>
               <tr>
-                <td style="font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่ : </strong>'.format_date($_POST['sell_date']).'</td>
+                <td style="font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่ : </strong>' . format_date($_POST['sell_date']) . '</td>
               </tr>
             </table>
         </td>
@@ -248,16 +262,16 @@
 		<td width="33%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;padding-top:10px;padding-bottom:10px;">
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
-			<td style="font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong >'.$hSaleSignature.'</strong></td>
+			<td style="font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong >' . $hSaleSignature . '</strong></td>
 		  </tr>
 		  <tr>
-			<td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>'.$hSaleName.'</strong></td>
+			<td style="border-bottom:1px solid #000000;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>' . $hSaleName . '</strong></td>
 		  </tr>
 		  <tr>
 			<td style="padding-top:10px;padding-bottom:10px;font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>ผู้อนุมัติ</strong></td>
 		  </tr>
 		  <tr>
-			<td style="font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่ '.$dataApprove.'</strong></td>
+			<td style="font-size:10px;font-family:Verdana, Geneva, sans-serif;text-align:center;"><strong>วันที่ ' . $dataApprove . '</strong></td>
 		  </tr>
             </table>
         </td>
@@ -265,8 +279,3 @@
       </tr>
     </table>';
 ?>
-
-
-	
-
-	
