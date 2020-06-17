@@ -771,7 +771,7 @@ while ($rowPro = mysqli_fetch_array($getProList)) {
                                                                 </td>
                                                                 <td
                                                                     style="border:1px solid #000000;padding:5;text-align:center;">
-                                                                    <?php echo $rowCalLev2 + 1; ?></td>
+                                                                    <?php echo ($rowCalLev2 + 1); ?></td>
                                                                 <td
                                                                     style="border:1px solid #000000;padding:5;text-align:center;">
                                                                     <?php echo get_stock_project_code($conn, $rowPro['cpro']); ?>

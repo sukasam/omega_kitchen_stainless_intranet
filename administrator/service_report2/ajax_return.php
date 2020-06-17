@@ -124,7 +124,7 @@ if ($_GET['action'] === 'getCusDetail') {
 			</td>
 			<td
 			style="border:1px solid #000000;padding:5;text-align:center;">
-			' . $rowCalLev2 + 1 . '</td>
+			' . ($rowCalLev2 + 1) . '</td>
 			<td
 			style="border:1px solid #000000;padding:5;text-align:center;">
 			' . get_stock_project_code($conn, $rowPro['cpro']) . '
