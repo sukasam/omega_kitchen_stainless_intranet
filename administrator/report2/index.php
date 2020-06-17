@@ -273,17 +273,17 @@ if ($_GET['action'] == "chksum") {
                                                                     <input name="sh1" type="checkbox" id="sh1" value="1"
                                                                         checked>
 
-                                                                    ผู้จำหน่าย / ส่งสินค้า
+                                                                    ชื่อโปรเจ็ค / ลูกค้า
 
                                                                     <input name="sh2" type="checkbox" id="sh2" value="1"
                                                                         checked>
 
-                                                                    ชื่ที่อยู่ /ผู้จำหน่าย / เบอร์โทร
+                                                                    ที่อยู่ / ลูกค้าโปรเจ็ค
 
                                                                     <input name="sh3" type="checkbox" id="sh3" value="1"
                                                                         checked>
 
-                                                                    เลขที่บิล
+                                                                    เลขที่ FO,FO/PJ
 
                                                                     <input name="sh4" type="checkbox" id="sh4" value="1"
                                                                         checked>
@@ -469,10 +469,10 @@ if ($_GET['action'] == "chksum") {
 
                                                                     ผู้จำหน่าย / ส่งสินค้า
 
-                                                                    <input name="sh2" type="checkbox" id="sh2" value="1"
+                                                                    <!-- <input name="sh2" type="checkbox" id="sh2" value="1"
                                                                         checked>
 
-                                                                    ชื่ที่อยู่ /ผู้จำหน่าย / เบอร์โทร
+                                                                    ชื่ที่อยู่ /ผู้จำหน่าย / เบอร์โทร -->
 
                                                                     <input name="sh3" type="checkbox" id="sh3" value="1"
                                                                         checked>

@@ -11,7 +11,7 @@ include("config.php");
 Check_Permission($conn, $check_module, $_SESSION["login_id"], "read");
 
 if ($_GET["page"] == "") {
-	$_REQUEST['page'] = 1;
+    $_REQUEST['page'] = 1;
 }
 
 $param = get_param($a_param, $a_not_exists);
@@ -32,20 +32,20 @@ $condi = '';
 
 if ($_REQUEST['priod'] == 0) {
 
-	$daterriod = " AND `job_open` between '" . $date_fm . "' and '" . $date_to . "'";
+    $daterriod = " AND `job_open` between '" . $date_fm . "' and '" . $date_to . "'";
 
-	$dateshow = "เริ่มวันที่ : " . format_date($date_fm) . "&nbsp;&nbsp;ถึงวันที่ : " . format_date($date_to);
+    $dateshow = "เริ่มวันที่ : " . format_date($date_fm) . "&nbsp;&nbsp;ถึงวันที่ : " . format_date($date_to);
 } else {
 
-	$dateshow = "วันที่ดำเนินการ : " . format_date(date("Y-m-d"));
+    $dateshow = "วันที่ดำเนินการ : " . format_date(date("Y-m-d"));
 }
 
 if ($cus_id != "") {
-	$condi .= " AND st.cus_id = '" . $cus_id . "'";
+    $condi .= " AND st.cus_id = '" . $cus_id . "'";
 }
 
 if ($gspar != "") {
-	$condi .= " AND stp.lists = '" . $gspar . "'";
+    $condi .= " AND stp.lists = '" . $gspar . "'";
 }
 
 
@@ -102,7 +102,7 @@ if ($gspar != "") {
 
         <tr>
 
-            <th colspan="4" style="text-align:left;font-size:12px;">บริษัท โอเมก้า แมชชีนเนอรี่ (1999) จำกัด<br />
+            <th colspan="5" style="text-align:left;font-size:12px;">บริษัท โอเมก้า แมชชีนเนอรี่ (1999) จำกัด<br />
 
                 รายงานใบเบิกวัตถุดิบเพื่อผลิต</th>
 
@@ -114,11 +114,17 @@ if ($gspar != "") {
 
             <?php if ($_REQUEST['sh9'] == 1) { ?><th width="5%">เลขที่ใบเบิก</th><?php  } ?>
 
+            <th width="10%">วันที่เบิกอะไหล่</th>
+
+            <th width="10%">เลขที่ FO,FO/JP</th>
+
             <?php if ($_REQUEST['sh1'] == 1) { ?><th width="16%">ชื่อลูกค้า / บริษัท + เบอร์โทร</th><?php  } ?>
 
-            <?php if ($_REQUEST['sh2'] == 1) { ?><th width="15%"> ชื่อร้าน / สถานที่ติดตั้ง</th><?php  } ?>
+            <?php /*if ($_REQUEST['sh2'] == 1) { ?><th width="15%"> ชื่อร้าน / สถานที่ติดตั้ง</th><?php  } */ ?>
 
-            <?php if ($_REQUEST['sh3'] == 1) { ?><th width="10%">จังหวัด</th><?php  } ?>
+            <?php /*if ($_REQUEST['sh3'] == 1) { ?><th width="10%">จังหวัด</th><?php  } */ ?>
+
+
 
             <?php if ($_REQUEST['sh4'] == 1 || $_REQUEST['sh5'] == 1 || $_REQUEST['sh6'] == 1) { ?><th width="30%">
                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tbreport">
@@ -140,6 +146,10 @@ if ($gspar != "") {
                 </table>
             </th><?php  } ?>
 
+            <th width="6%"><strong>รวมจำนวนที่เบิก</strong></th>
+
+            <th width="6%"><strong>รวมมูลค่าอะไหล่</strong></th>
+
             <?php  /*if($_REQUEST['sh7'] == 1){?><th width="6%"><strong>รวมราคาซื้ิอ</strong></th><?php  }*/ ?>
 
             <?php if ($_REQUEST['sh8'] == 1) { ?><th width="6%"><strong>ผู้เบิก</strong></th><?php  } ?>
@@ -153,40 +163,44 @@ if ($gspar != "") {
 
 
 
-		$dbservice = "s_service_report2";
+        $dbservice = "s_service_report2";
 
-		$dbservicesub = "s_service_report2sub";
+        $dbservicesub = "s_service_report2sub";
 
 
 
-		$sql = "SELECT * FROM " . $dbservice . " as st, " . $dbservicesub . " as stp WHERE st.sr_id = stp.sr_id " . $condi . " " . $daterriod . " GROUP BY st.sr_id ORDER BY st.sr_id DESC";
+        $sql = "SELECT * FROM " . $dbservice . " as st, " . $dbservicesub . " as stp WHERE st.sr_id = stp.sr_id " . $condi . " " . $daterriod . " GROUP BY st.sr_id ORDER BY st.sr_id DESC";
 
-		$qu_fr = @mysqli_query($conn, $sql);
+        $qu_fr = @mysqli_query($conn, $sql);
 
-		$sum = 0;
+        $sum = 0;
 
-		$totals = 0;
+        $totals = 0;
 
-		$sumTotalAll = 0;
+        $sumTotalAll = 0;
 
-		$moneyTCTota = 0;
+        $moneyTCTota = 0;
 
-		while ($row_bill = @mysqli_fetch_array($qu_fr)) {
+        while ($row_bill = @mysqli_fetch_array($qu_fr)) {
 
-			$foppj_info = get_firstorder2($conn, $row_bill['cus_id'], $row_bill['cus_source']);
-		?>
+            $foppj_info = get_firstorder2($conn, $row_bill['cus_id'], $row_bill['cus_source']);
+        ?>
 
         <tr>
 
             <?php if ($_REQUEST['sh9'] == 1) { ?><td><?php echo $row_bill['sv_id']; ?></td><?php  } ?>
 
+            <td><?php echo format_date_th($row_bill['job_open'], 7); ?></td>
+
+            <td><?php echo $foppj_info['fs_id']; ?></td>
+
             <?php if ($_REQUEST['sh1'] == 1) { ?><td>
                 <?php echo $foppj_info['cd_name'] . ' / ' . $foppj_info['cd_tel']; ?></td><?php  } ?>
 
-            <?php if ($_REQUEST['sh2'] == 1) { ?><td><?php echo $foppj_info['cd_address']; ?></td><?php  } ?>
+            <?php /*if ($_REQUEST['sh2'] == 1) { ?><td><?php echo $foppj_info['cd_address']; ?></td><?php  } */ ?>
 
-            <?php if ($_REQUEST['sh3'] == 1) { ?><td><?php echo province_name($conn, $foppj_info['cd_province']); ?>
-            </td><?php  } ?>
+            <?php /*if ($_REQUEST['sh3'] == 1) { ?><td><?php echo province_name($conn, $foppj_info['cd_province']); ?>
+            </td><?php  } */ ?>
 
 
 
@@ -195,27 +209,27 @@ if ($gspar != "") {
 
                 <?php
 
-						$qu_pfirst = @mysqli_query($conn, "SELECT * FROM " . $dbservicesub . " WHERE sr_id = '" . $row_bill['sr_id'] . "'");
+                        $qu_pfirst = @mysqli_query($conn, "SELECT * FROM " . $dbservicesub . " WHERE sr_id = '" . $row_bill['sr_id'] . "'");
 
-						?>
+                        ?>
 
                 <table border="0" width="90%" cellspacing="0" cellpadding="0" class="tbreport">
 
                     <?php
 
-							$totalamount = 0;
+                            $totalamount = 0;
 
-							$totalTA = 0;
+                            $totalTA = 0;
 
-							while ($row = @mysqli_fetch_array($qu_pfirst)) {
+                            while ($row = @mysqli_fetch_array($qu_pfirst)) {
 
-								if ($row['lists'] != "") {
+                                if ($row['lists'] != "") {
 
-									$total = $row['sparpart_unit_price'] * $row['sparpart_qty'];
+                                    $total = $row['prices'] * $row['opens'];
 
-									$totalamount += $row['sparpart_qty'];
+                                    $totalamount += $row['opens'];
 
-							?>
+                            ?>
 
                     <tr>
 
@@ -232,42 +246,48 @@ if ($gspar != "") {
 
                     <?php
 
-									$sumTotalAll += $total;
+                                    $sumTotalAll += $total;
 
-									$totalTA +=	$total;
-								}
-							}
+                                    $totalTA += $total;
+                                }
+                            }
 
-							$totals += $totalamount
+                            $totals += $totalamount
 
 
 
-							?>
+                            ?>
 
                 </table>
 
             </td><?php  } ?>
 
+            <td style="padding:0;">
+                <?php echo $totalamount; ?></td>
+
+            <td style="padding:0;">
+                <?php echo number_format($totalTA + $moneyTC, 2); ?></td>
+
             <?php  /*if($_REQUEST['sh7'] == 1){?><td style="padding:0;">
                 <?php  echo number_format($totalTA+$moneyTC,2);?></td><?php  }*/ ?>
 
             <?php if ($_REQUEST['sh8'] == 1) { ?><td style="padding:0;">
-                <?php echo get_technician_name($conn, $row_bill['loc_contact2']); ?></td><?php  } ?>
+                <?php echo getsalename($conn, $row_bill['loc_contact2']); ?></td><?php  } ?>
 
         </tr>
 
         <?php
 
-			$sum += 1;
+            $sum += 1;
 
-			$moneyTCTota += $moneyTC;
-		}
+            $moneyTCTota += $moneyTC;
+        }
 
-		?>
+        ?>
 
         <tr>
 
-            <td colspan="9" style="text-align:right;">
+            <td colspan="10" style="text-align:right;">
                 <strong>จำนวนใบเบิกวัถุดิบเพื่อผลิตทั้งหมด&nbsp;&nbsp;<?php echo $sum; ?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong>
             </td>
 
