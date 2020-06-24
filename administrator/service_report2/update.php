@@ -757,12 +757,13 @@ $chkPOItem = chkPOItemSelect($conn, $cus_id, $search_op);
 while ($rowPro = mysqli_fetch_array($getProList)) {
     if (in_array($rowCal, $proOpList)) {
 
-        if (in_array($rowCal, $chkPOItem)) {
-            $ReChkOp = (in_array($rowCal, $proOpRadioList)) ? '<input type="radio" name="chkprolists" value="' . $rowCal . '" checked="checked">' : '';
-        } else {
-            $ReChkOp = (in_array($rowCal, $proOpRadioList)) ? '<input type="radio" name="chkprolists" value="' . $rowCal . '" checked="checked">' : '<input type="radio" name="chkprolists" value="' . $rowCal . '">';
-        }
+        // if (in_array($rowCal, $chkPOItem)) {
+        //     $ReChkOp = (in_array($rowCal, $proOpRadioList)) ? '<input type="radio" name="chkprolists" value="' . $rowCal . '" checked="checked">' : '';
+        // } else {
+        //     $ReChkOp = (in_array($rowCal, $proOpRadioList)) ? '<input type="radio" name="chkprolists" value="' . $rowCal . '" checked="checked">' : '<input type="radio" name="chkprolists" value="' . $rowCal . '">';
+        // }
 
+        $ReChkOp = (in_array($rowCal, $proOpRadioList)) ? '<input type="radio" name="chkprolists" value="' . $rowCal . '" checked="checked">' : '<input type="radio" name="chkprolists" value="' . $rowCal . '">';
         ?>
                                                             <tr>
                                                                 <td
@@ -862,7 +863,7 @@ if ($_GET['mode'] == "update") {
         $bremains[] = $row_sub['remains'];
     }
 }
-for ($i = 1; $i <= 10; $i++) {
+for ($i = 1; $i <= 15; $i++) {
     ?>
 
                                 <tr>

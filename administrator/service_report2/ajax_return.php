@@ -110,11 +110,13 @@ if ($_GET['action'] === 'getCusDetail') {
 
         if (in_array($rowCal, $proOpList)) {
             //$listProHtml .= print($proOpList) . ',';
-            if (in_array($rowCal, $chkPOItem)) {
-                $ReChkOp = (in_array($rowCal, $proOpRadioList)) ? '<input type="radio" name="chkprolists" value="' . $rowCal . '" checked="checked">' : '';
-            } else {
-                $ReChkOp = (in_array($rowCal, $proOpRadioList)) ? '<input type="radio" name="chkprolists" value="' . $rowCal . '" checked="checked">' : '<input type="radio" name="chkprolists" value="' . $rowCal . '">';
-            }
+            // if (in_array($rowCal, $chkPOItem)) {
+            //     $ReChkOp = (in_array($rowCal, $proOpRadioList)) ? '<input type="radio" name="chkprolists" value="' . $rowCal . '" checked="checked">' : '';
+            // } else {
+            //     $ReChkOp = (in_array($rowCal, $proOpRadioList)) ? '<input type="radio" name="chkprolists" value="' . $rowCal . '" checked="checked">' : '<input type="radio" name="chkprolists" value="' . $rowCal . '">';
+            // }
+
+            $ReChkOp = (in_array($rowCal, $proOpRadioList)) ? '<input type="radio" name="chkprolists" value="' . $rowCal . '" checked="checked">' : '<input type="radio" name="chkprolists" value="' . $rowCal . '">';
             //$listProHtml .= $chkOp . ' ' . $fo_id . ' ' . $sr_id;
 
             $listProHtml .= '<tr>
