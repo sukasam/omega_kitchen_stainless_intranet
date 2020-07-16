@@ -204,14 +204,22 @@ function check_select(frm){
 					$counter = ($_GET["page"]-1)*$pagesize;
 					
 					while ($rec = @mysqli_fetch_array ($query)) { 
-					$counter++;
+          $counter++;
+          
+          $GMApprove = '';
+          if($rec['approve2'] == '1' || $rec['approve2'] == 1){
+            $GMApprove = 'color: #0018ff;';
+          }else{
+            $GMApprove = '';
+          }
+
 				   ?>
         <TR>
           <TD style="vertical-align: middle;"><INPUT type=checkbox name="del[]" value="<?php     echo $rec[$PK_field]; ?>" ></TD>
-          <TD style="vertical-align: middle;"><span class="text"><?php     echo sprintf("%04d",$counter); ?></span></TD>
-          <TD style="vertical-align: middle;"><?php     $chaf = preg_replace("/\//","-",$rec["fs_id"]); ?><span class="text"><a href="../../upload/first_order/<?php     echo $chaf;?>.pdf" target="_blank"><?php     echo $rec["fs_id"] ; ?></a></span></TD>
-          <TD style="vertical-align: middle;">          <span class="text"><?php     echo $rec["cd_name"] ; ?></span></TD>
-          <TD style="vertical-align: middle;"><span class="text"><?php     echo $rec["loc_name"] ; ?></span></TD>
+          <TD style="vertical-align: middle;"><span class="text" style="<?php echo $GMApprove;?>"><?php     echo sprintf("%04d",$counter); ?></span></TD>
+          <TD style="vertical-align: middle;"><?php     $chaf = preg_replace("/\//","-",$rec["fs_id"]); ?><span class="text"><a href="../../upload/first_order/<?php     echo $chaf;?>.pdf" target="_blank" style="<?php echo $GMApprove;?>"><?php     echo $rec["fs_id"] ; ?></a></span></TD>
+          <TD style="vertical-align: middle;">          <span class="text" style="<?php echo $GMApprove;?>"><?php     echo $rec["cd_name"] ; ?></span></TD>
+          <TD style="vertical-align: middle;"><span class="text" style="<?php echo $GMApprove;?>"><?php     echo $rec["loc_name"] ; ?></span></TD>
           <TD nowrap style="vertical-align:middle"><div align="center">
             <?php     if($rec["status_use"]==0) {?>
             <img src="../icons/favorites_use.png" width="15" height="15">
