@@ -1,36 +1,35 @@
-<?php     
-	include ("../../include/config.php");
-	include ("../../include/connect.php");
-	include ("../../include/function.php");
-	include ("config.php");
-	Check_Permission($conn,$check_module,$_SESSION["login_id"],"read");
-	if ($_GET["page"] == ""){$_REQUEST["page"] = 1;	}
-	$param = get_param($a_param,$a_not_exists);
-	
-	$cg_type = $_REQUEST['cg_type'];
-	$sr_ctype = $_REQUEST['sr_ctype'];
-	$a_sdate=explode("/",$_REQUEST['date_fm']);
-	$date_fm=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
-	$a_sdate=explode("/",$_REQUEST['date_to']);
-	$date_to=$a_sdate[2]."-".$a_sdate[1]."-".$a_sdate[0];
-	
-	if($_REQUEST['priod'] == 0){
-		$daterriod = " AND `sr_stime`  between '".$date_fm."' and '".$date_to."'"; 
-		$dateshow = "เริ่มวันที่ : ".format_date($date_fm)."&nbsp;&nbsp;ถึงวันที่ : ".format_date($date_to); 
-	}
-	else{
-		$dateshow = "วันที่ค้นหา : ".format_date(date("Y-m-d")); 
-	}
-	
-	$condition = "";
-	
-	if($cg_type != ""){
-		$condition .= " AND fr.cg_type = '".$cg_type."'";	
-	}
-	if($sr_ctype != ""){
-		$condition .= " AND sv.sr_ctype = '".$sr_ctype."'";
-	}
-	
+<?php
+include "../../include/config.php";
+include "../../include/connect.php";
+include "../../include/function.php";
+include "config.php";
+Check_Permission($conn, $check_module, $_SESSION["login_id"], "read");
+if ($_GET["page"] == "") {$_REQUEST["page"] = 1;}
+$param = get_param($a_param, $a_not_exists);
+
+$cg_type = $_REQUEST['cg_type'];
+$sr_ctype = $_REQUEST['sr_ctype'];
+$a_sdate = explode("/", $_REQUEST['date_fm']);
+$date_fm = $a_sdate[2] . "-" . $a_sdate[1] . "-" . $a_sdate[0];
+$a_sdate = explode("/", $_REQUEST['date_to']);
+$date_to = $a_sdate[2] . "-" . $a_sdate[1] . "-" . $a_sdate[0];
+
+if ($_REQUEST['priod'] == 0) {
+    $daterriod = " AND `sr_stime`  between '" . $date_fm . "' and '" . $date_to . "'";
+    $dateshow = "เริ่มวันที่ : " . format_date($date_fm) . "&nbsp;&nbsp;ถึงวันที่ : " . format_date($date_to);
+} else {
+    $dateshow = "วันที่ค้นหา : " . format_date(date("Y-m-d"));
+}
+
+$condition = "";
+
+if ($cg_type != "") {
+    $condition .= " AND fr.cg_type = '" . $cg_type . "'";
+}
+if ($sr_ctype != "") {
+    $condition .= " AND sv.sr_ctype = '" . $sr_ctype . "'";
+}
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -58,14 +57,14 @@
 <body>
 	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tbreport">
 	  <tr>
-	    <th colspan="5" style="text-align:left;font-size:12px;">	      บริษัท โอเมก้า แมชชีนเนอรี่ (1999) จำกัด<br />
+	    <th colspan="5" style="text-align:left;font-size:12px;">	      บริษัท โอเมก้า คิทเช่น สแตนเลส จำกัด<br />
 รายงานการให้บริการตามกลุ่มลูกค้า<br />
 ประเภทลูกค้า  :
-<?php     if($_POST['ctype'] != ""){echo custype_name($conn,$_POST['ctype']);}else{echo "ทั้งหมด";}?>
+<?php if ($_POST['ctype'] != "") {echo custype_name($conn, $_POST['ctype']);} else {echo "ทั้งหมด";}?>
 <br />
 ประเภทบริการ  :
-<?php     if($_POST['sr_ctype']){echo get_servicename($conn,$_POST['sr_ctype']);}else{echo "ทั้งหมด";}?></th>
-	    <th width="26%" colspan="4" style="text-align:right;font-size:11px;vertical-align:bottom;"><?php     echo $dateshow;?></th>
+<?php if ($_POST['sr_ctype']) {echo get_servicename($conn, $_POST['sr_ctype']);} else {echo "ทั้งหมด";}?></th>
+	    <th width="26%" colspan="4" style="text-align:right;font-size:11px;vertical-align:bottom;"><?php echo $dateshow; ?></th>
       </tr>
       <tr>
         <th width="19%">ชื่อลูกค้า / บริษัท + เบอร์โทร</th>
@@ -75,28 +74,28 @@
         <th width="14%">วันที่ให้บริการ</th>
         <th>รายละเอียดการให้บริการ</th>
       </tr>
-      <?php     
-		$sql = "SELECT * FROM s_first_order as fr, s_service_report as sv WHERE sv.cus_id = fr.fo_id ".$condition." ".$daterriod." ORDER BY fr.cd_name ASC";
-	  	$qu_fr = @mysqli_query($conn,$sql);
-		$sum = 0;
-		while($row_fr = @mysqli_fetch_array($qu_fr)){
-			
-			?>
+      <?php
+$sql = "SELECT * FROM s_first_order as fr, s_service_report as sv WHERE sv.cus_id = fr.fo_id " . $condition . " " . $daterriod . " ORDER BY fr.cd_name ASC";
+$qu_fr = @mysqli_query($conn, $sql);
+$sum = 0;
+while ($row_fr = @mysqli_fetch_array($qu_fr)) {
+
+    ?>
 			<tr>
-              <td><?php     echo $row_fr['cd_name'];?><br />
-              <?php     echo $row_fr['cd_tel'];?></td>
-              <td><?php     echo province_name($conn,$row_fr['cd_province']);?></td>
-              <td><?php     echo $row_fr['sv_id'];?></td>
-              <td><?php     echo format_date($row_fr['job_open'])." / ". ($row_fr['job_close']);?></td>
-              <td><?php     echo format_date($row_fr['sr_stime']);?></td>   
-              <td><?php     echo $row_fr['detail_recom'];?></td>              
+              <td><?php echo $row_fr['cd_name']; ?><br />
+              <?php echo $row_fr['cd_tel']; ?></td>
+              <td><?php echo province_name($conn, $row_fr['cd_province']); ?></td>
+              <td><?php echo $row_fr['sv_id']; ?></td>
+              <td><?php echo format_date($row_fr['job_open']) . " / " . ($row_fr['job_close']); ?></td>
+              <td><?php echo format_date($row_fr['sr_stime']); ?></td>
+              <td><?php echo $row_fr['detail_recom']; ?></td>
             </tr>
-			<?php    
-			$sum += 1;
-		}
-	  ?>
+			<?php
+$sum += 1;
+}
+?>
       <tr>
-			  <td colspan="8" style="text-align:right;"> <strong>ให้บริการตามกลุ่มลูกค้าทั้งหมด&nbsp;&nbsp;<?php     echo $sum;?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
+			  <td colspan="8" style="text-align:right;"> <strong>ให้บริการตามกลุ่มลูกค้าทั้งหมด&nbsp;&nbsp;<?php echo $sum; ?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong></td>
 	  </tr>
     </table>
 

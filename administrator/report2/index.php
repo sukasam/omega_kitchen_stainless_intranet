@@ -1,8 +1,8 @@
 <?php
-include("../../include/config.php");
-include("../../include/connect.php");
-include("../../include/function.php");
-include("config.php");
+include "../../include/config.php";
+include "../../include/connect.php";
+include "../../include/function.php";
+include "config.php";
 Check_Permission($conn, $check_module, $_SESSION["login_id"], "read");
 if ($_GET["page"] == "") {
     $_REQUEST["page"] = 1;
@@ -31,7 +31,6 @@ if ($_GET['action'] == "chksum") {
     } else {
         @header("Location:?mid=16&act=11&res=show&poi=" . $_POST['priod'] . "");
     }
-
 
     //
 }
@@ -125,15 +124,15 @@ if ($_GET['action'] == "chksum") {
     </script>
 
 </HEAD>
-<?php include("../../include/function_script.php"); ?>
+<?php include "../../include/function_script.php";?>
 
 <BODY>
     <DIV id=body-wrapper>
-        <?php include("../left.php"); ?>
+        <?php include "../left.php";?>
         <DIV id=main-content>
             <NOSCRIPT>
             </NOSCRIPT>
-            <?php include('../top.php'); ?>
+            <?php include '../top.php';?>
             <P id=page-intro><?php echo $page_name; ?></P>
 
             <UL class=shortcut-buttons-set>
@@ -180,9 +179,9 @@ if ($_GET['action'] == "chksum") {
 
 
                     <?php
-                    if ($_GET['act'] == 15) {
+if ($_GET['act'] == 15) {
 
-                    ?>
+    ?>
 
                     <DIV class=content-box>
                         <!-- Start Content Box -->
@@ -346,11 +345,11 @@ if ($_GET['action'] == "chksum") {
 
                     <?php
 
-                    }
+}
 
-                    if ($_GET['act'] == 16) {
+if ($_GET['act'] == 16) {
 
-                    ?>
+    ?>
 
                     <DIV class=content-box>
                         <!-- Start Content Box -->
@@ -386,16 +385,16 @@ if ($_GET['action'] == "chksum") {
                                                                         class="inputselect">
                                                                         <option value="">กรุณาเลือกรายการอะไหล่</option>
                                                                         <?php
-                                                                            $qupros1 = @mysqli_query($conn, "SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
-                                                                            while ($row_qupros1 = @@mysqli_fetch_array($qupros1)) {
-                                                                            ?>
+$qupros1 = @mysqli_query($conn, "SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
+    while ($row_qupros1 = @@mysqli_fetch_array($qupros1)) {
+        ?>
                                                                         <option
                                                                             value="<?php echo $row_qupros1['group_id']; ?>">
                                                                             <?php echo $row_qupros1['group_spar_id'] . " | " . $row_qupros1['group_name']; ?>
                                                                         </option>
                                                                         <?php
-                                                                            }
-                                                                            ?>
+}
+    ?>
                                                                     </select><a href="javascript:void(0);"
                                                                         onClick="windowOpener('400', '500', '', 'search_spar.php?protype=pro_pod');"><img
                                                                             src="../images/icon2/mark_f2.png" width="25"
@@ -543,11 +542,11 @@ if ($_GET['action'] == "chksum") {
 
                     <?php
 
-                    }
+}
 
-                    if ($_GET['act'] == 17) {
+if ($_GET['act'] == 17) {
 
-                    ?>
+    ?>
 
                     <DIV class=content-box>
                         <!-- Start Content Box -->
@@ -576,7 +575,7 @@ if ($_GET['action'] == "chksum") {
                                                         <table class="formFields" cellspacing="0" width="100%">
 
                                                             <tr>
-                                                                <td width="10%" nowrap class="name">ชื่อร้าน-ชื่อบริษัท
+                                                                <td width="10%" nowrap class="name">รหัสลูกค้า | ชื่อร้าน | ชื่อบริษัท
                                                                 </td>
                                                                 <td width="90%"><input name="cd_name" type="text"
                                                                         id="cd_name" value="" style="width:40%;"
@@ -598,16 +597,16 @@ if ($_GET['action'] == "chksum") {
                                                                         class="inputselect">
                                                                         <option value="">กรุณาเลือกรายการอะไหล่</option>
                                                                         <?php
-                                                                            $qupros1 = @mysqli_query($conn, "SELECT * FROM s_group_sparpart ORDER BY group_name ASC");
-                                                                            while ($row_qupros1 = @@mysqli_fetch_array($qupros1)) {
-                                                                            ?>
+$qupros1 = @mysqli_query($conn, "SELECT * FROM s_group_sparpart ORDER BY group_spar_id ASC");
+    while ($row_qupros1 = @@mysqli_fetch_array($qupros1)) {
+        ?>
                                                                         <option
                                                                             value="<?php echo $row_qupros1['group_id']; ?>">
                                                                             <?php echo $row_qupros1['group_spar_id'] . " | " . $row_qupros1['group_name']; ?>
                                                                         </option>
                                                                         <?php
-                                                                            }
-                                                                            ?>
+}
+    ?>
                                                                     </select><a href="javascript:void(0);"
                                                                         onClick="windowOpener('400', '500', '', 'search_spar.php?protype=pro_pod');"><img
                                                                             src="../images/icon2/mark_f2.png" width="25"
@@ -750,8 +749,8 @@ if ($_GET['action'] == "chksum") {
 
                     <?php
 
-                    }
-                    ?>
+}
+?>
 
 
                 </DIV><!-- End .content-box-content -->
@@ -761,7 +760,7 @@ if ($_GET['action'] == "chksum") {
             <DIV class=clear></DIV><!-- Start Notifications -->
             <!-- End Notifications -->
 
-            <?php include("../footer.php"); ?>
+            <?php include "../footer.php";?>
         </DIV><!-- End #main-content -->
     </DIV>
 </BODY>
