@@ -615,6 +615,32 @@ $qupros1 = @mysqli_query($conn, "SELECT * FROM s_group_sparpart ORDER BY group_s
                                                                 </td>
                                                             </tr>
 
+                                                            <!-- <tr>
+                                                                <td width="10%" nowrap class="name">ชนิดสินค้า :
+                                                                </td>
+                                                                <td width="90%"><input name="type_name" type="text"
+                                                                        id="type_name" value="" style="width:40%;"
+                                                                        readonly><a href="javascript:void(0);"
+                                                                        onClick="windowOpener('400', '500', '', 'search_type.php');"><img
+                                                                            src="../images/icon2/mark_f2.png" width="25"
+                                                                            height="25" border="0" alt=""
+                                                                            style="vertical-align:middle;padding-left:5px;"></a>
+                                                                </td>
+                                                            </tr> -->
+
+                                                            <!-- <tr>
+                                                                <td width="10%" nowrap class="name">เรียงตาม</td>
+                                                                <td width="90%">
+                                                                    <select name="source_by" id="source_by"
+                                                                        class="inputselect">
+                                                                        <option value="1">เลขที่ใบเบิกวัตถุดิบ</option>
+                                                                        <option value="2">ชื่อลูกค้า (รหัสลูกค้า)</option>
+                                                                        <option value="3">รหัสอะไหล่</option>
+                                                                        <option value="4">ชนิดสินค้า</option>
+                                                                    </select>
+                                                                </td>
+                                                            </tr> -->
+
                                                             <tr>
 
                                                                 <td nowrap class="name">&nbsp;</td>
@@ -717,6 +743,10 @@ $qupros1 = @mysqli_query($conn, "SELECT * FROM s_group_sparpart ORDER BY group_s
                                                                 </td>
 
                                                             </tr>
+                                                            <!-- <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr> -->
 
                                                         </table>
                                                     </td>

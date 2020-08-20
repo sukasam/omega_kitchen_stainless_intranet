@@ -115,9 +115,7 @@ if ($source_by == 2) {
 
             <th colspan="6" style="text-align:left;font-size:12px;">บริษัท โอเมก้า คิทเช่น สแตนเลส จำกัด<br />
 
-                <?php $fopjInfo = get_firstorder2($conn, $cus_id, "fopj");?>
-
-                รายงานใบเบิกวัตถุดิบเพื่อผลิต <?php if (!empty($gspar)) {echo ": รหัสสินค้า : " . get_sparpart_id($conn, $gspar) . " : ซื่อ : " . get_sparpart_name($conn, $gspar);} else if (!empty($cus_id)) {echo "ชื่อลูกค้า : " . $fopjInfo['cd_name'];}?></th>
+                รายงานใบเบิกวัตถุดิบเพื่อผลิต</th>
 
             <th colspan="7" style="text-align:right;font-size:11px;"><?php echo $dateshow; ?></th>
 
@@ -148,17 +146,17 @@ if ($source_by == 2) {
 
                     <tr>
 
-                        <?php if ($_REQUEST['sh4'] == 1) {?><td style="border-bottom:none;white-space: nowrap;" width="25%">
+                        <?php if ($_REQUEST['sh4'] == 1) {?><td style="border-bottom:none;white-space: nowrap;" width="20%">
                             <strong>รหัสอะไหล่</strong></td><?php }?>
 
                         <?php if ($_REQUEST['sh5'] == 1) {?><td style="border-bottom:none;" width="50%">
                             <center><strong>รายการอะไหล่</strong></center>
                         </td><?php }?>
 
-                        <?php if ($_REQUEST['sh6'] == 1) {?><td style="border-bottom:none;" width="25%">
+                        <?php if ($_REQUEST['sh6'] == 1) {?><td style="border-bottom:none;" width="15%">
                             <strong>จำนวนเบิก</strong></td><?php }?>
 
-                            <td style="border-bottom:none;white-space: nowrap;" width="25%">
+                            <td style="border-bottom:none;white-space: nowrap;" width="15%">
                             <strong>รวมยอดเงิน</strong></td>
 
                     </tr>
@@ -195,25 +193,14 @@ $sumTotalAll = 0;
 
 $moneyTCTota = 0;
 
-while ($row_bill = @mysqli_fetch_array($qu_fr)) {
+$svList = array();
+$svListPro = array();
 
-    //echo $row_bill['cus_source'];
+while ($row_bill = @mysqli_fetch_array($qu_fr, MYSQLI_ASSOC)) {
+
     $foppj_info = get_firstorder2($conn, $row_bill['cus_id'], $row_bill['cus_source']);
-    ?>
 
-        <tr>
-
-            <?php if ($_REQUEST['sh9'] == 1) {?><td><?php echo $row_bill['sv_id']; ?></td><?php }?>
-
-            <td><?php echo format_date_th($row_bill['job_open'], 7); ?></td>
-
-            <td><?php echo $foppj_info['fs_id']; ?></td>
-
-            <?php if ($_REQUEST['sh1'] == 1) {?><td>
-                <?php echo $foppj_info['cd_name'] . ' / ' . $foppj_info['cd_tel']; ?></td><?php }?>
-
-            <?php
-$getProList = get_fopj_pro($conn, $row_bill['cus_id']);
+    $getProList = get_fopj_pro($conn, $row_bill['cus_id']);
     $numPro = mysqli_num_rows($getProList);
     $rowCal = 1;
     $chkOp = get_checkOP($conn, $row_bill['cus_id'], $row_bill['sr_id']);
@@ -223,6 +210,7 @@ $getProList = get_fopj_pro($conn, $row_bill['cus_id']);
     $proOpCodeList = explode(',', $row_bill['codelist']);
     $rowCalNumPro = mysqli_num_rows($getProList);
 
+    $ListPro = array();
     while ($rowPro = mysqli_fetch_array($getProList)) {
         //echo $rowPro
         if (in_array($rowCal, $proOpList)) {
@@ -230,10 +218,11 @@ $getProList = get_fopj_pro($conn, $row_bill['cus_id']);
 
             // echo $ReChkOp;
             if ($ReChkOp == '1') {
+                array_push($ListPro, array("stock_pro" => get_stock_project_code($conn, $rowPro['cpro']), "code_pro" => $proOpCodeList[$rowCalLev2], "amount_pro" => $rowPro['camount']));
                 ?>
-                <td><center><?php echo get_stock_project_code($conn, $rowPro['cpro']) . " | " . get_stock_project_name($conn, $rowPro['cpro']); ?></center></td>
+                <!-- <td><center><?php echo get_stock_project_code($conn, $rowPro['cpro']); ?></center></td>
                 <td style="white-space: nowrap;"><center><?php echo $proOpCodeList[$rowCalLev2]; ?></center></td>
-                <td><center><?php echo $rowPro['camount']; ?></center></td>
+                <td><center><?php echo $rowPro['camount']; ?></center></td> -->
                 <?php
 
             }
@@ -241,155 +230,77 @@ $getProList = get_fopj_pro($conn, $row_bill['cus_id']);
         }
         $rowCal++;
     }
-    if ($numPro <= 0) {
-        ?>
-        <td></td>
-        <td></td>
-        <td></td>
-        <?php
-}
 
-    if (empty($foppj_info['fs_id'])) {
-        ?>
-        <td></td>
-        <td></td>
-        <td></td>
-        <?php
-}
+    $qu_pfirst = @mysqli_query($conn, "SELECT * FROM " . $dbservicesub . " WHERE sr_id = '" . $row_bill['sr_id'] . "'");
 
-    ?>
+    $ListSpare = array();
 
+    $totalamount = 0;
+    $totalTA = 0;
+    $totalSumSpare = 0;
 
-            <?php /*if ($_REQUEST['sh2'] == 1) { ?><td><?php echo $foppj_info['cd_address']; ?></td><?php  } */?>
+    while ($row = @mysqli_fetch_array($qu_pfirst)) {
+        if ($row['lists'] != "") {
+            $total = $row['prices'] * $row['opens'];
+            $totalamount += $row['opens'];
+            $totalSumSpare += get_spare_unit_price($conn, $row['lists']) * $row['opens'];
 
-            <?php /*if ($_REQUEST['sh3'] == 1) { ?><td><?php echo province_name($conn, $foppj_info['cd_province']); ?>
-    </td><?php  } */?>
+            $sumTotalAll += $total;
+            $totalTA += $total;
 
-
-
-            <?php if ($_REQUEST['sh4'] == 1 || $_REQUEST['sh5'] == 1 || $_REQUEST['sh8'] == 1) {?><td
-                style="padding:0;">
-
-                <?php
-
-        $qu_pfirst = @mysqli_query($conn, "SELECT * FROM " . $dbservicesub . " WHERE sr_id = '" . $row_bill['sr_id'] . "'");
-
-        ?>
-
-                <table border="0" width="90%" cellspacing="0" cellpadding="0" class="tbreport">
-
-                    <?php
-
-        $totalamount = 0;
-
-        $totalTA = 0;
-
-        $totalSumSpare = 0;
-
-        while ($row = @mysqli_fetch_array($qu_pfirst)) {
-
-            if ($row['lists'] != "") {
-
-                //echo $gspar . "|" . $row['lists'];
-
-                if (!empty($gspar)) {
-
-                    if ($gspar == $row['lists']) {
-                        $total = $row['prices'] * $row['opens'];
-
-                        $totalamount += $row['opens'];
-
-                        $totalSumSpare += get_spare_unit_price($conn, $row['lists']) * $row['opens'];
-
-                        ?>
-
-                            <tr>
-
-                                <?php if ($_REQUEST['sh4'] == 1) {?><td style="border-bottom:none;" width="25%">
-                                    <?php echo get_sparpart_id($conn, $row['lists']); ?></td><?php }?>
-
-                                <?php if ($_REQUEST['sh5'] == 1) {?><td align="left" style="border-bottom:none;" width="50%">
-                                    <?php echo get_sparpart_name($conn, $row['lists']); ?></td><?php }?>
-
-                                <?php if ($_REQUEST['sh6'] == 1) {?><td align="center" style="border-bottom:none;" width="25%">
-                                    <?php echo number_format($row['opens']); ?></td><?php }?>
-
-                                <td align="right" style="border-bottom:none;" width="25%">
-                                    <?php echo number_format(get_spare_unit_price($conn, $row['lists']) * $row['opens'], 2); ?></td>
-
-                            </tr>
-
-                            <?php
-
-                        $sumTotalAll += $total;
-
-                        $totalTA += $total;
-                    }
-
-                } else {
-                    $total = $row['prices'] * $row['opens'];
-
-                    $totalamount += $row['opens'];
-
-                    $totalSumSpare += get_spare_unit_price($conn, $row['lists']) * $row['opens'];
-
-                    ?>
-
-                        <tr>
-
-                            <?php if ($_REQUEST['sh4'] == 1) {?><td style="border-bottom:none;" width="25%">
-                                <?php echo get_sparpart_id($conn, $row['lists']); ?></td><?php }?>
-
-                            <?php if ($_REQUEST['sh5'] == 1) {?><td align="left" style="border-bottom:none;" width="50%">
-                                <?php echo get_sparpart_name($conn, $row['lists']); ?></td><?php }?>
-
-                            <?php if ($_REQUEST['sh6'] == 1) {?><td align="center" style="border-bottom:none;" width="25%">
-                                <?php echo number_format($row['opens']); ?></td><?php }?>
-
-                            <td align="right" style="border-bottom:none;" width="25%">
-                                <?php echo number_format(get_spare_unit_price($conn, $row['lists']) * $row['opens'], 2); ?></td>
-
-                        </tr>
-
-                        <?php
-
-                    $sumTotalAll += $total;
-
-                    $totalTA += $total;
-                }
-
-            }
+            array_push($ListSpare, array(get_sparpart_id($conn, $row['lists']), get_sparpart_name($conn, $row['lists']), $row['opens'], get_spare_unit_price($conn, $row['lists']) * $row['opens']));
         }
+    }
 
-        $totals += $totalamount
+    $svInfo = array("svInfo" => $row_bill);
+    $foInfo = array("foInfo" => $foppj_info);
+    $proinfo = array("proInfo" => $ListPro);
+    $spareinfo = array("spareInfo" => $ListSpare);
 
-        ?>
+    array_push($svList, array_merge($svInfo, $foInfo, $proinfo, $spareinfo));
 
-                </table>
-
-            </td><?php }?>
-
-            <!-- <td style="padding:0;">
-                <?php echo $totalamount; ?></td> -->
-
-            <td style="padding:0;">
-                <?php echo number_format($totalTA + $moneyTC, 2); ?></td>
-
-            <?php /*if($_REQUEST['sh7'] == 1){?><td style="padding:0;">
-    <?php  echo number_format($totalTA+$moneyTC,2);?></td><?php  }*/?>
-
-            <?php if ($_REQUEST['sh8'] == 1) {?><td style="padding:0;">
-                <?php echo getsalename($conn, $row_bill['loc_contact2']); ?></td><?php }?>
-
-        </tr>
-
-        <?php
-
-    $sum += 1;
-
-    $moneyTCTota += $moneyTC;
 }
 
+// $keysSour = array_column($svList, 'cd_name');
+// array_multisort($keysSour, SORT_ASC, $newSour);
+
+echo "<pre>";
+print_r($svList);
+echo "</pre>";
+
+foreach ($svList as $key => $value) {
+    //echo $value['svInfo']['sv_id'];
+    //array_search("red", $value);
+    ?>
+    <tr>
+    <td><?php echo $value['svInfo']['sv_id']; ?></td>
+    <td><?php echo format_date_th($value['svInfo']['job_open'], 7); ?></td>
+    <td><?php echo $value['svInfo']['sv_id']; ?></td>
+    <td><?php echo $value['foInfo']['cd_name'] . ' / ' . $value['foInfo']['cd_tel']; ?></td>
+    <td><?php echo $value['proInfo'][0]['stock_pro']; ?></td>
+    <td><?php echo $value['proInfo'][0]['code_pro']; ?></td>
+    <td><?php echo $value['proInfo'][0]['amount_pro']; ?></td>
+    <td>
+        <table border="0" width="100%" cellspacing="0" cellpadding="0" class="tbreport">
+        <?php
+foreach ($value['spareInfo'] as $key2 => $value2) {
+        ?>
+         <tr>
+            <td style="border-bottom:none;" width="20%"><?php echo $value2[0]; ?></td>
+            <td style="border-bottom:none;" width="50%"><?php echo $value2[1]; ?></td>
+            <td style="border-bottom:none;" width="15%"><?php echo $value2[2]; ?></td>
+            <td style="border-bottom:none;" width="15%"><?php echo number_format($value2[3], 2); ?></td>
+        </tr>
+        <?php
+}
+    ?>
+        </table>
+    </td>
+    <td></td>
+    <td><?php echo getsalename($conn, $value['svInfo']['sr_id']); ?></td>
+    </tr>
+    <?php
+}
 ?>
 
         <tr>

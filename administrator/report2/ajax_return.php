@@ -30,10 +30,36 @@ if ($_GET['action'] == 'getcuss') {
     }
     $qu_cus = mysqli_query($conn, "SELECT fo_id,cd_name,loc_name,cusid FROM s_fopj " . $consd . " ORDER BY cd_name ASC");
     while ($row_cus = @mysqli_fetch_array($qu_cus)) {
+        $cusName = '';
+
+        if (!empty($row_cus['cusid'])) {
+            $cusName .= $row_cus['cusid'] . " | ";
+        }
+
+        $cusName .= $row_cus['loc_name'] . " | " . $row_cus['cd_name'];
+
         ?>
 <tr>
     <td><A href="javascript:void(0);"
-            onclick="get_customer('<?php echo $row_cus['fo_id']; ?>','<?php echo $row_cus['loc_name']; ?>');"><?php if (!empty($row_cus['cusid'])) {echo $row_cus['cusid'] . " | ";}?><?php echo $row_cus['cd_name'] . " ( " . $row_cus['loc_name'] . " )"; ?></A>
+            onclick="get_customer('<?php echo $row_cus['fo_id']; ?>','<?php echo $cusName; ?>');"><?php echo $cusName; ?></A>
+    </td>
+</tr>
+<?php
+}
+    //echo "SELECT cd_name FROM s_first_order ".$consd." ORDER BY cd_name ASC";
+}
+
+if ($_GET['action'] == 'getTypeSpare') {
+    $cd_name = $_REQUEST['pval'];
+    if ($cd_name != "") {
+        $consd = " WHERE 1 AND `group_type` LIKE '%" . $cd_name . "%' GROUP BY `group_type` ORDER BY `group_type` ASC";
+    }
+    $qu_cus = mysqli_query($conn, "SELECT * FROM `s_group_sparpart`" . $consd);
+    while ($row_cus = @mysqli_fetch_array($qu_cus)) {
+        ?>
+<tr>
+    <td><A href="javascript:void(0);"
+            onclick="get_typespare('<?php echo $row_cus['group_type']; ?>');"><?php echo $row_cus['group_type']; ?></A>
     </td>
 </tr>
 <?php

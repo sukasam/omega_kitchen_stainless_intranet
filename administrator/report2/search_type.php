@@ -11,7 +11,7 @@ $param = get_param($a_param, $a_not_exists);
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>ค้าหาชื่อร้าน-ชื่อบริษัท</title>
+<title>ค้าหาชนิดสินค้า</title>
 <style type="text/css">
 	.tv_search{
 		font-size:12px;
@@ -42,11 +42,9 @@ $param = get_param($a_param, $a_not_exists);
 </style>
 
 <script type="text/javascript">
-	function get_customer(cid,cname){
-		var sCustomerName = self.opener.document.getElementById("cd_name");
-		var sCustomerID = self.opener.document.getElementById("cus_id");
+	function get_typespare(cname){
+		var sCustomerName = self.opener.document.getElementById("type_name");
 		sCustomerName.value = cname;
-		sCustomerID.value = cid;
 		// alert(cid);
 		window.close();
 	}
@@ -58,31 +56,22 @@ $param = get_param($a_param, $a_not_exists);
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search">
   <tr>
     <td colspan="2"><strong>ค้นหา&nbsp;&nbsp;:&nbsp;&nbsp;</strong>
-        <input type="text" name="textfield" id="textfield" style="width:85%;" onkeyup="get_cuss(this.value);"/>
+        <input type="text" name="textfield" id="textfield" style="width:85%;" onkeyup="getTypeSpare(this.value);"/>
     </td>
   </tr>
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search">
 <tr>
-    <th width="50%">รหัสลูกค้า | ชื่อร้าน | ชื่อบริษัท</th>
+    <th width="50%">ค้นหาชนิดสินค้า</th>
   </tr>
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tv_search" id="rscus">
 <?php
-$qu_cus = mysqli_query($conn, "SELECT fo_id,cd_name,loc_name,cusid FROM s_fopj ORDER BY cd_name ASC");
+$qu_cus = get_type_spare($conn);
 while ($row_cus = @mysqli_fetch_array($qu_cus)) {
-
-    $cusName = '';
-
-    if (!empty($row_cus['cusid'])) {
-        $cusName .= $row_cus['cusid'] . " | ";
-    }
-
-    $cusName .= $row_cus['loc_name'] . " | " . $row_cus['cd_name'];
-
     ?>
 		 <tr>
-            <td><A href="javascript:void(0);" onclick="get_customer('<?php echo $row_cus['fo_id']; ?>','<?php echo $cusName; ?>');"><?php echo $cusName; ?></A></td>
+            <td><A href="javascript:void(0);" onclick="get_typespare('<?php echo $row_cus['group_type']; ?>');"><?php echo $row_cus['group_type']; ?></A></td>
           </tr>
 		<?php
 }

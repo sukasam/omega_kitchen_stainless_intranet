@@ -115,9 +115,7 @@ if ($source_by == 2) {
 
             <th colspan="6" style="text-align:left;font-size:12px;">บริษัท โอเมก้า คิทเช่น สแตนเลส จำกัด<br />
 
-                <?php $fopjInfo = get_firstorder2($conn, $cus_id, "fopj");?>
-
-                รายงานใบเบิกวัตถุดิบเพื่อผลิต <?php if (!empty($gspar)) {echo ": รหัสสินค้า : " . get_sparpart_id($conn, $gspar) . " : ซื่อ : " . get_sparpart_name($conn, $gspar);} else if (!empty($cus_id)) {echo "ชื่อลูกค้า : " . $fopjInfo['cd_name'];}?></th>
+                รายงานใบเบิกวัตถุดิบเพื่อผลิต</th>
 
             <th colspan="7" style="text-align:right;font-size:11px;"><?php echo $dateshow; ?></th>
 
@@ -158,15 +156,12 @@ if ($source_by == 2) {
                         <?php if ($_REQUEST['sh6'] == 1) {?><td style="border-bottom:none;" width="25%">
                             <strong>จำนวนเบิก</strong></td><?php }?>
 
-                            <td style="border-bottom:none;white-space: nowrap;" width="25%">
-                            <strong>รวมยอดเงิน</strong></td>
-
                     </tr>
 
                 </table>
             </th><?php }?>
 
-
+            <th width="6%"><strong>รวมจำนวนที่เบิก</strong></th>
 
             <th width="6%"><strong>รวมมูลค่าอะไหล่</strong></th>
 
@@ -231,7 +226,7 @@ $getProList = get_fopj_pro($conn, $row_bill['cus_id']);
             // echo $ReChkOp;
             if ($ReChkOp == '1') {
                 ?>
-                <td><center><?php echo get_stock_project_code($conn, $rowPro['cpro']) . " | " . get_stock_project_name($conn, $rowPro['cpro']); ?></center></td>
+                <td><center><?php echo get_stock_project_code($conn, $rowPro['cpro']); ?></center></td>
                 <td style="white-space: nowrap;"><center><?php echo $proOpCodeList[$rowCalLev2]; ?></center></td>
                 <td><center><?php echo $rowPro['camount']; ?></center></td>
                 <?php
@@ -284,80 +279,34 @@ $getProList = get_fopj_pro($conn, $row_bill['cus_id']);
 
         $totalTA = 0;
 
-        $totalSumSpare = 0;
-
         while ($row = @mysqli_fetch_array($qu_pfirst)) {
 
             if ($row['lists'] != "") {
 
-                //echo $gspar . "|" . $row['lists'];
+                $total = $row['prices'] * $row['opens'];
 
-                if (!empty($gspar)) {
+                $totalamount += $row['opens'];
 
-                    if ($gspar == $row['lists']) {
-                        $total = $row['prices'] * $row['opens'];
+                ?>
 
-                        $totalamount += $row['opens'];
+                    <tr>
 
-                        $totalSumSpare += get_spare_unit_price($conn, $row['lists']) * $row['opens'];
+                        <?php if ($_REQUEST['sh4'] == 1) {?><td style="border-bottom:none;" width="25%">
+                            <?php echo get_sparpart_id($conn, $row['lists']); ?></td><?php }?>
 
-                        ?>
+                        <?php if ($_REQUEST['sh5'] == 1) {?><td align="left" style="border-bottom:none;" width="50%">
+                            <?php echo get_sparpart_name($conn, $row['lists']); ?></td><?php }?>
 
-                            <tr>
+                        <?php if ($_REQUEST['sh6'] == 1) {?><td align="center" style="border-bottom:none;" width="25%">
+                            <?php echo number_format($row['opens']); ?></td><?php }?>
 
-                                <?php if ($_REQUEST['sh4'] == 1) {?><td style="border-bottom:none;" width="25%">
-                                    <?php echo get_sparpart_id($conn, $row['lists']); ?></td><?php }?>
+                    </tr>
 
-                                <?php if ($_REQUEST['sh5'] == 1) {?><td align="left" style="border-bottom:none;" width="50%">
-                                    <?php echo get_sparpart_name($conn, $row['lists']); ?></td><?php }?>
+                    <?php
 
-                                <?php if ($_REQUEST['sh6'] == 1) {?><td align="center" style="border-bottom:none;" width="25%">
-                                    <?php echo number_format($row['opens']); ?></td><?php }?>
+                $sumTotalAll += $total;
 
-                                <td align="right" style="border-bottom:none;" width="25%">
-                                    <?php echo number_format(get_spare_unit_price($conn, $row['lists']) * $row['opens'], 2); ?></td>
-
-                            </tr>
-
-                            <?php
-
-                        $sumTotalAll += $total;
-
-                        $totalTA += $total;
-                    }
-
-                } else {
-                    $total = $row['prices'] * $row['opens'];
-
-                    $totalamount += $row['opens'];
-
-                    $totalSumSpare += get_spare_unit_price($conn, $row['lists']) * $row['opens'];
-
-                    ?>
-
-                        <tr>
-
-                            <?php if ($_REQUEST['sh4'] == 1) {?><td style="border-bottom:none;" width="25%">
-                                <?php echo get_sparpart_id($conn, $row['lists']); ?></td><?php }?>
-
-                            <?php if ($_REQUEST['sh5'] == 1) {?><td align="left" style="border-bottom:none;" width="50%">
-                                <?php echo get_sparpart_name($conn, $row['lists']); ?></td><?php }?>
-
-                            <?php if ($_REQUEST['sh6'] == 1) {?><td align="center" style="border-bottom:none;" width="25%">
-                                <?php echo number_format($row['opens']); ?></td><?php }?>
-
-                            <td align="right" style="border-bottom:none;" width="25%">
-                                <?php echo number_format(get_spare_unit_price($conn, $row['lists']) * $row['opens'], 2); ?></td>
-
-                        </tr>
-
-                        <?php
-
-                    $sumTotalAll += $total;
-
-                    $totalTA += $total;
-                }
-
+                $totalTA += $total;
             }
         }
 
@@ -369,8 +318,8 @@ $getProList = get_fopj_pro($conn, $row_bill['cus_id']);
 
             </td><?php }?>
 
-            <!-- <td style="padding:0;">
-                <?php echo $totalamount; ?></td> -->
+            <td style="padding:0;">
+                <?php echo $totalamount; ?></td>
 
             <td style="padding:0;">
                 <?php echo number_format($totalTA + $moneyTC, 2); ?></td>
@@ -395,12 +344,10 @@ $getProList = get_fopj_pro($conn, $row_bill['cus_id']);
         <tr>
 
             <td colspan="13" style="text-align:right;">
-                <strong>จำนวนใบเบิกทั้งหมด&nbsp;&nbsp;<?php echo $sum; ?>&nbsp;&nbsp;ใบ&nbsp;&nbsp;</strong>
+                <strong>จำนวนใบเบิกวัถุดิบเพื่อผลิตทั้งหมด&nbsp;&nbsp;<?php echo $sum; ?>&nbsp;&nbsp;รายการ&nbsp;&nbsp;</strong>
             </td>
 
         </tr>
-
-
 
         <!--
       <tr>
@@ -410,11 +357,11 @@ $getProList = get_fopj_pro($conn, $row_bill['cus_id']);
 	  </tr>
 -->
 
-     <tr>
+        <!-- <tr>
 
-			  <td colspan="13" style="text-align:right;"> <strong>รวมยอดมูลค่าอะไหล่ทั้งสิ้น&nbsp;&nbsp;<?php echo number_format($sumTotalAll + $moneyTCTota, 2); ?>&nbsp;&nbsp;บาท&nbsp;&nbsp;</strong></td>
+			  <td colspan="8" style="text-align:right;"> <strong>คิดเป็นมูลค่ารวมทั้งสิ้น&nbsp;&nbsp;<?php echo number_format($sumTotalAll + $moneyTCTota, 2); ?>&nbsp;&nbsp;บาท&nbsp;&nbsp;</strong></td>
 
-	  </tr>
+	  </tr> -->
 
     </table>
 

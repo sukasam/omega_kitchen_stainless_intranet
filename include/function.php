@@ -1987,7 +1987,7 @@ function get_firstorder2($conn, $fo_id, $chk)
         $tableDB = 's_first_order';
     }
 
-    $row_first_order = @mysqli_fetch_array(@mysqli_query($conn, "SELECT * FROM  " . $tableDB . " WHERE fo_id = '" . $fo_id . "'"));
+    $row_first_order = @mysqli_fetch_array(@mysqli_query($conn, "SELECT * FROM  " . $tableDB . " WHERE fo_id = '" . $fo_id . "'"), MYSQLI_ASSOC);
     return $row_first_order;
 }
 
@@ -2647,6 +2647,12 @@ function get_stock_project_unit_price($conn, $value)
     return $row_protype['group_unit_price'];
 }
 
+function get_spare_unit_price($conn, $value)
+{
+    $row_protype = @mysqli_fetch_array(@mysqli_query($conn, "SELECT * FROM  s_group_sparpart WHERE group_id = '" . $value . "'"));
+    return $row_protype['group_unit_price'];
+}
+
 function get_stock_order_name($conn, $value)
 {
     $row_protype = @mysqli_fetch_array(@mysqli_query($conn, "SELECT * FROM  s_group_stock_order WHERE group_id = '" . $value . "'"));
@@ -2899,4 +2905,10 @@ function chkPOItemSelect($conn, $cusid, $poid)
         }
     }
     return $stack;
+}
+
+function get_type_spare($conn)
+{
+    $row_fix = @mysqli_query($conn, "SELECT `group_type` FROM `s_group_sparpart` WHERE 1 GROUP BY `group_type` ORDER BY `group_type` ASC");
+    return $row_fix;
 }
