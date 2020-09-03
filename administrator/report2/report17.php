@@ -312,7 +312,7 @@ $getProList = get_fopj_pro($conn, $row_bill['cus_id']);
                                     <?php echo get_sparpart_name($conn, $row['lists']); ?></td><?php }?>
 
                                 <?php if ($_REQUEST['sh6'] == 1) {?><td align="center" style="border-bottom:none;" width="25%">
-                                    <?php echo number_format($row['opens']); ?></td><?php }?>
+                                    <?php echo number_format($row['opens'], 2); ?></td><?php }?>
 
                                 <td align="right" style="border-bottom:none;" width="25%">
                                     <?php echo number_format(get_spare_unit_price($conn, $row['lists']) * $row['opens'], 2); ?></td>
@@ -344,7 +344,7 @@ $getProList = get_fopj_pro($conn, $row_bill['cus_id']);
                                 <?php echo get_sparpart_name($conn, $row['lists']); ?></td><?php }?>
 
                             <?php if ($_REQUEST['sh6'] == 1) {?><td align="center" style="border-bottom:none;" width="25%">
-                                <?php echo number_format($row['opens']); ?></td><?php }?>
+                                <?php echo number_format($row['opens'], 2); ?></td><?php }?>
 
                             <td align="right" style="border-bottom:none;" width="25%">
                                 <?php echo number_format(get_spare_unit_price($conn, $row['lists']) * $row['opens'], 2); ?></td>

@@ -1,21 +1,21 @@
 <?php
-include("../../include/config.php");
-include("../../include/connect.php");
-include("../../include/function.php");
-include("config.php");
+include "../../include/config.php";
+include "../../include/connect.php";
+include "../../include/function.php";
+include "config.php";
 Check_Permission($conn, $check_module, $_SESSION["login_id"], "read");
 if ($_GET["page"] == "") {
-  $_REQUEST["page"] = 1;
+    $_REQUEST["page"] = 1;
 }
 $param = get_param($a_param, $a_not_exists);
 
 if ($_GET["action"] == "delete") {
-  $code = Check_Permission($conn, $check_module, $_SESSION["login_id"], "delete");
-  if ($code == "1") {
-    $sql = "delete from $tbl_name  where $PK_field = '" . $_GET[$PK_field] . "'";
-    @mysqli_query($conn, $sql);
-    header("location:index.php");
-  }
+    $code = Check_Permission($conn, $check_module, $_SESSION["login_id"], "delete");
+    if ($code == "1") {
+        $sql = "delete from $tbl_name  where $PK_field = '" . $_GET[$PK_field] . "'";
+        @mysqli_query($conn, $sql);
+        header("location:index.php");
+    }
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -48,15 +48,15 @@ if ($_GET["action"] == "delete") {
     }
     </script>
 </HEAD>
-<?php include("../../include/function_script.php"); ?>
+<?php include "../../include/function_script.php";?>
 
 <BODY>
     <DIV id=body-wrapper>
-        <?php include("../left.php"); ?>
+        <?php include "../left.php";?>
         <DIV id=main-content>
             <NOSCRIPT>
             </NOSCRIPT>
-            <?php include('../top.php'); ?>
+            <?php include '../top.php';?>
             <P id=page-intro><?php echo $page_name; ?></P>
 
             <UL class=shortcut-buttons-set>
@@ -76,14 +76,17 @@ if ($_GET["action"] == "delete") {
                                 src="../images/menu/mn_serting23.png"><BR>
                             รายงานสต็อค</SPAN></A></LI>
                 <?php
-        if ($FR_module <> "") {
-          $param2 = get_return_param();
-        ?>
+if ($FR_module != "") {
+    $param2 = get_return_param();
+    ?>
                 <LI><A class=shortcut-button
-                        href="../<?php echo $FR_module; ?>/?<?php if ($param2 <> "") echo $param2; ?>"><SPAN><IMG
+                        href="../<?php echo $FR_module; ?>/?<?php if ($param2 != "") {
+        echo $param2;
+    }
+    ?>"><SPAN><IMG
                                 alt=icon src="../images/btn_back.gif"><BR>
                             กลับ</SPAN></A></LI>
-                <?php     } ?>
+                <?php }?>
             </UL>
 
             <!-- End .shortcut-buttons-set -->
@@ -98,14 +101,14 @@ if ($_GET["action"] == "delete") {
                         <input name="keyword" type="text" id="keyword" value="<?php echo $keyword; ?>">
                         <input name="Action" type="submit" id="Action" value="ค้นหา">
                         <?php
-            $a_not_exists = array('keyword');
-            $param2 = get_param($a_param, $a_not_exists);
-            ?>
+$a_not_exists = array('keyword');
+$param2 = get_param($a_param, $a_not_exists);
+?>
                         <a href="index.php?<?php echo $param2; ?>">แสดงทั้งหมด</a>
                         <?php
-            /*$a_not_exists = array();
-			post_param($a_param,$a_not_exists);*/
-            ?>
+/*$a_not_exists = array();
+post_param($a_param,$a_not_exists);*/
+?>
                     </form>
                     <DIV class=clear>
 
@@ -135,33 +138,53 @@ if ($_GET["action"] == "delete") {
                                 </TFOOT>
                                 <TBODY>
                                     <?php
-                  if ($orderby == "") $orderby = $tbl_name . ".group_spar_id";
-                  if ($sortby == "") $sortby = "ASC";
+if ($orderby == "") {
+    $orderby = $tbl_name . ".group_spar_id";
+}
 
-                  $sql = " select *,$tbl_name.create_date as c_date from $tbl_name  where 1 ";
-                  if ($_GET[$PK_field] <> "") $sql .= " and ($PK_field  = '" . $_GET[$PK_field] . " ' ) ";
-                  if ($_GET[$FR_field] <> "") $sql .= " and ($FR_field  = '" . $_GET[$FR_field] . " ' ) ";
-                  if ($_GET["keyword"] <> "") {
-                    $sql .= "and ( " .  $PK_field  . " like '%" . $_GET["keyword"] . "%' ";
-                    if (count($search_key) > 0) {
-                      $search_text = " and ( ";
-                      foreach ($search_key as $key => $value) {
-                        $subtext .= "or " . $value  . " like '%" . $_GET["keyword"] . "%'";
-                      }
-                    }
-                    $sql .=  $subtext . " ) ";
-                  }
-                  if ($orderby <> "") $sql .= " order by " . $orderby;
-                  if ($sortby <> "") $sql .= " " . $sortby;
-                  include("../include/page_init.php");
-                  //echo $sql;
-                  $query = @mysqli_query($conn, $sql);
-                  if ($_GET["page"] == "") $_GET["page"] = 1;
-                  $counter = ($_GET["page"] - 1) * $pagesize;
+if ($sortby == "") {
+    $sortby = "ASC";
+}
 
-                  while ($rec = @mysqli_fetch_array($query)) {
-                    $counter++;
-                  ?>
+$sql = " select *,$tbl_name.create_date as c_date from $tbl_name  where 1 ";
+if ($_GET[$PK_field] != "") {
+    $sql .= " and ($PK_field  = '" . $_GET[$PK_field] . " ' ) ";
+}
+
+if ($_GET[$FR_field] != "") {
+    $sql .= " and ($FR_field  = '" . $_GET[$FR_field] . " ' ) ";
+}
+
+if ($_GET["keyword"] != "") {
+    $sql .= "and ( " . $PK_field . " like '%" . $_GET["keyword"] . "%' ";
+    if (count($search_key) > 0) {
+        $search_text = " and ( ";
+        foreach ($search_key as $key => $value) {
+            $subtext .= "or " . $value . " like '%" . $_GET["keyword"] . "%'";
+        }
+    }
+    $sql .= $subtext . " ) ";
+}
+if ($orderby != "") {
+    $sql .= " order by " . $orderby;
+}
+
+if ($sortby != "") {
+    $sql .= " " . $sortby;
+}
+
+include "../include/page_init.php";
+//echo $sql;
+$query = @mysqli_query($conn, $sql);
+if ($_GET["page"] == "") {
+    $_GET["page"] = 1;
+}
+
+$counter = ($_GET["page"] - 1) * $pagesize;
+
+while ($rec = @mysqli_fetch_array($query)) {
+    $counter++;
+    ?>
                                     <TR>
                                         <!--          <TD><INPUT type=checkbox name="del[]" value="<?php echo $rec[$PK_field]; ?>" ></TD>-->
                                         <TD><span class="text"><?php echo sprintf("%04d", $counter); ?></span></TD>
@@ -170,7 +193,7 @@ if ($_GET["action"] == "delete") {
                                         <TD><span class="text"><?php echo $rec["group_name"]; ?></span></TD>
                                         <TD><span class="text"><?php echo $rec["group_location"]; ?></span></TD>
                                         <TD style="text-align: center;"><span
-                                                class="text"><?php echo number_format($rec["group_stock"]); ?></span>
+                                                class="text"><?php echo number_format($rec["group_stock"], 2); ?></span>
                                         </TD>
                                         <TD style="text-align: center;"><span
                                                 class="text"><?php echo $rec["group_type"]; ?></span></TD>
@@ -187,7 +210,7 @@ if ($_GET["action"] == "delete") {
                                         </TD>
 
                                     </TR>
-                                    <?php     } ?>
+                                    <?php }?>
                                 </TBODY>
                             </TABLE>
                             <br><br>
@@ -201,15 +224,15 @@ if ($_GET["action"] == "delete") {
             <SELECT name="choose_action" id="choose_action">
               <OPTION selected value="">กรุณาเลือก...</OPTION>
               <OPTION value="del">ลบ</OPTION>
-            </SELECT>            
+            </SELECT>
 
             <?php
-            $a_not_exists = array();
-            post_param($a_param, $a_not_exists);
-            ?>
+$a_not_exists = array();
+post_param($a_param, $a_not_exists);
+?>
             <input class=button name="Action2" type="submit" id="Action2" value="ตกลง">-->
                             </DIV>
-                            <DIV class=pagination> <?php include("../include/page_show.php"); ?> </DIV>
+                            <DIV class=pagination> <?php include "../include/page_show.php";?> </DIV>
                         </form>
                     </DIV><!-- End #tab1 -->
 
@@ -221,7 +244,7 @@ if ($_GET["action"] == "delete") {
             <DIV class=clear></DIV><!-- Start Notifications -->
             <!-- End Notifications -->
 
-            <?php include("../footer.php"); ?>
+            <?php include "../footer.php";?>
         </DIV><!-- End #main-content -->
     </DIV>
 </BODY>

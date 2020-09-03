@@ -226,14 +226,14 @@ foreach ($codes as $a => $b) {
         $prices[$a] = number_format($prices[$a], 2);
     }
     if ($amounts[$a] != 0) {
-        $amounts[$a] = number_format($amounts[$a]);
+        $amounts[$a] = number_format($amounts[$a], 2);
     }
     if ($opens[$a] != 0) {
         $bopens = $opens[$a];
-        $opens[$a] = number_format($opens[$a]);
+        $opens[$a] = number_format($opens[$a], 2);
     }
     if ($remains[$a] != 0) {
-        $remains[$a] = number_format($remains[$a]);
+        $remains[$a] = number_format($remains[$a], 2);
     }
     if ($codes[$a] != "" || $lists[$a] != "") {
         $sumlist = $sumlist + 1;

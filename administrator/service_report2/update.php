@@ -257,6 +257,15 @@ if ($_GET["mode"] == "update") {
 
         return true;
     }
+    function isNumberDecimalKey(evt)
+       {
+          var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+             return false;
+
+          return true;
+       }
     </SCRIPT>
 
     <script type="text/javascript">
@@ -921,7 +930,7 @@ echo getStockSpar($conn, $blists[$i - 1]);
                                         style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;">
                                         <input type="text" name="opens[]" id="opens<?php echo $i; ?>"
                                             value="<?php if ($bopens[$i - 1] != 0) {echo $bopens[$i - 1];}?>"
-                                            style="width:100%;text-align:right;" onkeypress="return isNumberKey(event)">
+                                            style="width:100%;text-align:right;" onkeypress="return isNumberDecimalKey(event)">
                                     </td>
                                     <!--<td style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding-top:10px;padding-bottom:10px;"><input type="text" name="remains[]" id="remains<?php echo $i; ?>" value="<?php if ($bremains[$i - 1] != 0) {echo $bremains[$i - 1];}?>" style="width:100%;text-align:right;"></td>
         </tr>-->
