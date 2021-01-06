@@ -158,7 +158,11 @@ $form .= $poFoID . '<br />
     </table>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tb2">
       <tr>
-        <td width="53%"><strong>สถานที่ติดตั้ง / ส่งสินค้า : </strong>' . $finfos['loc_name'] . '<br /><br /><br /><br />
+		<td width="53%"><strong>สถานที่ติดตั้ง / ส่งสินค้า : </strong>' . $finfos['loc_name'] . '<br /><br />
+		<div><strong>ค่าใช้จ่ายอื่นๆ : รวมยอดทั้งสิ้น :</strong> ' . number_format($_POST['costSum']) . ' <strong>บาท</strong></div><br />
+		<div><strong>ค่าแรงช่าง ตับ/พับ/ประกอบ/ขัด :</strong> ' . number_format($_POST['costCut']) . ' บาท&nbsp;&nbsp;<strong>ค่าวัตถุดิบสูญเสีย :</strong> ' . number_format($_POST['costLost']) . ' บาท</div><br />
+		<div><strong>ค่าน้ำ/ค่าไฟ :</strong> ' . number_format($_POST['costElec']) . ' บาท&nbsp;&nbsp;<strong>ค่าล่วงเวลา :</strong> ' . number_format($_POST['costOT']) . ' บาท&nbsp;&nbsp;<strong>ค่าเลเซอร์ :</strong> ' . number_format($_POST['costLaser']) . ' บาท</div><br />
+		<div><strong>รวม Factory Cost :</strong> ' . number_format($costFactory) . ' บาท<br><br><strong>Gross Profit (GP) :</strong> ' . $_POST['costGP'] . '% = ' . number_format($costGPSum) . ' <strong>บาท</strong>&nbsp;&nbsp;&nbsp;&nbsp;<strong>ค่า Overhead :</strong> ' . $_POST['costOv'] . '% = ' . number_format($costOvSum) . ' <strong>บาท</strong></div>
            </td>
         <td width="47%" valign="top"><strong>รายละเอียดการเปลี่ยนอะไหล่</strong><br><br>' . $_POST['detail_recom'] . '</td>
       </tr>

@@ -95,7 +95,22 @@ if ($_POST["mode"] != "") {
         $_POST['detail_recom'] = nl2br($_POST['detail_recom']);
         $_POST['detail_calpr'] = nl2br($_POST['detail_calpr']);
 
+        $_POST['costSum'] = preg_replace("/,/", "", $_POST['costSum']);
+        $_POST['costCut'] = preg_replace("/,/", "", $_POST['costCut']);
+        $_POST['costOT'] = preg_replace("/,/", "", $_POST['costOT']);
+        $_POST['costLaser'] = preg_replace("/,/", "", $_POST['costLaser']);
+        $_POST['costGP'] = preg_replace("/,/", "", $_POST['costGP']);
+        $_POST['costElec'] = preg_replace("/,/", "", $_POST['costElec']);
+        $_POST['costLost'] = preg_replace("/,/", "", $_POST['costLost']);
+        $_POST['costOv'] = preg_replace("/,/", "", $_POST['costOv']);
+
+        $costFactory = $_POST['costCut'] + $_POST['costOT'] + $_POST['costLaser'] + $_POST['costElec'] + $_POST['costLost'];
+        $costGPSum = ($costFactory * ($_POST['costGP'] / 100)) + $costFactory;
+        $costOvSum = ($costFactory * ($_POST['costOv'] / 100)) + $costFactory;
+
         $_POST['job_last'] = get_lastservice_f($conn, $_POST['cus_id'], $_POST['sv_id']);
+
+        $chaf = preg_replace("/\//", "-", $_POST['sv_id']);
 
         $codes = $_POST['codes'];
         $lists = $_POST['lists'];
@@ -144,6 +159,9 @@ if ($_POST["mode"] != "") {
 }
 if ($_GET["mode"] == "add") {
     Check_Permission($conn, $check_module, $_SESSION["login_id"], "add");
+    $costFactory = "0.00";
+    $costGPSum = "0.00";
+    $costOvSum = "0.00";
 }
 if ($_GET["mode"] == "update") {
 
@@ -184,6 +202,10 @@ if ($_GET["mode"] == "update") {
     $finfo = get_firstorder2($conn, $cus_id, $cus_source);
 
     $ckf_list = explode(',', $ckf_list);
+
+    $costFactory = $costCut + $costOT + $costLaser + $costElec + $costLost;
+    $costGPSum = ($costFactory * ($costGP / 100)) + $costFactory;
+    $costOvSum = ($costFactory * ($costOv / 100)) + $costFactory;
 
 }
 
@@ -645,7 +667,40 @@ while ($row_cusftype2 = @mysqli_fetch_array($qu_cusftype2)) {
                                                     <tr>
                                                         <td width="50%"><strong>สถานที่ติดตั้ง / ส่งสินค้า :
                                                             </strong><span
-                                                                id="sloc_name"><?php echo $finfo['loc_name']; ?></span><br />
+                                                                id="sloc_name"><?php echo $finfo['loc_name']; ?></span><br /><br />
+
+                                                                <p>ค่าใช้จ่ายอื่นๆ : รวมยอดทั้งสิ้น : <input type="text"
+                                                                name="costSum" value="<?php echo $costSum; ?>"
+                                                                id="costSum" class="inpfoder" style="text-align: center;width:  80px;" onkeypress="return isNumberDecimalKey(event)"> บาท</p>
+                                                                <p>ค่าแรงช่าง ตับ/พับ/ประกอบ/ขัด : <input type="text"
+                                                                name="costCut" value="<?php echo $costCut; ?>"
+                                                                id="costCut" class="inpfoder" style="text-align: center;width: 60px;" onkeypress="return isNumberDecimalKey(event)">&nbsp;&nbsp;&nbsp;
+                                                                รวม Factory Cost : <input type="text"
+                                                                name="costFactory" value="<?php echo number_format($costFactory, 2); ?>"
+                                                                id="costFactory" class="inpfoder" style="text-align: left;width: 100px;border: 0;" readonly> บาท</p>
+                                                                <p>ค่าล่วงเวลา : <input type="text"
+                                                                name="costOT" value="<?php echo $costOT; ?>"
+                                                                id="costOT" class="inpfoder" style="text-align: center;width: 60px;" onkeypress="return isNumberDecimalKey(event)">
+                                                                 ค่าเลเซอร์ : <input type="text"
+                                                                name="costLaser" value="<?php echo $costLaser; ?>"
+                                                                id="costLaser" class="inpfoder" style="text-align: center;width: 60px;" onkeypress="return isNumberDecimalKey(event)">
+                                                                &nbsp;&nbsp;&nbsp;Gross Profit (GP) : <input type="text"
+                                                                name="costGP" value="<?php echo $costGP; ?>"
+                                                                id="costGP" class="inpfoder" style="text-align: center;width: 30px;" onkeypress="return isNumberKey(event)"> % = <input type="text"
+                                                                name="costGPSum" value="<?php echo $costGPSum; ?>"
+                                                                id="costGPSum" class="inpfoder" style="text-align: left;width: 80px;border: 0;" readonly></p>
+                                                                <p>ค่าน้ำ/ค่าไฟ : <input type="text"
+                                                                name="costElec" value="<?php echo $costElec; ?>"
+                                                                id="costElec" class="inpfoder" style="text-align: center;width: 60px;" onkeypress="return isNumberDecimalKey(event)">
+                                                                ค่าวัตถุดิบสูญเสีย : <input type="text"
+                                                                name="costLost" value="<?php echo $costLost; ?>"
+                                                                id="costLost" class="inpfoder" style="text-align: center;width: 60px;" onkeypress="return isNumberDecimalKey(event)">
+                                                                &nbsp;&nbsp;&nbsp;ค่า Overhead : <input type="text"
+                                                                name="costOv" value="<?php echo $costOv; ?>"
+                                                                id="costOv" class="inpfoder" style="text-align: center;width: 30px;" onkeypress="return isNumberKey(event)"> % = <input type="text"
+                                                                name="costOvSum" value="<?php echo $costOvSum; ?>"
+                                                                id="costOvSum" class="inpfoder" style="text-align: left;width: 80px;border: 0;" readonly></p>
+
                                                             <div style="display: none;">
                                                                 <br>
                                                                 <strong>เลือกสินค้า :</strong>
