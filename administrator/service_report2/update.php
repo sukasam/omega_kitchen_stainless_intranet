@@ -105,8 +105,9 @@ if ($_POST["mode"] != "") {
         $_POST['costOv'] = preg_replace("/,/", "", $_POST['costOv']);
 
         $costFactory = $_POST['costCut'] + $_POST['costOT'] + $_POST['costLaser'] + $_POST['costElec'] + $_POST['costLost'];
-        $costGPSum = ($costFactory * ($_POST['costGP'] / 100)) + $costFactory;
-        $costOvSum = ($costFactory * ($_POST['costOv'] / 100)) + $costFactory;
+        $costGPSum = ($costFactory * ($_POST['costGP'] / 100));
+        $costOvSum = ($costFactory * ($_POST['costOv'] / 100));
+        $costSum = $costFactory + $costGPSum + $costOvSum;
 
         $_POST['job_last'] = get_lastservice_f($conn, $_POST['cus_id'], $_POST['sv_id']);
 
@@ -162,6 +163,7 @@ if ($_GET["mode"] == "add") {
     $costFactory = "0.00";
     $costGPSum = "0.00";
     $costOvSum = "0.00";
+    $costSum = "0.00";
 }
 if ($_GET["mode"] == "update") {
 
@@ -204,9 +206,9 @@ if ($_GET["mode"] == "update") {
     $ckf_list = explode(',', $ckf_list);
 
     $costFactory = $costCut + $costOT + $costLaser + $costElec + $costLost;
-    $costGPSum = ($costFactory * ($costGP / 100)) + $costFactory;
-    $costOvSum = ($costFactory * ($costOv / 100)) + $costFactory;
-
+    $costGPSum = ($costFactory * ($costGP / 100));
+    $costOvSum = ($costFactory * ($costOv / 100));
+    $costSum = $costFactory + $costGPSum + $costOvSum;
 }
 
 ?>
@@ -670,14 +672,14 @@ while ($row_cusftype2 = @mysqli_fetch_array($qu_cusftype2)) {
                                                                 id="sloc_name"><?php echo $finfo['loc_name']; ?></span><br /><br />
 
                                                                 <p>ค่าใช้จ่ายอื่นๆ : รวมยอดทั้งสิ้น : <input type="text"
-                                                                name="costSum" value="<?php echo $costSum; ?>"
-                                                                id="costSum" class="inpfoder" style="text-align: center;width:  80px;" onkeypress="return isNumberDecimalKey(event)"> บาท</p>
+                                                                name="costSum" value="<?php echo number_format($costSum, 2); ?>"
+                                                                id="costSum" class="inpfoder" style="text-align: center;width:  80px;border: 0;" readonly> บาท</p>
                                                                 <p>ค่าแรงช่าง ตับ/พับ/ประกอบ/ขัด : <input type="text"
                                                                 name="costCut" value="<?php echo $costCut; ?>"
                                                                 id="costCut" class="inpfoder" style="text-align: center;width: 60px;" onkeypress="return isNumberDecimalKey(event)">&nbsp;&nbsp;&nbsp;
                                                                 รวม Factory Cost : <input type="text"
                                                                 name="costFactory" value="<?php echo number_format($costFactory, 2); ?>"
-                                                                id="costFactory" class="inpfoder" style="text-align: left;width: 100px;border: 0;" readonly> บาท</p>
+                                                                id="costFactory" class="inpfoder" style="text-align: center;width: 100px;border: 0;" readonly> บาท</p>
                                                                 <p>ค่าล่วงเวลา : <input type="text"
                                                                 name="costOT" value="<?php echo $costOT; ?>"
                                                                 id="costOT" class="inpfoder" style="text-align: center;width: 60px;" onkeypress="return isNumberDecimalKey(event)">
@@ -687,7 +689,7 @@ while ($row_cusftype2 = @mysqli_fetch_array($qu_cusftype2)) {
                                                                 &nbsp;&nbsp;&nbsp;Gross Profit (GP) : <input type="text"
                                                                 name="costGP" value="<?php echo $costGP; ?>"
                                                                 id="costGP" class="inpfoder" style="text-align: center;width: 30px;" onkeypress="return isNumberKey(event)"> % = <input type="text"
-                                                                name="costGPSum" value="<?php echo $costGPSum; ?>"
+                                                                name="costGPSum" value="<?php echo number_format($costGPSum, 2); ?>"
                                                                 id="costGPSum" class="inpfoder" style="text-align: left;width: 80px;border: 0;" readonly></p>
                                                                 <p>ค่าน้ำ/ค่าไฟ : <input type="text"
                                                                 name="costElec" value="<?php echo $costElec; ?>"
@@ -698,7 +700,7 @@ while ($row_cusftype2 = @mysqli_fetch_array($qu_cusftype2)) {
                                                                 &nbsp;&nbsp;&nbsp;ค่า Overhead : <input type="text"
                                                                 name="costOv" value="<?php echo $costOv; ?>"
                                                                 id="costOv" class="inpfoder" style="text-align: center;width: 30px;" onkeypress="return isNumberKey(event)"> % = <input type="text"
-                                                                name="costOvSum" value="<?php echo $costOvSum; ?>"
+                                                                name="costOvSum" value="<?php echo number_format($costOvSum, 2); ?>"
                                                                 id="costOvSum" class="inpfoder" style="text-align: left;width: 80px;border: 0;" readonly></p>
 
                                                             <div style="display: none;">

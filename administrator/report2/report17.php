@@ -195,6 +195,9 @@ $sumTotalAll = 0;
 
 $moneyTCTota = 0;
 
+$sumOtherPay = 0;
+$sumPlusOtherPay = 0;
+
 while ($row_bill = @mysqli_fetch_array($qu_fr)) {
 
     //echo $row_bill['cus_source'];
@@ -361,11 +364,30 @@ $getProList = get_fopj_pro($conn, $row_bill['cus_id']);
             }
         }
 
-        $totals += $totalamount
+        $totals += $totalamount;
+        $costFactory = $row_bill['costCut'] + $row_bill['costOT'] + $row_bill['costLaser'] + $row_bill['costElec'] + $row_bill['costLost'];
+        $costGPSum = ($costFactory * ($row_bill['costGP'] / 100));
+        $costOvSum = ($costFactory * ($row_bill['costOv'] / 100));
+        $costSum = $costFactory + $costGPSum + $costOvSum;
 
+        $sumOtherPay += $costSum;
+        $sumPlusOtherPay += $costSum + ($totalTA + $moneyTC);
         ?>
-
+                <tr>
+                    <td style="border-bottom:none;"></td>
+                    <td style="border-bottom:none;"><p><strong>รวมค่าใช้จ่ายอื่นๆทั้งสิ้น</strong></p></td>
+                    <td style="border-bottom:none;"></td>
+                    <td style="border-bottom:none;"><?php echo number_format($costSum, 2); ?></td>
+                </tr>
+                <tr>
+                    <td style="border-bottom:none;"></td>
+                    <td style="border-bottom:none;"><p><strong>รวมยอดทั้งสิ้น</strong></p></td>
+                    <td style="border-bottom:none;"></td>
+                    <td style="border-bottom:none;"><?php echo number_format($costSum + ($totalTA + $moneyTC), 2); ?></td>
+                </tr>
                 </table>
+
+
 
             </td><?php }?>
 
@@ -413,6 +435,16 @@ $getProList = get_fopj_pro($conn, $row_bill['cus_id']);
      <tr>
 
 			  <td colspan="13" style="text-align:right;"> <strong>รวมยอดมูลค่าอะไหล่ทั้งสิ้น&nbsp;&nbsp;<?php echo number_format($sumTotalAll + $moneyTCTota, 2); ?>&nbsp;&nbsp;บาท&nbsp;&nbsp;</strong></td>
+
+	  </tr>
+      <tr>
+
+			  <td colspan="13" style="text-align:right;"> <strong>รวมยอดค่าใช้จ่ายอื่นๆทั้งสิ้น&nbsp;&nbsp;<?php echo number_format($sumOtherPay, 2); ?>&nbsp;&nbsp;บาท&nbsp;&nbsp;</strong></td>
+
+	  </tr>
+      <tr>
+
+			  <td colspan="13" style="text-align:right;"> <strong>รวมยอดทั้งสิ้น&nbsp;&nbsp;<?php echo number_format($sumPlusOtherPay, 2); ?>&nbsp;&nbsp;บาท&nbsp;&nbsp;</strong></td>
 
 	  </tr>
 

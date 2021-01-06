@@ -54,8 +54,9 @@ if ($_POST["mode"] != "") {
         $_POST['costOv'] = preg_replace("/,/", "", $_POST['costOv']);
 
         $costFactory = $_POST['costCut'] + $_POST['costOT'] + $_POST['costLaser'] + $_POST['costElec'] + $_POST['costLost'];
-        $costGPSum = ($costFactory * ($_POST['costGP'] / 100)) + $costFactory;
-        $costOvSum = ($costFactory * ($_POST['costOv'] / 100)) + $costFactory;
+        $costGPSum = ($costFactory * ($_POST['costGP'] / 100));
+        $costOvSum = ($costFactory * ($_POST['costOv'] / 100));
+        $costSum = $costFactory + $costGPSum + $costOvSum;
 
         $_POST['job_last'] = get_lastservice_f($conn, $_POST['cus_id'], $_POST['sv_id']);
 
@@ -147,8 +148,9 @@ if ($_GET["mode"] == "update") {
     $ckf_list = explode(',', $ckf_list);
 
     $costFactory = $costCut + $costOT + $costLaser + $costElec + $costLost;
-    $costGPSum = ($costFactory * ($costGP / 100)) + $costFactory;
-    $costOvSum = ($costFactory * ($costOv / 100)) + $costFactory;
+    $costGPSum = ($costFactory * ($costGP / 100));
+    $costOvSum = ($costFactory * ($costOv / 100));
+    $costSum = $costFactory + $costGPSum + $costOvSum;
 
 }
 
