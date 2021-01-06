@@ -671,9 +671,7 @@ while ($row_cusftype2 = @mysqli_fetch_array($qu_cusftype2)) {
                                                             </strong><span
                                                                 id="sloc_name"><?php echo $finfo['loc_name']; ?></span><br /><br />
 
-                                                                <p>ค่าใช้จ่ายอื่นๆ : รวมยอดทั้งสิ้น : <input type="text"
-                                                                name="costSum" value="<?php echo number_format($costSum, 2); ?>"
-                                                                id="costSum" class="inpfoder" style="text-align: center;width:  80px;border: 0;" readonly> บาท</p>
+                                                                <p style="font-size: 14px;font-weight: bold;">ค่าใช้จ่ายอื่นๆ : รวมยอดทั้งสิ้น : <?php echo number_format($costSum, 2); ?> บาท</p>
                                                                 <p>ค่าแรงช่าง ตับ/พับ/ประกอบ/ขัด : <input type="text"
                                                                 name="costCut" value="<?php echo $costCut; ?>"
                                                                 id="costCut" class="inpfoder" style="text-align: center;width: 60px;" onkeypress="return isNumberDecimalKey(event)">&nbsp;&nbsp;&nbsp;
