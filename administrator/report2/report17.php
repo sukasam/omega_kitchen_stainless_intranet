@@ -377,13 +377,13 @@ $getProList = get_fopj_pro($conn, $row_bill['cus_id']);
                     <td style="border-bottom:none;"></td>
                     <td style="border-bottom:none;"><p><strong>รวมค่าใช้จ่ายอื่นๆทั้งสิ้น</strong></p></td>
                     <td style="border-bottom:none;"></td>
-                    <td style="border-bottom:none;"><?php echo number_format($costSum, 2); ?></td>
+                    <td style="border-bottom:none;"><strong><?php echo number_format($costSum, 2); ?></strong></td>
                 </tr>
                 <tr>
                     <td style="border-bottom:none;"></td>
                     <td style="border-bottom:none;"><p><strong>รวมยอดทั้งสิ้น</strong></p></td>
                     <td style="border-bottom:none;"></td>
-                    <td style="border-bottom:none;"><?php echo number_format($costSum + ($totalTA + $moneyTC), 2); ?></td>
+                    <td style="border-bottom:none;"><strong><?php echo number_format($costSum + ($totalTA + $moneyTC), 2); ?></strong></td>
                 </tr>
                 </table>
 

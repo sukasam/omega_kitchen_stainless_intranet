@@ -53,6 +53,20 @@ if ($_POST["mode"] != "") {
         $_POST['detail_calpr'] = nl2br($_POST['detail_calpr']);
         $_POST['detail_calpr'] = nl2br($_POST['detail_calpr']);
 
+        $_POST['costSum'] = preg_replace("/,/", "", $_POST['costSum']);
+        $_POST['costCut'] = preg_replace("/,/", "", $_POST['costCut']);
+        $_POST['costOT'] = preg_replace("/,/", "", $_POST['costOT']);
+        $_POST['costLaser'] = preg_replace("/,/", "", $_POST['costLaser']);
+        $_POST['costGP'] = preg_replace("/,/", "", $_POST['costGP']);
+        $_POST['costElec'] = preg_replace("/,/", "", $_POST['costElec']);
+        $_POST['costLost'] = preg_replace("/,/", "", $_POST['costLost']);
+        $_POST['costOv'] = preg_replace("/,/", "", $_POST['costOv']);
+
+        $costFactory = $_POST['costCut'] + $_POST['costOT'] + $_POST['costLaser'] + $_POST['costElec'] + $_POST['costLost'];
+        $costGPSum = ($costFactory * ($_POST['costGP'] / 100));
+        $costOvSum = ($costFactory * ($_POST['costOv'] / 100));
+        $costSum = $costFactory + $costGPSum + $costOvSum;
+
         $codes = $_POST['codes'];
         $lists = $_POST['lists'];
         $units = $_POST['units'];
@@ -927,7 +941,7 @@ if ($_GET['mode'] == "update") {
         $bremains[] = $row_sub['remains'];
     }
 }
-for ($i = 1; $i <= 15; $i++) {
+for ($i = 1; $i <= 14; $i++) {
     ?>
 
                                 <tr>

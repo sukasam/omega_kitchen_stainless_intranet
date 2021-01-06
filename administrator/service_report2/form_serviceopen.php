@@ -159,7 +159,7 @@ $form .= $poFoID . '<br />
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tb2">
       <tr>
 		<td width="53%"><strong>สถานที่ติดตั้ง / ส่งสินค้า : </strong>' . $finfos['loc_name'] . '<br /><br />
-		<div><strong>ค่าใช้จ่ายอื่นๆ : รวมยอดทั้งสิ้น :</strong> ' . number_format($costSum) . ' <strong>บาท</strong></div><br />
+		<div style="font-size: 14px;font-weight: bold;"><strong>ค่าใช้จ่ายอื่นๆ : รวมยอดทั้งสิ้น :</strong> ' . number_format($costSum, 2) . ' <strong>บาท</strong></div><br />
 		<div><strong>ค่าแรงช่าง ตับ/พับ/ประกอบ/ขัด :</strong> ' . number_format($_POST['costCut']) . ' บาท&nbsp;&nbsp;<strong>ค่าวัตถุดิบสูญเสีย :</strong> ' . number_format($_POST['costLost']) . ' บาท</div><br />
 		<div><strong>ค่าน้ำ/ค่าไฟ :</strong> ' . number_format($_POST['costElec']) . ' บาท&nbsp;&nbsp;<strong>ค่าล่วงเวลา :</strong> ' . number_format($_POST['costOT']) . ' บาท&nbsp;&nbsp;<strong>ค่าเลเซอร์ :</strong> ' . number_format($_POST['costLaser']) . ' บาท</div><br />
 		<div><strong>รวม Factory Cost :</strong> ' . number_format($costFactory) . ' บาท<br><br><strong>Gross Profit (GP) :</strong> ' . $_POST['costGP'] . '% = ' . number_format($costGPSum) . ' <strong>บาท</strong>&nbsp;&nbsp;&nbsp;&nbsp;<strong>ค่า Overhead :</strong> ' . $_POST['costOv'] . '% = ' . number_format($costOvSum) . ' <strong>บาท</strong></div>
@@ -268,6 +268,14 @@ $form .= '<tr >
         <tr >
           <td colspan="5"><center><strong>ใช้จ่ายรวม (รวมมูลค่าอะไหล่ที่เบิก)</strong></center></td>
           <td colspan="3" align="right"><strong>' . number_format($total, 2) . '&nbsp;&nbsp;บาท</strong></td>
+		  </tr>
+		  <tr >
+          <td colspan="5"><center><strong>รวมยอดค่าใช้จ่ายอื่นๆ</strong></center></td>
+          <td colspan="3" align="right"><strong>' . number_format($costSum, 2) . '&nbsp;&nbsp;บาท</strong></td>
+		  </tr>
+		  <tr >
+          <td colspan="5"><center><strong>รวมยอดทั้งสิ้น</strong></center></td>
+          <td colspan="3" align="right"><strong>' . number_format($costSum + $total, 2) . '&nbsp;&nbsp;บาท</strong></td>
           </tr>
     </table>
 
