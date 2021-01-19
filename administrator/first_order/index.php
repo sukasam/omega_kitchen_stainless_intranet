@@ -1,73 +1,97 @@
-<?php    
-	include ("../../include/config.php");
-	include ("../../include/connect.php");
-	include ("../../include/function.php");
-	include ("config.php");
-	Check_Permission($conn,$check_module,$_SESSION["login_id"],"read");
-	if ($_GET["page"] == ""){$_REQUEST["page"] = 1;	}
-	$param = get_param($a_param,$a_not_exists);
-	
-	if($_GET["action"] == "delete"){
-		$code = Check_Permission($conn,$check_module,$_SESSION["login_id"],"delete");		
-		if ($code == "1") {
-			$sql = "delete from $tbl_name  where $PK_field = '".$_GET[$PK_field]."'";
-			@mysqli_query($conn,$sql);			
-			header ("location:index.php");
-		} 
-	}
-	
-	//-------------------------------------------------------------------------------------
-	 if ($_GET["b"] <> "" and $_GET["s"] <> "") { 
-		if ($_GET["s"] == 0) $status = 1;
-		if ($_GET["s"] == 1) $status = 0;
-		Check_Permission($conn,$check_module,$_SESSION["login_id"],"update");
-		$sql_status = "update $tbl_name set st_setting = '".$status."' where $PK_field = '".$_GET["b"]."'";
-		@mysqli_query($conn,$sql_status);
-		if($_GET['page'] != ""){$conpage = "page=".$_GET['page'];}
-		header ("location:?".$conpage); 
-	}
-	
-	//-------------------------------------------------------------------------------------
-	 if ($_GET["bb"] <> "" and $_GET["ss"] <> "") { 
-		if ($_GET["ss"] == 0) $status = 1;
-		if ($_GET["ss"] == 1) $status = 0;
-		Check_Permission($conn,$check_module,$_SESSION["login_id"],"update");
-		$sql_status = "update $tbl_name set status = '".$status."' where $PK_field = '".$_GET["bb"]."'";
-		@mysqli_query($conn,$sql_status);
-		$sql_svstatus = "update s_service_report set st_setting = '".$status."' where cus_id = '".$_GET["foid"]."'";
-		@mysqli_query($conn,$sql_svstatus);
-		if($_GET['page'] != ""){$conpage = "page=".$_GET['page'];}
-		header ("location:?".$conpage); 
-	}
-	
-	//-------------------------------------------------------------------------------------
-	 if ($_GET["ff"] <> "" and $_GET["gg"] <> "") { 
-		if ($_GET["gg"] == 0) $status_use = 0;
-		if ($_GET["gg"] == 1) $status_use = 1;
-		if ($_GET["gg"] == 2) $status_use = 2;
-		if ($_GET["gg"] == 3) $status_use = 3;
-		// Check_Permission($conn,$check_module,$_SESSION["login_id"],"update");
-		// $sql_status = "update $tbl_name set status_use = '".$status_use."' where $PK_field = '".$_GET["ff"]."'";
-		// @mysqli_query($conn,$sql_status);
-		
-		// if($_GET['page'] != ""){$conpage = "page=".$_GET['page'];}
-    // header ("location:?".$conpage); 
-    
-    $code = Check_Permission($conn,'กำหนดดาว FO',$_SESSION["login_id"],"update");
+<?php
+include "../../include/config.php";
+include "../../include/connect.php";
+include "../../include/function.php";
+include "config.php";
+Check_Permission($conn, $check_module, $_SESSION["login_id"], "read");
+if ($_GET["page"] == "") {$_REQUEST["page"] = 1;}
+$param = get_param($a_param, $a_not_exists);
+
+if ($_GET["action"] == "delete") {
+    $code = Check_Permission($conn, $check_module, $_SESSION["login_id"], "delete");
     if ($code == "1") {
-      $sql_status = "update $tbl_name set status_use = '$status_use' where $PK_field = '".$_GET["ff"]."'";
-      @mysqli_query($conn,$sql_status);
-      
-      if($_GET["page"] != ""){$conpage = "page=".$_GET["page"];}
-      header ("location:?".$conpage); 
+        $sql = "delete from $tbl_name  where $PK_field = '" . $_GET[$PK_field] . "'";
+        @mysqli_query($conn, $sql);
+        header("location:index.php");
     }
-	}
-	
+}
+
+//-------------------------------------------------------------------------------------
+if ($_GET["b"] != "" and $_GET["s"] != "") {
+    if ($_GET["s"] == 0) {
+        $status = 1;
+    }
+
+    if ($_GET["s"] == 1) {
+        $status = 0;
+    }
+
+    Check_Permission($conn, $check_module, $_SESSION["login_id"], "update");
+    $sql_status = "update $tbl_name set st_setting = '" . $status . "' where $PK_field = '" . $_GET["b"] . "'";
+    @mysqli_query($conn, $sql_status);
+    if ($_GET['page'] != "") {$conpage = "page=" . $_GET['page'];}
+    header("location:?" . $conpage);
+}
+
+//-------------------------------------------------------------------------------------
+if ($_GET["bb"] != "" and $_GET["ss"] != "") {
+    if ($_GET["ss"] == 0) {
+        $status = 1;
+    }
+
+    if ($_GET["ss"] == 1) {
+        $status = 0;
+    }
+
+    Check_Permission($conn, $check_module, $_SESSION["login_id"], "update");
+    $sql_status = "update $tbl_name set status = '" . $status . "' where $PK_field = '" . $_GET["bb"] . "'";
+    @mysqli_query($conn, $sql_status);
+    $sql_svstatus = "update s_service_report set st_setting = '" . $status . "' where cus_id = '" . $_GET["foid"] . "'";
+    @mysqli_query($conn, $sql_svstatus);
+    if ($_GET['page'] != "") {$conpage = "page=" . $_GET['page'];}
+    header("location:?" . $conpage);
+}
+
+//-------------------------------------------------------------------------------------
+if ($_GET["ff"] != "" and $_GET["gg"] != "") {
+    if ($_GET["gg"] == 0) {
+        $status_use = 0;
+    }
+
+    if ($_GET["gg"] == 1) {
+        $status_use = 1;
+    }
+
+    if ($_GET["gg"] == 2) {
+        $status_use = 2;
+    }
+
+    if ($_GET["gg"] == 3) {
+        $status_use = 3;
+    }
+
+    // Check_Permission($conn,$check_module,$_SESSION["login_id"],"update");
+    // $sql_status = "update $tbl_name set status_use = '".$status_use."' where $PK_field = '".$_GET["ff"]."'";
+    // @mysqli_query($conn,$sql_status);
+
+    // if($_GET['page'] != ""){$conpage = "page=".$_GET['page'];}
+    // header ("location:?".$conpage);
+
+    $code = Check_Permission($conn, 'กำหนดดาว FO', $_SESSION["login_id"], "update");
+    if ($code == "1") {
+        $sql_status = "update $tbl_name set status_use = '$status_use' where $PK_field = '" . $_GET["ff"] . "'";
+        @mysqli_query($conn, $sql_status);
+
+        if ($_GET["page"] != "") {$conpage = "page=" . $_GET["page"];}
+        header("location:?" . $conpage);
+    }
+}
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE><?php     echo $s_title;?></TITLE>
+<TITLE><?php echo $s_title; ?></TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="../css/reset.css" media=screen>
 <LINK rel=stylesheet type=text/css href="../css/style.css" media=screen>
@@ -89,21 +113,24 @@ function check_select(frm){
 			alert ('Choose an action');
 			frm.choose_action.focus(); return false;
 		}
-}	
+}
 </script>
 </HEAD>
-<?php     include ("../../include/function_script.php"); ?>
+<?php include "../../include/function_script.php";?>
 <BODY>
 <DIV id=body-wrapper>
-<?php     include("../left.php");?>
+<?php include "../left.php";?>
 <DIV id=main-content>
 <NOSCRIPT>
 </NOSCRIPT>
-<?php     include('../top.php');?>
-<P id=page-intro><?php     echo $page_name; ?></P>
+<?php include '../top.php';?>
+<P id=page-intro><?php echo $page_name; ?></P>
 
 <UL class=shortcut-buttons-set>
-  <LI><A class=shortcut-button href="update.php?mode=add<?php     if ($param <> "") echo "&".$param; ?>"><SPAN><IMG  alt=icon src="../images/pencil_48.png"><BR>
+  <LI><A class=shortcut-button href="update.php?mode=add<?php if ($param != "") {
+    echo "&" . $param;
+}
+?>"><SPAN><IMG  alt=icon src="../images/pencil_48.png"><BR>
     เพิ่ม </SPAN></A></LI>
     <LI><A class=shortcut-button href="../first_order/index.php"><SPAN><IMG  alt=icon src="../images/icons/icon-48-category.png"><BR>
     First Order <br><br></SPAN></A></LI>
@@ -117,34 +144,37 @@ function check_select(frm){
     FO/PJ</SPAN></A></LI>
   <LI><A class=shortcut-button href="../work_noti/index.php"><SPAN><IMG  alt=icon src="../images/icons/icon-48-section.png"><BR>
     ใบแจ้งงาน</SPAN></A></LI>
-    <?php     
-	if ($FR_module <> "") { 
-	$param2 = get_return_param();
-	?>
-  <LI><A class=shortcut-button href="../<?php     echo $FR_module; ?>/?<?php     if($param2 <> "") echo $param2;?>"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>
+    <?php
+if ($FR_module != "") {
+    $param2 = get_return_param();
+    ?>
+  <LI><A class=shortcut-button href="../<?php echo $FR_module; ?>/?<?php if ($param2 != "") {
+        echo $param2;
+    }
+    ?>"><SPAN><IMG  alt=icon src="../images/btn_back.gif"><BR>
   กลับ</SPAN></A></LI>
-  <?php     }?>
+  <?php }?>
 
 </UL>
-  
+
   <!-- End .shortcut-buttons-set -->
 <DIV class=clear></DIV><!-- End .clear -->
 <DIV class=content-box><!-- Start Content Box -->
 <DIV class=content-box-header align="right" style="padding-right:15px;">
 
-<H3 align="left"><?php     echo $check_module; ?></H3>
+<H3 align="left"><?php echo $check_module; ?></H3>
 <br><form name="form1" method="get" action="index.php">
-    <input name="keyword" type="text" id="keyword" value="<?php     echo $keyword;?>">
+    <input name="keyword" type="text" id="keyword" value="<?php echo $keyword; ?>">
     <input name="Action" type="submit" id="Action" value="ค้นหา">
-    <?php    
-			$a_not_exists = array('keyword');
-			$param2 = get_param($a_param,$a_not_exists);
-			  ?>
-    <a href="index.php?<?php     echo $param2;?>">แสดงทั้งหมด</a>
-    <?php     
-			/*$a_not_exists = array();
-			post_param($a_param,$a_not_exists);*/
-			?>
+    <?php
+$a_not_exists = array('keyword');
+$param2 = get_param($a_param, $a_not_exists);
+?>
+    <a href="index.php?<?php echo $param2; ?>">แสดงทั้งหมด</a>
+    <?php
+/*$a_not_exists = array();
+post_param($a_param,$a_not_exists);*/
+?>
   </form>
 <DIV class=clear>
 
@@ -156,11 +186,11 @@ function check_select(frm){
       <THEAD>
         <TR>
           <TH width="5%"><INPUT class=check-all type=checkbox name="ca" value="true" onClick="chkAll(this.form, 'del[]', this.checked)"></TH>
-          <TH width="5%" <?php     Show_Sort_bg ("user_id", $orderby) ?>> <?php    
-		$a_not_exists = array('orderby','sortby');
-		$param2 = get_param($a_param,$a_not_exists);
-	?>
-            <?php      Show_Sort_new ("user_id", "ลำดับ.", $orderby, $sortby,$page,$param2);?>
+          <TH width="5%" <?php Show_Sort_bg("user_id", $orderby)?>> <?php
+$a_not_exists = array('orderby', 'sortby');
+$param2 = get_param($a_param, $a_not_exists);
+?>
+            <?php Show_Sort_new("user_id", "ลำดับ.", $orderby, $sortby, $page, $param2);?>
             &nbsp;</TH>
           <TH width="12%">First Order ID</TH>
           <TH width="35%">ชื่อลูกค้า</TH>
@@ -178,95 +208,115 @@ function check_select(frm){
       <TFOOT>
         </TFOOT>
       <TBODY>
-        <?php     
-					if($orderby=="") $orderby = $tbl_name.".".$PK_field;
-					if ($sortby =="") $sortby ="DESC";
-					
-				   	$sql = " select *,$tbl_name.create_date as c_date from $tbl_name  where 1 AND separate = 0 ";
-					if ($_GET[$PK_field] <> "") $sql .= " and ($PK_field  = '" . $_GET[$PK_field] . " ' ) ";					
-					if ($_GET[$FR_field] <> "") $sql .= " and ($FR_field  = '" . $_GET[$FR_field] . " ' ) ";					
- 					if ($_GET["keyword"] <> "") { 
-						$sql .= "and ( " .  $PK_field  . " like '%".$_GET["keyword"]."%' ";
-						if (count ($search_key) > 0) { 
-							$search_text = " and ( " ;
-							foreach ($search_key as $key=>$value) { 
-									$subtext .= "or " . $value  . " like '%" . $_GET["keyword"] . "%'";
-							}	
-						}
-						$sql .=  $subtext . " ) ";
-					} 
-					if ($orderby <> "") $sql .= " order by " . $orderby;
-					if ($sortby <> "") $sql .= " " . $sortby;
-					include ("../include/page_init.php");
-					//echo $sql;
-					$query = @mysqli_query($conn,$sql);
-					if($_GET["page"] == "") $_GET["page"] = 1;
-					$counter = ($_GET["page"]-1)*$pagesize;
-					
-					while ($rec = @mysqli_fetch_array ($query)) { 
-          $counter++;
-          
-          $GMApprove = '';
-          if($rec['approve2'] == '1' || $rec['approve2'] == 1){
-            if($rec["status_use"] != 2){
-              $GMApprove = 'color: #0018ff;';
-            }else{
-              $GMApprove = 'color: #f00;';
-            }
-          }else{
-            $GMApprove = '';
-          }
+        <?php
+if ($orderby == "") {
+    $orderby = $tbl_name . "." . $PK_field;
+}
 
-				   ?>
+if ($sortby == "") {
+    $sortby = "DESC";
+}
+
+$sql = " select *,$tbl_name.create_date as c_date from $tbl_name  where 1 AND separate = 0 ";
+if ($_GET[$PK_field] != "") {
+    $sql .= " and ($PK_field  = '" . $_GET[$PK_field] . " ' ) ";
+}
+
+if ($_GET[$FR_field] != "") {
+    $sql .= " and ($FR_field  = '" . $_GET[$FR_field] . " ' ) ";
+}
+
+if ($_GET["keyword"] != "") {
+    $sql .= "and ( " . $PK_field . " like '%" . $_GET["keyword"] . "%' ";
+    if (count($search_key) > 0) {
+        $search_text = " and ( ";
+        foreach ($search_key as $key => $value) {
+            $subtext .= "or " . $value . " like '%" . $_GET["keyword"] . "%'";
+        }
+    }
+    $sql .= $subtext . " ) ";
+}
+if ($orderby != "") {
+    $sql .= " order by " . $orderby;
+}
+
+if ($sortby != "") {
+    $sql .= " " . $sortby;
+}
+
+include "../include/page_init.php";
+//echo $sql;
+$query = @mysqli_query($conn, $sql);
+if ($_GET["page"] == "") {
+    $_GET["page"] = 1;
+}
+
+$counter = ($_GET["page"] - 1) * $pagesize;
+
+while ($rec = @mysqli_fetch_array($query)) {
+    $counter++;
+
+    $GMApprove = '';
+    if ($rec['approve2'] == '1' || $rec['approve2'] == 1) {
+        if ($rec["status_use"] != 2) {
+            $GMApprove = 'color: #0018ff;';
+        } else {
+            $GMApprove = 'color: #f00;';
+        }
+    } else {
+        $GMApprove = '';
+    }
+
+    ?>
         <TR>
-          <TD style="vertical-align: middle;"><INPUT type=checkbox name="del[]" value="<?php     echo $rec[$PK_field]; ?>" ></TD>
-          <TD style="vertical-align: middle;"><span class="text" style="<?php echo $GMApprove;?>"><?php     echo sprintf("%04d",$counter); ?></span></TD>
-          <TD style="vertical-align: middle;"><?php     $chaf = preg_replace("/\//","-",$rec["fs_id"]); ?><span class="text"><a href="../../upload/first_order/<?php     echo $chaf;?>.pdf" target="_blank" style="<?php echo $GMApprove;?>"><?php     echo $rec["fs_id"] ; ?></a></span></TD>
-          <TD style="vertical-align: middle;">          <span class="text" style="<?php echo $GMApprove;?>"><?php     echo $rec["cd_name"] ; ?></span></TD>
-          <TD style="vertical-align: middle;"><span class="text" style="<?php echo $GMApprove;?>"><?php     echo $rec["loc_name"] ; ?></span></TD>
+          <TD style="vertical-align: middle;"><INPUT type=checkbox name="del[]" value="<?php echo $rec[$PK_field]; ?>" ></TD>
+          <TD style="vertical-align: middle;"><span class="text" style="<?php echo $GMApprove; ?>"><?php echo sprintf("%04d", $counter); ?></span></TD>
+          <TD style="vertical-align: middle;"><?php $chaf = preg_replace("/\//", "-", $rec["fs_id"]);?><span class="text"><a href="../../upload/first_order/<?php echo $chaf; ?>.pdf" target="_blank" style="<?php echo $GMApprove; ?>"><?php echo $rec["fs_id"]; ?></a></span></TD>
+          <TD style="vertical-align: middle;">          <span class="text" style="<?php echo $GMApprove; ?>"><?php echo $rec["cd_name"]; ?></span></TD>
+          <TD style="vertical-align: middle;"><span class="text" style="<?php echo $GMApprove; ?>"><?php echo $rec["loc_name"]; ?></span></TD>
           <TD nowrap style="vertical-align:middle"><div align="center">
-            <?php     if($rec["status_use"]==0) {?>
+            <?php if ($rec["status_use"] == 0) {?>
             <img src="../icons/favorites_use.png" width="15" height="15">
-            <?php     } elseif($rec["status_use"]==2) {?>
+            <?php } elseif ($rec["status_use"] == 2) {?>
             <img src="../icons/favorites_close.png" width="15" height="15">
-            <?php     } elseif($rec["status_use"]==3) {?>
+            <?php } elseif ($rec["status_use"] == 3) {?>
             <img src="../icons/favorites_service.png" width="15" height="15">
-            <?php    }else{?>
+            <?php } else {?>
             <img src="../icons/favorites_stranby.png" width="15" height="15">
-            <?php     }?>
+            <?php }?>
             <div align="center" style="padding-top:5px;vertical-align: middle;">
-            <a href="../first_order/?ff=<?php     echo $rec[$PK_field]; ?>&gg=0&page=<?php     echo $_GET['page']; ?>&<?php     echo $FK_field; ?>=<?php     echo $_REQUEST["$FK_field"];?>"><img src="../icons/favorites_use.png" width="15" height="15"> | </a>
-            <a href="../first_order/?ff=<?php     echo $rec[$PK_field]; ?>&gg=1&page=<?php     echo $_GET['page']; ?>&<?php     echo $FK_field; ?>=<?php     echo $_REQUEST["$FK_field"];?>"><img src="../icons/favorites_stranby.png" width="15" height="15"> | </a>
-            <a href="../first_order/?ff=<?php     echo $rec[$PK_field]; ?>&gg=2&page=<?php     echo $_GET['page']; ?>&<?php     echo $FK_field; ?>=<?php     echo $_REQUEST["$FK_field"];?>"><img src="../icons/favorites_close.png" width="15" height="15"></a>
-            <!-- <a href="../first_order/?ff=<?php    echo $rec[$PK_field]; ?>&gg=3&page=<?php    echo $_GET['page']; ?>&<?php    echo $FK_field; ?>=<?php    echo $_REQUEST["$FK_field"];?>"><img src="../icons/favorites_service.png" width="15" height="15"></a> -->
+            <a href="../first_order/?ff=<?php echo $rec[$PK_field]; ?>&gg=0&page=<?php echo $_GET['page']; ?>&<?php echo $FK_field; ?>=<?php echo $_REQUEST["$FK_field"]; ?>"><img src="../icons/favorites_use.png" width="15" height="15"> | </a>
+            <a href="../first_order/?ff=<?php echo $rec[$PK_field]; ?>&gg=1&page=<?php echo $_GET['page']; ?>&<?php echo $FK_field; ?>=<?php echo $_REQUEST["$FK_field"]; ?>"><img src="../icons/favorites_stranby.png" width="15" height="15"> | </a>
+            <a href="../first_order/?ff=<?php echo $rec[$PK_field]; ?>&gg=2&page=<?php echo $_GET['page']; ?>&<?php echo $FK_field; ?>=<?php echo $_REQUEST["$FK_field"]; ?>"><img src="../icons/favorites_close.png" width="15" height="15"></a>
+            <!-- <a href="../first_order/?ff=<?php echo $rec[$PK_field]; ?>&gg=3&page=<?php echo $_GET['page']; ?>&<?php echo $FK_field; ?>=<?php echo $_REQUEST["$FK_field"]; ?>"><img src="../icons/favorites_service.png" width="15" height="15"></a> -->
             </div>
           </div></TD>
           <TD nowrap style="vertical-align:middle"><!--<div align="center">
-            <?php     if($rec["status"]==0) {?>
-            <a href="../first_order/?bb=<?php     echo $rec[$PK_field]; ?>&ss=<?php     echo $rec["status"]; ?>&page=<?php     echo $_GET['page']; ?>&<?php     echo $FK_field; ?>=<?php     echo $_REQUEST["$FK_field"];?>&foid=<?php     echo $rec["fo_id"]; ?>"><img src="../icons/status_on.gif" width="10" height="10"></a>
-            <?php     } else{?>
-            <a href="../first_order/?bb=<?php     echo $rec[$PK_field]; ?>&ss=<?php     echo $rec["status"]; ?>&page=<?php     echo $_GET['page']; ?>&<?php     echo $FK_field; ?>=<?php     echo $_REQUEST["$FK_field"];?>&foid=<?php     echo $rec["fo_id"]; ?>"><img src="../icons/status_off.gif" width="10" height="10"></a>
-            <div align="center"><a href="../../upload/service_report_close/<?php     echo get_srreport($conn,$rec["fs_id"]);?>.pdf" target="_blank"><p style="background:#999;color:#FFFFFF;padding:2px;"><?php     echo get_srreport($conn,$rec["fo_id"]);?></p></a></div>
-            <?php     }?>
+            <?php if ($rec["status"] == 0) {?>
+            <a href="../first_order/?bb=<?php echo $rec[$PK_field]; ?>&ss=<?php echo $rec["status"]; ?>&page=<?php echo $_GET['page']; ?>&<?php echo $FK_field; ?>=<?php echo $_REQUEST["$FK_field"]; ?>&foid=<?php echo $rec["fo_id"]; ?>"><img src="../icons/status_on.gif" width="10" height="10"></a>
+            <?php } else {?>
+            <a href="../first_order/?bb=<?php echo $rec[$PK_field]; ?>&ss=<?php echo $rec["status"]; ?>&page=<?php echo $_GET['page']; ?>&<?php echo $FK_field; ?>=<?php echo $_REQUEST["$FK_field"]; ?>&foid=<?php echo $rec["fo_id"]; ?>"><img src="../icons/status_off.gif" width="10" height="10"></a>
+            <div align="center"><a href="../../upload/service_report_close/<?php echo get_srreport($conn, $rec["fs_id"]); ?>.pdf" target="_blank"><p style="background:#999;color:#FFFFFF;padding:2px;"><?php echo get_srreport($conn, $rec["fo_id"]); ?></p></a></div>
+            <?php }?>
           </div>-->
-          <div align="center" style="vertical-align: middle;"><A href="service_close.php?fo_id=<?php     echo $rec["fo_id"];?>"><IMG  alt=icon src="../images/icons/icon-48-install.png"></A></div>
+          <div align="center" style="vertical-align: middle;"><A href="service_close.php?fo_id=<?php echo $rec["fo_id"]; ?>"><IMG  alt=icon src="../images/icons/icon-48-install.png"></A></div>
           </TD>
           <TD nowrap style="vertical-align:middle"><div align="center">
-            <?php     if($rec["st_setting"]==0) {?>
-            <a href="../first_order/?b=<?php     echo $rec[$PK_field]; ?>&s=<?php     echo $rec["st_setting"]; ?>&page=<?php     echo $_GET['page']; ?>&<?php     echo $FK_field; ?>=<?php     echo $_REQUEST["$FK_field"];?>"><img src="../icons/status_on.gif" width="10" height="10"></a>
-            <?php     } else{?>
-            <a href="../first_order/?b=<?php     echo $rec[$PK_field]; ?>&s=<?php     echo $rec["st_setting"]; ?>&page=<?php     echo $_GET['page']; ?>&<?php     echo $FK_field; ?>=<?php     echo $_REQUEST["$FK_field"];?>"><img src="../icons/status_off.gif" width="10" height="10"></a>
-            <?php     }?>
+            <?php if ($rec["st_setting"] == 0) {?>
+            <a href="../first_order/?b=<?php echo $rec[$PK_field]; ?>&s=<?php echo $rec["st_setting"]; ?>&page=<?php echo $_GET['page']; ?>&<?php echo $FK_field; ?>=<?php echo $_REQUEST["$FK_field"]; ?>"><img src="../icons/status_on.gif" width="10" height="10"></a>
+            <?php } else {?>
+            <a href="../first_order/?b=<?php echo $rec[$PK_field]; ?>&s=<?php echo $rec["st_setting"]; ?>&page=<?php echo $_GET['page']; ?>&<?php echo $FK_field; ?>=<?php echo $_REQUEST["$FK_field"]; ?>"><img src="../icons/status_off.gif" width="10" height="10"></a>
+            <?php }?>
           </div></TD>
-          <TD style="vertical-align: middle;"><div align="center"><a href="../../upload/first_order/<?php     echo $chaf;?>.pdf" target="_blank"><img src="../images/icon2/download_f2.png" width="20" height="20" border="0" alt=""></a></div></TD>
-          
-          <TD style="vertical-align: middle;"><div align="center"><a href="../document/?fo_id=<?php  echo $rec[$PK_field]; ?>"><img src="../images/document.png" width="30" height="30" border="0" alt=""></a></div></TD>
-          
+          <TD style="vertical-align: middle;"><div align="center"><a href="../../upload/first_order/<?php echo $chaf; ?>.pdf" target="_blank"><img src="../images/icon2/download_f2.png" width="20" height="20" border="0" alt=""></a></div></TD>
+
+          <TD style="vertical-align: middle;"><div align="center"><a href="../document/?fo_id=<?php echo $rec[$PK_field]; ?>"><img src="../images/document.png" width="30" height="30" border="0" alt=""></a></div></TD>
+
           <TD style="vertical-align: middle;"><!-- Icons -->
-            <A title=Edit href="update.php?mode=update&<?php     echo $PK_field; ?>=<?php     echo $rec[$PK_field]; if($param <> "") {?>&<?php     echo $param; }?>"><IMG alt=Edit src="../images/pencil.png"></A> <A title=Delete  href="#"></A></TD>
-          <TD style="vertical-align: middle;"><A title=Delete  href="#"><IMG alt=Delete src="../images/cross.png" onClick="confirmDelete('?action=delete&<?php     echo $PK_field; ?>=<?php     echo $rec[$PK_field];?>','Group  <?php     echo $rec[$PK_field];?> : <?php     echo $rec["group_name"];?>')"></A></TD>
-        </TR>  
-		<?php     }?>
+            <A title=Edit href="update.php?mode=update&<?php echo $PK_field; ?>=<?php echo $rec[$PK_field];if ($param != "") { ?>&<?php echo $param;} ?>"><IMG alt=Edit src="../images/pencil.png"></A> <A title=Delete  href="#"></A></TD>
+          <TD style="vertical-align: middle;"><A title=Delete  href="#"><IMG alt=Delete src="../images/cross.png" onClick="confirmDelete('?action=delete&<?php echo $PK_field; ?>=<?php echo $rec[$PK_field]; ?>','Group  <?php echo $rec[$PK_field]; ?> : <?php echo $rec["group_name"]; ?>')"></A></TD>
+        </TR>
+		<?php }?>
       </TBODY>
     </TABLE>
     <br><br>
@@ -274,14 +324,14 @@ function check_select(frm){
             <SELECT name="choose_action" id="choose_action">
               <OPTION selected value="">กรุณาเลือก...</OPTION>
               <OPTION value="del">ลบ</OPTION>
-            </SELECT>            
-            <?php    
-				$a_not_exists = array();
-				post_param($a_param,$a_not_exists); 
-			?>
+            </SELECT>
+            <?php
+$a_not_exists = array();
+post_param($a_param, $a_not_exists);
+?>
             <input class=button name="Action2" type="submit" id="Action2" value="ตกลง">
-          </DIV> <DIV class=pagination> <?php     include("../include/page_show.php");?> </DIV>
-  </form>  
+          </DIV> <DIV class=pagination> <?php include "../include/page_show.php";?> </DIV>
+  </form>
 </DIV><!-- End #tab1 -->
 
 
@@ -292,7 +342,7 @@ function check_select(frm){
 <DIV class=clear></DIV><!-- Start Notifications -->
 <!-- End Notifications -->
 
-<?php     include("../footer.php");?>
+<?php include "../footer.php";?>
 </DIV><!-- End #main-content -->
 </DIV>
 </BODY>

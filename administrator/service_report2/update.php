@@ -840,45 +840,90 @@ while ($rowPro = mysqli_fetch_array($getProList)) {
         // } else {
         //     $ReChkOp = (in_array($rowCal, $proOpRadioList)) ? '<input type="radio" name="chkprolists" value="' . $rowCal . '" checked="checked">' : '<input type="radio" name="chkprolists" value="' . $rowCal . '">';
         // }
-
         $ReChkOp = (in_array($rowCal, $proOpRadioList)) ? '<input type="radio" name="chkprolists" value="' . $rowCal . '" checked="checked">' : '<input type="radio" name="chkprolists" value="' . $rowCal . '">';
         ?>
-                                                            <tr>
-                                                                <td
-                                                                    style="border:1px solid #000000;padding:5;text-align:center;">
-                                                                    <?php echo $ReChkOp; ?>
-                                                                </td>
-                                                                <td
-                                                                    style="border:1px solid #000000;padding:5;text-align:center;">
-                                                                    <?php echo ($rowCalLev2 + 1); ?></td>
-                                                                <td
-                                                                    style="border:1px solid #000000;padding:5;text-align:center;">
-                                                                    <?php echo get_stock_project_code($conn, $rowPro['cpro']); ?>
-                                                                </td>
-                                                                <td
-                                                                    style="border:1px solid #000000;text-align:left;padding:5;">
-                                                                    <?php echo get_stock_project_name($conn, $rowPro['cpro']); ?>
-                                                                </td>
-                                                                <td style="border:1px solid #000000;padding:5;text-align:center;"
-                                                                    id="cpropod<?php echo $rowCal; ?>">
-                                                                    <?php echo get_stock_project_sn($conn, $rowPro['cpro']); ?>
-                                                                </td>
-                                                                <td style="border:1px solid #000000;padding:5;text-align:center;"
-                                                                    id="cprosize<?php echo $rowCal; ?>">
-                                                                    <?php echo get_stock_project_size($conn, $rowPro['cpro']); ?>
-                                                                </td>
-                                                                <td
-                                                                    style="border:1px solid #000000;padding:5;text-align:center;">
-                                                                    <?php echo $rowPro['camount']; ?>
-                                                                </td>
-                                                                <td
-                                                                    style="border:1px solid #000000;padding:5;text-align:center;">
-                                                                    <input type="text"
-                                                                        name="codes_<?php echo $rowCal; ?>"
-                                                                        value="<?php echo $proOpCodeList[$rowCalLev2]; ?>"
-                                                                        style="width:100%">
-                                                                </td>
-                                                            </tr>
+            <?php if ($_GET['mode'] === "update") {
+            if (in_array($rowCal, $proOpRadioList)) {
+                ?>
+            <tr>
+                    <td
+                        style="border:1px solid #000000;padding:5;text-align:center;">
+                        <?php echo $ReChkOp; ?>
+                    </td>
+                    <td
+                        style="border:1px solid #000000;padding:5;text-align:center;">
+                        <?php echo ($rowCalLev2 + 1); ?></td>
+                    <td
+                        style="border:1px solid #000000;padding:5;text-align:center;">
+                        <?php echo get_stock_project_code($conn, $rowPro['cpro']); ?>
+                    </td>
+                    <td
+                        style="border:1px solid #000000;text-align:left;padding:5;">
+                        <?php echo get_stock_project_name($conn, $rowPro['cpro']); ?>
+                    </td>
+                    <td style="border:1px solid #000000;padding:5;text-align:center;"
+                        id="cpropod<?php echo $rowCal; ?>">
+                        <?php echo get_stock_project_sn($conn, $rowPro['cpro']); ?>
+                    </td>
+                    <td style="border:1px solid #000000;padding:5;text-align:center;"
+                        id="cprosize<?php echo $rowCal; ?>">
+                        <?php echo get_stock_project_size($conn, $rowPro['cpro']); ?>
+                    </td>
+                    <td
+                        style="border:1px solid #000000;padding:5;text-align:center;">
+                        <?php echo $rowPro['camount']; ?>
+                    </td>
+                    <td
+                        style="border:1px solid #000000;padding:5;text-align:center;">
+                        <input type="text"
+                            name="codes_<?php echo $rowCal; ?>"
+                            value="<?php echo $proOpCodeList[$rowCalLev2]; ?>"
+                            style="width:100%">
+                    </td>
+                </tr>
+        <?php
+}
+        } else {
+            ?>
+            <tr>
+                    <td
+                        style="border:1px solid #000000;padding:5;text-align:center;">
+                        <?php echo $ReChkOp; ?>
+                    </td>
+                    <td
+                        style="border:1px solid #000000;padding:5;text-align:center;">
+                        <?php echo ($rowCalLev2 + 1); ?></td>
+                    <td
+                        style="border:1px solid #000000;padding:5;text-align:center;">
+                        <?php echo get_stock_project_code($conn, $rowPro['cpro']); ?>
+                    </td>
+                    <td
+                        style="border:1px solid #000000;text-align:left;padding:5;">
+                        <?php echo get_stock_project_name($conn, $rowPro['cpro']); ?>
+                    </td>
+                    <td style="border:1px solid #000000;padding:5;text-align:center;"
+                        id="cpropod<?php echo $rowCal; ?>">
+                        <?php echo get_stock_project_sn($conn, $rowPro['cpro']); ?>
+                    </td>
+                    <td style="border:1px solid #000000;padding:5;text-align:center;"
+                        id="cprosize<?php echo $rowCal; ?>">
+                        <?php echo get_stock_project_size($conn, $rowPro['cpro']); ?>
+                    </td>
+                    <td
+                        style="border:1px solid #000000;padding:5;text-align:center;">
+                        <?php echo $rowPro['camount']; ?>
+                    </td>
+                    <td
+                        style="border:1px solid #000000;padding:5;text-align:center;">
+                        <input type="text"
+                            name="codes_<?php echo $rowCal; ?>"
+                            value="<?php echo $proOpCodeList[$rowCalLev2]; ?>"
+                            style="width:100%">
+                    </td>
+                </tr>
+            <?php
+}?>
+
                                                             <?php
 $rowCalLev2++;
     }

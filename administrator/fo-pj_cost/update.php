@@ -1002,26 +1002,33 @@ if ($rowPro['ccost'] == 0 && $rowPro['cprice'] != 0) {
                                                 </td>
                                                 <td style="border:1px solid #000000;padding:5;text-align:center;">
                                                     <?php
-if ($rowPro['costpros'] == "" || $rowPro['costpros'] == 0 || $rowPro['costpros'] === "0") {
-        ?>
-                                                    <input type="text" name="costpros[]"
-                                                        value="<?php if ($rowPro['costpros'] == "" || $rowPro['costpros'] == 0 || $rowPro['costpros'] === "0") {echo "0";} else {echo number_format(get_stock_project_unit_price($conn, $rowPro['cpro']));}?>"
-                                                        id="costpros<?php echo $rowCal; ?>" class="inpfoder"
-                                                        style="width:100%;text-align:center;" readonly>
-                                                    <input type="hidden" name="costprosH[]"
-                                                        value="<?php if ($rowPro['costpros'] == "" || $rowPro['costpros'] == 0 || $rowPro['costpros'] === "0") {echo "0";} else {echo number_format(get_stock_project_unit_price($conn, $rowPro['cpro']));}?>">
-                                                    <?php
-} else {
-        ?>
-                                                    <input type="text" name="costpros[]"
-                                                        value="<?php echo number_format($rowPro['costpros']); ?>"
-                                                        id="costpros<?php echo $rowCal; ?>" class="inpfoder"
-                                                        style="width:100%;text-align:center;" readonly>
-                                                    <input type="hidden" name="costprosH[]"
-                                                        value="<?php echo $rowPro['costpros'] ?>">
-                                                    <?php
-}
+/*if ($rowPro['costpros'] == "" || $rowPro['costpros'] == 0 || $rowPro['costpros'] === "0") {
     ?>
+    <input type="text" name="costpros[]"
+    value="<?php if ($rowPro['costpros'] == "" || $rowPro['costpros'] == 0 || $rowPro['costpros'] === "0") {echo "0";} else {echo number_format(get_stock_project_unit_price($conn, $rowPro['cpro']));}?>"
+    id="costpros<?php echo $rowCal; ?>" class="inpfoder"
+    style="width:100%;text-align:center;" readonly>
+    <input type="hidden" name="costprosH[]"
+    value="<?php if ($rowPro['costpros'] == "" || $rowPro['costpros'] == 0 || $rowPro['costpros'] === "0") {echo "0";} else {echo number_format(get_stock_project_unit_price($conn, $rowPro['cpro']));}?>">
+    <?php
+    } else {
+    ?>
+    <input type="text" name="costpros[]"
+    value="<?php echo number_format($rowPro['costpros']); ?>"
+    id="costpros<?php echo $rowCal; ?>" class="inpfoder"
+    style="width:100%;text-align:center;" readonly>
+    <input type="hidden" name="costprosH[]"
+    value="<?php echo $rowPro['costpros'] ?>">
+    <?php
+    }*/
+    ?>
+    <input type="text" name="costpros[]"
+    value="<?php echo number_format(get_stock_project_unit_price($conn, $rowPro['cpro'])); ?>"
+    id="costpros<?php echo $rowCal; ?>" class="inpfoder"
+    style="width:100%;text-align:center;" readonly>
+    <input type="hidden" name="costprosH[]"
+    value="<?php echo number_format(get_stock_project_unit_price($conn, $rowPro['cpro'])); ?>">
+
                                                 </td>
 
                                             </tr>

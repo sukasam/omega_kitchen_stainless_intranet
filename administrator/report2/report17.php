@@ -198,6 +198,8 @@ $moneyTCTota = 0;
 $sumOtherPay = 0;
 $sumPlusOtherPay = 0;
 
+$totalSumOpen = 0;
+
 while ($row_bill = @mysqli_fetch_array($qu_fr)) {
 
     //echo $row_bill['cus_source'];
@@ -327,6 +329,8 @@ $getProList = get_fopj_pro($conn, $row_bill['cus_id']);
                         $sumTotalAll += $total;
 
                         $totalTA += $total;
+
+                        $totalSumOpen += $row['opens'];
                     }
 
                 } else {
@@ -359,6 +363,8 @@ $getProList = get_fopj_pro($conn, $row_bill['cus_id']);
                     $sumTotalAll += $total;
 
                     $totalTA += $total;
+
+                    $totalSumOpen += $row['opens'];
                 }
 
             }
@@ -418,6 +424,14 @@ $getProList = get_fopj_pro($conn, $row_bill['cus_id']);
 
             <td colspan="13" style="text-align:right;">
                 <strong>จำนวนใบเบิกทั้งหมด&nbsp;&nbsp;<?php echo $sum; ?>&nbsp;&nbsp;ใบ&nbsp;&nbsp;</strong>
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td colspan="13" style="text-align:right;">
+                <strong>จำนวนเบิกทั้งหมด&nbsp;&nbsp;<?php echo number_format($totalSumOpen, 2); ?>&nbsp;&nbsp;&nbsp;&nbsp;</strong>
             </td>
 
         </tr>
