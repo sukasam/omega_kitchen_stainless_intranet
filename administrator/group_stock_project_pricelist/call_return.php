@@ -3,7 +3,7 @@ include_once "../../include/connect.php";
 
 //header('Content-Type: text/html; charset=tis-620');
 
-if ($_GET['action'] === "chkProID") {
+if ($_REQUEST['action'] === "chkProID") {
 
     $rowSpar = @mysqli_fetch_assoc(@mysqli_query($conn, "SELECT * FROM s_group_stock_project WHERE group_spar_id ='" . $_GET['group_spar_id'] . "'"));
 
@@ -15,7 +15,7 @@ if ($_GET['action'] === "chkProID") {
 
 }
 
-if ($_GET['action'] === "chkProName") {
+if ($_REQUEST['action'] === "chkProName") {
 
     $rowSpar = @mysqli_fetch_assoc(@mysqli_query($conn, "SELECT * FROM s_group_stock_project WHERE group_name LIKE '%" . $_GET['group_name'] . "%'"));
 
@@ -27,8 +27,10 @@ if ($_GET['action'] === "chkProName") {
 
 }
 
-if ($_GET['action'] === "chkPrint") {
-    $listPro = explode(',', base64_decode($_GET['spar_id']));
+if ($_REQUEST['action'] === "chkPrint") {
+
+    $listPro = explode(',', base64_decode($_POST['spar_id']));
+    $listProQTY = explode(',', base64_decode($_POST['spar_qty']));
 
     if (isset($_GET['keyword']) && $_GET['keyword'] != "") {
         $keyWord = " AND (group_spar_id like '%" . $_GET['keyword'] . "%' OR group_name like '%" . $_GET['keyword'] . "%' OR group_size like '%" . $_GET['keyword'] . "%')";
@@ -41,21 +43,29 @@ if ($_GET['action'] === "chkPrint") {
     $query = @mysqli_query($conn, $sql);
     $counter = 0;
     $conHtml = '';
+    $sumQTY = 0;
+    $sumTotal = 0;
     while ($rec = @mysqli_fetch_array($query)) {
+
         if (in_array($rec["group_spar_id"], $listPro)) {
 
+            $counter++;
+
             if ($rec["group_unit_price"] !== '') {
-                $group_unit_price = number_format($rec["group_unit_price"], 2);
+                $group_unit_price = $rec["group_unit_price"];
             } else {
                 $group_unit_price = 0.00;
             }
             if ($rec["group_price"] !== '') {
-                $group_price = number_format($rec["group_price"], 2);
+                $group_price = $rec["group_price"];
             } else {
                 $group_price = 0.00;
             }
 
-            $counter++;
+            $sumPrice = $group_price * $listProQTY[$counter - 1];
+            $sumQTY += $listProQTY[$counter - 1];
+            $sumTotal += $sumPrice;
+
             $conHtml .= '<TR>';
             $conHtml .= '	<TD  style="text-align: center;"><span class="text" >' . sprintf("%04d", $counter) . '</span></TD>';
             $conHtml .= '	<TD style="text-align: center;"><span class="text">' . $rec["group_spar_id"] . '</span></TD>';
@@ -63,10 +73,17 @@ if ($_GET['action'] === "chkPrint") {
             $conHtml .= '	<TD style="text-align: center;"><span class="text">' . $rec["group_sn"] . '</span></TD>';
             $conHtml .= '	<TD style="text-align: center;"><span class="text">' . $rec["group_size"] . '</span></TD>';
             $conHtml .= '	<TD style="text-align: center;"><span class="text">' . $rec["group_category"] . '</span></TD>';
-            $conHtml .= '	<TD style="text-align: right;"><span class="text">' . $group_unit_price . '</span></TD>';
-            $conHtml .= '	<TD style="text-align: right;"><span class="text">' . $group_price . '</span></TD>';
+            $conHtml .= '	<TD style="text-align: right;"><span class="text">' . number_format($group_price, 2) . '</span></TD>';
+            $conHtml .= '	<TD style="text-align: center;"><span class="text">' . number_format($listProQTY[$counter - 1]) . '</span></TD>';
+            $conHtml .= '	<TD style="text-align: right;"><span class="text">' . number_format($sumPrice, 2) . '</span></TD>';
             $conHtml .= '</TR>';
         }
     }
+    $conHtml .= '<TR>
+                    <td colspan="4" style="border: none;"></td>
+                    <td colspan="3"><strong>รวมเป็นเงิน</strong></td>
+                    <td style="text-align: center;"><strong>' . number_format($sumQTY) . '</strong></td>
+                    <td style="text-align: right;"><strong>' . number_format($sumTotal, 2) . '</strong></td>
+                </TR>';
     echo $conHtml;
 }

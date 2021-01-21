@@ -1,32 +1,32 @@
-<?php    	
-	include ("../include/config.php");
-	include ("../include/connect.php");
-	include ("../include/function.php");
-	
-	if($_SESSION["login_id"] != ""){
-		header ("location:welcome/index.php");
-	}
-	
-	if ($_GET['action'] == "check") { 
-		$sql = "select * from s_user where username like '$_POST[login_name]' and password like '$_POST[passwd]'";
-		$query = @mysqli_query($conn,$sql);
-                $numuser = mysqli_num_rows($query);
-                $rec = @mysqli_fetch_array ($query);
+<?php
+include "../include/config.php";
+include "../include/connect.php";
+include "../include/function.php";
 
-		/*echo $numuser;
-		break;*/
+if ($_SESSION["login_id"] != "") {
+    header("location:welcome/index.php");
+}
 
-                if ($numuser != 0) { 
-			$_SESSION["login_id"] = $rec["user_id"];
-			$_SESSION["login_name"] = $rec["username"];
-			$_SESSION["fullname"] = $rec["name"];
-			$_SESSION["u_img"] = $rec["u_images"];
-			header ("location:welcome/index.php");
-		}else{
-			/*$msg_login="Username or password incorrect !!";*/
-			echo "<Script Language=\"JavaScript\">alert('Username or password incorrect !!');window.location='index.php';</Script>";}
-	}
-	
+if ($_GET['action'] == "check") {
+    $sql = "select * from s_user where username like '$_POST[login_name]' and password like '$_POST[passwd]'";
+    $query = @mysqli_query($conn, $sql);
+    $numuser = mysqli_num_rows($query);
+    $rec = @mysqli_fetch_array($query);
+
+    /*echo $numuser;
+    break;*/
+
+    if ($numuser != 0) {
+        $_SESSION["login_id"] = $rec["user_id"];
+        $_SESSION["login_name"] = $rec["username"];
+        $_SESSION["fullname"] = $rec["name"];
+        $_SESSION["u_img"] = $rec["u_images"];
+        header("location:welcome/index.php");
+    } else {
+        /*$msg_login="Username or password incorrect !!";*/
+        echo "<Script Language=\"JavaScript\">alert('Username or password incorrect !!');window.location='index.php';</Script>";}
+}
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -35,12 +35,12 @@
         <title>OMEGA Kitchen Intranet System</title>
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="css/invalid.css" type="text/css" media="screen" />  
+        <link rel="stylesheet" href="css/invalid.css" type="text/css" media="screen" />
 		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
         <!--[if IE 7]><link rel="stylesheet" href="css/styleIE7.css" type="text/css" media="screen" /><![endif]-->
         <!--[if IE 8]><link rel="stylesheet" href="css/styleIE8.css" type="text/css" media="screen" /><![endif]-->
         <!--[if IE 9]><link rel="stylesheet" href="css/styleIE9.css" type="text/css" media="screen" /><![endif]-->
-                
+
         <Script Language="JavaScript">
 		<!--
 		function check(frm){
@@ -51,14 +51,14 @@
 		if (frm.passwd.value.length==0 || frm.passwd.value == "Passwords"){
 			alert ('Please enter Password!!');
 			frm.passwd.focus(); return false;
-		}	
-	
-		}	
+		}
+
+		}
 		//-->
 		</Script>
-     
+
     </head>
-   
+
     <body style="background:#e1e1e1;">
        	<div id="webper_login">
         	<div id="logologin"><img src="images/template/logo_login.png" width="380" height="204" border="0" alt="" /></div>
@@ -67,7 +67,7 @@
             <!-- End #logn-top -->
             <div id="login-content">
                 <form name="frm" method="post" action="index.php?action=check" onSubmit="return check(this)">
-                    
+
                     <p style="padding-bottom:17px;">
                         <input class="text-input" type="text" name="login_name" onblur="if(this.value==''){this.value='User ID';}" onclick="if(this.value=='User ID'){this.value='';}" value="User ID" style="text-align:center;"/>
                     </p>
@@ -80,7 +80,7 @@
                 </form>
             </div> <!-- End #login-content -->
         </div>
-            </div>            
+            </div>
         </div>
         <div class="footer">
         	<div class="fb">
@@ -88,7 +88,7 @@
             	<li class="blogo"><img src="images/template/footer_logo.png" width="106" height="42" border="0" alt="" /></li>
                 <li class="bfooter">OMEGA MACHINERY (1999) CO., LTD. 188/21 Soi Sukhaphiban 5 (46), Ao-Ngoen, Saimai, Bangkok, Thailand 10220<br />
 Tel : 02-1019286 / Fax : 02-1019287 / Mobile : 088-3776557, 098-2683020<br />
-E-mail : info@omegadishwasher.com ,sale@omegadishwasher.com</li>           
+E-mail : info@omegadishwasher.com ,sale@omegadishwasher.com</li>
             </ul>
              <div class="clear"></div>
             </div>
