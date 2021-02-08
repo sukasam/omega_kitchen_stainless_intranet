@@ -32,13 +32,21 @@ if ($_REQUEST['action'] === "chkPrint") {
     $listPro = explode(',', base64_decode($_POST['spar_id']));
     $listProQTY = explode(',', base64_decode($_POST['spar_qty']));
 
-    if (isset($_GET['keyword']) && $_GET['keyword'] != "") {
-        $keyWord = " AND (group_spar_id like '%" . $_GET['keyword'] . "%' OR group_name like '%" . $_GET['keyword'] . "%' OR group_size like '%" . $_GET['keyword'] . "%')";
-    } else {
-        $keyWord = '';
+    // if (isset($_GET['keyword']) && $_GET['keyword'] != "") {
+    //     $keyWord = " AND (group_spar_id like '%" . $_GET['keyword'] . "%' OR group_name like '%" . $_GET['keyword'] . "%' OR group_size like '%" . $_GET['keyword'] . "%')";
+    // } else {
+    //     $keyWord = '';
+    // }
+
+    $keyWord = "AND (";
+
+    for ($i = 0; $i < count($listPro); $i++) {
+        $keyWord .= "`group_spar_id` LIKE '%" . $listPro[$i] . "%' OR ";
     }
 
-    $sql = 'select *,s_group_stock_project.create_date as c_date from s_group_stock_project where 1 ' . $keyWord . ' order by s_group_stock_project.group_spar_id ASC';
+    $keyWord2 = substr($keyWord, 0, -3) . ")";
+
+    $sql = 'select * from s_group_stock_project where 1=1 ' . $keyWord2 . ' order by s_group_stock_project.group_spar_id ASC';
 
     $query = @mysqli_query($conn, $sql);
     $counter = 0;
@@ -47,7 +55,9 @@ if ($_REQUEST['action'] === "chkPrint") {
     $sumTotal = 0;
     while ($rec = @mysqli_fetch_array($query)) {
 
-        if (in_array($rec["group_spar_id"], $listPro)) {
+        if (in_array(trim($rec["group_spar_id"]), $listPro)) {
+
+            // echo $rec["group_spar_id"];
 
             $counter++;
 

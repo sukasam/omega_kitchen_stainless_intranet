@@ -33,6 +33,7 @@ if ($_GET["action"] == "delete") {
     <SCRIPT type=text/javascript src="../js/jquery.wysiwyg.js"></SCRIPT>
     <META name=GENERATOR content="MSHTML 8.00.7600.16535">
     <script>
+
     function confirmDelete(delUrl, text) {
         if (confirm("Are you sure you want to delete\n" + text)) {
             document.location = delUrl;
@@ -204,9 +205,7 @@ while ($rec = @mysqli_fetch_array($query)) {
                                                 class="text"><?php echo number_format($rec["group_stock"] * $rec["group_unit_price"], 2); ?></span>
                                         </TD>
                                         <!--          <TD style="text-align: right;"><span class="text"><?php echo number_format($rec["group_price"], 2); ?></span></TD>-->
-                                        <TD style="text-align: center;"><A title=Delete href="#"><IMG alt=Delete
-                                                    src="../images/cross.png"
-                                                    onClick="confirmDelete('?action=delete&<?php echo $PK_field; ?>=<?php echo $rec[$PK_field]; ?>','Group  <?php echo $rec[$PK_field]; ?> : <?php echo $rec["group_name"]; ?>')"></A>
+                                        <TD style="text-align: center;"><A title="Delete" style="cursor: pointer;" onClick="confirmDelete('?action=delete&<?php echo $PK_field; ?>=<?php echo $rec[$PK_field]; ?>','Group  <?php echo $rec[$PK_field]; ?> : <?php echo  $rec["group_spar_id"]; ?>')"><IMG alt="Delete" src="../images/cross.png"></A>
                                         </TD>
 
                                     </TR>

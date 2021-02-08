@@ -94,7 +94,7 @@ if ($_GET["action"] == "delete") {
 			//					include ("../include/page_init.php");
 
 			if ($_GET['keyword']) {
-				$keyWord = " AND (group_name like '%" . $_GET['keyword'] . "%' OR group_type like '%" . $_GET['keyword'] . "%')";
+				$keyWord = " AND (group_name like '%" . $_GET['keyword'] . "%' OR group_spar_id  LIKE '%" . $_GET['keyword'] . "%' OR group_type like '%" . $_GET['keyword'] . "%')";
 			}
 
 			$sql = 'select *,s_group_sparpart.create_date as c_date from s_group_sparpart where 1 ' . $keyWord . ' order by s_group_sparpart.group_spar_id ASC';
