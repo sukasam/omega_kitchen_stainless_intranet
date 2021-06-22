@@ -116,21 +116,26 @@ if ($_POST["mode"] != "") {
         for ($i = 0; $i <= count($_POST['cproH']); $i++) {
             if ($_POST['cproH'][$i] != "") {
 
+                //echo $_POST['costpros'][$i]."<br>";
+               
+
                 $_POST['cpriceH'][$i] = preg_replace("/,/", "", $_POST['cpriceH'][$i]);
                 $_POST['ccost'][$i] = preg_replace("/,/", "", $_POST['ccost'][$i]);
                 $_POST['costpros'][$i] = preg_replace("/,/", "", $_POST['costpros'][$i]);
 
-                if ($_POST['ccostH'][$i] != $_POST['ccost'][$i]) {
-                    $_POST['ccost'][$i] = $_POST['camountH'][$i] * $_POST['ccost'][$i];
-                }
+                // if ($_POST['ccostH'][$i] != $_POST['ccost'][$i]) {
+                //     $_POST['ccost'][$i] = $_POST['camountH'][$i] * $_POST['ccost'][$i];
+                // }
 
-                if ($_POST['costprosH'][$i] != $_POST['costpros'][$i]) {
-                    $_POST['costpros'][$i] = $_POST['camountH'][$i] * $_POST['costpros'][$i];
-                }
+                // if ($_POST['costprosH'][$i] != $_POST['costpros'][$i]) {
+                //     $_POST['costpros'][$i] = $_POST['camountH'][$i] * $_POST['costpros'][$i];
+                // }
 
                 @mysqli_query($conn, "INSERT INTO `s_fopj_product_cost` (`fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`, `costpros`) VALUES ('" . $fo_id . "', '" . $_POST['ccodeH'][$i] . "', '" . $_POST['cproH'][$i] . "', '" . $_POST['cpodH'][$i] . "', '" . $_POST['csnH'][$i] . "', '" . $_POST['camountH'][$i] . "', '" . $_POST['cpriceH'][$i] . "', '" . $_POST['ccost'][$i] . "', '" . $_POST['costpros'][$i] . "');");
             }
         }
+
+        // exit();
 
         //$numCost = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM s_service_cost WHERE job_id = '".$jobID."'"));
 
@@ -1002,25 +1007,7 @@ if ($rowPro['ccost'] == 0 && $rowPro['cprice'] != 0) {
                                                 </td>
                                                 <td style="border:1px solid #000000;padding:5;text-align:center;">
                                                     <?php
-/*if ($rowPro['costpros'] == "" || $rowPro['costpros'] == 0 || $rowPro['costpros'] === "0") {
-    ?>
-    <input type="text" name="costpros[]"
-    value="<?php if ($rowPro['costpros'] == "" || $rowPro['costpros'] == 0 || $rowPro['costpros'] === "0") {echo "0";} else {echo number_format(get_stock_project_unit_price($conn, $rowPro['cpro']));}?>"
-    id="costpros<?php echo $rowCal; ?>" class="inpfoder"
-    style="width:100%;text-align:center;" readonly>
-    <input type="hidden" name="costprosH[]"
-    value="<?php if ($rowPro['costpros'] == "" || $rowPro['costpros'] == 0 || $rowPro['costpros'] === "0") {echo "0";} else {echo number_format(get_stock_project_unit_price($conn, $rowPro['cpro']));}?>">
-    <?php
-    } else {
-    ?>
-    <input type="text" name="costpros[]"
-    value="<?php echo number_format($rowPro['costpros']); ?>"
-    id="costpros<?php echo $rowCal; ?>" class="inpfoder"
-    style="width:100%;text-align:center;" readonly>
-    <input type="hidden" name="costprosH[]"
-    value="<?php echo $rowPro['costpros'] ?>">
-    <?php
-    }*/
+
     ?>
     <input type="text" name="costpros[]"
     value="<?php echo number_format(get_stock_project_unit_price($conn, $rowPro['cpro'])); ?>"
