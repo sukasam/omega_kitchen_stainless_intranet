@@ -199,7 +199,7 @@ $form = '
     </tr>
 	<tr>
   <td style="border:1px solid #000000;padding:5;font-size:13px;"><strong>ยอดรวมกำไรขั้นต้น</strong></td>
-  <td colspan="3"  style="border:1px solid #000000;padding:5;text-align:right;font-size:14px;"><strong>กำไร '.number_format(((($sumremainTotal-$sumCost) - $sumDics)*(100))/$sumCost,2).'%</strong>&nbsp;&nbsp;</td>
+  <td colspan="3"  style="border:1px solid #000000;padding:5;text-align:right;font-size:14px;"><strong>กำไร '.number_format(((($sumremainTotal-$sumCost) - $sumDics)*(100))/$sumremainTotal,2).'%</strong>&nbsp;&nbsp;</td>
 <td colspan=""  style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;"><strong>'.number_format(($sumremainTotal - $sumCost) - $sumDics,2).'</strong>&nbsp;&nbsp;</td>
     </tr>
 </table>
