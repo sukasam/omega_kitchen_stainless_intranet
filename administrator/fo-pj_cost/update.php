@@ -103,6 +103,8 @@ if ($_POST["mode"] != "") {
 
         $shipC8 = $shipC1 + $shipC2 + $shipC3 + $shipC4 + $shipC5 + $shipC6 + $shipC7;
 
+        $_POST['discount'] = preg_replace("/,/","",$_POST['discount']);
+
         $numCost = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM s_fopj_cost WHERE fo_id = '" . $fo_id . "'"));
 
         if ($numCost == 0) {
@@ -122,6 +124,7 @@ if ($_POST["mode"] != "") {
                 $_POST['cpriceH'][$i] = preg_replace("/,/", "", $_POST['cpriceH'][$i]);
                 $_POST['ccost'][$i] = preg_replace("/,/", "", $_POST['ccost'][$i]);
                 $_POST['costpros'][$i] = preg_replace("/,/", "", $_POST['costpros'][$i]);
+                $_POST['cdisc'][$i] = preg_replace("/,/", "", $_POST['cdisc'][$i]);
 
                 // if ($_POST['ccostH'][$i] != $_POST['ccost'][$i]) {
                 //     $_POST['ccost'][$i] = $_POST['camountH'][$i] * $_POST['ccost'][$i];
@@ -131,7 +134,7 @@ if ($_POST["mode"] != "") {
                 //     $_POST['costpros'][$i] = $_POST['camountH'][$i] * $_POST['costpros'][$i];
                 // }
 
-                @mysqli_query($conn, "INSERT INTO `s_fopj_product_cost` (`fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`, `costpros`) VALUES ('" . $fo_id . "', '" . $_POST['ccodeH'][$i] . "', '" . $_POST['cproH'][$i] . "', '" . $_POST['cpodH'][$i] . "', '" . $_POST['csnH'][$i] . "', '" . $_POST['camountH'][$i] . "', '" . $_POST['cpriceH'][$i] . "', '" . $_POST['ccost'][$i] . "', '" . $_POST['costpros'][$i] . "');");
+                @mysqli_query($conn, "INSERT INTO `s_fopj_product_cost` (`fo_id`, `ccode`, `cpro`, `cpod`, `csn`, `camount`, `cprice`, `ccost`, `costpros`,`cdisc`) VALUES ('" . $fo_id . "', '" . $_POST['ccodeH'][$i] . "', '" . $_POST['cproH'][$i] . "', '" . $_POST['cpodH'][$i] . "', '" . $_POST['csnH'][$i] . "', '" . $_POST['camountH'][$i] . "', '" . $_POST['cpriceH'][$i] . "', '" . $_POST['ccost'][$i] . "', '" . $_POST['costpros'][$i] . "', '" . $_POST['cdisc'][$i] . "');");
             }
         }
 
@@ -181,6 +184,8 @@ if ($_GET["mode"] == "update") {
             $$value = $rec[$value];
         }
     }
+
+    $fopjData = get_fopj($conn,$_GET[$PK_field]);
 
     $a_sdate = explode("-", $date_forder);
     $date_forder = $a_sdate[2] . "/" . $a_sdate[1] . "/" . $a_sdate[0];
@@ -874,18 +879,24 @@ while ($row_province = @mysqli_fetch_array($quprovince)) {
                                             <td width="8%"
                                                 style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;">
                                                 <strong>รุ่น / แบรนด์</strong></td>
-                                            <td width="8%"
+                                            <td width="7%"
                                                 style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;">
                                                 <strong>จำนวน</strong></td>
                                             <td width="10%"
                                                 style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;">
-                                                <strong>ราคาขาย / ต่อหน่วย</strong></td>
-                                            <td width="13%"
+                                                <strong>ราคาต้นทุนสินค้า</strong></td>
+                                            <td width="10%"
                                                 style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;">
-                                                <strong>ราคาต้นทุนสินค้า/ต่อหน่วย</strong></td>
-                                            <td width="13%"
+                                                <strong>ราคาขาย </strong></td>
+                                            <td width="8%"
                                                 style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;">
-                                                <strong>ราคาต้นทุนสินค้าโรงงาน/ต่อหน่วย</strong></td>
+                                                <strong>ส่วนลด </strong></td>
+                                            <td width="8%"
+                                                style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;">
+                                                <strong>ราคารวม </strong></td>
+                                            <td width="15%"
+                                                style="border:1px solid #000000;font-size:12px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;">
+                                                <strong>ราคาต้นทุนสินค้าโรงงาน</strong></td>
 
 
                                         </tr>
@@ -918,6 +929,7 @@ $sumTotalCost = 0;
 $sumTotalCost2 = 0;
 $sumPrice = 0;
 $runPJ = 0;
+$sumTotalDisc = 0;
 while ($rowPro = mysqli_fetch_array($rowRun)) {
     ?>
                                             <tr>
@@ -927,7 +939,7 @@ while ($rowPro = mysqli_fetch_array($rowRun)) {
                                                     <input type="text" name="ccode[]"
                                                         value="<?php echo $rowPro['ccode']; ?>"
                                                         id="ccode<?php echo $rowCal; ?>" class="inpfoder"
-                                                        style="width:100%;text-align:center;" readonly>
+                                                        style="width:100%;text-align:center;border: none;" readonly>
                                                     <input type="hidden" name="ccodeH[]"
                                                         value="<?php echo $rowPro['ccode']; ?>"></td>
                                                 <td style="border:1px solid #000000;text-align:left;padding:5;">
@@ -954,7 +966,7 @@ $qupro1 = @mysqli_query($conn, "SELECT * FROM s_group_stock_project ORDER BY gro
                                                     <input type="text" name="csn[]"
                                                         value="<?php echo get_stock_project_size($conn, $rowPro['cpro']); ?>"
                                                         id="csn<?php echo $rowCal; ?>" class="inpfoder"
-                                                        style="width:100%;text-align:center;" readonly>
+                                                        style="width:100%;text-align:center;border: none;" readonly>
                                                     <input type="hidden" name="csnH[]"
                                                         value="<?php echo get_stock_project_size($conn, $rowPro['cpro']); ?>">
                                                 </td>
@@ -962,7 +974,7 @@ $qupro1 = @mysqli_query($conn, "SELECT * FROM s_group_stock_project ORDER BY gro
                                                     <input type="text" name="cpod[]"
                                                         value="<?php echo get_stock_project_sn($conn, $rowPro['cpro']); ?>"
                                                         id="cpod<?php echo $rowCal; ?>" class="inpfoder"
-                                                        style="width:100%;text-align:center;" readonly>
+                                                        style="width:100%;text-align:center;border: none;" readonly>
                                                     <input type="hidden" name="cpodH[]"
                                                         value="<?php echo get_stock_project_sn($conn, $rowPro['cpro']); ?>">
                                                 </td>
@@ -970,17 +982,9 @@ $qupro1 = @mysqli_query($conn, "SELECT * FROM s_group_stock_project ORDER BY gro
                                                     <input type="text" name="camount[]"
                                                         value="<?php echo $rowPro['camount']; ?>"
                                                         id="camount<?php echo $rowCal; ?>" class="inpfoder"
-                                                        style="width:100%;text-align:center;" readonly>
+                                                        style="width:100%;text-align:center;border: none;" readonly>
                                                     <input type="hidden" name="camountH[]"
                                                         value="<?php echo $rowPro['camount']; ?>">
-                                                </td>
-                                                <td style="border:1px solid #000000;padding:5;text-align:center;">
-                                                    <input type="text" name="cprice[]"
-                                                        value="<?php echo number_format($rowPro['cprice']); ?>"
-                                                        id="cprice<?php echo $rowCal; ?>" class="inpfoder"
-                                                        style="width:100%;text-align:center;" readonly>
-                                                    <input type="hidden" name="cpriceH[]"
-                                                        value="<?php echo number_format($rowPro['cprice']); ?>">
                                                 </td>
                                                 <td style="border:1px solid #000000;padding:5;text-align:center;">
                                                     <?php
@@ -989,7 +993,7 @@ if ($rowPro['ccost'] == 0 && $rowPro['cprice'] != 0) {
                                                     <input type="text" name="ccost[]"
                                                         value="<?php echo number_format($arrPJ[$runPJ]); ?>"
                                                         id="ccost<?php echo $rowCal; ?>" class="inpfoder"
-                                                        style="width:100%;text-align:center;" readonly>
+                                                        style="width:100%;text-align:center;border: none;" readonly>
                                                     <input type="hidden" name="ccostH[]"
                                                         value="<?php echo $rowPro['ccost'] ?>">
                                                     <?php
@@ -998,12 +1002,32 @@ if ($rowPro['ccost'] == 0 && $rowPro['cprice'] != 0) {
                                                     <input type="text" name="ccost[]"
                                                         value="<?php echo number_format($rowPro['ccost']); ?>"
                                                         id="ccost<?php echo $rowCal; ?>" class="inpfoder"
-                                                        style="width:100%;text-align:center;" readonly>
+                                                        style="width:100%;text-align:center;border: none;" readonly>
                                                     <input type="hidden" name="ccostH[]"
                                                         value="<?php echo $rowPro['ccost'] ?>">
                                                     <?php
 }
     ?>
+                                                </td>
+                                                <td style="border:1px solid #000000;padding:5;text-align:center;">
+                                                    <input type="text" name="cprice[]"
+                                                        value="<?php echo number_format($rowPro['cprice']); ?>"
+                                                        id="cprice<?php echo $rowCal; ?>" class="inpfoder"
+                                                        style="width:100%;text-align:center;border: none;" readonly>
+                                                    <input type="hidden" name="cpriceH[]"
+                                                        value="<?php echo number_format($rowPro['cprice']); ?>">
+                                                </td>
+                                                <td style="border:1px solid #000000;padding:5;text-align:center;">
+                                                    <input type="text" name="cdisc[]"
+                                                        value="<?php echo number_format($rowPro['cdisc']); ?>"
+                                                        id="cdisc<?php echo $rowCal; ?>" class="inpfoder"
+                                                        style="width:100%;text-align:center;border: none;">
+                                                    <input type="hidden" name="cdiscH[]"
+                                                        value="<?php echo number_format($rowPro['cdisc']); ?>">
+                                                </td>
+                                                <td style="border:1px solid #000000;padding:5;text-align:center;font-size: 11px;">
+                                                   <?php 
+                                                   echo number_format(($rowPro['cprice']*$rowPro['camount'])-($rowPro['cdisc']*$rowPro['camount']),2);?>
                                                 </td>
                                                 <td style="border:1px solid #000000;padding:5;text-align:center;">
                                                     <?php
@@ -1012,7 +1036,7 @@ if ($rowPro['ccost'] == 0 && $rowPro['cprice'] != 0) {
     <input type="text" name="costpros[]"
     value="<?php echo number_format(get_stock_project_unit_price($conn, $rowPro['cpro'])); ?>"
     id="costpros<?php echo $rowCal; ?>" class="inpfoder"
-    style="width:100%;text-align:center;" readonly>
+    style="width:100%;text-align:center;border: none;" readonly>
     <input type="hidden" name="costprosH[]"
     value="<?php echo number_format(get_stock_project_unit_price($conn, $rowPro['cpro'])); ?>">
 
@@ -1020,9 +1044,11 @@ if ($rowPro['ccost'] == 0 && $rowPro['cprice'] != 0) {
 
                                             </tr>
                                             <?php
-$sumPrice += $rowPro['camount'] * $rowPro['cprice'];
+    $sumPrice += $rowPro['camount'] * $rowPro['cprice'];
+    $sumDisc += $rowPro['camount'] * $rowPro['cdisc'];
     $sumTotalCost += $rowPro['camount'] * $rowPro['ccost'];
     $sumTotalCost2 += $rowPro['camount'] * $rowPro['costpros'];
+    $sumTotalDisc += (($rowPro['cprice']*$rowPro['camount']) - ($rowPro['cdisc']*$rowPro['camount']));
     $rowCal++;
     $runPJ++;
 }
@@ -1031,60 +1057,109 @@ $sumPrice += $rowPro['camount'] * $rowPro['cprice'];
                                         <input type="text" hidden="hidden" value="<?php echo $rowCal; ?>" id="countexp"
                                             name="countexp" />
                                         <tr>
-                                            <td colspan="5"
-                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 18px;">
-                                                <strong>รวมยอดขาย / ยอดต้นทุนขาย / ยอดต้นทุนโรงงาน</strong></td>
-                                            <td colspan="2"
-                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 18px;">
-                                                <strong><?php echo number_format($sumPrice, 2); ?> บาท</strong></td>
+                                            <td colspan="6"
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                                <strong>ยอดต้นทุนขาย / รวมยอดขาย / ส่วนลด / ยอดต้นทุนโรงงาน</strong></td>
                                             <td
-                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 18px;">
-                                                <strong><?php echo number_format($sumTotalCost, 2); ?> บาท</strong></td>
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                                <strong><?php echo number_format($sumTotalCost, 2); ?></strong></td>
                                             <td
-                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 18px;">
-                                                <strong><?php echo number_format($sumTotalCost2, 2); ?> บาท</strong>
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                                <strong><?php echo number_format($sumPrice, 2); ?></strong></td>
+                                            <td
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                                <strong><?php echo number_format($sumDisc, 2); ?></strong></td>
+                                            <td
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                                <strong><?php echo number_format($sumTotalDisc, 2); ?></strong></td>
+                                            <td
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                                <strong><?php echo number_format($sumTotalCost2, 2); ?></strong>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="5"
-                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 18px;">
+                                            <td colspan="6"
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                                <strong>ส่วนลด (ท้ายบิลก่อน Vat)</strong></td>
+                                            <td colspan="4"
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                                <strong><?php echo number_format($fopjData['discount'], 2); ?>
+                                                    </strong>
+                                                    <input type="hidden" name="discount"
+                                                        value="<?php echo number_format($fopjData['discount']); ?>">
+                                                </td>
+                                            <td 
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                            
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6"
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                                <strong>คงเหลือยอดสุทธิ (หลังหักส่วนลด)</strong></td>
+                                            <td colspan="4"
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                                <strong><?php echo number_format($sumTotalDisc - $fopjData['discount'], 2); ?>
+                                                    </strong></td>
+                                            <td 
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6"
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
                                                 <strong>รวมค่าใช้จ่าย ขนส่ง น้ำมัน ที่พักฯ อื่นๆ</strong></td>
                                             <td colspan="4"
-                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 18px;">
-                                                <strong><?php echo number_format($shipC8 + $shipM9 + $shipL8, 2); ?>
-                                                    บาท</strong></td>
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                                </td>
+                                            <td 
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                               <strong><?php echo number_format($shipC8 + $shipM9 + $shipL8, 2); ?>
+                                                    </strong>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="5"
-                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 18px;">
-                                                <strong>รวมกำไรขั้นต้น</strong></td>
+                                            <td colspan="6"
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                                <strong>รวมกำไรขั้นต้น / รวมราคาต้นทุนโรงงานสุทธิ + คชจ.ทั้งหมด</strong></td>
                                             <td colspan="2"
-                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 18px;">
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
                                                 <strong>กำไร <?php if ($sumPrice > 0) {
-    echo number_format((($sumPrice - $sumTotalCost) * 100) / $sumPrice, 2);
+    echo number_format((((($sumPrice - $sumTotalCost) - $sumDisc) - $fopjData['discount']) * 100) / ($sumTotalDisc - $fopjData['discount']), 2);
 } else {
     echo "0.00";
 }?> %</strong></td>
                                             <td colspan="2"
-                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 18px;">
-                                                <strong><?php echo number_format($sumPrice - $sumTotalCost, 2); ?>
-                                                    บาท</strong></td>
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                                <strong><?php echo number_format((($sumPrice - $sumTotalCost) - $sumDisc) - $fopjData['discount'], 2); ?>
+                                                    </strong></td>
+                                            <td 
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                                <strong><?php echo number_format(($shipC8 + $shipM9 + $shipL8)+$sumTotalCost2, 2); ?>
+                                                    </strong>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="5"
-                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 18px;">
+                                            <td colspan="6"
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
                                                 <strong>รวมกำไรสุทธิ</strong></td>
                                             <td colspan="2"
-                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 18px;">
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
                                                 <strong>กำไร <?php if ($sumPrice > 0) {
-    echo number_format(($sumPrice - ($shipC8 + $shipM9 + $shipL8) - $sumTotalCost2) * 100 / $sumPrice, 2);
+    echo number_format(((($sumTotalDisc - $fopjData['discount']) - (($shipC8 + $shipM9 + $shipL8)+$sumTotalCost2)) * 100) / ($sumTotalDisc - $fopjData['discount']), 2);
 } else {
     echo "0.00";
 }?> %</strong></td>
                                             <td colspan="2"
-                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 18px;">
-                                                <strong><?php echo number_format($sumPrice - ($shipC8 + $shipM9 + $shipL8) - $sumTotalCost2, 2); ?>
-                                                    บาท</strong></td>
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                                <strong><?php echo number_format(($sumPrice - $sumDisc) - ($shipC8 + $shipM9 + $shipL8) - $sumTotalCost2, 2); ?>
+                                                    </strong></td>
+                                            <td 
+                                                style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 17px;">
+                                                <strong><?php echo number_format(($sumTotalDisc - $fopjData['discount']) - (($shipC8 + $shipM9 + $shipL8)+$sumTotalCost2), 2); ?>
+                                                    </strong>
+                                            </td>
                                         </tr>
 
                                         <tr style="display: none;">

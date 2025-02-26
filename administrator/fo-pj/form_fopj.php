@@ -84,7 +84,7 @@ for ($i = 0; $i <= count($_POST['cpro']); $i++) {
     $sumCost += $_POST['camount'][$i] * $_POST['ccost'][$i];
     $sumprice += $_POST['camount'][$i] * $_POST['cprice'][$i];
     $sumpriceNot += $_POST['camount'][$i] * $_POST['cprice'][$i];
-    $sumDics += $_POST['cdisc'][$i];
+    $sumDics += $_POST['camount'][$i] * $_POST['cdisc'][$i];
 
 
     $projectPro .= '<tr>
@@ -93,12 +93,11 @@ for ($i = 0; $i <= count($_POST['cpro']); $i++) {
 		<td style="border:1px solid #000000;padding:5;font-size:13px;">' . get_stock_project_code($conn, $_POST['cpro'][$i]) . '</td>
 		<td style="border:1px solid #000000;text-align:left;padding:5;font-size:13px;">' . get_stock_project_name($conn, $_POST['cpro'][$i]) . '</td>
     <td style="border:1px solid #000000;padding:5;font-size:13px;">' . get_stock_project_size($conn, $_POST['cpro'][$i]) . '</td>
-    <td style="border:1px solid #000000;padding:5;width:100px;font-size:13px;">' . get_stock_project_sn($conn, $_POST['cpro'][$i]) . '</td>
 		  <td style="border:1px solid #000000;padding:5;font-size:13px;">' . $_POST['camount'][$i] . '</td>
 		  <td style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;">' . number_format($_POST['ccost'][$i]) . '&nbsp;&nbsp;</td>
 		  <td style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;">' . number_format($_POST['cprice'][$i]) . '&nbsp;&nbsp;</td>
-		  <td style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;">'.number_format($_POST['cdisc'][$i]).'&nbsp;&nbsp;</td>
-      <td style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;">' . number_format($_POST['camount'][$i] * $_POST['cprice'][$i]) . '&nbsp;&nbsp;</td>
+		  <td style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;">'.number_format($_POST['cdisc'][$i]*$_POST['camount'][$i]).'&nbsp;&nbsp;</td>
+      <td style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;">' . number_format($_POST['camount'][$i] * $_POST['cprice'][$i]-($_POST['cdisc'][$i]* $_POST['camount'][$i])) . '&nbsp;&nbsp;</td>
 		</tr>';
   }
 }
@@ -194,7 +193,6 @@ $form = '
 	  <td width="8%" style="border:1px solid #000000;font-size:13px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รหัสสินค้า</strong></td>
       <td width="25%" style="border:1px solid #000000;font-size:13px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รายการ</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:13px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ขนาด</strong></td>
-      <td width="10%" style="border:1px solid #000000;font-size:13px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รุ่น/แบรนด์</strong></td>
       <td width="10%" style="border:1px solid #000000;font-size:13px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>จำนวน</strong></td>
 	  <td width="14%" style="border:1px solid #000000;font-size:13px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ต้นทุนสินค้า / หน่วย</strong></td>
       <td width="14%" style="border:1px solid #000000;font-size:13px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคาขาย / หน่วย</strong></td>
@@ -205,7 +203,7 @@ $form = '
 	' . $projectPro . '    
 	
     <tr>
-      <td colspan="6" rowspan="7" style="text-align:left;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size:13px;"><strong>หมายเหตุ :</strong> ' . nl2br($_POST['ccomment']) . '<br>
+      <td colspan="5" rowspan="7" style="text-align:left;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size:13px;"><strong>หมายเหตุ :</strong> ' . nl2br($_POST['ccomment']) . '<br>
       </td>
       <td style="border:1px solid #000000;padding:5;font-size:13px;"><strong>รวมทั้งหมด</strong></td>
       <td style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;"><strong>' . number_format($sumCost, 2) . '</strong>&nbsp;&nbsp;</td>
@@ -231,7 +229,7 @@ $form = '
     </tr>
 	<tr>
       <td style="border:1px solid #000000;padding:5;font-size:13px;"><strong>ยอดรวมกำไรขั้นต้น</strong></td>
-      <td colspan="3"  style="border:1px solid #000000;padding:5;text-align:right;font-size:14px;"><strong>กำไร ' . number_format(((($sumremainTotal - $sumCost) - $sumDics) * 100) / $sumremainTotal, 2) . '%</strong>&nbsp;&nbsp;</td>
+      <td colspan="3"  style="border:1px solid #000000;padding:5;text-align:right;font-size:14px;"><strong>กำไร ' . number_format(((($sumremainTotal - $sumCost) - $sumDics) * 100) / ($sumremainTotal-$sumDics), 2) . '%</strong>&nbsp;&nbsp;</td>
 	  <td colspan=""  style="border:1px solid #000000;padding:5;text-align:right;font-size:13px;"><strong>' . number_format(($sumremainTotal - $sumCost) - $sumDics, 2) . '</strong>&nbsp;&nbsp;</td>
     </tr>
 </table>

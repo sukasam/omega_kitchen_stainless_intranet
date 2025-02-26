@@ -560,7 +560,7 @@ Vat 7%</strong></td>
 			$sumPrice = $sumPrice+($rowPro['camount']*$rowPro['cprice']);
 			//$sumPrice = $sumPrice+$rowPro['cprice'];
 			$sumCost  = $sumCost+($rowPro['camount']*$rowPro['ccost']);
-			$sumDisc  = $sumDisc+$rowPro['cdisc'];
+			$sumDisc  = $sumDisc+($rowPro['camount']*$rowPro['cdisc']);
 			$rowCal++;
 		}
 	?>
@@ -574,7 +574,7 @@ Vat 7%</strong></td>
               <input type="text" name="discount" value="<?php     if($discount != ""){echo $discount;}else{echo '0';}?>" id="discount" class="inpfoder" style="width:50%;">
               <br><br></div>	
       </td>
-      <td colspan="5" style="text-align: right;border: 1px solid #000000;padding: 5;vertical-align: middle;font-size: 15px;font-weight: bold;">ยอดราคาต้นทุนสินค้า / รวมยอดขาย</td>
+      <td colspan="5" style="text-align: right;border: 1px solid #000000;padding: 5;vertical-align: middle;font-size: 15px;font-weight: bold;">ยอดราคาต้นทุนสินค้า / รวมยอดขาย / ส่วนลด</td>
       <td style="text-align: left;border: 1px solid #000000;padding: 5;vertical-align: middle;text-align: right;font-size: 15px;font-weight: bold;"><?php     echo number_format($sumCost,2);?></td>
       <td style="text-align: left;border: 1px solid #000000;padding: 5;vertical-align: middle;text-align: right;font-size: 15px;font-weight: bold;"><?php     echo number_format($sumPrice,2);?></td>
 	  <td style="text-align: left;border: 1px solid #000000;padding: 5;vertical-align: middle;text-align: right;font-size: 15px;font-weight: bold;"><?php     echo number_format($sumDisc,2);?></td>

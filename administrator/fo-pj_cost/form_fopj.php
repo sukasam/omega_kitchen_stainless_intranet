@@ -55,28 +55,35 @@ $sumtotal = $sumprice + $sumpricevat;
 
 $projectPro = '';
 $sumprice = 0;
+$sumDisc = 0;
+$discount = $_POST['discount'];
+
 
 for ($i = 0; $i <= count($_POST['cproH']); $i++) {
 	if ($_POST['cproH'][$i] != "") {
 
 		$_POST['cpriceH'][$i] = preg_replace("/,/", "", $_POST['cpriceH'][$i]);
 		$_POST['ccost'][$i] = preg_replace("/,/", "", $_POST['ccost'][$i]);
+		$_POST['cdiscH'][$i] = preg_replace("/,/", "", $_POST['cdiscH'][$i]);
 		$_POST['costpros'][$i] = preg_replace("/,/", "", $_POST['costpros'][$i]);
 
 		$sumprice += $_POST['camountH'][$i] * $_POST['cpriceH'][$i];
+		$sumDisc += $_POST['camountH'][$i] * $_POST['cdiscH'][$i];
 		$sumTotalCost += $_POST['camountH'][$i] * $_POST['ccost'][$i];
 		$sumTotalCost2 += $_POST['camountH'][$i] * $_POST['costpros'][$i];
+		$sumTotalDisc += (($_POST['cpriceH'][$i]*$_POST['camountH'][$i]) - ($_POST['cdiscH'][$i]*$_POST['camountH'][$i]));
 
 		$projectPro .= '<tr>
-		<td style="border:1px solid #000000;padding:5;">' . ($i + 1) . '</td>
-		<td style="border:1px solid #000000;padding:5;">' . get_stock_project_code($conn, $_POST['cproH'][$i]) . '</td>
-		<td style="border:1px solid #000000;text-align:left;padding:5;">' . get_stock_project_name($conn, $_POST['cproH'][$i]) . '</td>
-		<td style="border:1px solid #000000;padding:5;">' . get_stock_project_size($conn, $_POST['cproH'][$i]) . '</td>  
-		<td style="border:1px solid #000000;padding:5;width:100px;">' . get_stock_project_sn($conn, $_POST['cproH'][$i]) . '</td>
-		  <td style="border:1px solid #000000;padding:5;">' . $_POST['camountH'][$i] . '</td>
-		  <td style="border:1px solid #000000;padding:5;text-align:right;">' . number_format($_POST['cpriceH'][$i], 2) . '&nbsp;&nbsp;</td>
-		  <td style="border:1px solid #000000;padding:5;text-align:right;">' . number_format($_POST['ccost'][$i], 2) . '&nbsp;&nbsp;</td>
-		  <td style="border:1px solid #000000;padding:5;text-align:right;">' . number_format($_POST['costpros'][$i], 2) . '&nbsp;&nbsp;</td>
+		<td style="border:1px solid #000000;padding:5;font-size:12px;">' . ($i + 1) . '</td>
+		<td style="border:1px solid #000000;padding:5;font-size:12px;">' . get_stock_project_code($conn, $_POST['cproH'][$i]) . '</td>
+		<td style="border:1px solid #000000;text-align:left;padding:5;font-size:12px;">' . get_stock_project_name($conn, $_POST['cproH'][$i]) . '</td>
+		<td style="border:1px solid #000000;padding:5;font-size:12px;">' . get_stock_project_size($conn, $_POST['cproH'][$i]) . '</td>  
+		  <td style="border:1px solid #000000;padding:5;font-size:12px;">' . $_POST['camountH'][$i] . '</td>
+		  <td style="border:1px solid #000000;padding:5;text-align:right;font-size:12px;">' . number_format($_POST['ccost'][$i], 2) . '&nbsp;&nbsp;</td>
+		  <td style="border:1px solid #000000;padding:5;text-align:right;font-size:12px;">' . number_format($_POST['cpriceH'][$i], 2) . '&nbsp;&nbsp;</td>
+		  <td style="border:1px solid #000000;padding:5;text-align:right;font-size:12px;">' . number_format($_POST['cdiscH'][$i], 2) . '&nbsp;&nbsp;</td>
+		  <td style="border:1px solid #000000;padding:5;text-align:right;font-size:12px;">' . number_format(($_POST['cpriceH'][$i]*$_POST['camountH'][$i]) - ($_POST['cdiscH'][$i]*$_POST['camountH'][$i]), 2) . '&nbsp;&nbsp;</td>
+		  <td style="border:1px solid #000000;padding:5;text-align:right;font-size:11px;">' . number_format($_POST['costpros'][$i], 2) . '&nbsp;&nbsp;</td>
 		</tr>';
 	}
 }
@@ -155,39 +162,56 @@ $form = '
 </table>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:10px;text-align:center;margin-top:10px;">
     <tr>
-      <td width="5%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ลำดับ</strong></td>
-	  <td width="5%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>Code</strong></td>
-      <td width="30%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รายการ</strong></td>
-	  <td width="10%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ขนาด</strong></td>
-	  <td width="10%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รุ่น/แบรนด์</strong></td>
-	  <td width="10%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>จำนวน</strong></td>
-      <td width="15%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคาขาย/หน่วย</strong></td>
-      <td width="15%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคาต้นทุนสินค้า/หน่วย</strong></td>
-	  <td width="15%" style="border:1px solid #000000;font-size:10px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคาต้นทุนสินค้าโรงงาน/หน่วย</strong></td>
+      <td width="5%" style="border:1px solid #000000;font-size:11px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ลำดับ</strong></td>
+	  <td width="5%" style="border:1px solid #000000;font-size:11px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>Code</strong></td>
+      <td width="30%" style="border:1px solid #000000;font-size:11px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>รายการ</strong></td>
+	  <td width="10%" style="border:1px solid #000000;font-size:11px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ขนาด</strong></td>
+	  <td width="10%" style="border:1px solid #000000;font-size:11px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>จำนวน</strong></td>
+	  <td width="15%" style="border:1px solid #000000;font-size:11px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคาต้นทุนสินค้า</strong></td>
+      <td width="15%" style="border:1px solid #000000;font-size:11px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคาขาย</strong></td>
+	  <td width="15%" style="border:1px solid #000000;font-size:11px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ส่วนลด</strong></td>
+	  <td width="15%" style="border:1px solid #000000;font-size:11px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคารวม</strong></td>
+	  <td width="15%" style="border:1px solid #000000;font-size:11px;font-family:Verdana, Geneva, sans-serif;padding:5px;text-align:center;"><strong>ราคาต้นทุนสินค้าโรงงาน</strong></td>
     </tr>
     
 	' . $projectPro . '    
 	
     <tr>
-      <td colspan="5" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>รวมยอดขาย / ยอดต้นทุนขาย / ยอดต้นทุนโรงงาน</strong></td>
-      <td colspan="2" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>' . number_format($sumprice, 2) . ' บาท</strong></td>
-      <td style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>' . number_format($sumTotalCost, 2) . ' บาท</strong></td>
+      <td colspan="5" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>รวมยอดขาย / ส่วนลด / ยอดต้นทุนขาย / ยอดต้นทุนโรงงาน</strong></td>
+      <td style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>' . number_format($sumTotalCost, 2) . ' บาท</strong></td> 
+	  <td style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>' . number_format($sumprice, 2) . ' บาท</strong></td>
+	  <td style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>' . number_format($sumDisc, 2) . ' บาท</strong></td>
+	  <td style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>' . number_format($sumTotalDisc, 2) . ' บาท</strong></td>
       <td style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>' . number_format($sumTotalCost2, 2) . ' บาท</strong></td>
     </tr>
+	
+	<tr>
+      <td colspan="5" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>ส่วนลด (ท้ายบิลก่อน Vat)</strong></td>
+      <td colspan="4" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>' . number_format($discount, 2) . ' บาท</strong></td>
+	  <td colspan="4" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"></td>
+    </tr>
+	<tr>
+		<td colspan="5" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>คงเหลือยอดสุทธิ (หลังหักส่วนลด)</strong></td>
+		<td colspan="4" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>' . number_format($sumTotalDisc-$discount, 2) . ' บาท</strong></td>
+		<td colspan="4" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"></td>
+	</tr>
 	<tr>
       <td colspan="5" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>รวมค่าใช้จ่าย ขนส่ง น้ำมัน ที่พักฯ อื่นๆ</strong></td>
-      <td colspan="4" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>' . number_format($shipC8 + $shipM9 + $shipL8, 2) . ' บาท</strong></td>
+      <td colspan="4" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong></strong></td>
+	  <td style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>' . number_format($shipC8 + $shipM9 + $shipL8, 2) . ' บาท</strong></td>
     </tr>
     <tr>
-      <td colspan="5" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 16px;"><strong>รวมกำไรขั้นต้น</strong></td>
-      <td colspan="2" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 16px;"><strong>กำไร ' . number_format((($sumprice - $sumTotalCost) * 100) / $sumprice, 2) . ' %</strong></td>
-	  <td colspan="2" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 16px;"><strong>' . number_format($sumprice - $sumTotalCost, 2) . ' บาท</strong></td>
+      <td colspan="5" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 16px;"><strong>รวมกำไรขั้นต้น / รวมราคาต้นทุนโรงงานสุทธิ + คชจ.ทั้งหมด</strong></td>
+      <td colspan="2" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 16px;"><strong>กำไร ' . number_format((((($sumprice - $sumTotalCost)- $sumDisc)-$discount) * 100) / ($sumTotalDisc-$discount), 2) . ' %</strong></td>
+	  <td colspan="2" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 16px;"><strong>' . number_format((($sumprice - $sumTotalCost)- $sumDisc)-$discount, 2) . ' บาท</strong></td>
+	  <td style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>' . number_format($sumTotalCost2+($shipC8 + $shipM9 + $shipL8), 2) . ' บาท</strong></td>
     </tr>
     <tr>
       <td colspan="5" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 16px;"><strong>รวมกำไรสุทธิ</strong></td>
-      <td colspan="2" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 16px;"><strong>กำไร ' . number_format(($sumprice - ($shipC8 + $shipM9 + $shipL8) - $sumTotalCost2) * 100 / $sumprice, 2) . ' %</strong></td>
-	  <td colspan="2" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 16px;"><strong>' . number_format($sumprice - ($shipC8 + $shipM9 + $shipL8) - $sumTotalCost2, 2) . ' บาท</strong></td>
-    </tr>
+      <td colspan="2" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 16px;"><strong>กำไร ' . number_format((($sumTotalDisc - $discount) - (($shipC8 + $shipM9 + $shipL8)+$sumTotalCost2)) * 100 / ($sumTotalDisc-$discount), 2) . ' %</strong></td>
+	  <td colspan="2" style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 16px;"><strong>' . number_format(($sumprice - $sumDisc) - ($shipC8 + $shipM9 + $shipL8) - $sumTotalCost2, 2) . ' บาท</strong></td>
+      <td style="text-align:right;border:1px solid #000000;padding:5;vertical-align:top;padding-top:15px;font-size: 14px;"><strong>' . number_format(($sumTotalDisc - $discount) - (($shipC8 + $shipM9 + $shipL8)+$sumTotalCost2), 2) . ' บาท</strong></td>    
+	</tr>
 </table>';
 
 ?>
